@@ -1,74 +1,11 @@
-// Mette nella pagina i testi di data/contenuti.js e i numeri di data/.
-// Tappa 2: testi in forma semplice, uno sotto l'altro, per controllarli.
-// L'impaginazione vera (card, griglie, grafici, apri/chiudi) arriva alla tappa 3.
-//
-// Ogni numero scientifico è scritto in un elemento con data-metrica="<metric_id>"
-// (da site_metrics.js) o data-dato="<percorso>" (dai file di sezione):
-// lo script «npm run verifica-dati» li confronta con i valori di data/.
-// Nei testi di contenuti.js i numeri sono segnaposto: {metrica:ID} e {dato:percorso}.
-//
-// Formati: sotto i 1024 px (tablet e smartphone) si usano i campi «compatto»
-// di contenuti.js al posto di quelli desktop; se la finestra cambia formato
-// i testi vengono ridisegnati.
+// Sezioni 03–10 in forma semplice (testi e numeri uno sotto l'altro), finché
+// non vengono impaginate alle tappe 3b e 3c. Header, hero e sezione 02 hanno
+// i loro file (js/intestazione.js, js/hero.js, js/sezione-02.js).
+// Funzioni comuni (el, righe, numero, formato…) in js/ui.js.
 
 (() => {
-  const { contenuti, metrica, fonte, dato } = window.SITO.dati;
-  const compatto = window.matchMedia('(max-width: 1023px)');
-
-  // Testi del formato corrente: i campi «compatto» sostituiscono quelli desktop
-  function formato(oggetto) {
-    if (!oggetto || !oggetto.compatto || !compatto.matches) return oggetto;
-    return { ...oggetto, ...oggetto.compatto };
-  }
-
-  // Trasforma un testo con segnaposto in testo + <span> con il valore preso dai dati
-  const SEGNAPOSTO = /\{(metrica|dato):([^}]+)\}/g;
-  function conValori(testo) {
-    const parti = [];
-    let ultimo = 0;
-    for (const trovato of testo.matchAll(SEGNAPOSTO)) {
-      parti.push(testo.slice(ultimo, trovato.index));
-      const [, tipo, chiave] = trovato;
-      parti.push(tipo === 'metrica' ? numero(chiave, 'valore-nel-testo')
-        : el('span', { class: 'valore-nel-testo', 'data-dato': chiave }, dato(chiave) ?? '?'));
-      ultimo = trovato.index + trovato[0].length;
-    }
-    parti.push(testo.slice(ultimo));
-    return parti;
-  }
-
-  // Crea un elemento: el('p', { class: 'x' }, 'testo', altroElemento)
-  function el(tag, attributi, ...figli) {
-    const nodo = document.createElement(tag);
-    for (const [nome, valore] of Object.entries(attributi || {})) {
-      if (valore !== undefined && valore !== null) nodo.setAttribute(nome, valore);
-    }
-    for (const figlio of figli.flat(Infinity)) {
-      if (figlio === undefined || figlio === null || figlio === '' || figlio === false) continue;
-      if (figlio instanceof Node) nodo.append(figlio);
-      else nodo.append(...conValori(String(figlio)).filter((p) => p !== null && p !== ''));
-    }
-    return nodo;
-  }
-
-  // Sostituisce il contenuto di un contenitore, saltando i blocchi vuoti
-  function riempi(contenitore, ...figli) {
-    if (!contenitore) return;
-    contenitore.replaceChildren(...figli.flat(Infinity).filter((f) => f instanceof Node));
-  }
-
-  // Testo che nel disegno va a capo in punti precisi: una riga per <span>
-  function righe(testo) {
-    if (!Array.isArray(testo)) return testo;
-    return testo.map((riga) => el('span', { class: 'riga' }, riga));
-  }
-
-  function numero(id, classe) {
-    const m = metrica(id);
-    if (!m) return null;
-    return el('span', { class: classe, 'data-metrica': id, 'data-esito': m.esito }, m.display);
-  }
-
+  const { contenuti, fonte } = window.SITO.dati;
+  const { el, riempi, righe, numero, formato, alCambioFormato } = window.SITO.ui;
   function eyebrow(testo, extra = '') {
     return testo ? el('p', { class: `t-eyebrow-maiuscolo-12 accento ${extra}`.trim() }, righe(testo)) : null;
   }
@@ -240,29 +177,8 @@
       document.querySelector('.vai-al-contenuto').textContent = contenuti.pagina.vai_al_contenuto;
     }
 
-    const intestazione = contenuti.intestazione;
-    if (intestazione) {
-      riempi(document.querySelector('.intestazione .contenitore'),
-        el('p', { class: 't-eyebrow-maiuscolo-12' }, intestazione.marchio),
-        el('ul', { class: 'voci-provvisorie', role: 'list' },
-          intestazione.voci.map((v) => el('li', { class: 't-etichetta-media-14' }, v)),
-          intestazione.social.map((v) => el('li', { class: 't-etichetta-media-14 attenuato' }, v))));
-    }
-
-    const hero = formato(contenuti.hero);
-    if (hero) {
-      riempi(document.querySelector('[data-sezione="hero"] .contenitore'),
-        eyebrow(hero.eyebrow),
-        el('h1', { id: 'titolo-inizio', class: 't-titolo-display' }, righe(hero.titolo)),
-        el('p', { class: 't-corpo-grande-18' }, hero.sottotitolo),
-        el('p', { class: 't-eyebrow-maiuscolo-12 attenuato' }, righe(hero.invito)),
-        el('figure', { class: 'citazione' },
-          hero.virgolette ? el('p', { class: 't-decorativo-virgolette-34 accento', 'aria-hidden': 'true' }, hero.virgolette) : null,
-          el('blockquote', { lang: hero.citazione.lingua, class: 't-citazione-corsivo-22' }, el('p', {}, hero.citazione.testo)),
-          el('figcaption', { class: 't-etichetta-media-14' }, hero.citazione.autore)));
-    }
-
     for (const [numeroSezione, s] of Object.entries(contenuti.sezioni || {})) {
+      if (numeroSezione === '02') continue;   // js/sezione-02.js
       sezione(numeroSezione, s);
     }
 
@@ -282,9 +198,8 @@
         el('p', { class: 't-corpo-piccolo-14' }, footer.copyright),
         eyebrow(footer.marchio));
     }
-    document.documentElement.dataset.formato = compatto.matches ? 'compatto' : 'desktop';
   }
 
   disegna();
-  compatto.addEventListener('change', disegna);
+  alCambioFormato(disegna);
 })();

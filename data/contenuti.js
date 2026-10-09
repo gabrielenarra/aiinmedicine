@@ -98,18 +98,34 @@
       "medicina",
       "è possibile"
     ],
-    "sottotitolo": "L’intelligenza artificiale sta ridefinendo la prevenzione, la diagnosi e la cura. Scopri come i dati e la scienza stanno aprendo nuove strade per il futuro della salute.",
+    "sottotitolo": [
+      "L’intelligenza artificiale sta ridefinendo",
+      "la prevenzione, la diagnosi e la cura.",
+      "Scopri come i dati e la scienza",
+      "stanno aprendo nuove strade",
+      "per il futuro della salute."
+    ],
     "invito": [
       "SCORRI PER INIZIARE",
       "IL PERCORSO"
     ],
     "citazione": {
       "lingua": "en",
-      "testo": "The future will be defined not by AI replacing clinicians, but by those who use AI replacing those who don’t.",
+      "testo": [
+        "The future will be defined not by AI",
+        "replacing clinicians, but by those who use",
+        "AI replacing those who don’t."
+      ],
       "autore": "— Eric Topol"
     },
     "compatto": {
-      "virgolette": "“"
+      "virgolette": "“",
+      "sottotitolo": "L’intelligenza artificiale sta ridefinendo la prevenzione, la diagnosi e la cura. Scopri come i dati e la scienza stanno aprendo nuove strade per il futuro della salute.",
+      "citazione": {
+        "lingua": "en",
+        "testo": "The future will be defined not by AI replacing clinicians, but by those who use AI replacing those who don’t.",
+        "autore": "— Eric Topol"
+      }
     }
   },
   "sezioni": {

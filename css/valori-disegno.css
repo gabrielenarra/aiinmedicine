@@ -1,0 +1,47 @@
+/* ==========================================================================
+   Valori presi dal disegno Figma che NON sono variabili di design/tokens.css
+   (ombre dei componenti, margini misurati sul disegno desktop).
+   Ognuno ha accanto il nodo Figma da cui viene. Se cambiano nel disegno,
+   si cambiano solo qui. I colori restano quelli di tokens.css.
+   ========================================================================== */
+
+:root {
+  /* Margini laterali misurati nel disegno desktop 1440 (CLAUDE.md dice 64 px:
+     il disegno usa 46 per header e hero, 72 per i testi delle sezioni 02, 08–10,
+     56 per le sezioni 03–07; vale il disegno, vedi docs/PUNTI-APERTI.md B17) */
+  --margine-alto-desktop: 46px;        /* 415:80, 15:9 */
+  --margine-testi-02-desktop: 72px;    /* 19:3 */
+
+  /* Filetti: 1 px nel colore del testo principale (letto dai pixel del disegno) */
+  --filetto: 1px solid var(--testo-primario);
+
+  /* Header iniziale (415:80): le voci partono ogni 82,5 px; «About» e social
+     finiscono 19 px prima del filetto */
+  --passo-voci-intestazione: 82.5px;
+  --alto-testi-intestazione: 25px;     /* distanza dei testi dal bordo alto */
+  --rientro-extra-intestazione: 19px;
+
+  /* Header sticky (242:2): marchio a 40 px, 52 px a destra, pillola del capitolo */
+  --margine-sticky-sinistra: 40px;
+  --margine-sticky-destra: 52px;
+  --larghezza-capitolo-sticky: 350px;
+  --raggio-capitolo-sticky: 17px;
+  --distanza-capitolo-sticky: 55px;
+  --distanza-indicatore-sticky: 32px;  /* dall'alto della voce all'indicatore */
+
+  /* Hero desktop (3:7): l'hero va da y 64 a 766 nel disegno */
+  --hero-altezza: 702px;
+  --hero-alto: 52px;                  /* eyebrow a y 116 */
+  --hero-spazio-titolo: 18px;         /* eyebrow → titolo */
+  --hero-spazio-invito: 62px;         /* testo → «Scorri per iniziare» */
+  --hero-larghezza-titolo: 560px;
+  --hero-larghezza-testo: 455px;
+  --hero-alto-citazione: 66px;        /* citazione a y 130 */
+  --hero-larghezza-citazione: 376px;
+
+  /* Sezione 02 (384:25): alta 740 px; posizioni di card e riquadro in css/sezione-02.css */
+  --s02-altezza: 740px;
+
+  /* Card della sezione 02 (415:2 …) */
+  --ombra-card-02: 0 12px 30px rgba(31, 26, 61, 0.08);
+}

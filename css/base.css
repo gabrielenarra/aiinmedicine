@@ -92,14 +92,9 @@ body {
 /* ---------- Scheletro provvisorio (tappa 1) ----------
    Spaziature solo per rendere leggibile lo scheletro: le misure vere
    delle sezioni arrivano dal disegno alle tappe 3 e 4. */
-.intestazione,
 .sezione,
 .pie {
   padding-block: var(--spazio-48);
-}
-
-.intestazione {
-  border-bottom: 1px solid var(--linea-intestazione);
 }
 
 .pie {

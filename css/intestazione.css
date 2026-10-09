@@ -1,0 +1,171 @@
+/* ==========================================================================
+   Header iniziale (disegno 415:80) e header sticky (disegno 242:2), desktop.
+   Tablet e smartphone (pulsante menu) arrivano alla tappa 4.
+   ========================================================================== */
+
+[hidden] {
+  display: none !important;
+}
+
+.intestazione ul,
+.intestazione-sticky ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ---------- Header iniziale ---------- */
+.intestazione__interno {
+  position: relative;
+  max-width: var(--larghezza-desktop);
+  margin-inline: auto;
+  padding: var(--spazio-16) var(--spazio-20);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spazio-8) var(--spazio-24);
+  color: var(--testo-primario);
+}
+
+.intestazione__nav ul,
+.intestazione__extra {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spazio-8) var(--spazio-16);
+}
+
+.intestazione__extra {
+  color: var(--testo-attenuato);   /* nel disegno: testo principale al 70% */
+}
+
+/* filetto sotto l'header, largo quanto il contenuto */
+.intestazione__interno::after {
+  content: "";
+  position: absolute;
+  left: var(--spazio-20);
+  right: var(--spazio-20);
+  bottom: 0;
+  border-top: var(--filetto);
+}
+
+@media (min-width: 600px) {
+  .intestazione__interno { padding-inline: var(--spazio-24); }
+  .intestazione__interno::after { left: var(--spazio-24); right: var(--spazio-24); }
+}
+
+@media (min-width: 1024px) {
+  .intestazione__interno {
+    display: grid;
+    /* il marchio occupa lo spazio fino alla prima voce (815 px su 1440 nel disegno) */
+    grid-template-columns: calc((815 - 46) / (1440 - 2 * 46) * 100%) auto 1fr;
+    align-items: start;
+    height: var(--spazio-64);
+    padding: var(--alto-testi-intestazione) var(--margine-alto-desktop) 0;
+    gap: 0;
+  }
+
+  .intestazione__interno::after {
+    left: var(--margine-alto-desktop);
+    right: var(--margine-alto-desktop);
+  }
+
+  .intestazione__nav ul {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: var(--passo-voci-intestazione);
+    gap: 0;
+  }
+
+  .intestazione .intestazione__extra {
+    justify-content: flex-end;
+    gap: var(--spazio-12);
+    padding-right: var(--rientro-extra-intestazione);
+  }
+
+  .intestazione__extra li:first-child {
+    margin-right: var(--spazio-8);
+  }
+}
+
+/* ---------- Header sticky ---------- */
+.intestazione-sticky {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 50;
+  background: var(--superficie-base);
+  border-bottom: 1px solid var(--linea-intestazione);
+  box-shadow: var(--ombra-header-sticky);
+  -webkit-backdrop-filter: blur(var(--sfocatura-header));
+  backdrop-filter: blur(var(--sfocatura-header));
+}
+
+.intestazione-sticky__interno {
+  max-width: var(--larghezza-desktop);
+  margin-inline: auto;
+  min-height: var(--spazio-64);
+  padding: var(--spazio-12) var(--spazio-20);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spazio-8) var(--spazio-24);
+}
+
+.intestazione-sticky__nav ul {
+  display: flex;
+  gap: var(--spazio-40);
+}
+
+.voce-sticky {
+  position: relative;
+  color: var(--testo-navigazione);
+  text-transform: uppercase;
+}
+
+.voce-sticky--corrente {
+  color: var(--testo-accento);
+}
+
+/* indicatore 34 × 2 px sotto la voce corrente (foglio B) */
+.voce-sticky--corrente::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: var(--distanza-indicatore-sticky);
+  width: 34px;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--accento-lilla);
+}
+
+.intestazione-sticky__capitolo {
+  display: flex;
+  align-items: center;
+  gap: var(--spazio-12);
+  min-height: var(--spazio-40);
+  padding: 0 var(--spazio-12);
+  background: var(--superficie-bianco);
+  border: 1px solid var(--accento-lilla);
+  border-radius: var(--raggio-capitolo-sticky);
+  white-space: nowrap;
+}
+
+.intestazione-sticky__capitolo .t-eyebrow-maiuscolo-12 {
+  color: var(--testo-accento);
+}
+
+.intestazione-sticky__capitolo .t-corpo-piccolo-14 {
+  color: var(--testo-navigazione);
+}
+
+@media (min-width: 1024px) {
+  .intestazione-sticky__interno {
+    display: grid;
+    grid-template-columns: 1fr auto var(--larghezza-capitolo-sticky);
+    height: var(--spazio-64);
+    padding: 0 var(--margine-sticky-destra) 0 var(--margine-sticky-sinistra);
+    gap: 0;
+  }
+
+  .intestazione-sticky__nav {
+    margin-right: var(--distanza-capitolo-sticky);
+  }
+}

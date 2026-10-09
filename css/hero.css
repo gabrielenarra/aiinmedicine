@@ -1,0 +1,113 @@
+/* ==========================================================================
+   Hero (disegno 3:7: 15:9 eyebrow, 15:10 titolo, 15:11 testo, 15:12 invito,
+   415:76 citazione) con le sfere ferme di design/sfere.css.
+   Misure desktop 1440; tra 1024 e 1440 le posizioni orizzontali scalano.
+   Tablet e smartphone: tappa 4 (per ora testi in colonna, senza sfere).
+   ========================================================================== */
+
+/* l'alone delle sfere a destra non deve creare scorrimento orizzontale
+   (clip e non hidden: non crea un'area di scorrimento e non taglia in verticale) */
+.hero {
+  overflow-x: clip;
+}
+
+.hero__palco {
+  position: relative;
+  max-width: var(--larghezza-desktop);
+  margin-inline: auto;
+  padding: var(--spazio-48) var(--spazio-20);
+  isolation: isolate;               /* le sfere restano dietro ai testi della sezione */
+}
+
+.hero__sfere {
+  display: none;                    /* tablet e smartphone: tappa 4 */
+}
+
+.hero__testo,
+.hero__citazione {
+  position: relative;
+  z-index: 1;                       /* sopra alle sfere */
+}
+
+.hero__eyebrow {
+  color: var(--testo-accento);
+}
+
+.hero__titolo {
+  margin-top: var(--hero-spazio-titolo);
+  color: var(--testo-primario);
+}
+
+.hero__sottotitolo {
+  margin-top: var(--spazio-20);
+  max-width: var(--hero-larghezza-testo);
+  color: var(--testo-navigazione);
+}
+
+/* «Scorri per iniziare»: link alla prima sezione, area di tocco ≥ 44 px */
+.hero__invito {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: var(--area-tocco-min);
+  margin-top: var(--spazio-32);
+  color: var(--testo-attenuato);    /* nel disegno: testo principale al 61% */
+  text-decoration: none;
+}
+
+.hero__citazione {
+  margin: var(--spazio-48) 0 0;
+  max-width: var(--hero-larghezza-citazione);
+  padding: var(--spazio-8);
+}
+
+.hero__citazione blockquote {
+  margin: 0;
+  color: var(--testo-primario);
+}
+
+.hero__autore {
+  margin-top: var(--spazio-12);
+  color: var(--testo-attenuato);    /* nel disegno: testo principale al 62% */
+}
+
+.hero__virgolette {
+  color: var(--testo-accento);
+}
+
+@media (min-width: 600px) {
+  .hero__palco { padding-inline: var(--spazio-24); }
+}
+
+@media (min-width: 1024px) {
+  .hero__palco {
+    min-height: var(--hero-altezza);
+    padding: var(--hero-alto) var(--margine-alto-desktop) 0;
+  }
+
+  .hero__sfere {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .hero__titolo {
+    max-width: var(--hero-larghezza-titolo);
+  }
+
+  /* invito a 62 px dal testo; la zona cliccabile alta 44 px ne toglie 6 sopra */
+  .hero__invito {
+    margin-top: calc(var(--hero-spazio-invito) - (var(--area-tocco-min) - 2 * 16px) / 2);
+  }
+
+  /* citazione nella colonna destra: 920 px da sinistra, 66 px dall'alto dell'hero */
+  .hero__citazione {
+    position: absolute;
+    left: calc(920 / 1440 * 100%);
+    top: var(--hero-alto-citazione);
+    width: var(--hero-larghezza-citazione);
+    margin: 0;
+  }
+}

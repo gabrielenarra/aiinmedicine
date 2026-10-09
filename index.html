@@ -10,7 +10,12 @@
   <link rel="stylesheet" href="design/movimento.css">
   <link rel="stylesheet" href="css/font.css">
   <link rel="stylesheet" href="design/typography.css">
+  <link rel="stylesheet" href="css/valori-disegno.css">
   <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="design/sfere.css">
+  <link rel="stylesheet" href="css/intestazione.css">
+  <link rel="stylesheet" href="css/hero.css">
+  <link rel="stylesheet" href="css/sezione-02.css">
 
   <!-- Dati: script normali (non .json) perché il sito si apre anche con un doppio clic.
        Vanno caricati prima di js/dati.js; defer mantiene l'ordine. -->
@@ -25,21 +30,32 @@
   <script src="data/discoveries.js" defer></script>
   <script src="data/contenuti.js" defer></script>
   <script src="js/dati.js" defer></script>
+  <script src="js/ui.js" defer></script>
+  <script src="js/intestazione.js" defer></script>
+  <script src="js/hero.js" defer></script>
+  <script src="js/sezione-02.js" defer></script>
   <script src="js/testi.js" defer></script>
 </head>
 <body>
   <a class="vai-al-contenuto t-etichetta-forte-14" href="#contenuto">Vai al contenuto</a>
 
-  <!-- I testi arrivano da data/contenuti.js (js/testi.js), i numeri da data/site_metrics.js. -->
+  <!-- I testi arrivano da data/contenuti.js, i numeri da data/ (js/*.js). -->
   <header class="intestazione">
-    <div class="contenitore"></div>
+    <div class="intestazione__interno"></div>
   </header>
 
+  <!-- Header sticky: compare dopo l'hero (tappa 5); per ora nascosto -->
+  <div class="intestazione-sticky" hidden>
+    <div class="intestazione-sticky__interno"></div>
+  </div>
+
   <main id="contenuto">
-    <section id="inizio" class="sezione sezione-hero" data-sezione="hero" aria-labelledby="titolo-inizio">
-      <div class="contenitore"></div>
+    <section id="inizio" class="hero" data-sezione="hero" aria-labelledby="titolo-inizio">
+      <div class="hero__palco"></div>
     </section>
-    <section class="sezione" data-sezione="02"><div class="contenitore"></div></section>
+    <section class="sezione-02" data-sezione="02">
+      <div class="s02__palco"></div>
+    </section>
     <section class="sezione" data-sezione="03"><div class="contenitore"></div></section>
     <section class="sezione" data-sezione="04"><div class="contenitore"></div></section>
     <section class="sezione" data-sezione="05"><div class="contenitore"></div></section>

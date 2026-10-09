@@ -1,0 +1,141 @@
+/* ==========================================================================
+   Sezione 02 «I dati raccontano il cambiamento» (disegno 384:25, y 766, alta 740).
+   Desktop: titolo a sinistra, riquadro «Data thread» in alto a destra,
+   cinque card sparse sul piano come nel disegno (posizioni sotto).
+   Tra 1024 e 1440 px posizioni e larghezze scalano con la pagina.
+   Tablet e smartphone: tappa 4 (per ora tutto in colonna).
+   Card NON cliccabili: nessun hover, focus o premuto.
+   ========================================================================== */
+
+.s02__palco {
+  position: relative;
+  max-width: var(--larghezza-desktop);
+  margin-inline: auto;
+  padding: var(--spazio-48) var(--spazio-20);
+}
+
+/* Il disegno ha un livello «Section 02 / Top Hairline» (19:2), ma nella resa
+   non si vede: nessun filetto sopra la sezione 02 (vale il disegno) */
+
+.s02__eyebrow {
+  color: var(--testo-accento);
+}
+
+.s02__titolo {
+  margin-top: var(--spazio-16);
+  color: var(--testo-primario);
+}
+
+.s02__introduzione {
+  margin-top: var(--spazio-4);
+  color: var(--testo-secondario);
+}
+
+/* riquadro «Data thread» (19:6) */
+.s02__riquadro {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: var(--spazio-32);
+  padding: var(--spazio-16) var(--spazio-16) var(--spazio-8);
+  background: var(--superficie-lilla-chiaro);
+  border: 1px solid var(--accento-lilla);
+  border-radius: var(--raggio-18);
+}
+
+.s02__riquadro-eyebrow {
+  color: var(--testo-accento);
+}
+
+.s02__riquadro-testo {
+  color: var(--testo-primario);
+}
+
+/* card (componente «Card sezione 02», 362:29) */
+.s02__card {
+  display: grid;
+  gap: var(--spazio-16);
+  margin: var(--spazio-32) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card-02 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;   /* nel disegno i due gruppi sono attaccati */
+  /* in Figma il bordo non occupa spazio: 1 px in meno di padding (18 · 20 · 12) */
+  padding: calc(18px - 1px) calc(var(--spazio-20) - 1px) calc(var(--spazio-12) - 1px);
+  background: var(--superficie-bianco);
+  border: 1px solid var(--accento-lilla);
+  border-radius: var(--raggio-24);
+  box-shadow: var(--ombra-card-02);
+}
+
+.card-02__alto {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spazio-12);
+}
+
+.card-02__basso {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spazio-8);
+}
+
+.card-02__numero { color: var(--testo-accento); }
+.card-02__titolo { color: var(--testo-primario); }
+.card-02__testo { color: var(--testo-secondario); }
+.card-02__categoria { color: var(--testo-attenuato); }   /* nel disegno: principale al 60% */
+
+@media (min-width: 600px) {
+  .s02__palco { padding-inline: var(--spazio-24); }
+}
+
+@media (min-width: 1024px) {
+  /* coordinate del disegno: x e larghezze in px su 1440 (scalano), y in px */
+  .s02__palco {
+    height: var(--s02-altezza);
+    padding: 0;
+  }
+
+  .s02__testa,
+  .s02__riquadro,
+  .card-02 {
+    position: absolute;
+    left: calc(var(--x) / 1440 * 100%);
+    top: calc(var(--y) * 1px);
+    width: calc(var(--w) / 1440 * 100%);
+    margin: 0;
+  }
+
+  .s02__testa { --x: 72; --y: 40; --w: 520; }          /* 19:3, 19:4, 19:5 */
+  .s02__introduzione { max-width: calc(430 / 520 * 100%); }
+
+  .s02__riquadro {                                       /* 19:6 */
+    --x: 1104; --y: 49; --w: 250;
+    min-height: 126px;
+    padding: calc(18px - 1px) calc(18px - 1px) calc(var(--spazio-8) - 1px);
+  }
+
+  .s02__card { margin: 0; }
+
+  /* 415:2 mRNA · 415:8 CRISPR · 415:14 Immunoterapia · 415:20 Diagnostica · 415:26 Scoperte */
+  .card-02:nth-child(1) { --x: 649;  --y: 50;  --w: 250; }
+  .card-02:nth-child(2) { --x: 1076; --y: 236; --w: 278; }
+  .card-02:nth-child(3) { --x: 783;  --y: 458; --w: 290; }
+  .card-02:nth-child(4) { --x: 417;  --y: 426; --w: 265; }
+  .card-02:nth-child(5) { --x: 72;   --y: 467; --w: 244; }
+}
+
+/* Da 1280 px: card e riquadro larghi come nel disegno (scala solo la posizione),
+   così i testi vanno a capo come a 1440 e le card restano nella sezione.
+   Tra 1024 e 1279 px le larghezze scalano ancora: da decidere (PUNTI-APERTI B10). */
+@media (min-width: 1280px) {
+  .s02__testa,
+  .s02__riquadro,
+  .card-02 {
+    width: calc(var(--w) * 1px);
+  }
+}
