@@ -52,7 +52,7 @@
   .intestazione__interno::after { left: var(--spazio-24); right: var(--spazio-24); }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1280px) {
   .intestazione__interno {
     display: grid;
     /* il marchio occupa lo spazio fino alla prima voce (815 px su 1440 nel disegno) */
@@ -156,7 +156,7 @@
   color: var(--testo-navigazione);
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1280px) {
   .intestazione-sticky__interno {
     display: grid;
     grid-template-columns: 1fr auto var(--larghezza-capitolo-sticky);

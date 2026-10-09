@@ -2,7 +2,7 @@
    Sezione 02 «I dati raccontano il cambiamento» (disegno 384:25, y 766, alta 740).
    Desktop: titolo a sinistra, riquadro «Data thread» in alto a destra,
    cinque card sparse sul piano come nel disegno (posizioni sotto).
-   Tra 1024 e 1440 px posizioni e larghezze scalano con la pagina.
+   Tra 1280 e 1440 px le posizioni scalano con la pagina; card larghe come nel disegno.
    Tablet e smartphone: tappa 4 (per ora tutto in colonna).
    Card NON cliccabili: nessun hover, focus o premuto.
    ========================================================================== */
@@ -93,8 +93,9 @@
   .s02__palco { padding-inline: var(--spazio-24); }
 }
 
-@media (min-width: 1024px) {
-  /* coordinate del disegno: x e larghezze in px su 1440 (scalano), y in px */
+@media (min-width: 1280px) {
+  /* coordinate del disegno: x in px su 1440 (scala con la pagina), y e larghezze in px:
+     card e riquadro restano larghi come nel disegno, così i testi vanno a capo come a 1440 */
   .s02__palco {
     height: var(--s02-altezza);
     padding: 0;
@@ -106,7 +107,7 @@
     position: absolute;
     left: calc(var(--x) / 1440 * 100%);
     top: calc(var(--y) * 1px);
-    width: calc(var(--w) / 1440 * 100%);
+    width: calc(var(--w) * 1px);
     margin: 0;
   }
 
@@ -129,13 +130,3 @@
   .card-02:nth-child(5) { --x: 72;   --y: 467; --w: 244; }
 }
 
-/* Da 1280 px: card e riquadro larghi come nel disegno (scala solo la posizione),
-   così i testi vanno a capo come a 1440 e le card restano nella sezione.
-   Tra 1024 e 1279 px le larghezze scalano ancora: da decidere (PUNTI-APERTI B10). */
-@media (min-width: 1280px) {
-  .s02__testa,
-  .s02__riquadro,
-  .card-02 {
-    width: calc(var(--w) * 1px);
-  }
-}

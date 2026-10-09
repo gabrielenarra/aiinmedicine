@@ -5,8 +5,8 @@
 
    Formati (CLAUDE.md):
      smartphone  fino a 599 px    margini 20 px
-     tablet      600–1023 px      margini 24 px
-     desktop     da 1024 px       margini 64 px, contenuto largo al massimo 1440 px
+     tablet      600–1279 px      margini 24 px (anche 1024–1279: layout tablet, decisione 9 ott 2026)
+     desktop     da 1280 px       margini 64 px, contenuto largo al massimo 1440 px
    ========================================================================== */
 
 /* ---------- Reset essenziale ---------- */
@@ -62,7 +62,7 @@ body {
   font-family: var(--font-sans);
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1280px) {
   /* Desktop: sfumatura orizzontale su tutta la finestra (design/mappa-figma.md, «Sfondi e superfici») */
   body {
     background: var(--sfondo-pagina-desktop);
@@ -83,7 +83,7 @@ body {
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1280px) {
   .contenitore {
     padding-inline: var(--spazio-64);
   }

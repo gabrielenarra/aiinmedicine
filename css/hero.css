@@ -1,7 +1,7 @@
 /* ==========================================================================
    Hero (disegno 3:7: 15:9 eyebrow, 15:10 titolo, 15:11 testo, 15:12 invito,
    415:76 citazione) con le sfere ferme di design/sfere.css.
-   Misure desktop 1440; tra 1024 e 1440 le posizioni orizzontali scalano.
+   Misure desktop 1440; tra 1280 e 1440 le posizioni orizzontali scalano.
    Tablet e smartphone: tappa 4 (per ora testi in colonna, senza sfere).
    ========================================================================== */
 
@@ -79,7 +79,7 @@
   .hero__palco { padding-inline: var(--spazio-24); }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1280px) {
   .hero__palco {
     min-height: var(--hero-altezza);
     padding: var(--hero-alto) var(--margine-alto-desktop) 0;

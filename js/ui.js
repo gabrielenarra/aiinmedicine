@@ -10,8 +10,8 @@
 (() => {
   const { metrica, dato } = window.SITO.dati;
 
-  // Tablet e smartphone (sotto i 1024 px) usano i campi «compatto» di contenuti.js
-  const compatto = window.matchMedia('(max-width: 1023px)');
+  // Tablet e smartphone (sotto i 1280 px: tra 1024 e 1279 si usa il layout tablet) usano i campi «compatto» di contenuti.js
+  const compatto = window.matchMedia('(max-width: 1279px)');
 
   function formato(oggetto) {
     if (!oggetto || !oggetto.compatto || !compatto.matches) return oggetto;

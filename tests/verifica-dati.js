@@ -80,7 +80,8 @@ async function controlla(browser, larghezza) {
   const browser = await chromium.launch();
   let totaleDifferenze = 0;
   try {
-    for (const larghezza of [1440, 390]) {
+    // 1440 desktop · 1100 layout tablet sopra i 1024 px (decisione 9 ott) · 390 smartphone
+    for (const larghezza of [1440, 1100, 390]) {
       const r = await controlla(browser, larghezza);
       console.log(`\n${larghezza} px (${r.formato}): ${r.mostrati.metriche.length} numeri da site_metrics, ` +
         `${r.mostrati.dati.length} valori dai file di sezione, ${r.mostrati.fonti.length} link alle fonti`);

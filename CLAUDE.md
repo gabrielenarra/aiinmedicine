@@ -36,9 +36,9 @@ Se il disegno e un documento qui non coincidono, **vale il disegno**: segnalalo 
 
 ## Breakpoint e adattamento
 
-- Smartphone fino a 599 px · tablet 600–1023 px · desktop da 1024 px. I frame disegnati (390, 768, 1440) sono i riferimenti; in mezzo il layout è fluido.
+- Smartphone fino a 599 px · tablet 600–1279 px · desktop da 1280 px. **Decisione del 9 ottobre 2026:** tra 1024 e 1279 px si usano layout e testi del tablet (il desktop disegnato a 1440 non regge sotto i 1280: sfere sopra il titolo, card troppo strette). I frame disegnati (390, 768, 1440) sono i riferimenti; in mezzo il layout è fluido. Nei file CSS e in `js/ui.js` le soglie sono `min-width: 600px` e `min-width: 1280px`. Dove `design/` o la pagina Leggimi dicono «desktop da 1024 px», vale questa decisione.
 - Margini laterali 64 px desktop, 24 px tablet, 20 px smartphone. Oltre 1440 px il contenuto è largo al massimo 1440 e centrato.
-- **Prove obbligatorie a ogni tappa visiva** (con Playwright, vedi sotto): larghezze 320, 360, 768, 1024, 1280, 1440, 1920. Nessuno scorrimento orizzontale, nessun testo tagliato o sovrapposto.
+- **Prove obbligatorie a ogni tappa visiva** (con Playwright, vedi sotto): larghezze 320, 360, 768, 1024, 1279, 1280, 1440, 1920. Nessuno scorrimento orizzontale, nessun testo tagliato o sovrapposto.
 - Confronta con `get_screenshot` dei frame Figma (ID in `design/mappa-figma.md`) e dì all'utente le differenze.
 
 ## Contenuto e dati — regole che non si toccano

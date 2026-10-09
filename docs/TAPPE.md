@@ -114,10 +114,11 @@ Smartphone, 250:2), con i rispettivi stati aperti. Layout fluido tra i
 riferimenti; margini 24/20 px; titoli di sezione 50 px (tablet) e 36 px
 (smartphone, stile Titolo/Mobile). Testi diversi tra formati solo dove il
 disegno li ha diversi.
-Prova con Playwright a 320, 360, 390, 600, 768, 1023, 1024, 1280, 1440,
-1920 px: nessuno scorrimento orizzontale, nessun testo tagliato, area di
-tocco >= 44 px. Se tra 1024 e 1280 le colonne si stringono troppo, dimmelo
-con uno screenshot (non decidere da solo).
+Il layout tablet vale fino a 1279 px (deciso il 9 ottobre: tra 1024 e 1279
+si usa il tablet). Prova con Playwright a 320, 360, 390, 600, 768, 1023,
+1024, 1279, 1280, 1440, 1920 px: nessuno scorrimento orizzontale, nessun
+testo tagliato, area di tocco >= 44 px. Se il layout tablet si allarga
+troppo vicino ai 1279 px, dimmelo con uno screenshot (non decidere da solo).
 Commit "Tappa 4: tablet e smartphone".
 ```
 
