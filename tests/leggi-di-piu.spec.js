@@ -24,12 +24,12 @@ for (const id of SEZIONI) {
     await barra.click();
     await expect(barra).toHaveAttribute('aria-expanded', 'true');
     await expect(pannello).toBeVisible();
-    await expect(barra.locator('[data-segno]')).toHaveText('−');
+    await expect(barra.locator('[data-segno]')).toHaveAttribute('data-segno', '−');
 
     await barra.click();
     await expect(barra).toHaveAttribute('aria-expanded', 'false');
     await expect(pannello).toBeHidden();
-    await expect(barra.locator('[data-segno]')).toHaveText('+');
+    await expect(barra.locator('[data-segno]')).toHaveAttribute('data-segno', '+');
   });
 }
 
@@ -59,12 +59,14 @@ test('le sezioni sono indipendenti: aprirne una non chiude le altre', async ({ p
   await expect(page.locator('#approfondimento-crispr')).toBeHidden();
 });
 
+// Misure di layout (getComputedStyle), non a schermo: la crescita d'ingresso usa transform
+// e non cambia la scala vera delle barre
 test('grafici 06 e 07: valori come testo, barre in scala, testo alternativo', async ({ page }) => {
   const auroc = page.locator('[data-grafico="diagnostics_auroc"]');
   await expect(auroc.locator('.grafico-colonne__valore')).toHaveText(['0,85', '0,90', '0,90', '0,92', '0,97']);
   const altezze = await auroc.evaluate((g) => ({
-    area: g.querySelector('.grafico-colonne__area').getBoundingClientRect().height,
-    barre: [...g.querySelectorAll('.grafico-colonne__barra')].map((b) => b.getBoundingClientRect().height),
+    area: parseFloat(getComputedStyle(g.querySelector('.grafico-colonne__area')).height),
+    barre: [...g.querySelectorAll('.grafico-colonne__barra')].map((b) => parseFloat(getComputedStyle(b).height)),
   }));
   // asse 0,80–1,00: 0,85 → un quarto dell'altezza, 0,97 → 85%
   expect(altezze.barre[0] / altezze.area).toBeCloseTo(0.25, 2);
@@ -73,8 +75,8 @@ test('grafici 06 e 07: valori come testo, barre in scala, testo alternativo', as
   const composto = page.locator('[data-grafico="discoveries_classification"]');
   await expect(composto.locator('.grafico-composto__quota')).toHaveText(['57%', '11%', '32%']);
   const quote = await composto.evaluate((g) => {
-    const totale = g.querySelector('.grafico-composto__barra').getBoundingClientRect().width;
-    return [...g.querySelectorAll('.grafico-composto__segmento')].map((s) => s.getBoundingClientRect().width / totale);
+    const totale = parseFloat(getComputedStyle(g.querySelector('.grafico-composto__barra')).width);
+    return [...g.querySelectorAll('.grafico-composto__segmento')].map((s) => parseFloat(getComputedStyle(s).width) / totale);
   });
   expect(quote[0]).toBeCloseTo(0.57, 2);
   expect(quote[1]).toBeCloseTo(0.11, 2);
@@ -89,8 +91,8 @@ test('il grafico della 04 ha i valori come testo e il testo alternativo', async 
   await expect(page.locator(`#${idAlt}`)).toContainText('Scala da 0 a 60%');
   // le barre sono proporzionali alla scala di charts.js (56,4 su 60)
   const larghezze = await grafico.locator('.grafico-barre__voce').first().evaluate((v) => ({
-    pista: v.querySelector('.grafico-barre__pista').getBoundingClientRect().width,
-    barra: v.querySelector('.grafico-barre__barra').getBoundingClientRect().width,
+    pista: parseFloat(getComputedStyle(v.querySelector('.grafico-barre__pista')).width),
+    barra: parseFloat(getComputedStyle(v.querySelector('.grafico-barre__barra')).width),
   }));
   expect(larghezze.barra / larghezze.pista).toBeCloseTo(56.4 / 60, 2);
 });
@@ -108,9 +110,9 @@ for (const larghezza of [390, 768]) {
       await barra.click();
       await expect(barra).toHaveAttribute('aria-expanded', 'true');
       await expect(pannello).toBeVisible();
-      await expect(barra.locator('[data-segno]')).toHaveText('−');
+      await expect(barra.locator('[data-segno]')).toHaveAttribute('data-segno', '−');
       const chiudi = pannello.locator('[data-chiudi]');
-      for (const pulsante of [barra, chiudi, page.locator('.pulsante-menu')]) {
+      for (const pulsante of [barra, chiudi, page.locator('.intestazione .pulsante-menu')]) {
         const box = await pulsante.boundingBox();
         expect(box.height).toBeGreaterThanOrEqual(44);
         expect(box.width).toBeGreaterThanOrEqual(44);

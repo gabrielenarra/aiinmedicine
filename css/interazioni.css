@@ -1,0 +1,353 @@
+/* ==========================================================================
+   Interazioni e movimento (design/stati-e-interazioni.md; token in design/movimento.css).
+   Solo le tre durate del foglio A, una sola curva, uscita al 70%.
+   Si animano solo opacità, transform, colori, bordi e l'altezza dell'approfondimento.
+   Hover solo con puntatore preciso; focus solo da tastiera (anello di movimento.css).
+   In fondo: movimento ridotto (foglio E).
+   ========================================================================== */
+
+/* ---------- Navigazione verso una sezione (sequenza 6) ---------- */
+footer[id] { scroll-margin-top: 80px; }
+
+/* ---------- 1 · «Leggi di più»: altezza da 0fr a 1fr (sequenza 1) ---------- */
+/* il primo valore di transition è l'altezza: js/sezioni-dati.js lo legge */
+.apribile {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  transition:
+    grid-template-rows calc(var(--durata-lenta) * var(--uscita)) var(--curva),
+    visibility 0s linear calc(var(--durata-lenta) * var(--uscita));
+}
+
+.apribile[data-aperto="true"] {
+  grid-template-rows: 1fr;
+  visibility: visible;
+  transition:
+    grid-template-rows var(--durata-lenta) var(--curva),
+    visibility 0s;
+}
+
+.apribile__dentro {
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* a pannello tutto aperto niente ritaglio: ombre e anello di focus interi */
+.apribile[data-completo] .apribile__dentro { overflow: visible; }
+
+/* contenuto: dissolvenza e 8 px di salita, da 100 a 350 ms; in chiusura parte subito (175 ms) */
+.apribile__dentro > * {
+  opacity: 0;
+  transform: translateY(var(--scarto-blocco));
+  transition:
+    opacity calc(var(--durata-standard) * var(--uscita)) var(--curva),
+    transform calc(var(--durata-standard) * var(--uscita)) var(--curva);
+}
+
+.apribile[data-aperto="true"] .apribile__dentro > * {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity var(--durata-standard) var(--curva) 100ms,
+    transform var(--durata-standard) var(--curva) 100ms;
+}
+
+/* chiuso, il pannello non occupa spazio: lo spazio sopra sta dentro il contenitore
+   (desktop 28 px, tablet e smartphone 16) */
+.sd__destra > .apribile { margin-top: -28px; }
+.sd__destra .apribile__dentro > * { margin-top: 28px; }
+
+.sezione-dati--compatta .sd__interno > .apribile {
+  margin: calc(var(--spazio-16) * -1) calc(var(--spazio-20) * -1) 0;   /* largo quanto la pagina */
+}
+.sezione-dati--compatta .apribile__dentro > * { margin-top: var(--spazio-16); }
+
+@media (min-width: 600px) {
+  .sezione-dati--compatta .sd__interno > .apribile { margin-inline: calc(var(--spazio-24) * -1); }
+}
+
+/* segno «+» / «−» in dissolvenza incrociata (150 ms; quello che esce 105) */
+.segno { display: grid; }
+.segno > span {
+  grid-area: 1 / 1;
+  text-align: center;
+  transition: opacity var(--durata-rapida) var(--curva);
+}
+.segno[data-segno="+"] .segno__meno,
+.segno[data-segno="−"] .segno__piu {
+  opacity: 0;
+  transition-duration: calc(var(--durata-rapida) * var(--uscita));
+}
+
+/* ---------- 3 · Header sticky (sequenza 3) ---------- */
+.intestazione-sticky {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-100%);
+  transition:
+    transform calc(var(--durata-standard) * var(--uscita)) var(--curva),
+    opacity calc(var(--durata-standard) * var(--uscita)) var(--curva),
+    visibility 0s linear calc(var(--durata-standard) * var(--uscita));
+}
+
+.intestazione-sticky[data-visibile] {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition:
+    transform var(--durata-standard) var(--curva),
+    opacity var(--durata-standard) var(--curva),
+    visibility 0s;
+}
+
+/* voce attiva: colore in 150 ms, indicatore che scorre in 250 ms */
+.voce-sticky { transition: color var(--durata-rapida) var(--curva); }
+
+.intestazione-sticky__indicatore {
+  transition:
+    transform var(--durata-standard) var(--curva),
+    opacity var(--durata-rapida) var(--curva);
+}
+.intestazione-sticky__indicatore[data-subito] { transition: none; }
+
+/* pillola del capitolo: il testo nuovo entra in dissolvenza */
+.intestazione-sticky__capitolo--cambio > span {
+  animation: dissolvenza var(--durata-standard) var(--curva);
+}
+
+@keyframes dissolvenza {
+  from { opacity: 0; }
+}
+
+/* ---------- 2 · Menu a tutta pagina (sequenza 2) ---------- */
+.menu {
+  opacity: 0;
+  transition: opacity calc(var(--durata-standard) * var(--uscita)) var(--curva);
+}
+
+.menu[data-stato="aperto"] {
+  opacity: 1;
+  transition-duration: var(--durata-standard);
+}
+
+.menu__contenuto {
+  transform: translateY(calc(var(--scarto-blocco) * -1));
+  transition: transform var(--durata-standard) var(--curva);
+}
+
+.menu[data-stato] .menu__contenuto { transform: none; }
+
+/* voci a cascata: da 60 ms, +40 ms l'una; in chiusura restano ferme (sparisce tutto insieme) */
+.menu__voce {
+  opacity: 0;
+  transform: translateY(var(--scarto-ingresso));
+}
+
+.menu[data-stato] .menu__voce {
+  opacity: 1;
+  transform: none;
+}
+
+.menu[data-stato="aperto"] .menu__voce {
+  transition:
+    opacity var(--durata-standard) var(--curva) calc(60ms + var(--i) * 40ms),
+    transform var(--durata-standard) var(--curva) calc(60ms + var(--i) * 40ms);
+}
+
+/* ---------- 5 · Ingresso di hero e blocchi (sequenza 5) ---------- */
+[data-ingresso="attesa"] {
+  opacity: 0;
+  transform: translateY(var(--scarto, var(--scarto-blocco)));
+}
+
+[data-ingresso="fatto"] {
+  transition:
+    opacity var(--durata-lenta) var(--curva) var(--ritardo, 0ms),
+    transform var(--durata-lenta) var(--curva) var(--ritardo, 0ms);
+}
+
+/* grafici: le barre crescono in 400 ms, una sola volta; i valori sono già scritti */
+.grafico-barre__barra,
+.grafico-righe__barra,
+.grafico-composto__barra {
+  transform-origin: left center;
+  transition: transform var(--durata-lenta) var(--curva);
+}
+
+.grafico-colonne__barra {
+  transform-origin: center bottom;
+  transition: transform var(--durata-lenta) var(--curva);
+}
+
+[data-cresce="attesa"] .grafico-barre__barra,
+[data-cresce="attesa"] .grafico-righe__barra,
+[data-cresce="attesa"] .grafico-composto__barra { transform: scaleX(0); }
+[data-cresce="attesa"] .grafico-colonne__barra { transform: translateX(-50%) scaleY(0); }
+
+/* ---------- 6 · Stati (foglio B) ---------- */
+
+/* pulsante menu e pulsante chiudi: l'anello di focus è attorno al cerchio, a 2 px */
+.pulsante-menu__cerchio,
+.pulsante-chiudi__cerchio {
+  transition:
+    border-color var(--durata-rapida) var(--curva),
+    background-color var(--durata-rapida) var(--curva),
+    transform var(--durata-rapida) var(--curva);
+}
+
+.pulsante-menu:focus-visible,
+.pulsante-chiudi:focus-visible { outline: none; }
+
+.pulsante-menu:focus-visible .pulsante-menu__cerchio,
+.pulsante-chiudi:focus-visible .pulsante-chiudi__cerchio {
+  outline: var(--anello-focus);
+  outline-offset: var(--anello-distanza);
+}
+
+.pulsante-menu:active .pulsante-menu__cerchio,
+.pulsante-chiudi:active .pulsante-chiudi__cerchio {
+  background: var(--superficie-nebbia-88);
+  transform: scale(0.94);                     /* cerchio da 30 px */
+}
+
+/* barre «Leggi di più» e «Chiudi approfondimento» */
+.leggi-di-piu,
+.sc-leggi,
+.sc-chiudi {
+  transition:
+    border-color var(--durata-rapida) var(--curva),
+    background-color var(--durata-rapida) var(--curva),
+    color var(--durata-rapida) var(--curva),
+    transform var(--durata-rapida) var(--curva);
+}
+
+.sc-chiudi { border: 1px solid transparent; }
+
+.leggi-di-piu:active,
+.sc-leggi:active,
+.sc-chiudi:active {
+  background: var(--superficie-nebbia-88);
+  border-color: var(--testo-accento);
+}
+
+.leggi-di-piu:active .leggi-di-piu__etichetta,
+.sc-leggi:active,
+.sc-chiudi:active { color: var(--testo-accento-premuto); }
+
+/* scala 0,98 solo su smartphone e tablet */
+.sc-leggi:active,
+.sc-chiudi:active { transform: scale(0.98); }
+
+/* link di testo: fonti e DOI */
+.sd__fonte,
+.sc-fonti__fonte,
+.approfondimento__fonti a,
+.sc-approfondimento__fonte,
+.approfondimento__chiudi,
+.marchio,
+.voce-intestazione {
+  transition: color var(--durata-rapida) var(--curva);
+}
+
+.sd__fonte:active,
+.sc-fonti__fonte:active,
+.approfondimento__fonti a:active,
+.sc-approfondimento__fonte:active,
+.approfondimento__chiudi:active {
+  color: var(--testo-accento-premuto);
+  text-decoration: underline;
+}
+
+/* voci dell'header sticky: indicatore al 45% in hover, al 70% premuto */
+.voce-sticky { position: relative; }
+
+.voce-sticky::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: calc(50% - 10px + var(--distanza-indicatore-sticky));
+  width: 34px;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--accento-lilla);
+  opacity: 0;
+  transition: opacity var(--durata-rapida) var(--curva);
+}
+
+.voce-sticky--corrente::after { display: none; }   /* la corrente ha l'indicatore che scorre */
+
+.voce-sticky:active { color: var(--testo-accento-premuto); }
+.voce-sticky:active::after { opacity: 0.7; }
+
+/* voci del menu */
+.voce-menu__titolo { transition: color var(--durata-rapida) var(--curva); }
+.voce-menu__freccia { transition: transform var(--durata-standard) var(--curva); }
+.menu__voce { transition: border-color var(--durata-rapida) var(--curva); }
+
+.voce-menu:active {
+  background: var(--superficie-nebbia-88);
+  border-radius: var(--raggio-12);
+}
+.voce-menu:active .voce-menu__titolo { color: var(--testo-accento-premuto); }
+.voce-menu:active .voce-menu__freccia { transform: translateX(6px); }
+
+@media (hover: hover) {
+  .pulsante-menu:hover .pulsante-menu__cerchio,
+  .pulsante-chiudi:hover .pulsante-chiudi__cerchio {
+    border-color: var(--testo-accento);
+    background: var(--superficie-lilla);
+  }
+
+  .leggi-di-piu:hover,
+  .sc-leggi:hover,
+  .sc-chiudi:hover { border-color: var(--testo-accento); }
+
+  .sd__fonte:hover,
+  .sc-fonti__fonte:hover,
+  .approfondimento__fonti a:hover,
+  .sc-approfondimento__fonte:hover,
+  .approfondimento__chiudi:hover {
+    color: var(--testo-accento);
+    text-decoration: underline;
+  }
+
+  .marchio:hover,
+  .voce-intestazione:hover,
+  .voce-sticky:hover { color: var(--testo-accento); }
+
+  .voce-sticky:not(.voce-sticky--corrente):hover::after { opacity: 0.45; }
+
+  .voce-menu:hover .voce-menu__titolo { color: var(--testo-accento); }
+  .voce-menu:hover .voce-menu__freccia { transform: translateX(6px); }
+  .menu__voce:has(> .voce-menu:hover),
+  .menu__voce:has(> .voce-menu:hover) + .menu__voce { border-top-color: var(--linea-accento-75); }
+}
+
+/* ---------- 7 · Movimento ridotto (foglio E) ----------
+   Le durate sono già più brevi (design/movimento.css). Qui: niente scale e traslazioni,
+   pannelli e menu senza movimento, solo dissolvenze. */
+@media (prefers-reduced-motion: reduce) {
+  .apribile,
+  .apribile[data-aperto="true"] { transition: grid-template-rows 0s, visibility 0s; }
+  .apribile[data-aperto="true"] .apribile__dentro > * { transition-delay: 0s; }
+
+  .intestazione-sticky,
+  .intestazione-sticky[data-visibile] { transform: none; }
+  .intestazione-sticky__indicatore { transition: none; }
+
+  .menu__voce,
+  .menu[data-stato="aperto"] .menu__voce { opacity: 1; transform: none; transition: none; }
+
+  .pulsante-menu:active .pulsante-menu__cerchio,
+  .pulsante-chiudi:active .pulsante-chiudi__cerchio,
+  .sc-leggi:active,
+  .sc-chiudi:active,
+  .voce-menu:active .voce-menu__freccia { transform: none; }
+
+  [data-cresce="attesa"] .grafico-barre__barra,
+  [data-cresce="attesa"] .grafico-righe__barra,
+  [data-cresce="attesa"] .grafico-composto__barra { transform: none; }
+  [data-cresce="attesa"] .grafico-colonne__barra { transform: translateX(-50%); }
+  [data-ingresso="attesa"] { opacity: 1; transform: none; }
+}

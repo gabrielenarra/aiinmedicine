@@ -20,6 +20,8 @@
   <link rel="stylesheet" href="css/sezioni-dati.css">
   <link rel="stylesheet" href="css/sezioni-compatte.css">
   <link rel="stylesheet" href="css/sezioni-finali.css">
+  <link rel="stylesheet" href="css/menu.css">
+  <link rel="stylesheet" href="css/interazioni.css">
 
   <!-- Dati: script normali (non .json) perché il sito si apre anche con un doppio clic.
        Vanno caricati prima di js/dati.js; defer mantiene l'ordine. -->
@@ -41,6 +43,8 @@
   <script src="js/grafico.js" defer></script>
   <script src="js/sezioni-dati.js" defer></script>
   <script src="js/sezioni-finali.js" defer></script>
+  <script src="js/navigazione.js" defer></script>
+  <script src="js/ingresso.js" defer></script>
 </head>
 <body>
   <a class="vai-al-contenuto t-etichetta-forte-14" href="#contenuto">Vai al contenuto</a>
@@ -50,7 +54,7 @@
     <div class="intestazione__interno"></div>
   </header>
 
-  <!-- Header sticky: compare dopo l'hero (tappa 5); per ora nascosto -->
+  <!-- Header sticky: compare dopo l'hero (js/navigazione.js); senza JavaScript resta nascosto -->
   <div class="intestazione-sticky" hidden>
     <div class="intestazione-sticky__interno"></div>
   </div>

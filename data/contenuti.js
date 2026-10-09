@@ -7,6 +7,7 @@
     "'righe' = a capo voluti nel disegno desktop. Gli spazi doppi attorno a '/' sono del disegno.",
     "'figma' = nodo del disegno da cui viene il testo.",
     "'compatto' = testi diversi su tablet e smartphone (frame 509:258 e 250:2: stessi testi, cambiano solo gli a capo). Ogni campo sostituisce quello desktop; null = il blocco non c'è in quel formato.",
+    "'destinazioni' = sezione a cui porta ogni voce (stesso ordine di 'voci'; '10' = footer). Deciso dall'utente il 9 ottobre 2026 (punto aperto B15). Nell'header sticky una voce può comprendere più sezioni: è attiva quando si legge una di quelle.",
     "Nei pannelli compatti le schede sono numerate «01 ·», «02 ·»… (numera_schede) e 'contesto' e 'sintesi' diventano schede anch'esse: è impaginazione, i testi non cambiano."
   ],
   "pagina": {
@@ -23,6 +24,13 @@
       "Risorse",
       "About"
     ],
+    "destinazioni": [
+      "02",
+      "03",
+      "08",
+      "09",
+      "10"
+    ],
     "social": [
       "in",
       "X",
@@ -31,13 +39,19 @@
   },
   "intestazione_sticky": {
     "figma": "242:2",
-    "_nota": "Le voci dell'header sticky nel disegno (STORIA, DATI, CASI, FONTI) sono diverse da quelle dell'header iniziale e del menu: punto aperto B15.",
+    "_nota": "Le voci dell'header sticky nel disegno (STORIA, DATI, CASI, FONTI) sono diverse da quelle dell'header iniziale e del menu. Destinazioni decise il 9 ottobre 2026 (B15). capitolo_esempio è solo il testo del disegno: nel sito la pillola mostra la sezione che si sta leggendo.",
     "marchio": "AI · DATA · DESIGN · HUMAN",
     "voci": [
       "STORIA",
       "DATI",
       "CASI",
       "FONTI"
+    ],
+    "destinazioni": [
+      ["02"],
+      ["03", "04", "05", "06", "07"],
+      ["08"],
+      ["10"]
     ],
     "capitolo_esempio": {
       "eyebrow": "06 / DIAGNOSTICA",
@@ -84,7 +98,22 @@
     "copyright": "© 2026 AI in Medicine",
     "chiudi_testo": "ESC  ·  CHIUDI",
     "etichetta_apri": "Apri menu",
-    "etichetta_chiudi": "Chiudi menu"
+    "etichetta_chiudi": "Chiudi menu",
+    "etichetta_dialogo": "Menu",
+    "destinazioni": [
+      "02",
+      "03",
+      "08",
+      "09",
+      "10"
+    ],
+    "compatto": {
+      "figma": [
+        "508:340",
+        "403:44"
+      ],
+      "eyebrow": "MENU"
+    }
   },
   "hero": {
     "figma": [

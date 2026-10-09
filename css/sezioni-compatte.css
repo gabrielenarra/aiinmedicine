@@ -186,12 +186,12 @@
 }
 
 /* ---------- Pannello aperto (508:362, 508:388) ----------
-   Largo quanto la pagina, come nel disegno: esce dai margini laterali */
+   Largo quanto la pagina, come nel disegno: esce dai margini laterali
+   (il margine negativo è sul contenitore che si apre, css/interazioni.css) */
 .sc-approfondimento {
   display: flex;
   flex-direction: column;
   gap: var(--spazio-16);
-  margin-inline: calc(var(--spazio-20) * -1);
   padding: calc(var(--spazio-24) - 1px) var(--spazio-20) calc(28px - 1px);
   background: var(--superficie-base);
   border-block: 1px solid var(--accento-lilla);
@@ -247,10 +247,7 @@
   /* tablet: valore e nome uno accanto all'altro (509:351) */
   .sc-confronto__riga { grid-template-columns: auto minmax(0, 1fr); }
 
-  .sc-approfondimento {
-    margin-inline: calc(var(--spazio-24) * -1);
-    padding-inline: var(--spazio-24);
-  }
+  .sc-approfondimento { padding-inline: var(--spazio-24); }
 
   .sc-dettagli { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }

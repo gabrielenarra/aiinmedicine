@@ -1,0 +1,116 @@
+/* ==========================================================================
+   Menu a tutta pagina (js/intestazione.js; si apre e si chiude in js/navigazione.js).
+   Tablet 508:340, smartphone 403:44. Sul desktop il pulsante menu non c'è
+   (docs/PUNTI-APERTI.md B29). Movimento in css/interazioni.css.
+   ========================================================================== */
+
+.menu {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  overflow-y: auto;                 /* se non entra (telefono in orizzontale) scorre */
+  overscroll-behavior: contain;
+  background: var(--superficie-base);
+}
+
+/* scroll della pagina bloccato a menu aperto */
+html.menu-aperto { overflow: hidden; }
+
+.menu__contenuto {
+  max-width: var(--larghezza-contenuto);
+  min-height: 100%;
+  margin-inline: auto;
+}
+
+/* testa: marchio e pulsante chiudi, alta 64 px, filetto sotto (403:45, 403:49) */
+.menu__testa {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spazio-16);
+  height: var(--spazio-64);
+  padding: 0 var(--spazio-20);
+}
+
+.menu__testa::after {
+  content: "";
+  position: absolute;
+  left: var(--spazio-20);
+  right: var(--spazio-20);
+  bottom: 0;
+  border-top: 1px solid var(--linea-divisore);
+}
+
+.menu__marchio { color: var(--testo-primario); }
+
+/* pulsante chiudi (foglio B): cerchio solo bordo, × accento; area 44 × 44 */
+.pulsante-chiudi {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: var(--area-tocco-min);
+  height: var(--area-tocco-min);
+  margin-right: calc((var(--area-tocco-min) - 32px) / -2);
+  padding: 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.pulsante-chiudi__cerchio {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--linea-accento-75);
+  border-radius: 50%;
+  color: var(--testo-accento);
+  font: 400 18px/1 var(--font-sans);
+}
+
+/* corpo (403:50): 30 px sopra, 24 sotto */
+.menu__corpo {
+  padding: 30px var(--spazio-20) var(--spazio-24);
+}
+
+.menu__eyebrow { color: var(--testo-accento); }
+.menu__titolo { color: var(--testo-primario); }
+
+.menu__voci {
+  margin: 22px 0 26px;
+  padding: 0;
+  list-style: none;
+}
+
+/* filetto tra una voce e l'altra */
+.menu__voce + .menu__voce { border-top: 1px solid var(--linea-divisore); }
+
+/* voce (432:648): numero 50 px, titolo, freccia 34 px; alta 74 (l'ultima 68) */
+.voce-menu {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-height: 74px;
+  color: var(--testo-primario);
+  text-decoration: none;
+}
+
+.menu__voce:last-child .voce-menu { min-height: 68px; }
+
+.voce-menu__numero { flex: none; width: 50px; color: var(--testo-accento); }
+.voce-menu__titolo { flex: 1; min-width: 0; }
+.voce-menu__freccia { flex: none; width: 34px; color: var(--testo-accento); }
+
+.menu__social {
+  color: var(--testo-primario);
+  white-space: pre-wrap;
+}
+
+.menu__ente { color: var(--testo-secondario); }
+
+@media (min-width: 600px) {
+  .menu__testa { padding-inline: var(--spazio-24); }
+  .menu__testa::after { left: 0; right: 0; }     /* tablet: filetto da bordo a bordo (508:345) */
+  .menu__corpo { padding-inline: var(--spazio-24); }
+}

@@ -206,6 +206,21 @@
   }
 
   // ---------- «Leggi di più» ----------
+  // Segno «+» / «−»: due segni sovrapposti in dissolvenza incrociata (foglio C, sequenza 1).
+  // data-segno dice quello visibile.
+  function segno(classe, aperto) {
+    return el('span', { class: `${classe} segno t-etichetta-media-16`, 'aria-hidden': 'true', 'data-segno': aperto ? '−' : '+' },
+      el('span', { class: 'segno__piu' }, '+'),
+      el('span', { class: 'segno__meno' }, '−'));
+  }
+
+  // Contenitore che si apre in altezza (griglia da 0fr a 1fr, css/interazioni.css).
+  // Chiuso: inert e invisibile, quindi fuori dalla tabulazione e dai lettori di schermo.
+  function apribile(id, pannello) {
+    const aperto = aperti.has(id);
+    return el('div', { class: 'apribile', 'data-apribile': id, 'data-aperto': aperto ? 'true' : 'false', 'data-completo': aperto ? '' : null, inert: aperto ? null : '' },
+      el('div', { class: 'apribile__dentro' }, pannello));
+  }
   function barraLeggiDiPiu(s) {
     const aperto = aperti.has(s.id);
     return el('button', {
@@ -219,7 +234,7 @@
       el('span', { class: 'leggi-di-piu__testo' },
         el('span', { class: 'leggi-di-piu__etichetta t-eyebrow-maiuscolo-12' }, s.leggi_di_piu.etichetta),
         s.leggi_di_piu.descrizione ? el('span', { class: 'leggi-di-piu__descrizione t-corpo-piccolo-14' }, s.leggi_di_piu.descrizione) : null),
-      el('span', { class: 'leggi-di-piu__segno t-etichetta-media-16', 'aria-hidden': 'true', 'data-segno': '' }, aperto ? '−' : '+'));
+      segno('leggi-di-piu__segno', aperto));
   }
 
   function approfondimento(s) {
@@ -232,7 +247,6 @@
       id: `approfondimento-${s.id}`,
       role: 'region',
       'aria-labelledby': `leggi-${s.id}`,
-      hidden: aperti.has(s.id) ? null : '',
     },
       el('p', { class: 'approfondimento__eyebrow t-eyebrow-maiuscolo-12' }, a.eyebrow),
       el('h3', { class: 'approfondimento__titolo t-titolo-card-grande' }, a.titolo),
@@ -270,9 +284,23 @@
     if (!barra || !pannello) return;
     if (apri) aperti.add(id); else aperti.delete(id);
     barra.setAttribute('aria-expanded', apri ? 'true' : 'false');
-    barra.querySelector('[data-segno]').textContent = apri ? '−' : '+';
-    pannello.hidden = !apri;
+    barra.querySelector('[data-segno]').dataset.segno = apri ? '−' : '+';
+    const contenitore = pannello.closest('[data-apribile]');
+    contenitore.dataset.aperto = apri ? 'true' : 'false';
+    contenitore.inert = !apri;
+    // a pannello tutto aperto si toglie il ritaglio (ombre e anello di focus interi);
+    // in chiusura si rimette subito
+    if (!apri) delete contenitore.dataset.completo;
+    // con «movimento ridotto» l'altezza cambia subito e transitionend non arriva
+    else if (parseFloat(getComputedStyle(contenitore).transitionDuration) === 0) contenitore.dataset.completo = '';
   }
+
+  // fine dell'apertura in altezza: pannello «completo»
+  document.addEventListener('transitionend', (evento) => {
+    const contenitore = evento.target;
+    if (!contenitore.matches || !contenitore.matches('[data-apribile]') || evento.propertyName !== 'grid-template-rows') return;
+    if (contenitore.dataset.aperto === 'true') contenitore.dataset.completo = '';
+  });
 
   document.addEventListener('click', (evento) => {
     const barra = evento.target.closest('[data-leggi-di-piu]');
@@ -469,7 +497,7 @@
       'data-leggi-di-piu': s.id,
     },
       el('span', { class: 'sc-leggi__etichetta t-eyebrow-maiuscolo-12' }, s.leggi_di_piu.etichetta),
-      el('span', { class: 'sc-leggi__segno t-etichetta-media-16', 'aria-hidden': 'true', 'data-segno': '' }, aperto ? '−' : '+'));
+      segno('sc-leggi__segno', aperto));
   }
 
   // Pannello aperto compatto (508:362, 508:388): schede due per riga su tablet;
@@ -489,7 +517,6 @@
       id: `approfondimento-${s.id}`,
       role: 'region',
       'aria-labelledby': `leggi-${s.id}`,
-      hidden: aperti.has(s.id) ? null : '',
     },
       el('p', { class: `sc-eyebrow ${classeEtichetta}` }, a.eyebrow),
       el('h3', { class: 'sc-titolo t-titolo-mobile' }, a.titolo),
@@ -526,7 +553,7 @@
         testaCompatta(n, s),
         bloccoCompatto(n, s),
         barraCompatta(s),
-        approfondimentoCompatto(n, s));
+        apribile(s.id, approfondimentoCompatto(n, s)));
       return;
     }
     riempi(nodo.querySelector('.sd__interno'),
@@ -536,7 +563,7 @@
           intestazionePalco(n, s),
           bloccoSezione(n, s),
           barraLeggiDiPiu(s)),
-        approfondimento(s)));
+        apribile(s.id, approfondimento(s))));
   }
 
   function disegna() {
