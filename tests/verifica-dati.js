@@ -76,9 +76,32 @@ async function controlla(browser, larghezza) {
   return { larghezza, formato: mostrati.formato, mostrati, differenze, mai };
 }
 
+// Coerenza tra file: lo stesso numero scritto in due file di data/ deve coincidere
+// (i grafici leggono charts.js, le KPI site_metrics.js e i file di sezione)
+function coerenzaTraFile() {
+  const differenze = [];
+  const g = (id) => DATI.charts.charts.find((c) => c.id === id);
+  const confronta = (a, b, descrizione) => { if (String(a) !== String(b)) differenze.push(`${descrizione}: «${a}» ≠ «${b}»`); };
+  const on = g('crispr_on_target');
+  const off = g('crispr_off_target');
+  confronta(on.barre[0].display, METRICHE.get('crispr_on_target_opencrispr').display, 'charts crispr_on_target OpenCRISPR-1 vs site_metrics');
+  confronta(on.barre[1].display, METRICHE.get('crispr_on_target_spcas9').display, 'charts crispr_on_target SpCas9 vs site_metrics');
+  confronta(off.barre[0].display, METRICHE.get('crispr_off_target_opencrispr').display, 'charts crispr_off_target OpenCRISPR-1 vs site_metrics');
+  confronta(off.barre[1].display, METRICHE.get('crispr_off_target_spcas9').display, 'charts crispr_off_target SpCas9 vs site_metrics');
+  confronta(on.barre[0].valore, DATI.crispr.editors[0].on_target_median_pct, 'charts vs crispr.js (on-target OpenCRISPR-1)');
+  confronta(off.barre[1].valore, DATI.crispr.editors[1].off_target_median_pct, 'charts vs crispr.js (off-target SpCas9)');
+  g('diagnostics_auroc').barre.forEach((b, i) => confronta(b.display, DATI.diagnostics.auroc_test_set.values[i].display, `charts vs diagnostics.js (AUROC ${b.id})`));
+  g('discoveries_classification').segmenti.forEach((s, i) => confronta(s.display, DATI.discoveries.classification[i].display, `charts vs discoveries.js (${s.id})`));
+  return differenze;
+}
+
 (async () => {
   const browser = await chromium.launch();
   let totaleDifferenze = 0;
+  const traFile = coerenzaTraFile();
+  console.log(`\nCoerenza tra i file di data/: ${traFile.length ? traFile.length + ' differenze' : 'nessuna differenza'}`);
+  for (const d of traFile) console.log(`  DIFFERENZA: ${d}`);
+  totaleDifferenze += traFile.length;
   try {
     // 1440 desktop · 1100 layout tablet sopra i 1024 px (decisione 9 ott) · 390 smartphone
     for (const larghezza of [1440, 1100, 390]) {

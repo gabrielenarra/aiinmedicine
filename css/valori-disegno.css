@@ -44,4 +44,17 @@
 
   /* Card della sezione 02 (415:2 …) */
   --ombra-card-02: 0 12px 30px rgba(31, 26, 61, 0.08);
+
+  /* Sezioni dati 03–07 (55:2, 63:2, 82:2 …) */
+  --margine-sezioni-dati-desktop: 56px;           /* px-56 del frame di sezione */
+  --larghezza-colonna-testo: 316px;
+  --larghezza-palco: 940px;
+  --ombra-palco: 0 16px 34px rgba(26, 20, 51, 0.05);          /* 55:11 */
+  --ombra-kpi: 0 10px 22px rgba(31, 26, 61, 0.05);            /* 415:32 */
+  --ombra-scheda: 0 8px 20px rgba(31, 26, 61, 0.05);          /* 55:57, 63:20 */
+  --ombra-grafico: 0 8px 20px rgba(31, 26, 61, 0.04);         /* 63:38 */
+  --ombra-kpi-evidenza: 0 10px 24px rgba(36, 28, 71, 0.07);   /* 63:15 */
+  --ombra-approfondimento: 0 12px 28px rgba(31, 26, 61, 0.06); /* 184:2 */
+  --sfumatura-kpi-evidenza: linear-gradient(90deg, rgba(246, 244, 255, 0.98), rgba(224, 217, 255, 0.98)); /* 63:15 */
+  --sfumatura-barra-principale: linear-gradient(90deg, #ccc2ff, #8c75e8);  /* 63:48, barra OpenCRISPR-1 on-target */
 }

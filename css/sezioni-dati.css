@@ -1,0 +1,484 @@
+/* ==========================================================================
+   Sezioni «dati» 03–07 (js/sezioni-dati.js). Misure del disegno desktop 1440
+   (55:2, 63:2, 82:2 e stati aperti 184:2, 194:76, 200:93).
+   Sotto i 1280 px (tablet e smartphone) per ora tutto in colonna: tappa 4.
+   Dove il disegno usa un bordo di 1 px, i padding sono 1 px più piccoli
+   (in Figma il bordo non occupa spazio).
+   ========================================================================== */
+
+/* Spazi verticali della colonna di testo: nel disegno cambiano da sezione a sezione.
+   --altezza-sezione = distanza dalla sezione successiva nel disegno (comprende lo spazio
+   tra le sezioni dove stanno sfere e linea: 1506 → 2477 → 3403 → 4429 → 5498 → 6645) */
+[data-sezione="03"] { --sp-alto: 8px;  --sp-titolo: 28px; --sp-domanda: 38px; --sp-intro: 11px; --sp-etichetta: 42px; --sp-fonte: 10px; --sp-ambito: 45px; --altezza-sezione: 971px; }
+[data-sezione="04"] { --sp-alto: 8px;  --sp-titolo: 28px; --sp-domanda: 84px; --sp-intro: 14px; --sp-etichetta: 27px; --sp-fonte: 9px;  --sp-ambito: 52px; --altezza-sezione: 926px; }
+[data-sezione="05"] { --sp-alto: 8px;  --sp-titolo: 28px; --sp-domanda: 46px; --sp-intro: 6px;  --sp-etichetta: 23px; --sp-fonte: 9px;  --sp-ambito: 44px; --altezza-sezione: 1026px; }
+[data-sezione="06"] { --sp-alto: 12px; --sp-titolo: 30px; --sp-domanda: 46px; --sp-intro: 16px; --sp-etichetta: 51px; --sp-fonte: 9px;  --sp-ambito: 48px; --altezza-sezione: 1069px; }
+[data-sezione="07"] { --sp-alto: 12px; --sp-titolo: 30px; --sp-domanda: 27px; --sp-intro: 16px; --sp-etichetta: 40px; --sp-fonte: 10px; --sp-ambito: 23px; --altezza-sezione: 1147px; }
+
+/* Badge del palco: fondo diverso per sezione nel disegno */
+[data-sezione="03"], [data-sezione="04"] { --sfondo-badge: var(--superficie-lilla-chiaro-90); }
+[data-sezione="05"] { --sfondo-badge: var(--superficie-lilla); }
+[data-sezione="06"] { --sfondo-badge: var(--superficie-lilla-chiaro-55); }
+
+/* reset delle liste con specificità zero, così le regole dei componenti vincono */
+:where(.sezione-dati) :where(ul, ol) {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ---------- Impianto ---------- */
+.sd__interno {
+  position: relative;
+  max-width: var(--larghezza-desktop);
+  margin-inline: auto;
+  padding: var(--spazio-48) var(--spazio-20);
+  display: grid;
+  gap: var(--spazio-32);
+}
+
+/* filetto in alto */
+.sd__interno::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: var(--spazio-20);
+  right: var(--spazio-20);
+  border-top: var(--filetto);
+}
+
+.sd__destra {
+  display: grid;
+  gap: 28px;
+  min-width: 0;
+}
+
+/* ---------- Colonna di testo ---------- */
+.sd__testo { min-width: 0; }
+.sd__eyebrow { color: var(--testo-accento); }
+.sd__titolo { margin-top: var(--sp-titolo); color: var(--testo-primario); }
+.sd__domanda { margin-top: var(--sp-domanda); color: var(--testo-primario); }
+.sd__introduzione { margin-top: var(--sp-intro); color: var(--testo-secondario); }
+.sd__etichetta-fonti { margin-top: var(--sp-etichetta); color: var(--testo-accento); }
+.sd__fonti { margin-top: var(--sp-fonte); }
+.sd__fonte { display: block; color: var(--testo-secondario); text-decoration: none; }
+.sd__ambito { margin-top: var(--sp-ambito); color: var(--testo-secondario); }
+
+/* ---------- Palco dei dati ---------- */
+.sd__palco {
+  display: grid;
+  gap: 18px;
+  min-width: 0;
+  padding: calc(var(--spazio-16) - 1px) calc(28px - 1px);
+  background: var(--superficie-base);
+  border: 1px solid var(--accento-lilla);
+  border-radius: var(--raggio-30);
+  box-shadow: var(--ombra-palco);
+}
+
+.sd__testa-palco {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spazio-8) var(--spazio-16);
+}
+
+.sd__etichetta-palco { color: var(--testo-accento); }
+
+.sd__badge {
+  padding: calc(var(--spazio-8) - 1px) calc(var(--spazio-12) - 1px);
+  background: var(--sfondo-badge, var(--superficie-lilla-chiaro-90));
+  border: 1px solid var(--accento-lilla);
+  border-radius: var(--raggio-14);
+  color: var(--testo-accento);
+  white-space: nowrap;
+}
+
+/* card bianca comune (spiegazione, confronti, grafico, profili) */
+.scheda {
+  min-width: 0;
+  background: var(--superficie-bianco);
+  border: 1px solid var(--accento-lilla);
+  border-radius: var(--raggio-24);
+  box-shadow: var(--ombra-scheda);
+}
+
+/* ---------- KPI ---------- */
+.sd__kpi {
+  display: grid;
+  gap: var(--spazio-20);
+  align-items: start;              /* nel disegno le KPI hanno altezze diverse */
+}
+
+.kpi {
+  min-width: 0;
+  padding: calc(15px - 1px) calc(var(--spazio-16) - 1px) calc(var(--spazio-8) - 1px) calc(18px - 1px);
+  background: var(--superficie-bianco);
+  border: 1px solid var(--accento-lilla);
+  border-radius: var(--raggio-22);
+  box-shadow: var(--ombra-kpi);
+}
+
+.kpi__numero { color: var(--testo-accento); }
+.kpi__valore { margin-top: 11px; color: var(--testo-primario); }
+.kpi__didascalia { margin-top: var(--spazio-12); color: var(--testo-secondario); }
+.kpi__nota { margin-top: 9px; color: var(--testo-secondario); }
+
+/* 04: «95%» in evidenza (63:15) */
+.kpi--evidenza {
+  padding: calc(18px - 1px) calc(18px - 1px) calc(var(--spazio-8) - 1px);
+  background: var(--sfumatura-kpi-evidenza);
+  border-radius: var(--raggio-24);
+  box-shadow: var(--ombra-kpi-evidenza);
+}
+
+.kpi--evidenza .kpi__eyebrow { color: var(--testo-accento); }
+.kpi--evidenza .kpi__valore { margin-top: 0; color: var(--testo-accento); }
+.kpi--evidenza .kpi__didascalia { margin-top: 22px; }
+.kpi--evidenza .kpi__nota { margin-top: var(--spazio-16); }
+
+/* ---------- Spiegazione in tre passaggi (55:57) ---------- */
+.spiegazione {
+  display: grid;
+  gap: 6px;
+  padding: calc(18px - 1px) calc(18px - 1px) calc(14px - 1px);
+}
+
+.spiegazione__titolo { color: var(--testo-primario); }
+.spiegazione__sottotitolo,
+.spiegazione__testo { color: var(--testo-secondario); }
+.spiegazione__chiusura { color: var(--testo-secondario); }
+
+.passi {
+  display: grid;
+  gap: var(--spazio-12);
+}
+
+.passo {
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 10px;
+  align-items: start;
+}
+
+/* cerchietto con il numero del passaggio */
+.passo__segno {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  margin: 4px 2px 0;
+  border: 1px solid var(--accento-lilla);
+  border-radius: 50%;
+  background: var(--superficie-lilla);
+  color: var(--testo-accento);
+}
+
+.passo__testo { display: grid; gap: 5px; min-width: 0; }
+.passo__titolo { color: var(--testo-primario); }
+.passo__corpo { color: var(--testo-secondario); }
+
+/* ---------- 04: confronti on/off target (63:20, 63:29) ---------- */
+.confronto {
+  padding: calc(18px - 1px) calc(18px - 1px) calc(var(--spazio-8) - 1px);
+}
+
+.confronto__eyebrow { color: var(--testo-accento); }
+.confronto__valori { display: grid; margin-top: 18px; }
+.confronto__principale { color: var(--testo-primario); }
+.confronto--off .confronto__principale { color: var(--testo-accento); }
+.confronto__secondario { color: var(--testo-attenuato); }
+.confronto__vs { color: var(--testo-primario); }
+.confronto__nomi { margin-top: 21px; color: var(--testo-secondario); }
+
+.confronto__nota {
+  margin-top: var(--spazio-20);
+  padding-top: 14px;
+  border-top: var(--filetto);
+  color: var(--testo-secondario);
+}
+
+/* ---------- 04: grafico «Dove modifica il DNA?» (63:38) ---------- */
+.grafico-precisione {
+  position: relative;
+  padding: calc(17px - 1px) calc(21px - 1px) calc(17px - 1px);
+  box-shadow: var(--ombra-grafico);
+}
+
+.grafico-precisione__titolo { color: var(--testo-primario); }
+.grafico-precisione__sottotitolo { margin-top: var(--spazio-20); color: var(--testo-secondario); }
+
+.grafico-precisione .legenda { margin-top: var(--spazio-12); }
+
+.grafico-precisione__pannelli {
+  display: grid;
+  gap: var(--spazio-24);
+  margin-top: 25px;
+}
+
+.grafico-precisione__nota {
+  margin-top: 17px;
+  padding-top: 15px;
+  border-top: var(--filetto);
+  color: var(--testo-secondario);
+}
+
+.kpi--sintesi { margin-top: var(--spazio-16); box-shadow: none; }
+
+/* ---------- 05: la ricerca in numeri (88:7) ---------- */
+.coorte {
+  min-width: 0;
+  padding: calc(22px - 1px) calc(18px - 1px) calc(var(--spazio-8) - 1px);
+  background: var(--superficie-base);
+  border: 1px solid var(--accento-lilla);
+  border-radius: 26px;
+}
+
+.coorte__eyebrow { color: var(--testo-accento); }
+.coorte__voce--0 .coorte__valore { margin-top: var(--spazio-20); color: var(--testo-accento); }
+.coorte__voce--1 { margin-top: 34px; border-top: var(--filetto); }
+.coorte__voce--1 .coorte__valore { color: var(--testo-primario); }
+.coorte__didascalia { margin-top: 7px; color: var(--testo-secondario); }
+.coorte__voce--1 .coorte__didascalia { margin-top: 22px; }
+.coorte__nota { margin-top: 21px; color: var(--testo-secondario); }
+.coorte__voce--1 .coorte__nota { margin-top: 35px; }
+
+.coorte__eyebrow--limite {
+  margin-top: 44px;
+  padding-top: var(--spazio-24);
+  border-top: var(--filetto);
+}
+
+.coorte__limite { margin-top: 17px; color: var(--testo-secondario); }
+
+/* ---------- 05: i sei profili (88:19) ---------- */
+.profili {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spazio-12);
+  padding: calc(18px - 1px) calc(18px - 1px) calc(var(--spazio-16) - 1px);
+  border-radius: 26px;
+  box-shadow: none;
+}
+
+.profili__testa { display: grid; gap: 3px; }
+.profili__numero { color: var(--testo-accento); }
+.profili__titolo { color: var(--testo-primario); }
+.profili__testo { color: var(--testo-secondario); }
+.profili .passo { grid-template-columns: 30px 1fr; gap: var(--spazio-12); }
+.profili__chiusura { color: var(--testo-secondario); }
+
+.sd__riga-05 {
+  display: grid;
+  gap: var(--spazio-12);
+}
+
+/* ---------- Barra «Leggi di più» (431:152, foglio B) ---------- */
+.leggi-di-piu {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spazio-16);
+  width: 100%;
+  min-height: var(--area-tocco-min);
+  padding: 0 calc(18px - 1px);
+  background: var(--superficie-lilla-chiaro-90);
+  border: 1px solid var(--accento-lilla);
+  border-radius: var(--raggio-22);
+  color: var(--testo-secondario);
+  text-align: left;
+  cursor: pointer;
+}
+
+.leggi-di-piu__testo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spazio-4) var(--spazio-24);
+  min-width: 0;
+  padding-block: var(--spazio-8);
+}
+
+.leggi-di-piu__etichetta { color: var(--testo-accento); }
+
+.leggi-di-piu__segno {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 28px;
+  height: 28px;
+  color: var(--testo-accento);
+}
+
+/* aperto: «−» dentro un cerchio da 24 px (182:79) */
+.leggi-di-piu[aria-expanded="true"] .leggi-di-piu__segno::before {
+  content: "";
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--testo-accento);
+  border-radius: 50%;
+}
+
+.leggi-di-piu__segno { position: relative; }
+
+/* ---------- Pannello di approfondimento (184:2, 194:76, 200:93) ---------- */
+.approfondimento {
+  min-width: 0;
+  padding: calc(23px - 1px) calc(27px - 1px);
+  background: var(--superficie-base);
+  border: 1px solid var(--accento-lilla);
+  border-radius: 28px;
+  box-shadow: var(--ombra-approfondimento);
+}
+
+.approfondimento__eyebrow { color: var(--testo-accento); }
+.approfondimento__titolo { margin-top: 10px; color: var(--testo-primario); }
+.approfondimento__introduzione { margin-top: var(--spazio-20); max-width: 850px; color: var(--testo-secondario); }
+
+.approfondimento__contesto { margin-top: 28px; max-width: 870px; }
+.approfondimento__contesto p:first-child,
+.approfondimento__sintesi p:first-child { color: var(--testo-accento); }
+.approfondimento__contesto p + p { margin-top: 6px; color: var(--testo-secondario); }
+
+.approfondimento__schede {
+  display: grid;
+  align-items: start;
+  gap: var(--spazio-12);
+  margin-top: var(--spazio-20);
+}
+
+.scheda-dettaglio {
+  min-width: 0;
+  padding: calc(14px - 1px);
+  background: var(--superficie-bianco);
+  border: 1px solid var(--accento-lilla);
+  border-radius: var(--raggio-18);
+}
+
+.scheda-dettaglio__etichetta { color: var(--testo-accento); }
+.scheda-dettaglio__testo { margin-top: var(--spazio-12); color: var(--testo-secondario); }
+.scheda-dettaglio__valore { margin-top: 10px; color: var(--testo-primario); }
+.scheda-dettaglio__valore + .scheda-dettaglio__testo { margin-top: var(--spazio-4); }
+
+/* 05: i sei profili C1–C6 (432:254) */
+.approfondimento__profili {
+  display: grid;
+  gap: var(--spazio-12) 22px;
+  margin-top: var(--spazio-20);
+}
+
+.profilo {
+  display: grid;
+  grid-template-columns: 38px 1fr;
+  column-gap: 10px;
+  align-content: start;
+  padding: calc(13px - 1px);
+  background: var(--superficie-bianco);
+  border: 1px solid var(--accento-lilla);
+  border-radius: var(--raggio-18);
+}
+
+.profilo__codice {
+  grid-row: span 2;
+  display: grid;
+  place-items: center;
+  height: 26px;
+  margin-top: 2px;
+  background: var(--superficie-lilla);
+  border: 1px solid var(--accento-lilla);
+  border-radius: 11px;
+  color: var(--testo-accento);
+}
+
+.profilo__nome { color: var(--testo-primario); }
+.profilo__inglese { color: var(--testo-secondario); }
+.profilo__testo { grid-column: 1 / -1; margin-top: 5px; color: var(--testo-secondario); }
+
+.approfondimento__sintesi { margin-top: 30px; }
+.approfondimento__sintesi p + p { color: var(--testo-secondario); }
+
+.approfondimento__piede {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spazio-8) var(--spazio-24);
+  margin-top: var(--spazio-20);
+}
+
+.approfondimento__fonti { color: var(--testo-attenuato); }   /* nel disegno: secondario al 69% */
+.approfondimento__fonti a { color: inherit; text-decoration: none; }
+
+/* «Mostra meno»: testo piccolo, ma area di tocco di 44 px */
+.approfondimento__chiudi {
+  min-height: var(--area-tocco-min);
+  margin: calc((var(--area-tocco-min) - 16px) / -2) calc(var(--spazio-8) * -1);
+  padding: 0 var(--spazio-8);
+  background: none;
+  border: 0;
+  color: var(--testo-accento);
+  cursor: pointer;
+}
+
+/* ---------- Tablet e smartphone (provvisorio, tappa 4) ---------- */
+@media (min-width: 600px) {
+  .sd__interno { padding-inline: var(--spazio-24); }
+  .sd__interno::before { left: var(--spazio-24); right: var(--spazio-24); }
+  .sd__kpi, .sd__riga-05, .approfondimento__schede, .approfondimento__profili { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .grafico-precisione__pannelli { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* ---------- Desktop ---------- */
+@media (min-width: 1280px) {
+  .sd__interno {
+    grid-template-columns: var(--larghezza-colonna-testo) minmax(0, var(--larghezza-palco));
+    gap: 36px;
+    align-items: start;
+    min-height: var(--altezza-sezione);
+    padding: 36px var(--margine-sezioni-dati-desktop) 44px;   /* 44 px sotto il pannello aperto (182:2) */
+  }
+
+  .sd__interno::before {
+    left: var(--margine-sezioni-dati-desktop);
+    right: var(--margine-sezioni-dati-desktop);
+  }
+
+  .sd__testo { padding-top: var(--sp-alto); }
+
+  /* 03: tre KPI da 278 px; 04: 286 · 276 · 282 px (gap 20) */
+  .sd__kpi { grid-template-columns: repeat(3, minmax(0, 278px)); }
+  .sd__kpi--04 { grid-template-columns: minmax(0, 286fr) minmax(0, 276fr) minmax(0, 282fr); }
+
+  .spiegazione .passi { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+
+  /* 04: due pannelli di barre, 346 px ciascuno a 93 px di distanza; legenda in alto a destra */
+  .grafico-precisione__pannelli {
+    grid-template-columns: repeat(2, minmax(0, 346px));
+    gap: 87px;
+  }
+
+  .grafico-precisione .legenda {
+    position: absolute;
+    top: 18px;
+    right: 39px;
+    margin: 0;
+  }
+
+  /* 05: 292 + 564 px */
+  .sd__riga-05 { grid-template-columns: minmax(0, 292px) minmax(0, 564px); align-items: stretch; }
+
+  /* approfondimento: quattro schede (204 · 204 · 204 · 236), sintesi su due colonne */
+  .approfondimento__schede { grid-template-columns: repeat(3, minmax(0, 204fr)) minmax(0, 236fr); }
+  [data-sezione="06"] .approfondimento__schede { grid-template-columns: repeat(3, minmax(0, 210fr)) minmax(0, 238fr); }
+  .approfondimento__profili { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+  .approfondimento__sintesi {
+    display: grid;
+    grid-template-columns: 137px minmax(0, 720px);
+  }
+
+  [data-sezione="05"] .approfondimento__sintesi { display: block; max-width: 650px; }
+  [data-sezione="05"] .approfondimento__sintesi p + p { margin-top: 6px; }
+}

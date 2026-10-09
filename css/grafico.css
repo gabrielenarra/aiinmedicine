@@ -1,0 +1,96 @@
+/* ==========================================================================
+   Grafici (js/grafico.js), guidati da data/charts.js. Fermi: il valore finale
+   è sempre visibile. Solo lettura: niente hover, niente focus (foglio B).
+   ========================================================================== */
+
+/* ---------- Barre orizzontali con pista (sezione 04, 63:38) ---------- */
+.grafico-barre {
+  margin: 0;
+  min-width: 0;
+}
+
+.grafico-barre__etichetta {
+  color: var(--testo-accento);
+}
+
+.grafico-barre__elenco {
+  display: grid;
+  gap: 14px;
+  margin: var(--spazio-16) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.grafico-barre__voce {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  row-gap: var(--spazio-8);
+}
+
+/* la pista è 6 px più corta della riga: il valore sporge come nel disegno */
+.grafico-barre__pista {
+  grid-column: 1 / -1;
+  display: block;
+  width: calc(100% - 6px);
+  height: 15px;
+  border-radius: var(--raggio-8);
+  background: var(--superficie-nebbia-88);
+  overflow: hidden;
+}
+
+.grafico-barre__barra {
+  display: block;
+  width: calc(var(--quota) * 100%);
+  min-width: 2px;               /* un valore piccolo resta visibile */
+  height: 100%;
+  border-radius: var(--raggio-8);
+  background: var(--grafico-barra-neutra);
+}
+
+.grafico-barre__nome,
+.grafico-barre__valore {
+  color: var(--testo-secondario);
+}
+
+.grafico-barre__valore {
+  text-align: right;
+}
+
+/* colori del disegno: OpenCRISPR-1 in viola (sfumato on-target, pieno off-target), SpCas9 neutro */
+[data-grafico="crispr_on_target"] [data-barra="opencrispr1"] .grafico-barre__barra {
+  background: var(--sfumatura-barra-principale);
+}
+
+[data-grafico="crispr_off_target"] [data-barra="opencrispr1"] .grafico-barre__barra {
+  background: var(--accento-viola-profondo);
+}
+
+/* ---------- Legenda ---------- */
+.legenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spazio-8);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--testo-secondario);
+}
+
+.legenda__voce {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legenda__punto {
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background: var(--accento-lilla);
+}
+
+/* SpCas9: nel disegno il punto è lilla come OpenCRISPR-1, ma le sue barre sono
+   grigie; qui il punto ha il colore delle barre (docs/PUNTI-APERTI.md B20) */
+.legenda__voce--1 .legenda__punto {
+  background: var(--grafico-barra-neutra);
+}

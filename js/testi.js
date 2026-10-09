@@ -178,7 +178,7 @@
     }
 
     for (const [numeroSezione, s] of Object.entries(contenuti.sezioni || {})) {
-      if (numeroSezione === '02') continue;   // js/sezione-02.js
+      if (['02', '03', '04', '05'].includes(numeroSezione)) continue;   // js/sezione-02.js, js/sezioni-dati.js
       sezione(numeroSezione, s);
     }
 

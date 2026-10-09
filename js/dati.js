@@ -52,6 +52,18 @@
     return typeof valore === 'number' ? formatoNumeri.format(valore) : String(valore);
   }
 
+  // Un grafico di charts.js per id, con la sua posizione nell'elenco
+  // (serve a scrivere data-dato="charts.charts.<n>…" sui valori mostrati)
+  function grafico(id) {
+    const elenco = (grezzi.charts && grezzi.charts.charts) || [];
+    const indice = elenco.findIndex((g) => g.id === id);
+    if (indice < 0) {
+      console.error(`Grafico sconosciuto: «${id}» (non è in data/charts.js)`);
+      return null;
+    }
+    return { spec: elenco[indice], percorso: `charts.charts.${indice}` };
+  }
+
   window.SITO = window.SITO || {};
   window.SITO.dati = {
     contenuti: grezzi.contenuti || {},
@@ -66,5 +78,6 @@
     metrica,
     fonte,
     dato,
+    grafico,
   };
 })();
