@@ -49,4 +49,13 @@ node strumenti/dati.mjs controlla
 
 ## Dove sono i testi del resto del sito
 
-I testi che non sono numeri scientifici (titoli, introduzioni, citazioni, voci del menu, didascalie) vanno estratti dal disegno Figma in `data/contenuti.js` alla tappa 2 (`docs/TAPPE.md`). Il file non esiste ancora: lo crea Claude Code leggendo il disegno.
+In `contenuti.js` (creato alla tappa 2, 9 ottobre 2026, copiando i testi dal disegno Figma): titoli, introduzioni, citazioni, voci del menu, didascalie, badge, pannelli «Leggi di più», footer. Come si legge:
+
+- **I numeri non sono scritti lì.** Una KPI rimanda alla sua voce di `site_metrics.js` con `"metrica": "mrna_workflow_time"`; una fonte a `sources.js` con `"fonte": "SRC_VAXLAB_2026"`.
+- **Numeri dentro le frasi:** segnaposto che il sito sostituisce con il valore dei dati. `{metrica:ID}` = campo `display` di `site_metrics.js` (es. `Il {metrica:crispr_off_target_reduction} indica…` → «Il 95% indica…»); `{dato:percorso}` = un valore dei file di sezione (es. `{dato:diagnostics.splits.0.patients}` → «64.540»; i numeri sono scritti all'italiana). I pochi numeri rimasti scritti a mano sono elencati in `docs/PUNTI-APERTI.md`, A15.
+- **`righe`** (liste di testi) = a capo voluti nel disegno desktop.
+- **`compatto`** = testi diversi su tablet e smartphone (nel disegno i due formati hanno gli stessi testi). Ogni campo sostituisce quello desktop; `null` vuol dire che il blocco in quel formato non c'è.
+- **`figma`** = nodo del disegno da cui viene il testo (per ritrovarlo).
+- Le didascalie dei numeri sono quelle **del disegno**, anche dove `site_metrics.js` dice altro (elenco in `docs/PUNTI-APERTI.md`, A13).
+
+Dopo una modifica: `node strumenti/dati.mjs controlla` (il file è ancora JSON valido?) e `npm run verifica-dati` (i numeri mostrati coincidono con i dati?).

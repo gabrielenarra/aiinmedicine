@@ -11,78 +11,46 @@
   <link rel="stylesheet" href="css/font.css">
   <link rel="stylesheet" href="design/typography.css">
   <link rel="stylesheet" href="css/base.css">
+
+  <!-- Dati: script normali (non .json) perché il sito si apre anche con un doppio clic.
+       Vanno caricati prima di js/dati.js; defer mantiene l'ordine. -->
+  <script src="data/site_metrics.js" defer></script>
+  <script src="data/sources.js" defer></script>
+  <script src="data/audit_status.js" defer></script>
+  <script src="data/charts.js" defer></script>
+  <script src="data/mrna.js" defer></script>
+  <script src="data/crispr.js" defer></script>
+  <script src="data/immunotherapy.js" defer></script>
+  <script src="data/diagnostics.js" defer></script>
+  <script src="data/discoveries.js" defer></script>
+  <script src="data/contenuti.js" defer></script>
+  <script src="js/dati.js" defer></script>
+  <script src="js/testi.js" defer></script>
 </head>
 <body>
   <a class="vai-al-contenuto t-etichetta-forte-14" href="#contenuto">Vai al contenuto</a>
 
-  <!-- Tappa 1: scheletro. Testi provvisori: i testi veri arrivano dal disegno alla tappa 2 (data/contenuti.js). -->
+  <!-- I testi arrivano da data/contenuti.js (js/testi.js), i numeri da data/site_metrics.js. -->
   <header class="intestazione">
-    <div class="contenitore">
-      <p class="t-etichetta-forte-16">AI · Data · Design · Human</p>
-    </div>
+    <div class="contenitore"></div>
   </header>
 
   <main id="contenuto">
-    <section id="inizio" class="sezione sezione-hero" aria-labelledby="titolo-inizio">
-      <div class="contenitore">
-        <h1 id="titolo-inizio" class="t-titolo-display">AI · Data · Design · Human</h1>
-      </div>
+    <section id="inizio" class="sezione sezione-hero" data-sezione="hero" aria-labelledby="titolo-inizio">
+      <div class="contenitore"></div>
     </section>
-
-    <section id="sezione-02" class="sezione" aria-labelledby="titolo-sezione-02">
-      <div class="contenitore">
-        <h2 id="titolo-sezione-02" class="t-titolo-sezione">02 · Card</h2>
-      </div>
-    </section>
-
-    <section id="vaccini-mrna" class="sezione" aria-labelledby="titolo-vaccini-mrna">
-      <div class="contenitore">
-        <h2 id="titolo-vaccini-mrna" class="t-titolo-sezione">03 · Vaccini mRNA</h2>
-      </div>
-    </section>
-
-    <section id="crispr" class="sezione" aria-labelledby="titolo-crispr">
-      <div class="contenitore">
-        <h2 id="titolo-crispr" class="t-titolo-sezione">04 · CRISPR-Cas9</h2>
-      </div>
-    </section>
-
-    <section id="immunoterapia" class="sezione" aria-labelledby="titolo-immunoterapia">
-      <div class="contenitore">
-        <h2 id="titolo-immunoterapia" class="t-titolo-sezione">05 · Immunoterapia</h2>
-      </div>
-    </section>
-
-    <section id="diagnostica" class="sezione" aria-labelledby="titolo-diagnostica">
-      <div class="contenitore">
-        <h2 id="titolo-diagnostica" class="t-titolo-sezione">06 · Diagnostica</h2>
-      </div>
-    </section>
-
-    <section id="scoperte" class="sezione" aria-labelledby="titolo-scoperte">
-      <div class="contenitore">
-        <h2 id="titolo-scoperte" class="t-titolo-sezione">07 · Scoperte scientifiche</h2>
-      </div>
-    </section>
-
-    <section id="eric-topol" class="sezione" aria-labelledby="titolo-eric-topol">
-      <div class="contenitore">
-        <h2 id="titolo-eric-topol" class="t-titolo-sezione">08 · Eric Topol</h2>
-      </div>
-    </section>
-
-    <section id="conclusione" class="sezione" aria-labelledby="titolo-conclusione">
-      <div class="contenitore">
-        <h2 id="titolo-conclusione" class="t-titolo-sezione">09 · Conclusione</h2>
-      </div>
-    </section>
+    <section class="sezione" data-sezione="02"><div class="contenitore"></div></section>
+    <section class="sezione" data-sezione="03"><div class="contenitore"></div></section>
+    <section class="sezione" data-sezione="04"><div class="contenitore"></div></section>
+    <section class="sezione" data-sezione="05"><div class="contenitore"></div></section>
+    <section class="sezione" data-sezione="06"><div class="contenitore"></div></section>
+    <section class="sezione" data-sezione="07"><div class="contenitore"></div></section>
+    <section class="sezione" data-sezione="08"><div class="contenitore"></div></section>
+    <section class="sezione" data-sezione="09"><div class="contenitore"></div></section>
   </main>
 
-  <footer id="informazioni" class="pie">
-    <div class="contenitore">
-      <p class="t-titolo-card">10 · Footer informativo</p>
-      <p class="t-corpo-piccolo-14">Testo provvisorio: i contenuti del footer arrivano alla tappa 2, come testo non cliccabile.</p>
-    </div>
+  <footer id="informazioni" class="pie" data-sezione="10">
+    <div class="contenitore"></div>
   </footer>
 </body>
 </html>

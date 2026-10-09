@@ -95,7 +95,11 @@ test('Nei file del sito solo percorsi relativi, niente moduli né fetch', async 
   const file = ['index.html', ...cartella('css'), ...cartella('js')];
   const problemi = [];
   for (const f of file) {
-    const testo = fs.readFileSync(path.join(RADICE, f), 'utf8');
+    // I commenti non contano (es. «per tornare ai .json si usa fetch» in js/dati.js)
+    const testo = fs.readFileSync(path.join(RADICE, f), 'utf8')
+      .replace(/<!--[\s\S]*?-->/g, '')
+      .replace(/\/\*[\s\S]*?\*\//g, '')
+      .replace(/^\s*\/\/.*$/gm, '');
     const regole = [
       [/(?:href|src)\s*=\s*["']\s*\//i, 'percorso che inizia con «/»'],
       [/url\(\s*["']?\s*\//i, 'url() che inizia con «/»'],

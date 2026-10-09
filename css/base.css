@@ -111,6 +111,74 @@ body {
   color: var(--testo-attenuato);
 }
 
+/* ---------- Testi in forma semplice (tappa 2) ----------
+   Solo per leggere e controllare i testi: card, griglie e grafici veri
+   arrivano alla tappa 3 e sostituiranno queste regole. */
+.riga {
+  display: block;
+}
+
+.accento {
+  color: var(--testo-accento);
+}
+
+.attenuato {
+  color: var(--testo-attenuato);
+}
+
+.contenitore > * + * {
+  margin-top: var(--spazio-16);
+}
+
+.kpi-riga,
+.card,
+.passi,
+.voci-provvisorie {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spazio-16) var(--spazio-32);
+  margin-inline: 0;
+  padding: 0;
+}
+
+.kpi,
+.card > li,
+.passi > li {
+  flex: 1 1 220px;
+}
+
+.elenco-semplice {
+  list-style: none;
+  padding: 0;
+}
+
+.fonte {
+  display: block;
+  margin-top: var(--spazio-8);
+  color: var(--testo-secondario);
+}
+
+.badge {
+  margin-left: var(--spazio-12);
+  padding: var(--spazio-4) var(--spazio-12);
+  border: 1px solid var(--accento-lilla);
+  border-radius: var(--raggio-14);
+}
+
+.approfondimento {
+  padding: var(--spazio-24);
+  border: 1px solid var(--accento-lilla);
+  border-radius: var(--raggio-30);
+}
+
+.approfondimento > * + * {
+  margin-top: var(--spazio-12);
+}
+
+.citazione {
+  max-width: 400px;
+}
+
 /* ---------- «Vai al contenuto»: primo elemento della tabulazione ----------
    Fuori dallo schermo finché non riceve il focus da tastiera. */
 .vai-al-contenuto {

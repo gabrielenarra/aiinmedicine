@@ -44,7 +44,8 @@ Se il disegno e un documento qui non coincidono, **vale il disegno**: segnalalo 
 ## Contenuto e dati — regole che non si toccano
 
 - **Non cambiare mai il contenuto scientifico** (numeri, unità, fonti, didascalie, attribuzioni). Si copia dal disegno e da `data/`.
-- **Nessun numero scritto nel codice.** Numeri, etichette dei numeri, fonti e specifiche dei grafici si leggono da `data/*.js` (`display` per il testo, `value` per i calcoli). I testi del resto del sito vanno in `data/contenuti.js` (da creare alla tappa 2 leggendo il disegno). Motivo: i punti scientifici ancora aperti devono poter essere corretti in seguito modificando un solo file.
+- **Nessun numero scritto nel codice.** Numeri, etichette dei numeri, fonti e specifiche dei grafici si leggono da `data/*.js` (`display` per il testo, `value` per i calcoli). I testi del resto del sito sono in `data/contenuti.js` (creato alla tappa 2 dal disegno; come si legge: `data/README.md`). Motivo: i punti scientifici ancora aperti devono poter essere corretti in seguito modificando un solo file.
+- **In `contenuti.js` i numeri dentro le frasi sono segnaposto** (`{metrica:ID}`, `{dato:percorso}`) e i testi diversi su tablet/smartphone stanno nei campi `compatto`. Mai riscrivere un numero a mano se esiste nei dati. Ogni numero mostrato sta in un elemento con `data-metrica` o `data-dato`: è quello che controlla `npm run verifica-dati` (`tests/verifica-dati.js`).
 - **Forma dei file `data/*.js`** (convertiti il 9 ottobre 2026 dai `.json` originali, valori identici; gli originali sono nel primo commit). Ogni file è **JSON puro** racchiuso tra una riga d'apertura e una di chiusura, e nient'altro:
   ```
   (window.DATI = window.DATI || {})["mrna"] =

@@ -22,10 +22,15 @@ ai-medicine-sito/
 ├── .claude/settings.json        permessi: cosa può fare senza chiedere e cosa mai
 ├── package.json                 strumenti di sviluppo (font, server locale)
 ├── assets/fonts/                Inter e Cormorant Garamond (woff2) con le licenze
-├── css/font.css                 collega i font al sito
+├── index.html                   la pagina (si apre con un doppio clic)
+├── css/font.css  css/base.css   font e stili di base
+├── js/dati.js                   legge i dati di data/ e li passa al sito
+├── js/testi.js                  mette testi e numeri nella pagina
+├── tests/                       prove automatiche (npm test, npm run verifica-dati)
 ├── strumenti/dati.mjs           converte i dati tra .js e .json e li controlla
 ├── data/                        numeri, fonti, grafici (la fonte di tutto ciò che è scientifico)
 │   ├── README.md                come si usano (e perché sono .js)
+│   ├── contenuti.js             tutti i testi del sito, copiati dal disegno
 │   ├── site_metrics.js  mrna.js  crispr.js  immunotherapy.js
 │   ├── diagnostics.js   discoveries.js  sources.js  manifest.js
 │   ├── audit_status.js  audit_numeri.csv   esiti dei controlli sulle fonti (8 ott 2026)
