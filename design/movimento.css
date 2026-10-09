@@ -1,0 +1,67 @@
+/* ==========================================================================
+   AI · Data · Design · Human — token di movimento e interazione
+   Fonte: pagina Figma 06 «Stati e interazioni», foglio A (principi) ed E (movimento ridotto).
+   Tre durate in tutto, una sola curva, uscita al 70% dell'ingresso.
+   Va caricato DOPO tokens.css.
+   ========================================================================== */
+
+:root {
+  --durata-rapida:    150ms;   /* feedback immediato: colore, bordo, sottolineatura, segno +/−, premuto */
+  --durata-standard:  250ms;   /* spostamenti e dissolvenze: header sticky, menu, voce attiva */
+  --durata-lenta:     400ms;   /* cambi di dimensione e rivelazioni: approfondimento, ingresso, sfere */
+  --uscita:           0.7;     /* in chiusura le durate valgono il 70%: 150→105, 250→175, 400→280 ms */
+  --curva:            cubic-bezier(0.22, 1, 0.36, 1);   /* l'unica curva del sito */
+
+  --anello-focus:     2px solid #6A4CE9;   /* = --testo-accento */
+  --anello-distanza:  2px;
+  --area-tocco-min:   44px;
+
+  /* spostamenti usati dalle sequenze (foglio C) */
+  --scarto-ingresso:  12px;    /* hero e voci del menu */
+  --scarto-blocco:    8px;     /* blocchi delle sezioni, pannello «Leggi di più», contenitore menu */
+  --scala-ingresso:   0.92;    /* sfere */
+}
+
+/* Durate in chiusura: usarle con calc(var(--durata-standard) * var(--uscita)) */
+
+/* ---------- Anello di focus: uno solo per tutto il sito ----------
+   Solo da tastiera (:focus-visible). Con outline e outline-offset, MAI con border
+   o box-shadow: non sposta il layout e resta visibile con i colori forzati.
+   Raggio dell'anello = raggio dell'elemento + 4 px (outline lo segue da solo
+   nei browser moderni). Nessuna transizione. Non tagliarlo con overflow. */
+:focus-visible {
+  outline: var(--anello-focus);
+  outline-offset: var(--anello-distanza);
+}
+/* i link di testo hanno 4 px di margine tra testo e anello */
+a:focus-visible { outline-offset: 4px; }
+
+/* ---------- Hover solo con puntatore preciso ----------
+   Esempio di regola:  @media (hover: hover) { .voce:hover { color: var(--testo-accento); } }
+   Su schermi touch l'hover non esiste: si passa da normale a premuto. */
+
+/* ---------- Movimento ridotto (foglio E) ----------
+   Il contenuto resta identico: cambia solo come compare.
+   - tutte le durate a 0 / 150 ms;
+   - traslazioni e scale con moltiplicatore 0 (al posto di 8–12 px e 0,92);
+   - scorrimento immediato.
+   La linea narrativa e le sfere si gestiscono nel codice (vedi design/linee/LEGGIMI-linee.md). */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --durata-rapida:   0ms;
+    --durata-standard: 150ms;
+    --durata-lenta:    150ms;
+    --scarto-ingresso: 0px;
+    --scarto-blocco:   0px;
+    --scala-ingresso:  1;
+  }
+  html { scroll-behavior: auto; }
+}
+
+/* Scorrimento morbido verso le sezioni (solo senza «movimento ridotto») */
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+/* Posizione finale di un'ancora: header sticky da 64 px più 16 px di respiro */
+section[id], [id].ancora { scroll-margin-top: 80px; }

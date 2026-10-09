@@ -1,0 +1,102 @@
+/* ==========================================================================
+   AI · Data · Design · Human — design token
+   Fonte: variabili locali del file Figma "AI · Data · Design · Human"
+   (fileKey AtwFNzYiwSlUkSIfsBPDWk), estratte l'8 ott 2026.
+   Il nome Figma originale è nel commento accanto a ogni valore.
+   NON cambiare i valori qui senza cambiarli anche in Figma.
+   I colori con trasparenza sono in formato #RRGGBBAA (CSS valido).
+   ========================================================================== */
+
+:root {
+  /* ---------- Colori: testo ---------- */
+  --testo-primario:        #0e1225;   /* Testo/Primario */
+  --testo-secondario:      #2e3042;   /* Testo/Secondario */
+  --testo-navigazione:     #2b2e3d;   /* Testo/Navigazione */
+  --testo-attenuato:       #686b7a;   /* Testo/Attenuato */
+  --testo-assi-grafico:    #0e1225b2; /* Testo/Assi grafico (70%) */
+  --testo-accento:         #6a4ce9;   /* Testo/Accento */
+  --testo-accento-scuro:   #755ed1;   /* Testo/Accento scuro */
+  --testo-accento-premuto: #4b33bd;   /* Testo/Accento premuto — stato premuto, contrasto ≥ 7:1 su superfici chiare */
+
+  /* ---------- Colori: accenti ---------- */
+  --accento-lilla:         #9985f0;   /* Accento/Lilla */
+  --accento-viola-profondo:#7a66d6;   /* Accento/Viola profondo */
+
+  /* ---------- Colori: superfici ---------- */
+  --superficie-base:       #fbfbff;   /* Superficie/Base — sfondo pagina */
+  --superficie-bianco:     #ffffff;   /* Superficie/Bianco */
+  --superficie-lilla:      #f6f3ff;   /* Superficie/Lilla */
+  --superficie-lilla-chiaro:      #f4f1ff;   /* Superficie/Lilla chiaro */
+  --superficie-lilla-chiaro-95:   #f4f1fff2; /* Superficie/Lilla chiaro 95% */
+  --superficie-lilla-chiaro-90:   #f4f1ffe5; /* Superficie/Lilla chiaro 90% */
+  --superficie-lilla-chiaro-55:   #f4f1ff8c; /* Superficie/Lilla chiaro 55% */
+  --superficie-lilla-chiaro-52:   #f4f1ff85; /* Superficie/Lilla chiaro 52% */
+  --superficie-nebbia-88:  #f0eefbe0; /* Superficie/Nebbia 88% */
+
+  /* ---------- Colori: linee e bordi ---------- */
+  --linea-divisore:        #0e122529; /* Linea/Divisore */
+  --linea-intestazione:    #b8ade529; /* Linea/Intestazione */
+  --linea-accento-75:      #9985f0bf; /* Linea/Accento 75% */
+  --linea-griglia-grafico: #dbdbe82e; /* Linea/Griglia grafico */
+  --linea-percorso:        #856edbf2; /* Linea/Percorso — linea narrativa */
+  --linea-ancora-percorso: #fffffff2; /* Linea/Ancora percorso */
+
+  /* ---------- Colori: sfere ---------- */
+  --sfera-alone:           #dbd4fc18; /* Sfera/Alone */
+  --sfera-alone-tappa:     #e0d9fc12; /* Sfera/Alone tappa */
+  --sfera-ombra:           #4a40851f; /* Sfera/Ombra */
+
+  /* ---------- Colori: grafici ---------- */
+  --grafico-pista:         #dbdbe84d; /* Grafico/Pista */
+  --grafico-segmento-tenue:#ebe5fb;   /* Grafico/Segmento tenue */
+  --grafico-incerto:       #bfbad1;   /* Grafico/Incerto */
+  --grafico-patogenico:    #755ed1;   /* Grafico/Patogenico */
+  --grafico-barra-neutra:  #a8abb8c7; /* Grafico/Barra neutra */
+  --grafico-barra-grigia:  #a1a3b0db; /* Grafico/Barra grigia */
+
+  /* ---------- Spaziature (Figma: AI Medicine / Spaziature) ---------- */
+  --spazio-4:  4px;
+  --spazio-8:  8px;
+  --spazio-12: 12px;
+  --spazio-16: 16px;
+  --spazio-20: 20px;
+  --spazio-24: 24px;
+  --spazio-32: 32px;
+  --spazio-40: 40px;
+  --spazio-48: 48px;
+  --spazio-64: 64px;
+
+  /* ---------- Raggi (Figma: AI Medicine / Raggi) ---------- */
+  --raggio-8:  8px;
+  --raggio-12: 12px;
+  --raggio-14: 14px;
+  --raggio-18: 18px;
+  --raggio-22: 22px;
+  --raggio-24: 24px;
+  --raggio-30: 30px;
+  --raggio-pillola: 999px; /* non è una variabile Figma: per badge e pulsanti a pillola */
+
+  /* ---------- Font (Google Fonts) ---------- */
+  --font-serif: "Cormorant Garamond", "Cormorant", Georgia, "Times New Roman", serif;
+  --font-sans:  "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* ---------- Valori ricavati dal disegno (NON sono variabili Figma) ---------- */
+  /* Sfondo della pagina: solo desktop (≥ 1024 px), sfumatura orizzontale da sinistra a destra.
+     Tablet e smartphone: tinta unita --superficie-base. Le sezioni sono trasparenti. */
+  --sfondo-pagina-desktop: linear-gradient(90deg, #fefeff 0%, #f6f5ff 100%);
+  /* Header sticky: fondo --superficie-base pieno, sfocatura 16 px, filetto in basso --linea-intestazione, ombra: */
+  --ombra-header-sticky:   0 8px 24px rgba(28, 23, 56, 0.08);
+  --sfocatura-header:      16px;
+  /* Linea narrativa e sfere dentro il suo frame: opacità 58% (già nei file SVG) */
+  --opacita-linea:         0.58;
+
+  /* ---------- Larghezze di riferimento del disegno ---------- */
+  --larghezza-desktop:    1440px;
+  --larghezza-tablet:     768px;
+  --larghezza-smartphone: 390px;
+}
+
+/* Contrasto: nel disegno i testi su superfici chiare usano --testo-primario,
+   --testo-secondario, --testo-accento o --testo-attenuato (il registro modifiche
+   della pagina Leggimi, tappa D, riporta il contrasto AA su tutti i testi).
+   Non usare --accento-lilla (#9985f0) per testo piccolo: è pensato per bordi e forme. */

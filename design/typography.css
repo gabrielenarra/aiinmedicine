@@ -1,0 +1,64 @@
+/* ==========================================================================
+   AI · Data · Design · Human — stili di testo
+   Fonte: 24 stili di testo locali del file Figma (nome Figma nel commento).
+   Valori in px come nel disegno: in produzione si possono convertire in rem
+   (1rem = 16px) senza cambiare la resa. Richiede tokens.css.
+
+   Font da caricare (Google Fonts):
+     Cormorant Garamond: 400, 600, 400 italic
+     Inter: 400, 500, 600
+   Esempio:
+     https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap
+   ========================================================================== */
+
+/* ---------- Titoli (Cormorant Garamond SemiBold, 600) ---------- */
+.t-titolo-display   { font: 600 80px/84px var(--font-serif); letter-spacing: -1px;   } /* Titolo/Display */
+.t-titolo-grande    { font: 600 60px/64px var(--font-serif); letter-spacing: -0.8px; } /* Titolo/Grande */
+.t-titolo-sezione   { font: 600 50px/54px var(--font-serif); letter-spacing: -0.6px; } /* Titolo/Sezione */
+.t-titolo-numero    { font: 600 42px/40px var(--font-serif); letter-spacing: -0.4px; } /* Titolo/Numero */
+.t-titolo-mobile    { font: 600 36px/43px var(--font-serif); }                          /* Titolo/Mobile */
+.t-titolo-card-grande { font: 600 30px/36px var(--font-serif); }                        /* Titolo/Card grande */
+.t-titolo-card      { font: 600 26px/30px var(--font-serif); }                          /* Titolo/Card */
+.t-titolo-citazione { font: 600 22px/28px var(--font-serif); }                          /* Titolo/Citazione */
+.t-titolo-sottotitolo { font: 600 19px/24px var(--font-serif); }                        /* Titolo/Sottotitolo */
+
+/* ---------- Titoli e decorativi (Cormorant Garamond Regular, 400) ---------- */
+.t-titolo-regolare-24 { font: 400 24px/28px var(--font-serif); }                        /* Titolo/Regolare 24 */
+.t-decorativo-virgolette-34 { font: 400 34px/44px var(--font-serif); }                  /* Decorativo/Virgolette 34 */
+
+/* ---------- Citazioni (Cormorant Garamond Italic) ---------- */
+.t-citazione-corsivo-22 { font: italic 400 22px/28px var(--font-serif); }               /* Citazione/Corsivo 22 */
+.t-citazione-corsivo-20 { font: italic 400 20px/27px var(--font-serif); }               /* Citazione/Corsivo 20 */
+.t-citazione-corsivo-18 { font: italic 400 18px/26px var(--font-serif); }               /* Citazione/Corsivo 18 */
+
+/* ---------- Corpo (Inter Regular, 400) ---------- */
+.t-corpo-grande-18  { font: 400 18px/28px var(--font-sans); }                           /* Corpo/Grande 18 */
+.t-corpo-base-16    { font: 400 16px/25px var(--font-sans); }                           /* Corpo/Base 16 */
+.t-corpo-piccolo-14 { font: 400 14px/21px var(--font-sans); }                           /* Corpo/Piccolo 14 */
+
+/* ---------- Etichette (Inter Medium 500 / Semi Bold 600) ---------- */
+.t-etichetta-media-16 { font: 500 16px/22px var(--font-sans); }                         /* Etichetta/Media 16 */
+.t-etichetta-media-14 { font: 500 14px/20px var(--font-sans); }                         /* Etichetta/Media 14 */
+.t-etichetta-forte-16 { font: 600 16px/22px var(--font-sans); }                         /* Etichetta/Forte 16 */
+.t-etichetta-forte-14 { font: 600 14px/20px var(--font-sans); }                         /* Etichetta/Forte 14 */
+
+/* ---------- Eyebrow (Inter Semi Bold 12, maiuscolo, spaziatura 1,35 px) ---------- */
+.t-eyebrow-maiuscolo-12 { font: 600 12px/16px var(--font-sans); letter-spacing: 1.35px; text-transform: uppercase; } /* Eyebrow/Maiuscolo 12 */
+
+/* ---------- Dati e grafici (Inter 12) ---------- */
+.t-dati-medio-12 { font: 500 12px/16px var(--font-sans); }                              /* Dati/Medio 12 */
+.t-dati-forte-12 { font: 600 12px/16px var(--font-sans); }                              /* Dati/Forte 12 */
+
+/* ==========================================================================
+   Uso per formato (conteggio degli usi nelle tre home del disegno)
+   Serve a capire quale stile scala su quale formato:
+   - Titolo/Display 80 (desktop, 1 uso: titolo del hero)
+       → tablet usa Titolo/Grande 60; smartphone usa Titolo/Numero 42 (1 uso)
+   - Titolo/Sezione 50 (desktop e tablet, 8 usi: titoli delle sezioni 03–10)
+       → smartphone usa Titolo/Mobile 36
+   - Titolo/Mobile 36: smartphone (8 usi); su desktop è usato 6 volte per i valori dei KPI
+   - Citazione/Corsivo: desktop usa 22 (1 uso); tablet usa 20 (2 usi) e 22 (5 usi);
+       smartphone usa 18 (1 uso), 20 (1 uso) e 22 (5 usi)
+   Gli usi per stile e per formato sono nel disegno: verificarli con il server Figma
+   (get_design_context) prima di decidere i punti di rottura.
+   ========================================================================== */

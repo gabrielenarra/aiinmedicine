@@ -1,0 +1,29 @@
+{
+  "project": "AI in Medicine",
+  "purpose": "Development-ready data package matching the current Figma scientific values",
+  "figma_file_key": "AtwFNzYiwSlUkSIfsBPDWk",
+  "figma_home_node": "3:7",
+  "scientific_sections": [
+    "03",
+    "04",
+    "05",
+    "06",
+    "07"
+  ],
+  "rules": [
+    "Scientific numeric values must not be hard-coded in React/chart components.",
+    "Use numeric 'value' for calculations and 'display' for the Italian UI label.",
+    "Do not interpret 89% AlphaMissense as clinical accuracy.",
+    "Do not interpret the TCGA immune subtypes as response probabilities.",
+    "CheXpert AUROC values are pathology-specific; there is no single universal CheXpert AUC."
+  ],
+  "files": [
+    "crispr.json",
+    "diagnostics.json",
+    "discoveries.json",
+    "immunotherapy.json",
+    "mrna.json",
+    "site_metrics.json",
+    "sources.json"
+  ]
+}

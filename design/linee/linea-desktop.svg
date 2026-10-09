@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Linea narrativa — desktop. Tracciato ricavato dal file Figma (nodo 26:5, home 3:7).
+  Coordinate: stesse della home del disegno (viewBox = dimensioni della home, 1440 x 8785 px).
+  Geometria: curve di Bézier ricalcolate sul tracciato originale con scarto massimo inferiore a 0,5 px
+  (desktop: segmenti originali). Stile: tratto 5,9 px con gradiente (lilla chiaro → viola), due ombre esterne.
+  NON incluse: le due ombre interne del tratto (bianca -1,1/-1,1 e viola +1,1/+1,1): vedi design/linee/LEGGIMI-linee.md.
+  Opacità: il frame del disegno che contiene la linea è al 58% (gruppo #linea-gruppo): vale anche per le sfere dentro quel frame (ancore.json, campo opacita).
+  Per animare: stroke-dasharray / stroke-dashoffset sull'elemento #linea (vedi pagina Figma 06, foglio C, sequenza 4).
+  Questo SVG è decorativo: aria-hidden, fuori dall'ordine di tabulazione.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 8785" width="1440" height="8785" fill="none" aria-hidden="true" focusable="false" role="presentation">
+  <defs>
+    <linearGradient id="gradiente-linea" x1="0" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox" gradientTransform="matrix(1.1377 0.3052 -0.3052 1.1377 0.0708 -0.1274)">
+      <stop offset="0" stop-color="#f0ebff" stop-opacity="0.98"/>
+      <stop offset="0.22" stop-color="#dbcffc"/>
+      <stop offset="0.5" stop-color="#bda8f5"/>
+      <stop offset="0.78" stop-color="#a38ceb"/>
+      <stop offset="1" stop-color="#8f78de" stop-opacity="0.98"/>
+    </linearGradient>
+    <filter id="ombre-linea" filterUnits="userSpaceOnUse" x="-30" y="-30" width="1500" height="8845" color-interpolation-filters="sRGB">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3.25" result="b1"/>
+      <feOffset in="b1" dx="0" dy="2.4" result="o1"/>
+      <feFlood flood-color="#6b57c2" flood-opacity="0.24" result="f1"/>
+      <feComposite in="f1" in2="o1" operator="in" result="s1"/>
+      <feGaussianBlur in="SourceAlpha" stdDeviation="5" result="b2"/>
+      <feFlood flood-color="#c2b0ff" flood-opacity="0.18" result="f2"/>
+      <feComposite in="f2" in2="b2" operator="in" result="s2"/>
+      <feMerge><feMergeNode in="s2"/><feMergeNode in="s1"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    
+  </defs>
+  <g id="linea-gruppo" opacity="0.58">
+  <g filter="url(#ombre-linea)">
+    <path id="linea" d="M0 2.05C222.8 -4.05 429.8 2.05 488.1 36.05C546.5 72.15 514.6 122.35 445.7 164.45C376.7 206.55 408.5 262.75 541.2 306.85C700.3 356.95 732.2 445.25 636.7 535.45C546.5 620.65 445.7 605.65 424.4 695.85C397.9 811.25 583.6 866.35 848.9 926.55C1082.3 976.65 1262.7 1031.85 1294.6 1137.05C1326.4 1242.35 1199.1 1312.55 986.8 1337.65C764 1362.75 488.1 1337.65 307.7 1402.85C185.7 1447.95 153.9 1560.45 212.2 1675.95C270.6 1791.45 254.7 1889.65 169.8 1970.55C90.2 2045.65 111.4 2132.25 222.8 2190.05C424.4 2288.25 886 2195.75 1220.3 2253.55C1326.4 2276.65 1347.6 2502.85 1326.4 2628.25C1299.9 2785.05 1167.2 2926.25 944.4 3030.75C737.5 3124.85 514.6 3093.45 323.6 3135.25C212.2 3161.45 153.9 3266.45 175.1 3448.65C201.6 3561.65 201.6 3684.95 169.8 3787.65C137.9 3890.35 143.3 3982.85 196.3 4064.95C249.4 4147.15 228.1 4301.95 159.2 4479.35C95.5 4563.45 111.4 4668.55 191 4752.65C265.3 4836.75 244.1 4941.85 159.2 5025.95C84.9 5099.55 100.8 5215.15 191 5369.65C265.3 5544.15 244.1 5642.15 164.5 5729.85C95.5 5807.25 111.4 5925.85 201.6 6013.55C265.3 6080.65 260 6183.75 212.2 6276.65C175.1 6354.05 201.6 6683.55 291.8 6768.75C392.6 6864.05 583.6 6929.15 811.8 6974.35C997.5 7009.45 1161.9 7044.55 1252.1 7104.65C1315.8 7149.75 1305.2 7214.95 1230.9 7255.05C1124.8 7310.25 933.8 7318.25 732.2 7312.25C519.9 7306.25 323.6 7320.25 212.2 7365.35C137.9 7395.45 153.9 7440.55 244.1 7470.65C445.7 7540.85 721.6 7540.85 997.5 7530.85C1188.5 7525.85 1284 7570.95 1294.6 7661.15C1305.2 7771.45 1252.1 7891.85 1209.7 8002.15C1167.2 8112.45 1183.2 8227.75 1257.4 8333.05C1315.8 8418.25 1310.5 8503.45 1252.1 8583.75" stroke="url(#gradiente-linea)" stroke-width="5.9" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"/>
+  </g>
+  </g>
+</svg>
