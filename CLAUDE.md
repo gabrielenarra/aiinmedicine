@@ -73,7 +73,7 @@ Specifica completa in `design/stati-e-interazioni.md` (copia fedele della pagina
 
 ## Linea narrativa e sfere
 
-Si fanno **per ultime** (tappa 6). Prima il sito con la linea ferma e completa. Leggi `design/linee/LEGGIMI-linee.md` prima di toccarla: la linea è legata alle altezze del disegno e va riallineata alle sezioni vere; sfere in `design/sfere.css` (geometria esatta di ogni sfera in `design/linee/ancore.json`). Siccome il sito si apre anche da `file://`, né `ancore.json` né gli SVG della linea si possono leggere con `fetch`: alla tappa 6 proponi all'utente come portarli nel sito (es. una copia in `data/ancore.js` nella stessa forma degli altri dati, SVG scritto dentro `index.html`) e aspetta l'ok. I due «Reference Marker» del desktop non si realizzano senza chiedere (`docs/PUNTI-APERTI.md` B13). Non cambiare lo stile della linea.
+Si fanno **per ultime** (tappa 6). Prima il sito con la linea ferma e completa. Leggi `design/linee/LEGGIMI-linee.md` prima di toccarla: la linea è legata alle altezze del disegno e va riallineata alle sezioni vere; sfere in `design/sfere.css` (geometria esatta di ogni sfera in `design/linee/ancore.json`). Siccome il sito si apre anche da `file://`, né `ancore.json` né gli SVG della linea si possono leggere con `fetch`. **Deciso alla tappa 6 (9 ottobre 2026):** copie in `data/ancore.js` (identica a `ancore.json`) e `data/linee.js` (solo i tracciati), rigenerate con `node strumenti/linee.mjs` se il disegno cambia; lo stile della linea lo ricostruisce `js/linea.js` uguale agli SVG. La fonte resta `design/linee/`. I due «Reference Marker» del desktop non si realizzano senza chiedere (`docs/PUNTI-APERTI.md` B13). Non cambiare lo stile della linea.
 
 ## Come lavorare
 

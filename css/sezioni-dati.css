@@ -582,7 +582,10 @@
   [data-sezione="06"] .approfondimento__schede { grid-template-columns: repeat(3, minmax(0, 210fr)) minmax(0, 238fr); }
   .approfondimento__profili { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 
-  .strumenti__titolo { white-space: nowrap; }   /* 216:4: una riga sola */
+  /* 216:4: nel disegno il titolo sta su una riga sola e occupa anche lo spazio interno
+     a destra della card (252 px su 246): qui può usare quei 17 px, così a 1440 resta su
+     una riga e, se la card si stringe (1280–1400 px), va a capo senza uscire */
+  .strumenti__titolo { margin-right: calc(-17px + 1px); }
 
   /* fonti a sinistra (al massimo 720 px, anche su due righe) e «Mostra meno» sempre a destra (216:126) */
   .approfondimento__piede {

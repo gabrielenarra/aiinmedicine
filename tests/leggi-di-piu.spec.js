@@ -148,6 +148,9 @@ for (const larghezza of [320, 390, 768, 1024, 1279, 1280, 1320, 1360, 1440]) {
         for (const n of card.querySelectorAll('*')) {
           const r = n.getBoundingClientRect();
           if (r.width && (r.right > c.right + 1 || r.left < c.left - 1)) elenco.push(`${card.className} → ${n.className || n.tagName}`);
+          // testo che deborda dal proprio elemento (es. titolo su una riga sola troppo lungo)
+          const s = getComputedStyle(n);
+          if (s.overflowX === 'visible' && n.scrollWidth > n.clientWidth + 1 && n.clientWidth && n.childElementCount === 0) elenco.push(`${card.className} → testo fuori: ${n.textContent.trim().slice(0, 30)}`);
         }
       }
       return elenco;

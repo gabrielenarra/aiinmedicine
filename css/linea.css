@@ -1,0 +1,37 @@
+/* ==========================================================================
+   Linea narrativa e sfere lungo la pagina (js/linea.js; ricetta delle sfere in
+   design/sfere.css). Strato decorativo sotto a tutto il contenuto: aria-hidden,
+   nessun puntatore, ritagliato ai bordi (niente scorrimento orizzontale).
+   ========================================================================== */
+
+.narrazione {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: clip;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.narrazione__linea {
+  position: absolute;
+  top: 0;
+  overflow: visible;
+}
+
+/* il contenuto sta sopra la linea e le sfere */
+.intestazione,
+main,
+footer {
+  position: relative;
+  z-index: 1;
+}
+
+/* opacità di ogni sfera dal disegno (0,58 per quelle dentro il frame della linea) */
+.sfera--hero { opacity: var(--opacita, 1); }
+.narrazione .sfera--da-rivelare.e-visibile { opacity: var(--opacita, 1); }
+
+@media (prefers-reduced-motion: reduce) {
+  .narrazione .sfera--da-rivelare { opacity: var(--opacita, 1); }
+}
