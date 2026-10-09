@@ -1,0 +1,219 @@
+/* ==========================================================================
+   Sezioni 08 (142:2), 09 (148:2) e footer informativo 10 (148:45).
+   Desktop: elementi sul piano come nel disegno (x in px su 1440 che scalano
+   con la pagina, y in px), come la sezione 02.
+   Sotto i 1280 px per ora tutto in colonna: tappa 4.
+   ========================================================================== */
+
+:where(.sezione-finale) :where(ul, ol) {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sf__palco {
+  position: relative;
+  max-width: var(--larghezza-desktop);
+  margin-inline: auto;
+  padding: var(--spazio-48) var(--spazio-20);
+  display: grid;
+  gap: var(--spazio-32);
+}
+
+/* filetto in alto (64 → 1376 px nel disegno) */
+.sf__palco::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: var(--spazio-20);
+  right: var(--spazio-20);
+  border-top: var(--filetto);
+}
+
+.sf__eyebrow { color: var(--testo-accento); }
+.sf__titolo { margin-top: var(--sf-spazio-titolo, var(--spazio-16)); color: var(--testo-primario); }
+.sf__introduzione { margin-top: var(--sf-spazio-intro, var(--spazio-12)); color: var(--testo-secondario); }
+.sf__nota { margin-top: 44px; color: var(--testo-primario); }
+
+/* ---------- 08: le cinque card di Eric Topol (componente «Citazione desktop» 427:141) ---------- */
+.s08__contesto { color: var(--testo-accento); }
+
+.s08__articoli {
+  display: grid;
+  gap: var(--spazio-16);
+}
+
+.articolo {
+  padding: calc(14px - 1px) calc(18px - 1px) calc(var(--spazio-8) - 1px);
+  background: var(--superficie-bianco);
+  border: 1px solid var(--accento-lilla);
+  border-radius: var(--raggio-24);
+  box-shadow: var(--ombra-card-02);
+}
+
+.articolo__numero {
+  display: flex;
+  gap: var(--spazio-12);
+  align-items: baseline;
+  color: var(--testo-accento);
+}
+
+.articolo__sintesi { margin-top: 15px; color: var(--testo-primario); }
+.articolo__fonte { margin-top: var(--spazio-24); color: var(--testo-secondario); }
+
+.s08__chiusura .t-eyebrow-maiuscolo-12 { color: var(--testo-accento); }
+.s08__chiusura .t-corpo-piccolo-14 { margin-top: var(--spazio-8); color: var(--testo-secondario); }
+
+/* ---------- 09: il percorso in cinque tappe ---------- */
+.s09__tappe {
+  display: grid;
+  gap: var(--spazio-24);
+}
+
+.tappa {
+  display: grid;
+  align-content: start;           /* tutte le tappe allineate in alto, anche se i testi sono lunghi diversi */
+  justify-items: start;
+}
+
+/* nodo: cerchio da 32 px con alone da 44 e trattino (148:8–148:11) */
+.tappa__segno {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  margin: 6px;
+  background: var(--superficie-bianco);
+  border: 1px solid var(--accento-lilla);
+  border-radius: 50%;
+  box-shadow: 0 0 0 6px var(--sfera-alone-tappa);
+}
+
+.tappa__segno::after {
+  content: "";
+  width: 12px;
+  border-top: 1.4px solid var(--accento-lilla);
+}
+
+.tappa__numero { margin-top: 18px; color: var(--testo-accento); }
+.tappa__titolo { margin-top: 6px; color: var(--testo-primario); }
+.tappa__testo { margin-top: var(--spazio-12); color: var(--testo-secondario); }
+
+.s09__percorso { color: var(--testo-accento); }
+.s09__chiusura { color: var(--testo-primario); }
+
+/* ---------- 10: footer informativo ---------- */
+.s10__titolo { margin-top: 26px; color: var(--testo-primario); }
+.s10__progetto { margin-top: 21px; color: var(--testo-secondario); }
+.s10__descrizione { margin-top: var(--spazio-32); max-width: 320px; color: var(--testo-secondario); }
+.s10__titolo-colonna { color: var(--testo-accento); }
+.s10__voci { margin-top: var(--spazio-12); color: var(--testo-secondario); }
+.s10__social { display: flex; flex-wrap: wrap; gap: var(--spazio-16); color: var(--testo-primario); }
+.s10__nota-fonti { color: var(--testo-secondario); }
+.s10__copyright { color: var(--testo-secondario); }
+.s10__firma { color: var(--testo-accento); }
+
+@media (min-width: 600px) {
+  .sf__palco { padding-inline: var(--spazio-24); }
+  .sf__palco::before { left: var(--spazio-24); right: var(--spazio-24); }
+  .s08__articoli { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .s09__tappe { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+/* ---------- Desktop ---------- */
+@media (min-width: 1280px) {
+  .sf__palco {
+    display: block;
+    height: var(--sf-altezza);
+    padding: 0;
+  }
+
+  .sf__palco::before {
+    left: calc(64 / 1440 * 100%);
+    right: calc(64 / 1440 * 100%);
+  }
+
+  /* elementi sul piano: x e larghezza in px su 1440 (scalano), y in px */
+  .sf__testa,
+  .articolo,
+  .s09__tappe,
+  .s09__percorso,
+  .s09__chiusura,
+  .s10__marchio,
+  .s10__colonna,
+  .s10__copyright {
+    position: absolute;
+    left: calc(var(--x) / 1440 * 100%);
+    top: calc(var(--y) * 1px);
+    width: calc(var(--w) * 1px);
+    margin: 0;
+  }
+
+  /* elementi allineati a destra (social, nota sulle fonti, firma): bordo destro a 1370 px */
+  .s10__social,
+  .s10__nota-fonti,
+  .s10__firma {
+    position: absolute;
+    right: calc(70 / 1440 * 100%);
+    top: calc(var(--y) * 1px);
+    margin: 0;
+    text-align: right;
+  }
+
+  /* 08 (142:2): alta 760 + 116 di spazio fino alla 09 nel disegno (6645 → 7445: 800) */
+  [data-sezione="08"] { --sf-altezza: 800px; --sf-spazio-titolo: 16px; --sf-spazio-intro: 10px; }
+  [data-sezione="08"] .sf__testa { --x: 72; --y: 26; --w: 500; }
+  [data-sezione="08"] .sf__introduzione { max-width: 430px; }
+  .s08__articoli { display: block; }
+
+  /* 427:142 · 427:149 · 427:156 · 427:163 · 427:170; --sp = spazio tra sintesi e articolo */
+  .articolo:nth-child(1) { --x: 649;  --y: 36;  --w: 250; --sp: 74px; }
+  .articolo:nth-child(2) { --x: 1055; --y: 174; --w: 278; --sp: 54px; }
+  .articolo:nth-child(3) { --x: 783;  --y: 444; --w: 290; --sp: 62px; }
+  .articolo:nth-child(4) { --x: 422;  --y: 360; --w: 265; --sp: 28px; }
+  .articolo:nth-child(5) { --x: 72;   --y: 453; --w: 244; --sp: 75px; }
+  .articolo__fonte { margin-top: var(--sp); }
+
+  /* 09 (148:2): 7445 → 8085 */
+  [data-sezione="09"] { --sf-altezza: 640px; --sf-spazio-titolo: 22px; --sf-spazio-intro: 2px; }
+  [data-sezione="09"] .sf__testa { --x: 72; --y: 34; --w: 350; }
+  [data-sezione="09"] .sf__introduzione { max-width: 340px; }
+  [data-sezione="09"] .sf__nota { max-width: 300px; }
+
+  /* tappe centrate a 500, 670, 840, 1010, 1180 px: colonne da 170 a partire da 415 */
+  .s09__tappe {
+    --x: 415; --y: 158; --w: 850;
+    width: calc(850 / 1440 * 100%);
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0;
+  }
+
+  .tappa { justify-items: center; text-align: center; }
+  .tappa__testo { max-width: 144px; }
+
+  .s09__percorso { --x: 500; --y: 388; --w: 680; width: calc(680 / 1440 * 100%); text-align: center; }
+  .s09__chiusura { --x: 500; --y: 470; --w: 670; width: calc(670 / 1440 * 100%); text-align: center; }
+
+  /* 10 (148:45): alto 660 */
+  [data-sezione="10"] { --sf-altezza: 660px; }
+  .s10__marchio { --x: 72; --y: 44; --w: 420; }
+  .s10__colonna { --y: 94; --w: 150; }
+  .s10__colonna--0 { --x: 560; }
+  .s10__colonna--1 { --x: 760; }
+  .s10__colonna--2 { --x: 940; }
+  .s10__social { --y: 96; }
+  .s10__nota-fonti { --y: 240; max-width: 350px; }
+  .s10__copyright { --x: 72; --y: 526; --w: 360; }
+  .s10__firma { --y: 526; }
+
+  /* filetto in basso (148:59, y 492) */
+  [data-sezione="10"] .sf__palco::after {
+    content: "";
+    position: absolute;
+    top: 492px;
+    left: calc(64 / 1440 * 100%);
+    right: calc(64 / 1440 * 100%);
+    border-top: var(--filetto);
+  }
+}

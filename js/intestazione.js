@@ -10,6 +10,12 @@
   const { el, riempi } = window.SITO.ui;
 
   function disegna() {
+    // titolo della scheda e link «Vai al contenuto»
+    if (contenuti.pagina) {
+      document.title = contenuti.pagina.titolo_scheda;
+      document.querySelector('.vai-al-contenuto').textContent = contenuti.pagina.vai_al_contenuto;
+    }
+
     const t = contenuti.intestazione;
     if (t) {
       // Nel disegno le prime quattro voci stanno al centro; «About» va a destra

@@ -89,89 +89,9 @@ body {
   }
 }
 
-/* ---------- Scheletro provvisorio (tappa 1) ----------
-   Spaziature solo per rendere leggibile lo scheletro: le misure vere
-   delle sezioni arrivano dal disegno alle tappe 3 e 4. */
-.sezione,
-.pie {
-  padding-block: var(--spazio-48);
-}
-
-.pie {
-  border-top: 1px solid var(--linea-divisore);
-}
-
-.pie .t-corpo-piccolo-14 {
-  margin-top: var(--spazio-8);
-  color: var(--testo-attenuato);
-}
-
-/* ---------- Testi in forma semplice (tappa 2) ----------
-   Solo per leggere e controllare i testi: card, griglie e grafici veri
-   arrivano alla tappa 3 e sostituiranno queste regole. */
+/* ---------- Testi che nel disegno vanno a capo in punti precisi (js/ui.js, righe()) ---------- */
 .riga {
   display: block;
-}
-
-.accento {
-  color: var(--testo-accento);
-}
-
-.attenuato {
-  color: var(--testo-attenuato);
-}
-
-.contenitore > * + * {
-  margin-top: var(--spazio-16);
-}
-
-.kpi-riga,
-.card,
-.passi,
-.voci-provvisorie {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spazio-16) var(--spazio-32);
-  margin-inline: 0;
-  padding: 0;
-}
-
-.kpi,
-.card > li,
-.passi > li {
-  flex: 1 1 220px;
-}
-
-.elenco-semplice {
-  list-style: none;
-  padding: 0;
-}
-
-.fonte {
-  display: block;
-  margin-top: var(--spazio-8);
-  color: var(--testo-secondario);
-}
-
-.badge {
-  margin-left: var(--spazio-12);
-  padding: var(--spazio-4) var(--spazio-12);
-  border: 1px solid var(--accento-lilla);
-  border-radius: var(--raggio-14);
-}
-
-.approfondimento {
-  padding: var(--spazio-24);
-  border: 1px solid var(--accento-lilla);
-  border-radius: var(--raggio-30);
-}
-
-.approfondimento > * + * {
-  margin-top: var(--spazio-12);
-}
-
-.citazione {
-  max-width: 400px;
 }
 
 /* ---------- Testo solo per i lettori di schermo (es. testo alternativo dei grafici) ---------- */

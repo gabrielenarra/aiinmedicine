@@ -1,5 +1,5 @@
-// Sezioni «dati» 03–05 (tappa 3b; 06–07 alla tappa 3c), disegno 55:2, 63:2, 82:2
-// e stati aperti 184:2, 194:76, 200:93. Testi da data/contenuti.js, numeri da data/.
+// Sezioni «dati» 03–07, disegno 55:2, 63:2, 82:2, 97:2, 120:2 e stati aperti
+// 184:2, 194:76, 200:93, 206:110, 216:106. Testi da data/contenuti.js, numeri da data/.
 //
 // Struttura comune (desktop): colonna di testo a sinistra; a destra il «palco»
 // dei dati (intestazione con badge, blocchi della sezione, barra «Leggi di più»)
@@ -12,9 +12,9 @@
 (() => {
   const { contenuti, fonte } = window.SITO.dati;
   const { el, riempi, righe, numero, formato, alCambioFormato } = window.SITO.ui;
-  const { barreOrizzontali } = window.SITO.grafico;
+  const { barreOrizzontali, barreVerticali, barraComposta } = window.SITO.grafico;
 
-  const SEZIONI = ['03', '04', '05'];
+  const SEZIONI = ['03', '04', '05', '06', '07'];
 
   // Nel disegno l'etichetta della colonna di testo è Etichetta forte 14 in 03 e 04,
   // Eyebrow 12 (maiuscolo) nelle altre; l'etichetta del palco è Etichetta forte 14 solo in 03
@@ -63,10 +63,11 @@
   }
 
   // Spiegazione in tre passaggi (03; su tablet/smartphone anche 04, 05, 06)
-  function spiegazione(sp) {
+  // laterale = pannello stretto accanto al grafico (06, 97:56): titolo Citazione 22
+  function spiegazione(sp, laterale = false) {
     if (!sp) return null;
-    return el('div', { class: 'scheda spiegazione' },
-      el('h3', { class: 'spiegazione__titolo t-titolo-card' }, sp.titolo),
+    return el('div', { class: `scheda spiegazione${laterale ? ' spiegazione--laterale' : ''}` },
+      el('h3', { class: `spiegazione__titolo ${laterale ? 't-titolo-citazione' : 't-titolo-card'}` }, sp.titolo),
       sp.sottotitolo ? el('p', { class: 'spiegazione__sottotitolo t-corpo-piccolo-14' }, sp.sottotitolo) : null,
       sp.testo ? el('p', { class: 'spiegazione__testo t-corpo-piccolo-14' }, sp.testo) : null,
       passi(sp.passi),
@@ -133,8 +134,60 @@
       el('p', { class: 'profili__chiusura t-etichetta-forte-14' }, righe(p.chiusura)));
   }
 
+  // 06 e 07: KPI a tre testi (componenti «KPI compatta» 423:94 e «KPI con nota» 426:107)
+  function kpiCompatta(voce, i) {
+    return el('div', { class: `kpi-compatta kpi-compatta--${i}` },
+      el('p', { class: 'kpi-compatta__valore t-titolo-numero' }, numero(voce.metrica)),
+      el('p', { class: 'kpi-compatta__didascalia t-etichetta-media-14' }, voce.didascalia),
+      el('p', { class: 'kpi-compatta__nota t-corpo-piccolo-14' }, voce.nota));
+  }
+
+  // 06: AUROC (97:27)
+  function graficoAuroc(g) {
+    return el('div', { class: 'scheda grafico-auroc' },
+      el('h3', { class: 'grafico-auroc__titolo t-titolo-card' }, g.titolo),
+      el('p', { class: 'grafico-auroc__sottotitolo t-corpo-piccolo-14' }, g.sottotitolo),
+      barreVerticali('diagnostics_auroc', { sinistra: g.etichetta_sinistra, destra: g.etichetta_destra }),
+      el('p', { class: 'grafico-auroc__nota t-corpo-piccolo-14' }, g.nota));
+  }
+
+  // 07: composizione AlphaMissense (122:2)
+  function graficoComposizione(g) {
+    const nomi = (window.DATI.discoveries && window.DATI.discoveries.classification || []).map((c) => c.label_it);
+    return el('div', { class: 'scheda grafico-composizione' },
+      el('h3', { class: 'grafico-composizione__titolo t-titolo-card' }, g.titolo),
+      el('p', { class: 'grafico-composizione__sottotitolo t-corpo-piccolo-14' }, g.sottotitolo),
+      barraComposta('discoveries_classification', { nomi, asse: g.asse, score: g.parola_score }),
+      el('p', { class: 'grafico-composizione__nota t-corpo-piccolo-14' }, g.nota));
+  }
+
+  // 07: «Due strumenti, due domande» (122:26)
+  function strumenti(st) {
+    return el('div', { class: 'scheda strumenti' },
+      el('h3', { class: 'strumenti__titolo t-titolo-citazione' }, st.titolo),
+      st.voci.map((v) => el('div', { class: 'strumenti__voce' },
+        el('p', { class: 'strumenti__eyebrow t-eyebrow-maiuscolo-12' }, v.eyebrow),
+        el('p', { class: 'strumenti__domanda t-etichetta-forte-14' }, v.domanda),
+        el('p', { class: 'strumenti__testo t-corpo-piccolo-14' }, v.testo))),
+      el('p', { class: 'strumenti__chiusura t-etichetta-forte-14' }, st.chiusura));
+  }
+
   function bloccoSezione(n, s) {
     switch (n) {
+      case '06':
+        return [
+          s.kpi_eyebrow ? el('p', { class: 'sd__eyebrow-kpi t-eyebrow-maiuscolo-12' }, s.kpi_eyebrow) : null,
+          el('div', { class: 'sd__kpi sd__kpi--compatte' }, s.kpi.map(kpiCompatta)),
+          el('div', { class: 'sd__riga-grafico' }, graficoAuroc(s.grafico), spiegazione(s.spiegazione, true)),
+          s.suddivisione ? el('p', { class: 'sd__suddivisione' },
+            el('span', { class: 'riga t-eyebrow-maiuscolo-12' }, s.suddivisione.etichetta),
+            el('span', { class: 'riga t-corpo-piccolo-14' }, s.suddivisione.testo)) : null,
+        ];
+      case '07':
+        return [
+          el('div', { class: 'sd__kpi sd__kpi--compatte' }, s.kpi.map(kpiCompatta)),
+          el('div', { class: 'sd__riga-grafico' }, graficoComposizione(s.grafico), strumenti(s.strumenti)),
+        ];
       case '03':
         return [el('div', { class: 'sd__kpi' }, s.kpi.map((v) => kpi(v))), spiegazione(s.spiegazione)];
       case '04':

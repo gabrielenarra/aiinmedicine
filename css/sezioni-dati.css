@@ -77,6 +77,7 @@
 }
 
 .sd__testa-palco {
+  min-height: 32px;               /* anche senza badge (07, 390:84) */
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -274,6 +275,87 @@
   gap: var(--spazio-12);
 }
 
+/* ---------- 06 e 07: KPI a tre testi (424:79…, 426:108…) ---------- */
+.kpi-compatta {
+  min-width: 0;
+  padding: calc(22px - 1px) calc(18px - 1px) calc(var(--spazio-8) - 1px);
+  background: var(--superficie-bianco);
+  border: 1px solid var(--accento-lilla);
+  border-radius: var(--raggio-22);
+}
+
+.kpi-compatta__valore { color: var(--testo-primario); }
+.kpi-compatta--0 .kpi-compatta__valore,
+.kpi-compatta--2 .kpi-compatta__valore { color: var(--testo-accento); }
+.kpi-compatta__didascalia { margin-top: 11px; color: var(--testo-secondario); }
+.kpi-compatta__nota { margin-top: 15px; color: var(--testo-primario); }
+
+[data-sezione="06"] .kpi-compatta--0 { box-shadow: var(--ombra-kpi-compatta); }
+[data-sezione="06"] .kpi-compatta--2 { background: var(--sfumatura-kpi-06); }
+
+[data-sezione="07"] .kpi-compatta__didascalia { margin-top: 10px; }
+[data-sezione="07"] .kpi-compatta__nota { margin-top: 13px; color: var(--testo-secondario); }
+[data-sezione="07"] .kpi-compatta--2 {
+  padding: calc(18px - 1px) calc(18px - 1px) calc(var(--spazio-16) - 1px);
+  background: var(--superficie-lilla);
+}
+[data-sezione="07"] .kpi-compatta--2 > * + * { margin-top: 6px; }
+
+.sd__eyebrow-kpi,
+.sd__suddivisione .t-eyebrow-maiuscolo-12 { color: var(--testo-accento); }
+.sd__suddivisione .t-corpo-piccolo-14 { color: var(--testo-secondario); }
+
+.sd__riga-grafico {
+  display: grid;
+  gap: var(--spazio-12);
+  align-items: start;
+}
+
+/* ---------- 06: grafico AUROC (97:27) ---------- */
+.grafico-auroc,
+.grafico-composizione {
+  padding: calc(17px - 1px) calc(21px - 1px) calc(var(--spazio-16) - 1px);
+  box-shadow: var(--ombra-grafico-06-07);
+}
+
+.grafico-auroc__titolo,
+.grafico-composizione__titolo { color: var(--testo-primario); }
+
+.grafico-auroc__sottotitolo,
+.grafico-composizione__sottotitolo { margin-top: var(--spazio-20); color: var(--testo-secondario); }
+
+.grafico-auroc .grafico-colonne { margin-top: 28px; }
+.grafico-auroc__nota { margin-top: var(--spazio-16); color: var(--testo-secondario); }
+@media (min-width: 1280px) { .grafico-auroc__nota { margin-top: 57px; } }
+
+/* ---------- 06: «Come funziona, in pratica?» accanto al grafico (97:56) ---------- */
+.spiegazione--laterale {
+  gap: 14px;
+  padding: calc(18px - 1px) calc(18px - 1px) calc(var(--spazio-16) - 1px);
+  box-shadow: none;
+}
+
+.spiegazione--laterale .passi { gap: 10px; }
+.spiegazione--laterale .passo { gap: var(--spazio-12); }
+
+/* ---------- 07: composizione AlphaMissense (122:2) ---------- */
+.grafico-composizione .grafico-composto { margin-top: 6px; }
+.grafico-composizione__nota { margin-top: 40px; max-width: 535px; color: var(--testo-secondario); }
+
+/* ---------- 07: «Due strumenti, due domande» (122:26) ---------- */
+.strumenti {
+  padding: calc(17px - 1px);
+  box-shadow: none;
+}
+
+.strumenti__titolo { color: var(--testo-primario); }
+.strumenti__voce { margin-top: 10px; }
+.strumenti__voce:first-of-type { margin-top: 40px; }
+.strumenti__eyebrow { color: var(--testo-accento); }
+.strumenti__domanda { margin-top: var(--spazio-8); color: var(--testo-primario); }
+.strumenti__testo { margin-top: 10px; color: var(--testo-secondario); }
+.strumenti__chiusura { margin-top: 28px; color: var(--testo-accento); }
+
 /* ---------- Barra «Leggi di più» (431:152, foglio B) ---------- */
 .leggi-di-piu {
   display: flex;
@@ -452,6 +534,11 @@
   .sd__kpi--04 { grid-template-columns: minmax(0, 286fr) minmax(0, 276fr) minmax(0, 282fr); }
 
   .spiegazione .passi { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+  .spiegazione--laterale .passi { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+
+  /* 06: card del grafico alta 426 px, nota in fondo (97:27) */
+  .grafico-auroc { display: flex; flex-direction: column; min-height: 426px; }
+  .grafico-auroc .grafico-auroc__nota { margin-top: auto; }
 
   /* 04: due pannelli di barre, 346 px ciascuno a 93 px di distanza; legenda in alto a destra */
   .grafico-precisione__pannelli {
@@ -466,6 +553,12 @@
     margin: 0;
   }
 
+  /* 06: KPI 272 · 272 · 292 px, grafico 592 + pannello 272; 07: 278 · 278 · 281, 586 + 280 */
+  [data-sezione="06"] .sd__kpi--compatte { grid-template-columns: minmax(0, 272fr) minmax(0, 272fr) minmax(0, 292fr); }
+  [data-sezione="07"] .sd__kpi--compatte { grid-template-columns: minmax(0, 278fr) minmax(0, 278fr) minmax(0, 281fr); }
+  [data-sezione="06"] .sd__riga-grafico { grid-template-columns: minmax(0, 592px) minmax(0, 272px); }
+  [data-sezione="07"] .sd__riga-grafico { grid-template-columns: minmax(0, 586px) minmax(0, 280px); }
+
   /* 05: 292 + 564 px */
   .sd__riga-05 { grid-template-columns: minmax(0, 292px) minmax(0, 564px); align-items: stretch; }
 
@@ -474,10 +567,24 @@
   [data-sezione="06"] .approfondimento__schede { grid-template-columns: repeat(3, minmax(0, 210fr)) minmax(0, 238fr); }
   .approfondimento__profili { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 
+  .strumenti__titolo { white-space: nowrap; }   /* 216:4: una riga sola */
+
+  /* fonti a sinistra (al massimo 720 px, anche su due righe) e «Mostra meno» sempre a destra (216:126) */
+  .approfondimento__piede {
+    display: grid;
+    grid-template-columns: minmax(0, 720px) auto;
+    align-items: start;
+  }
+
+  /* etichetta a sinistra e testo a destra; la colonna dell'etichetta cambia nel disegno */
   .approfondimento__sintesi {
     display: grid;
-    grid-template-columns: 137px minmax(0, 720px);
+    grid-template-columns: var(--colonna-sintesi, 137px) minmax(0, 720px);
   }
+
+  [data-sezione="04"] .approfondimento__sintesi { --colonna-sintesi: 140px; }
+  [data-sezione="06"] .approfondimento__sintesi { --colonna-sintesi: 155px; }
+  [data-sezione="07"] .approfondimento__sintesi { --colonna-sintesi: 117px; }
 
   [data-sezione="05"] .approfondimento__sintesi { display: block; max-width: 650px; }
   [data-sezione="05"] .approfondimento__sintesi p + p { margin-top: 6px; }

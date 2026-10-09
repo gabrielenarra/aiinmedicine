@@ -1,6 +1,6 @@
 // Strumenti comuni per costruire la pagina: creano gli elementi, inseriscono
 // i numeri presi da data/ e scelgono i testi del formato corrente.
-// Li usano js/intestazione.js, js/hero.js, js/sezione-02.js e js/testi.js
+// Li usano tutti gli altri file di js/
 // tramite window.SITO.ui.
 //
 // Ogni numero scientifico finisce in un elemento con data-metrica="<metric_id>"

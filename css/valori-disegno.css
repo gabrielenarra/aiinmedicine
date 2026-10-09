@@ -57,4 +57,9 @@
   --ombra-approfondimento: 0 12px 28px rgba(31, 26, 61, 0.06); /* 184:2 */
   --sfumatura-kpi-evidenza: linear-gradient(90deg, rgba(246, 244, 255, 0.98), rgba(224, 217, 255, 0.98)); /* 63:15 */
   --sfumatura-barra-principale: linear-gradient(90deg, #ccc2ff, #8c75e8);  /* 63:48, barra OpenCRISPR-1 on-target */
+  --ombra-kpi-compatta: 0 8px 18px rgba(26, 20, 51, 0.04);                  /* 424:79 */
+  --ombra-grafico-06-07: 0 8px 18px rgba(26, 20, 51, 0.03);                 /* 97:27, 122:2 */
+  --sfumatura-kpi-06: linear-gradient(90deg, rgba(246, 244, 255, 0.98), rgba(227, 219, 255, 0.98)); /* 424:91 */
+  /* AUROC (charts.js: «490 px per 1,0 a partire da 0,80»): l'asse 0,80–1,00 è alto 98 px */
+  --altezza-grafico-auroc: 98px;
 }

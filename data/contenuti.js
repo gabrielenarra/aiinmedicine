@@ -1003,7 +1003,12 @@
       "grafico": {
         "titolo": "Come si distribuiscono ~71 milioni di varianti?",
         "sottotitolo": "Le percentuali mostrano la quota di varianti in ciascuna classe; lo score definisce le soglie di classificazione.",
-        "nota": "{dato:discoveries.classification.0.display} + {dato:discoveries.classification.2.display} = {metrica:discovery_classified_share} nelle due classi principali. È copertura di classificazione, non accuratezza clinica."
+        "nota": "{dato:discoveries.classification.0.display} + {dato:discoveries.classification.2.display} = {metrica:discovery_classified_share} nelle due classi principali. È copertura di classificazione, non accuratezza clinica.",
+        "asse": [
+          "0%",
+          "100%"
+        ],
+        "parola_score": "score"
       },
       "strumenti": {
         "titolo": "Due strumenti, due domande",

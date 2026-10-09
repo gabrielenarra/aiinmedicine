@@ -5,7 +5,7 @@ const path = require('node:path');
 const { pathToFileURL } = require('node:url');
 
 const PAGINA = pathToFileURL(path.resolve(__dirname, '..', 'index.html')).href;
-const SEZIONI = ['vaccini-mrna', 'crispr', 'immunoterapia'];
+const SEZIONI = ['vaccini-mrna', 'crispr', 'immunoterapia', 'diagnostica', 'scoperte'];
 
 test.beforeEach(async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
@@ -57,6 +57,29 @@ test('le sezioni sono indipendenti: aprirne una non chiude le altre', async ({ p
   await expect(page.locator('#approfondimento-vaccini-mrna')).toBeVisible();
   await expect(page.locator('#approfondimento-immunoterapia')).toBeVisible();
   await expect(page.locator('#approfondimento-crispr')).toBeHidden();
+});
+
+test('grafici 06 e 07: valori come testo, barre in scala, testo alternativo', async ({ page }) => {
+  const auroc = page.locator('[data-grafico="diagnostics_auroc"]');
+  await expect(auroc.locator('.grafico-colonne__valore')).toHaveText(['0,85', '0,90', '0,90', '0,92', '0,97']);
+  const altezze = await auroc.evaluate((g) => ({
+    area: g.querySelector('.grafico-colonne__area').getBoundingClientRect().height,
+    barre: [...g.querySelectorAll('.grafico-colonne__barra')].map((b) => b.getBoundingClientRect().height),
+  }));
+  // asse 0,80–1,00: 0,85 → un quarto dell'altezza, 0,97 → 85%
+  expect(altezze.barre[0] / altezze.area).toBeCloseTo(0.25, 2);
+  expect(altezze.barre[4] / altezze.area).toBeCloseTo(0.85, 2);
+
+  const composto = page.locator('[data-grafico="discoveries_classification"]');
+  await expect(composto.locator('.grafico-composto__quota')).toHaveText(['57%', '11%', '32%']);
+  const quote = await composto.evaluate((g) => {
+    const totale = g.querySelector('.grafico-composto__barra').getBoundingClientRect().width;
+    return [...g.querySelectorAll('.grafico-composto__segmento')].map((s) => s.getBoundingClientRect().width / totale);
+  });
+  expect(quote[0]).toBeCloseTo(0.57, 2);
+  expect(quote[1]).toBeCloseTo(0.11, 2);
+  expect(quote[2]).toBeCloseTo(0.32, 2);
+  await expect(page.locator(`#${await composto.getAttribute('aria-describedby')}`)).toContainText('copertura di classificazione');
 });
 
 test('il grafico della 04 ha i valori come testo e il testo alternativo', async ({ page }) => {

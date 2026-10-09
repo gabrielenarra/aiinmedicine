@@ -25,7 +25,10 @@ ai-medicine-sito/
 ├── index.html                   la pagina (si apre con un doppio clic)
 ├── css/font.css  css/base.css   font e stili di base
 ├── js/dati.js                   legge i dati di data/ e li passa al sito
-├── js/testi.js                  mette testi e numeri nella pagina
+├── js/ui.js  js/grafico.js      strumenti comuni e grafici (guidati da data/charts.js)
+├── js/intestazione.js  js/hero.js  js/sezione-02.js
+├── js/sezioni-dati.js           sezioni 03–07 con «Leggi di più»
+├── js/sezioni-finali.js         sezioni 08, 09 e footer
 ├── tests/                       prove automatiche (npm test, npm run verifica-dati)
 ├── strumenti/dati.mjs           converte i dati tra .js e .json e li controlla
 ├── data/                        numeri, fonti, grafici (la fonte di tutto ciò che è scientifico)

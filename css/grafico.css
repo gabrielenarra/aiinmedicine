@@ -94,3 +94,173 @@
 .legenda__voce--1 .legenda__punto {
   background: var(--grafico-barra-neutra);
 }
+
+/* ---------- Barre verticali (sezione 06, AUROC, 97:27) ----------
+   Area del grafico alta --altezza-grafico-auroc (scala di charts.js); colonne da 90 px,
+   barre da 42 px; tacche a sinistra con la griglia. Asse troncato 0,80–1,00 come
+   nel disegno (punto aperto A7): l'etichetta lo dice. */
+.grafico-colonne {
+  margin: 0;
+  min-width: 0;
+}
+
+.grafico-colonne__testa {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--spazio-16);
+  max-width: 538px;
+  color: var(--testo-secondario);
+}
+
+.grafico-colonne__area {
+  position: relative;
+  height: var(--altezza-grafico-auroc);
+  margin: 33px 0 var(--spazio-48);   /* sotto: nomi delle condizioni (anche su due righe) */
+}
+
+.grafico-colonne__tacche {
+  position: absolute;
+  inset: 0 0 0 0;
+}
+
+.grafico-colonne__tacca {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(var(--quota) * 100%);
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  align-items: center;
+  gap: var(--spazio-8);
+  transform: translateY(50%);
+  color: var(--testo-secondario);
+  text-align: right;
+}
+
+.grafico-colonne__tacca::after {
+  content: "";
+  border-top: 1px solid var(--linea-divisore);
+}
+
+/* tablet e smartphone: colonne che si dividono lo spazio; desktop: misure del disegno (sotto) */
+.grafico-colonne__elenco {
+  position: absolute;
+  inset: 0 0 0 42px;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.grafico-colonne__voce {
+  position: relative;
+}
+
+.grafico-colonne__barra {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+  width: min(42px, 60%);
+  height: calc(var(--quota) * 100%);
+  border-radius: 7px;
+  background: var(--accento-lilla);
+}
+
+.grafico-colonne__valore {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(var(--quota) * 100% + 1px);
+  text-align: center;
+  color: var(--testo-secondario);
+}
+
+.grafico-colonne__nome {
+  position: absolute;
+  top: calc(100% + var(--spazio-8));
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: var(--testo-secondario);
+}
+
+@media (min-width: 1280px) {
+  .grafico-colonne__area { margin-bottom: var(--spazio-24); }
+  .grafico-colonne__tacche { right: 14px; }
+  .grafico-colonne__tacca { grid-template-columns: 74px 1fr; }
+
+  .grafico-colonne__elenco {
+    inset: 0 auto 0 81px;
+    grid-auto-columns: 90px;
+  }
+
+  .grafico-colonne__barra {
+    left: 24px;
+    transform: none;
+    width: 42px;
+  }
+
+  .grafico-colonne__nome {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    white-space: nowrap;
+  }
+}
+
+/* ---------- Barra composta al 100% (sezione 07, 122:2) ---------- */
+.grafico-composto {
+  margin: 0;
+  min-width: 0;
+  max-width: 542px;
+}
+
+.grafico-composto__asse {
+  display: flex;
+  justify-content: space-between;
+  color: var(--testo-secondario);
+}
+
+.grafico-composto__barra {
+  display: flex;
+  height: 62px;
+  margin-top: var(--spazio-4);
+  border-radius: var(--raggio-14);
+  overflow: hidden;
+}
+
+[data-segmento="likely_benign"] { --colore-segmento: var(--grafico-segmento-tenue); }
+[data-segmento="uncertain"] { --colore-segmento: var(--grafico-incerto); }
+[data-segmento="likely_pathogenic"] { --colore-segmento: var(--grafico-patogenico); }
+
+.grafico-composto__segmento {
+  position: relative;
+  flex: 0 0 calc(var(--quota) * 100%);
+  background: var(--colore-segmento);
+}
+
+.grafico-composto__legenda {
+  display: grid;
+  gap: 34px;
+  max-width: 522px;
+  margin: 30px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.grafico-composto__voce {
+  display: grid;
+  grid-template-columns: 28px 68px 1fr auto;
+  align-items: center;
+  color: var(--testo-secondario);
+}
+
+.grafico-composto__punto {
+  width: 14px;
+  height: 14px;
+  border-radius: 7px;
+  background: var(--colore-segmento);
+}
