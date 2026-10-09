@@ -1,7 +1,8 @@
 /* ==========================================================================
    Sezioni «dati» 03–07 (js/sezioni-dati.js). Misure del disegno desktop 1440
    (55:2, 63:2, 82:2 e stati aperti 184:2, 194:76, 200:93).
-   Sotto i 1280 px (tablet e smartphone) per ora tutto in colonna: tappa 4.
+   Sotto i 1280 px (tablet e smartphone) le sezioni usano altre classi («sc-»),
+   in css/sezioni-compatte.css: qui per loro vale solo l'impianto (.sd__interno).
    Dove il disegno usa un bordo di 1 px, i padding sono 1 px più piccoli
    (in Figma il bordo non occupa spazio).
    ========================================================================== */
@@ -27,21 +28,25 @@
   list-style: none;
 }
 
-/* ---------- Impianto ---------- */
+/* ---------- Impianto ----------
+   Tablet e smartphone (509:298, 302:2): blocchi in colonna a 16 px; 64 px tra una
+   sezione e l'altra, 24 px sotto la barra «Leggi di più» (8 di spazio + 16) */
 .sd__interno {
   position: relative;
   max-width: var(--larghezza-desktop);
   margin-inline: auto;
-  padding: var(--spazio-48) var(--spazio-20);
-  display: grid;
-  gap: var(--spazio-32);
+  padding: var(--spazio-64) var(--spazio-20) var(--spazio-24);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spazio-16);
 }
 
-/* filetto in alto */
-.sd__interno::before {
+/* filetto: su tablet e smartphone solo sopra la 05, a metà dello spazio
+   (509:296, 250:187; docs/PUNTI-APERTI.md B24); su desktop sopra ogni sezione */
+[data-sezione="05"] .sd__interno::before {
   content: "";
   position: absolute;
-  top: 0;
+  top: var(--spazio-32);
   left: var(--spazio-20);
   right: var(--spazio-20);
   border-top: var(--filetto);
@@ -504,17 +509,16 @@
   cursor: pointer;
 }
 
-/* ---------- Tablet e smartphone (provvisorio, tappa 4) ---------- */
+/* ---------- Tablet ---------- */
 @media (min-width: 600px) {
   .sd__interno { padding-inline: var(--spazio-24); }
-  .sd__interno::before { left: var(--spazio-24); right: var(--spazio-24); }
-  .sd__kpi, .sd__riga-05, .approfondimento__schede, .approfondimento__profili { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .grafico-precisione__pannelli { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  [data-sezione="05"] .sd__interno::before { left: var(--spazio-24); right: var(--spazio-24); }
 }
 
 /* ---------- Desktop ---------- */
 @media (min-width: 1280px) {
   .sd__interno {
+    display: grid;
     grid-template-columns: var(--larghezza-colonna-testo) minmax(0, var(--larghezza-palco));
     gap: 36px;
     align-items: start;
@@ -522,9 +526,15 @@
     padding: 36px var(--margine-sezioni-dati-desktop) 44px;   /* 44 px sotto il pannello aperto (182:2) */
   }
 
-  .sd__interno::before {
+  /* filetto in alto, sopra ogni sezione */
+  .sd__interno::before,
+  [data-sezione="05"] .sd__interno::before {
+    content: "";
+    position: absolute;
+    top: 0;
     left: var(--margine-sezioni-dati-desktop);
     right: var(--margine-sezioni-dati-desktop);
+    border-top: var(--filetto);
   }
 
   .sd__testo { padding-top: var(--sp-alto); }
@@ -556,8 +566,13 @@
   /* 06: KPI 272 · 272 · 292 px, grafico 592 + pannello 272; 07: 278 · 278 · 281, 586 + 280 */
   [data-sezione="06"] .sd__kpi--compatte { grid-template-columns: minmax(0, 272fr) minmax(0, 272fr) minmax(0, 292fr); }
   [data-sezione="07"] .sd__kpi--compatte { grid-template-columns: minmax(0, 278fr) minmax(0, 278fr) minmax(0, 281fr); }
-  [data-sezione="06"] .sd__riga-grafico { grid-template-columns: minmax(0, 592px) minmax(0, 272px); }
-  [data-sezione="07"] .sd__riga-grafico { grid-template-columns: minmax(0, 586px) minmax(0, 280px); }
+  /* larghezze del disegno a 1440; sotto, grafico e pannello si stringono in proporzione */
+  [data-sezione="06"] .sd__riga-grafico {
+    grid-template-columns: min(592px, (100% - 12px) * 592 / 864) min(272px, (100% - 12px) * 272 / 864);
+  }
+  [data-sezione="07"] .sd__riga-grafico {
+    grid-template-columns: min(586px, (100% - 12px) * 586 / 866) min(280px, (100% - 12px) * 280 / 866);
+  }
 
   /* 05: 292 + 564 px */
   .sd__riga-05 { grid-template-columns: minmax(0, 292px) minmax(0, 564px); align-items: stretch; }

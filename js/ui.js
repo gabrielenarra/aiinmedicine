@@ -70,16 +70,32 @@
     return testo.map((riga) => el('span', { class: 'riga' }, riga));
   }
 
-  // Ridisegna quando si passa da desktop a tablet/smartphone e viceversa
+  // Smartphone (sotto i 600 px): stessi testi del tablet, ma alcuni stili di testo
+  // più piccoli (titoli di sezione 36 invece di 50, titolo dell'hero 42 invece di 60)
+  const smartphone = window.matchMedia('(max-width: 599px)');
+
+  // Classe di typography.css per il formato corrente: perFormato({ desktop, tablet, smartphone })
+  function perFormato(classi) {
+    if (!compatto.matches) return classi.desktop;
+    if (smartphone.matches) return classi.smartphone || classi.tablet;
+    return classi.tablet || classi.desktop;
+  }
+
+  // Ridisegna quando cambia il formato (desktop, tablet, smartphone)
   const ridisegni = [];
   function alCambioFormato(funzione) {
     ridisegni.push(funzione);
   }
-  compatto.addEventListener('change', () => {
-    ridisegni.forEach((f) => f());
-    document.documentElement.dataset.formato = compatto.matches ? 'compatto' : 'desktop';
-  });
-  document.documentElement.dataset.formato = compatto.matches ? 'compatto' : 'desktop';
+  function segnaFormato() {
+    document.documentElement.dataset.formato = !compatto.matches ? 'desktop' : (smartphone.matches ? 'smartphone' : 'tablet');
+  }
+  for (const query of [compatto, smartphone]) {
+    query.addEventListener('change', () => {
+      segnaFormato();
+      ridisegni.forEach((f) => f());
+    });
+  }
+  segnaFormato();
 
-  window.SITO.ui = { el, riempi, righe, numero, formato, compatto, alCambioFormato };
+  window.SITO.ui = { el, riempi, righe, numero, formato, perFormato, compatto, smartphone, alCambioFormato };
 })();

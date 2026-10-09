@@ -29,6 +29,13 @@
   --distanza-capitolo-sticky: 55px;
   --distanza-indicatore-sticky: 32px;  /* dall'alto della voce all'indicatore */
 
+  /* Hero smartphone (250:2): da y 64 a 823; eyebrow a 94; testo 105 px sotto il titolo
+     (lo spazio lasciato alle sfere). Hero tablet (509:258): da y 64 a 772 */
+  --hero-altezza-smartphone: 759px;
+  --hero-alto-smartphone: 30px;
+  --hero-spazio-testo-smartphone: 105px;
+  --hero-altezza-tablet: 708px;
+
   /* Hero desktop (3:7): l'hero va da y 64 a 766 nel disegno */
   --hero-altezza: 702px;
   --hero-alto: 52px;                  /* eyebrow a y 116 */

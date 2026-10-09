@@ -14,16 +14,53 @@
   list-style: none;
 }
 
-/* ---------- Header iniziale ---------- */
+/* ---------- Header iniziale ----------
+   Tablet e smartphone (509:277, 416:94): alto 64 px, marchio a sinistra,
+   pulsante menu a destra. Desktop (da 1280 px): voci e social, sotto. */
 .intestazione__interno {
   position: relative;
   max-width: var(--larghezza-desktop);
+  height: var(--spazio-64);
   margin-inline: auto;
-  padding: var(--spazio-16) var(--spazio-20);
+  padding: 0 var(--spazio-20);
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--spazio-8) var(--spazio-24);
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spazio-16);
   color: var(--testo-primario);
+}
+
+/* pulsante menu (foglio B): cerchio da 32 px, area di tocco 44 × 44 */
+.pulsante-menu {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: var(--area-tocco-min);
+  height: var(--area-tocco-min);
+  margin-right: calc((var(--area-tocco-min) - 32px) / -2);  /* il cerchio arriva al margine */
+  padding: 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.pulsante-menu__cerchio {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 4px;
+  width: 32px;
+  height: 32px;
+  background: var(--superficie-lilla-chiaro);
+  border: 1px solid var(--accento-lilla);
+  border-radius: 50%;
+}
+
+/* tre lineette da 14 px */
+.pulsante-menu__cerchio i {
+  display: block;
+  width: 14px;
+  border-top: 1px solid var(--testo-accento);
 }
 
 .intestazione__nav ul,

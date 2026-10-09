@@ -16,7 +16,7 @@ const MODI = [
   { nome: 'sottocartella', descrizione: 'server, sito in una sottocartella', url: `${SERVER}/sottocartella/annidata/` },
 ];
 
-const LARGHEZZE = [320, 360, 390, 768, 1024, 1279, 1280, 1440, 1920];
+const LARGHEZZE = [320, 360, 390, 600, 768, 1023, 1024, 1279, 1280, 1440, 1920];
 
 // Apre la pagina e registra tutto ciò che succede in rete e in console.
 async function apri(page, url) {

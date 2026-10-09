@@ -7,7 +7,7 @@
 
 (() => {
   const { contenuti } = window.SITO.dati;
-  const { el, riempi } = window.SITO.ui;
+  const { el, riempi, compatto, alCambioFormato } = window.SITO.ui;
 
   function disegna() {
     // titolo della scheda e link «Vai al contenuto»
@@ -17,7 +17,17 @@
     }
 
     const t = contenuti.intestazione;
-    if (t) {
+    // Tablet e smartphone (509:277, 416:94): marchio e pulsante menu (il menu si apre dalla tappa 5)
+    if (t && compatto.matches) {
+      riempi(document.querySelector('.intestazione__interno'),
+        el('p', { class: 'intestazione__marchio t-etichetta-forte-14' }, t.marchio),
+        el('button', {
+          type: 'button',
+          class: 'pulsante-menu',
+          'aria-label': contenuti.menu.etichetta_apri,
+          'aria-expanded': 'false',
+        }, el('span', { class: 'pulsante-menu__cerchio', 'aria-hidden': 'true' }, el('i'), el('i'), el('i'))));
+    } else if (t) {
       // Nel disegno le prime quattro voci stanno al centro; «About» va a destra
       // con i social, più tenue (opacità 70% nel disegno → colore attenuato)
       const principali = t.voci.slice(0, 4);
@@ -49,4 +59,5 @@
   }
 
   disegna();
+  alCambioFormato(disegna);
 })();

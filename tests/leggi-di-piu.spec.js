@@ -1,4 +1,4 @@
-// «Leggi di più» (sezioni 03–05): apertura e chiusura con mouse e tastiera,
+// «Leggi di più» (sezioni 03–07): apertura e chiusura con mouse e tastiera,
 // aria-expanded / aria-controls, «Mostra meno», sezioni indipendenti.
 const { test, expect } = require('@playwright/test');
 const path = require('node:path');
@@ -24,12 +24,12 @@ for (const id of SEZIONI) {
     await barra.click();
     await expect(barra).toHaveAttribute('aria-expanded', 'true');
     await expect(pannello).toBeVisible();
-    await expect(barra.locator('.leggi-di-piu__segno')).toHaveText('−');
+    await expect(barra.locator('[data-segno]')).toHaveText('−');
 
     await barra.click();
     await expect(barra).toHaveAttribute('aria-expanded', 'false');
     await expect(pannello).toBeHidden();
-    await expect(barra.locator('.leggi-di-piu__segno')).toHaveText('+');
+    await expect(barra.locator('[data-segno]')).toHaveText('+');
   });
 }
 
@@ -94,3 +94,62 @@ test('il grafico della 04 ha i valori come testo e il testo alternativo', async 
   }));
   expect(larghezze.barra / larghezze.pista).toBeCloseTo(56.4 / 60, 2);
 });
+
+// Tablet e smartphone: stessa barra (alta 56 px), pannello largo quanto la pagina,
+// «Chiudi approfondimento» in fondo. Aree di tocco di almeno 44 px.
+for (const larghezza of [390, 768]) {
+  test(`${larghezza} px: i cinque pannelli si aprono e si chiudono, aree di tocco ≥ 44 px`, async ({ page }) => {
+    await page.setViewportSize({ width: larghezza, height: 900 });
+    await page.goto(PAGINA);
+    for (const id of SEZIONI) {
+      const barra = page.locator(`#leggi-${id}`);
+      const pannello = page.locator(`#approfondimento-${id}`);
+      await expect(pannello).toBeHidden();
+      await barra.click();
+      await expect(barra).toHaveAttribute('aria-expanded', 'true');
+      await expect(pannello).toBeVisible();
+      await expect(barra.locator('[data-segno]')).toHaveText('−');
+      const chiudi = pannello.locator('[data-chiudi]');
+      for (const pulsante of [barra, chiudi, page.locator('.pulsante-menu')]) {
+        const box = await pulsante.boundingBox();
+        expect(box.height).toBeGreaterThanOrEqual(44);
+        expect(box.width).toBeGreaterThanOrEqual(44);
+      }
+      const box = await pannello.boundingBox();
+      expect(Math.round(box.width)).toBe(larghezza);   // largo quanto la pagina, come nel disegno
+      await chiudi.click();
+      await expect(pannello).toBeHidden();
+      await expect(barra).toBeFocused();
+    }
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(larghezza);
+  });
+}
+
+test('un pannello aperto resta aperto se si passa da desktop a tablet', async ({ page }) => {
+  await page.locator('#leggi-crispr').click();
+  await page.setViewportSize({ width: 768, height: 900 });
+  await expect(page.locator('#leggi-crispr')).toHaveAttribute('aria-expanded', 'true');
+  await expect(page.locator('#approfondimento-crispr')).toBeVisible();
+});
+
+// Nessun contenuto esce dalla sua card (era successo al grafico AUROC tra 1280 e 1360 px)
+for (const larghezza of [320, 390, 768, 1024, 1279, 1280, 1320, 1360, 1440]) {
+  test(`${larghezza} px: grafici e testi restano dentro le loro card`, async ({ page }) => {
+    await page.setViewportSize({ width: larghezza, height: 900 });
+    await page.goto(PAGINA);
+    await page.evaluate(() => document.fonts.ready);
+    const fuori = await page.evaluate(() => {
+      const elenco = [];
+      for (const card of document.querySelectorAll('.scheda, .sc-scheda, .kpi, .kpi-compatta, .coorte, .card-02, .articolo, .fc-articolo')) {
+        const c = card.getBoundingClientRect();
+        if (!c.width) continue;
+        for (const n of card.querySelectorAll('*')) {
+          const r = n.getBoundingClientRect();
+          if (r.width && (r.right > c.right + 1 || r.left < c.left - 1)) elenco.push(`${card.className} → ${n.className || n.tagName}`);
+        }
+      }
+      return elenco;
+    });
+    expect(fuori).toEqual([]);
+  });
+}

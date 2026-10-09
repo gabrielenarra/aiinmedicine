@@ -10,9 +10,9 @@
 // Ogni sezione è indipendente: aprirne una non chiude le altre.
 
 (() => {
-  const { contenuti, fonte } = window.SITO.dati;
-  const { el, riempi, righe, numero, formato, alCambioFormato } = window.SITO.ui;
-  const { barreOrizzontali, barreVerticali, barraComposta } = window.SITO.grafico;
+  const { contenuti, fonte, sezioni } = window.SITO.dati;
+  const { el, riempi, righe, numero, formato, perFormato, compatto, alCambioFormato } = window.SITO.ui;
+  const { barreOrizzontali, barreVerticali, barreRighe, barraComposta } = window.SITO.grafico;
 
   const SEZIONI = ['03', '04', '05', '06', '07'];
 
@@ -46,9 +46,11 @@
 
   // ---------- Blocchi del palco ----------
   function intestazionePalco(n, s) {
+    // su tablet e smartphone il palco non ha intestazione (pannello null) o solo il badge (03)
+    if (!s.pannello) return null;
     const classe = ETICHETTA_FORTE_PALCO.includes(n) ? 't-etichetta-forte-14' : 't-eyebrow-maiuscolo-12';
     return el('div', { class: 'sd__testa-palco' },
-      el('p', { class: `sd__etichetta-palco ${classe}` }, s.pannello.eyebrow),
+      s.pannello.eyebrow ? el('p', { class: `sd__etichetta-palco ${classe}` }, s.pannello.eyebrow) : null,
       s.pannello.badge ? el('p', { class: 'sd__badge t-eyebrow-maiuscolo-12' }, s.pannello.badge) : null);
   }
 
@@ -153,7 +155,7 @@
 
   // 07: composizione AlphaMissense (122:2)
   function graficoComposizione(g) {
-    const nomi = (window.DATI.discoveries && window.DATI.discoveries.classification || []).map((c) => c.label_it);
+    const nomi = ((sezioni['07'] && sezioni['07'].classification) || []).map((c) => c.label_it);
     return el('div', { class: 'scheda grafico-composizione' },
       el('h3', { class: 'grafico-composizione__titolo t-titolo-card' }, g.titolo),
       el('p', { class: 'grafico-composizione__sottotitolo t-corpo-piccolo-14' }, g.sottotitolo),
@@ -217,12 +219,12 @@
       el('span', { class: 'leggi-di-piu__testo' },
         el('span', { class: 'leggi-di-piu__etichetta t-eyebrow-maiuscolo-12' }, s.leggi_di_piu.etichetta),
         s.leggi_di_piu.descrizione ? el('span', { class: 'leggi-di-piu__descrizione t-corpo-piccolo-14' }, s.leggi_di_piu.descrizione) : null),
-      el('span', { class: 'leggi-di-piu__segno t-etichetta-media-16', 'aria-hidden': 'true' }, aperto ? '−' : '+'));
+      el('span', { class: 'leggi-di-piu__segno t-etichetta-media-16', 'aria-hidden': 'true', 'data-segno': '' }, aperto ? '−' : '+'));
   }
 
   function approfondimento(s) {
     const a = formato(s.approfondimento);
-    const nomiProfili = (window.DATI.immunotherapy && window.DATI.immunotherapy.immune_subtypes) || [];
+    const nomiProfili = (sezioni['05'] && sezioni['05'].immune_subtypes) || [];
     const numera = (i, testo) => (a.numera_schede ? `${String(i + 1).padStart(2, '0')} · ${testo}` : testo);
     const etichettaScheda = (testo, i) => (Array.isArray(testo) ? [numera(i, testo[0]), ...testo.slice(1)] : numera(i, testo));
     return el('div', {
@@ -268,7 +270,7 @@
     if (!barra || !pannello) return;
     if (apri) aperti.add(id); else aperti.delete(id);
     barra.setAttribute('aria-expanded', apri ? 'true' : 'false');
-    barra.querySelector('.leggi-di-piu__segno').textContent = apri ? '−' : '+';
+    barra.querySelector('[data-segno]').textContent = apri ? '−' : '+';
     pannello.hidden = !apri;
   }
 
@@ -286,6 +288,231 @@
     }
   });
 
+  // =====================================================================
+  // Tablet e smartphone (509:298…509:524, 302:2…416:60; aperti 508:362…, 297:4…)
+  // Tutto in colonna, a 16 px; su tablet alcuni blocchi stanno affiancati
+  // (classi sc-riga--2 e sc-riga--3). Classi proprie («sc-», sezione compatta),
+  // così le misure del desktop non si mescolano a quelle compatte.
+  // =====================================================================
+
+  // Nel disegno compatto le didascalie vanno a capo da sole: niente righe forzate
+  const unaRiga = (testo) => (Array.isArray(testo) ? testo.join(' ') : testo);
+
+  function testaCompatta(n, s) {
+    const classeEtichetta = ETICHETTA_FORTE_TESTO.includes(n) ? 't-etichetta-forte-14' : 't-eyebrow-maiuscolo-12';
+    return [
+      el('p', { class: `sc-eyebrow ${classeEtichetta}` }, s.eyebrow),
+      el('h2', { id: `titolo-${s.id}`, class: `sc-titolo ${perFormato({ tablet: 't-titolo-sezione', smartphone: 't-titolo-mobile' })}` }, righe(s.titolo)),
+      el('p', { class: 'sc-testo t-corpo-base-16' }, unaRiga(s.introduzione)),
+      el('div', { class: 'sc-fonti' },
+        el('p', { class: 'sc-fonti__etichetta t-eyebrow-maiuscolo-12' }, s.fonti.etichetta),
+        el('div', { class: 'sc-fonti__voci' }, s.fonti.voci.map((voce) => {
+          const f = fonte(voce.fonte);
+          if (!f) return null;
+          return el('a', { class: 'sc-fonti__fonte t-etichetta-media-14', href: f.doi_url, rel: 'noopener noreferrer', target: '_blank', 'data-fonte': f.id },
+            righe(voce.righe), el('span', { class: 'riga' }, `DOI ${f.doi}`));
+        })),
+        el('p', { class: 'sc-fonti__ambito t-etichetta-media-14' },
+          el('span', { class: 'riga' }, s.nota_ambito.titolo),
+          el('span', { class: 'riga' }, s.nota_ambito.testo))),
+      s.pannello && s.pannello.badge ? el('p', { class: 'sc-badge t-eyebrow-maiuscolo-12' }, s.pannello.badge) : null,
+    ];
+  }
+
+  // KPI con numero d'ordine (03, «KPI 01» 509:308) o a tre testi (07, 509:491)
+  function kpiC(voce) {
+    return el('div', { class: 'sc-scheda sc-kpi' },
+      voce.numero ? el('p', { class: 'sc-kpi__numero t-etichetta-forte-14', 'aria-hidden': 'true' }, voce.numero) : null,
+      el('p', { class: 'sc-kpi__valore t-titolo-card' }, numero(voce.metrica)),
+      el('p', { class: 'sc-forte t-etichetta-forte-14' }, unaRiga(voce.didascalia)),
+      voce.nota ? el('p', { class: 'sc-nota t-etichetta-media-14' }, voce.nota) : null);
+  }
+
+  // 04: «95%» (509:344)
+  function kpiEvidenzaC(voce) {
+    return el('div', { class: 'sc-scheda sc-kpi sc-kpi--evidenza' },
+      el('p', { class: 'sc-etichetta t-eyebrow-maiuscolo-12' }, voce.eyebrow),
+      el('p', { class: 'sc-kpi__valore t-titolo-card-grande' }, numero(voce.metrica)),
+      el('p', { class: 'sc-forte t-etichetta-forte-14' }, unaRiga(voce.didascalia)),
+      el('p', { class: 'sc-nota t-etichetta-media-14' }, voce.nota));
+  }
+
+  // 04: on-target / off-target (509:349, 509:358)
+  function confrontoC(c) {
+    return el('div', { class: 'sc-scheda sc-confronto' },
+      el('p', { class: 'sc-etichetta t-eyebrow-maiuscolo-12' }, c.eyebrow),
+      c.metriche.map((m, i) => el('p', { class: `sc-confronto__riga sc-confronto__riga--${i ? 'secondaria' : 'principale'}` },
+        el('span', { class: `sc-confronto__valore ${i ? 't-titolo-citazione' : 't-titolo-card'}` }, numero(m)),
+        el('span', { class: `sc-confronto__nome ${i ? 't-etichetta-media-14' : 't-etichetta-forte-14'}` }, c.nomi[i]))),
+      el('p', { class: 'sc-nota t-etichetta-media-14' }, unaRiga(c.nota)));
+  }
+
+  // Spiegazione in tre passaggi («Plain Explainer» 509:320, 509:380, 509:415, 509:466)
+  function spiegazioneC(sp, suddivisione) {
+    if (!sp) return null;
+    return el('div', { class: 'sc-scheda sc-spiegazione' },
+      el('h3', { class: 'sc-titoletto t-titolo-sottotitolo' }, sp.titolo),
+      sp.sottotitolo ? el('p', { class: 'sc-nota t-etichetta-media-14' }, sp.sottotitolo) : null,
+      sp.testo ? el('p', { class: 'sc-nota t-etichetta-media-14' }, sp.testo) : null,
+      el('ol', { class: 'sc-passi', role: 'list' }, sp.passi.map((p) =>
+        el('li', { class: 'sc-riquadro sc-passo' },
+          el('p', { class: 'sc-forte t-etichetta-forte-14' }, `${p.numero} · ${p.titolo}`),
+          el('p', { class: 'sc-nota t-etichetta-media-14' }, p.testo)))),
+      sp.chiusura ? el('p', { class: 'sc-etichetta t-eyebrow-maiuscolo-12' }, unaRiga(sp.chiusura)) : null,
+      suddivisione ? el('p', { class: 'sc-riquadro sc-riquadro--bordo sc-suddivisione' },
+        el('span', { class: 'riga sc-etichetta t-eyebrow-maiuscolo-12' }, suddivisione.etichetta),
+        el('span', { class: 'riga sc-nota t-etichetta-media-14' }, suddivisione.testo)) : null);
+  }
+
+  // Riquadro con un numero (05 «Metric 10.000+» 509:404, 06 «Metric 224.316» 509:440)
+  function metricaC(v) {
+    return el('div', { class: 'sc-riquadro sc-metrica' },
+      el('p', { class: 'sc-kpi__valore t-titolo-card' }, numero(v.metrica)),
+      el('p', { class: 'sc-forte t-etichetta-forte-14' }, v.didascalia),
+      el('p', { class: 'sc-nota t-etichetta-media-14' }, v.nota));
+  }
+
+  // 05: «La ricerca in numeri» (509:402)
+  function coorteC(c) {
+    return el('div', { class: 'sc-scheda sc-coorte' },
+      el('p', { class: 'sc-etichetta t-eyebrow-maiuscolo-12' }, c.eyebrow),
+      c.voci.map(metricaC),
+      el('div', { class: 'sc-riquadro sc-riquadro--bordo' },
+        el('p', { class: 'sc-etichetta t-eyebrow-maiuscolo-12' }, c.cosa_non_dice.eyebrow),
+        el('p', { class: 'sc-nota t-etichetta-media-14' }, c.cosa_non_dice.testo)));
+  }
+
+  // 06: «Il dataset in numeri» (509:438)
+  function datasetC(s) {
+    return el('div', { class: 'sc-scheda sc-dataset' },
+      el('p', { class: 'sc-etichetta t-eyebrow-maiuscolo-12' }, s.kpi_eyebrow),
+      s.kpi.map(metricaC));
+  }
+
+  // 04: «Dove modifica il DNA?» (509:367)
+  function graficoPrecisioneC(g, nomi) {
+    return el('div', { class: 'sc-scheda sc-grafico' },
+      el('h3', { class: 'sc-titoletto t-titolo-sottotitolo' }, g.titolo),
+      el('p', { class: 'sc-nota t-etichetta-media-14' }, g.sottotitolo),
+      barreRighe('crispr_on_target', { etichetta: g.pannelli[0], nomi }),
+      el('hr', { class: 'sc-divisore' }),
+      barreRighe('crispr_off_target', { etichetta: g.pannelli[1], nomi }),
+      g.sintesi ? el('p', { class: 'sc-sintesi' },
+        el('span', { class: 'sc-sintesi__valore t-titolo-card' }, numero(g.sintesi.metrica)),
+        el('span', { class: 'sc-nota t-etichetta-media-14' }, righe(g.sintesi.didascalia))) : null);
+  }
+
+  // 06: AUROC (509:452)
+  function graficoAurocC(g) {
+    return el('div', { class: 'sc-scheda sc-grafico sc-grafico--auroc' },
+      el('h3', { class: 'sc-titoletto t-titolo-sottotitolo' }, g.titolo),
+      el('p', { class: 'sc-nota t-corpo-piccolo-14' }, g.sottotitolo),
+      barreRighe('diagnostics_auroc', { tacche: true }),
+      el('hr', { class: 'sc-divisore' }),
+      el('p', { class: 'sc-nota t-corpo-piccolo-14' }, g.nota));
+  }
+
+  // 07: composizione AlphaMissense (509:494)
+  function graficoComposizioneC(g) {
+    const nomi = ((sezioni['07'] && sezioni['07'].classification) || []).map((c) => c.label_it);
+    return el('div', { class: 'sc-scheda sc-grafico' },
+      el('h3', { class: 'sc-titoletto t-titolo-sottotitolo' }, g.titolo),
+      el('p', { class: 'sc-nota t-etichetta-media-14' }, g.sottotitolo),
+      barraComposta('discoveries_classification', { nomi, asse: g.asse, score: g.parola_score, compatto: true }),
+      el('hr', { class: 'sc-divisore' }),
+      el('p', { class: 'sc-nota t-etichetta-media-14' }, g.nota));
+  }
+
+  // 07: «Due strumenti, due domande» (509:512)
+  function strumentiC(st) {
+    return el('div', { class: 'sc-scheda sc-strumenti' },
+      el('h3', { class: 'sc-titoletto t-titolo-sottotitolo' }, st.titolo),
+      st.voci.map((v) => el('div', { class: 'sc-riquadro sc-strumento' },
+        el('p', { class: 'sc-etichetta t-eyebrow-maiuscolo-12' }, v.eyebrow),
+        el('p', { class: 'sc-forte t-etichetta-forte-14' }, v.domanda),
+        el('p', { class: 'sc-nota t-etichetta-media-14' }, v.testo))),
+      el('hr', { class: 'sc-divisore' }),
+      el('p', { class: 'sc-etichetta t-eyebrow-maiuscolo-12' }, st.chiusura));
+  }
+
+  const riga = (colonne, ...blocchi) => el('div', { class: `sc-riga sc-riga--${colonne}` }, blocchi);
+
+  function bloccoCompatto(n, s) {
+    switch (n) {
+      case '03':
+        return [riga(3, s.kpi.map(kpiC)), spiegazioneC(s.spiegazione)];
+      case '04':
+        return [
+          riga(3, kpiEvidenzaC(s.kpi_principale), s.confronti.map(confrontoC)),
+          riga(2, graficoPrecisioneC(s.grafico, s.confronti[0].nomi), spiegazioneC(s.spiegazione)),
+        ];
+      case '05':
+        return [riga(2, coorteC(s.coorte), spiegazioneC(s.spiegazione))];
+      case '06':
+        return [riga(2, datasetC(s), graficoAurocC(s.grafico)), spiegazioneC(s.spiegazione, s.suddivisione)];
+      case '07':
+        return [riga(3, s.kpi.map(kpiC)), riga(2, graficoComposizioneC(s.grafico), strumentiC(s.strumenti))];
+      default:
+        return null;
+    }
+  }
+
+  // «Leggi di più» compatta (509:334): alta 56 px, solo l'etichetta e il segno
+  function barraCompatta(s) {
+    const aperto = aperti.has(s.id);
+    return el('button', {
+      type: 'button',
+      class: 'sc-leggi',
+      id: `leggi-${s.id}`,
+      'aria-expanded': aperto ? 'true' : 'false',
+      'aria-controls': `approfondimento-${s.id}`,
+      'data-leggi-di-piu': s.id,
+    },
+      el('span', { class: 'sc-leggi__etichetta t-eyebrow-maiuscolo-12' }, s.leggi_di_piu.etichetta),
+      el('span', { class: 'sc-leggi__segno t-etichetta-media-16', 'aria-hidden': 'true', 'data-segno': '' }, aperto ? '−' : '+'));
+  }
+
+  // Pannello aperto compatto (508:362, 508:388): schede due per riga su tablet;
+  // il contesto («Perché è utile») e la sintesi diventano schede anche loro
+  function approfondimentoCompatto(n, s) {
+    const a = formato(s.approfondimento);
+    const nomiProfili = (sezioni['05'] && sezioni['05'].immune_subtypes) || [];
+    const numera = (i, testo) => (a.numera_schede ? `${String(i + 1).padStart(2, '0')} · ${testo}` : testo);
+    const scheda = (etichetta, testo, extra) => el('li', { class: 'sc-dettaglio' },
+      el('p', { class: 'sc-etichetta t-eyebrow-maiuscolo-12' }, etichetta),
+      extra || null,
+      el('p', { class: 'sc-nota t-etichetta-media-14' }, righe(testo)));
+    const schede = a.schede || [];
+    const classeEtichetta = ETICHETTA_FORTE_TESTO.includes(n) ? 't-etichetta-forte-14' : 't-eyebrow-maiuscolo-12';
+    return el('div', {
+      class: 'sc-approfondimento',
+      id: `approfondimento-${s.id}`,
+      role: 'region',
+      'aria-labelledby': `leggi-${s.id}`,
+      hidden: aperti.has(s.id) ? null : '',
+    },
+      el('p', { class: `sc-eyebrow ${classeEtichetta}` }, a.eyebrow),
+      el('h3', { class: 'sc-titolo t-titolo-mobile' }, a.titolo),
+      el('p', { class: 'sc-nota t-etichetta-media-14' }, a.introduzione),
+      el('ul', { class: 'sc-dettagli', role: 'list' },
+        schede.map((sc, i) => scheda(numera(i, unaRiga(sc.etichetta)), sc.testo)),
+        (a.profili || []).map((p) => {
+          const nomi = nomiProfili.find((x) => x.code === p.codice) || {};
+          return el('li', { class: 'sc-dettaglio', 'data-profilo': p.codice },
+            el('p', { class: 'sc-etichetta t-eyebrow-maiuscolo-12' }, `${p.codice} · ${nomi.name_it || ''}`),
+            el('p', { class: 'sc-nota t-etichetta-media-14' },
+              el('span', { class: 'riga', lang: 'en' }, nomi.name_en),
+              el('span', { class: 'riga' }, p.testo)));
+        }),
+        scheda(schede.length ? numera(schede.length, a.contesto.etichetta) : a.contesto.etichetta, a.contesto.testo),
+        scheda(a.sintesi.etichetta, a.sintesi.testo)),
+      el('p', { class: 'sc-nota t-etichetta-media-14' }, a.fonti.map((voce, i) => {
+        const f = fonte(voce.fonte);
+        return [i ? '   ·   ' : '', f ? el('a', { class: 'sc-approfondimento__fonte', href: f.doi_url, rel: 'noopener noreferrer', target: '_blank', 'data-fonte': f.id }, `${voce.testo} · DOI ${f.doi}`) : null];
+      })),
+      el('button', { type: 'button', class: 'sc-chiudi t-eyebrow-maiuscolo-12', 'data-chiudi': s.id }, a.chiudi));
+  }
+
   // ---------- Sezione completa ----------
   function sezione(n) {
     const s = formato(contenuti.sezioni[n]);
@@ -293,6 +520,15 @@
     if (!s || !nodo) return;
     nodo.id = s.id;
     nodo.setAttribute('aria-labelledby', `titolo-${s.id}`);
+    nodo.classList.toggle('sezione-dati--compatta', compatto.matches);
+    if (compatto.matches) {
+      riempi(nodo.querySelector('.sd__interno'),
+        testaCompatta(n, s),
+        bloccoCompatto(n, s),
+        barraCompatta(s),
+        approfondimentoCompatto(n, s));
+      return;
+    }
     riempi(nodo.querySelector('.sd__interno'),
       colonnaTesto(n, s),
       el('div', { class: 'sd__destra' },

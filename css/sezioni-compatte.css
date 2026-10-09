@@ -1,0 +1,256 @@
+/* ==========================================================================
+   Sezioni «dati» 03–07 su tablet e smartphone (js/sezioni-dati.js, classi «sc-»).
+   Disegno: tablet 509:298 … 509:524, smartphone 302:2 … 416:60;
+   pannelli aperti 508:362 … (tablet), 297:4 … (smartphone).
+   Smartphone: tutto in colonna. Tablet (anche 1024–1279 px): KPI tre per riga,
+   grafico e spiegazione affiancati. In Figma il bordo non occupa spazio:
+   dove c'è un bordo di 1 px i padding sono 1 px più piccoli.
+   ========================================================================== */
+
+/* ---------- Colori dei testi ricorrenti ---------- */
+.sc-eyebrow,
+.sc-etichetta,
+.sc-fonti__etichetta,
+.sc-kpi__numero { color: var(--testo-accento); }
+
+.sc-titolo,
+.sc-titoletto,
+.sc-forte,
+.sc-kpi__valore { color: var(--testo-primario); }
+
+.sc-testo,
+.sc-nota,
+.sc-fonti__fonte,
+.sc-fonti__ambito { color: var(--testo-secondario); }
+
+/* ---------- Fonti e badge ---------- */
+.sc-fonti {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sc-fonti__fonte {
+  display: block;
+  text-decoration: none;
+}
+
+/* «Da abstract» (509:306) */
+.sc-badge {
+  align-self: flex-start;
+  padding: calc(7px - 1px) calc(var(--spazio-12) - 1px);
+  background: var(--superficie-lilla-chiaro);
+  border: 1px solid var(--accento-lilla);
+  border-radius: 15px;
+  color: var(--testo-accento);
+  white-space: nowrap;
+}
+
+/* ---------- Righe di blocchi ---------- */
+.sc-riga {
+  display: grid;
+  gap: var(--spazio-16);
+}
+
+/* ---------- Schede (bordo lilla, angoli 22 px, senza fondo) ---------- */
+.sc-scheda {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spazio-12);
+  min-width: 0;
+  padding: calc(var(--spazio-20) - 1px);
+  border: 1px solid var(--accento-lilla);
+  border-radius: var(--raggio-22);
+}
+
+/* riquadri interni: passaggi, numeri, strumenti (fondo lilla chiaro, angoli 16 px) */
+.sc-riquadro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spazio-8);
+  min-width: 0;
+  padding: calc(var(--spazio-12) - 1px) calc(14px - 1px);
+  background: var(--superficie-lilla-chiaro-52);
+  border: 1px solid var(--accento-lilla);
+  border-radius: 16px;
+}
+
+.sc-riquadro--bordo { background: none; }
+
+.sc-metrica,
+.sc-coorte .sc-riquadro--bordo { padding: calc(var(--spazio-12) - 1px); }
+
+/* passaggi delle sezioni 03 e 04: fondo al 55% (509:324, 509:383) */
+[data-sezione="03"] .sc-passo,
+[data-sezione="04"] .sc-passo { background: var(--superficie-lilla-chiaro-55); }
+
+.sc-divisore {
+  width: 100%;
+  margin: 0;
+  border: 0;
+  border-top: 1px solid var(--linea-divisore);
+}
+
+/* ---------- KPI ---------- */
+/* 03 (509:308): 15 · 18 px, testi a 6 px */
+.sc-kpi {
+  gap: 6px;
+  padding: calc(15px - 1px) calc(18px - 1px);
+}
+
+/* 04 «95%» (509:344) e 07 (509:491): 18 px, testi a 7 px */
+.sc-kpi--evidenza,
+[data-sezione="07"] .sc-kpi {
+  gap: 7px;
+  padding: calc(18px - 1px);
+}
+
+/* ---------- 04: on-target / off-target (509:349) ---------- */
+.sc-confronto {
+  gap: var(--spazio-8);
+  padding: calc(18px - 1px);
+}
+
+.sc-confronto__riga {
+  display: grid;
+  grid-template-columns: 104px minmax(0, 1fr);   /* smartphone: valori in colonna (307:17) */
+  align-items: center;
+  gap: 10px;
+}
+
+.sc-confronto__riga--principale { min-height: 42px; }
+.sc-confronto__riga--secondaria { min-height: 38px; }
+.sc-confronto__valore { color: var(--testo-primario); white-space: nowrap; }
+.sc-confronto__riga--principale .sc-confronto__nome { color: var(--testo-primario); }
+.sc-confronto__riga--secondaria .sc-confronto__nome { color: var(--testo-secondario); }
+
+/* ---------- Spiegazione (509:320) ---------- */
+[data-sezione="03"] .sc-spiegazione { padding: calc(18px - 1px) calc(var(--spazio-20) - 1px); }
+[data-sezione="06"] .sc-spiegazione { gap: 13px; }
+
+.sc-passi {
+  display: grid;
+  gap: var(--spazio-12);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* 06: «Training / validation / test» (509:478) */
+.sc-suddivisione {
+  padding: calc(10px - 1px) calc(var(--spazio-12) - 1px);
+  border-radius: var(--raggio-14);
+}
+
+/* ---------- 05 e 06: numeri in riquadri ---------- */
+.sc-coorte { padding: calc(18px - 1px); }
+.sc-dataset { gap: 10px; padding: calc(18px - 1px); }
+
+/* ---------- Grafici ---------- */
+.sc-grafico--auroc { gap: 13px; }
+
+/* 04: «95%» sotto le barre (509:377) */
+.sc-sintesi {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  align-items: center;
+  gap: var(--spazio-12);
+  min-height: 54px;
+}
+
+.sc-sintesi__valore { color: var(--testo-primario); }
+
+/* ---------- Barra «Leggi di più» (509:334) ---------- */
+.sc-leggi {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spazio-16);
+  width: 100%;
+  min-height: 56px;
+  padding: 0 calc(14px - 1px) 0 calc(18px - 1px);
+  background: var(--superficie-lilla-chiaro);
+  border: 1px solid var(--accento-lilla);
+  border-radius: var(--raggio-22);
+  color: var(--testo-accento);
+  text-align: left;
+  cursor: pointer;
+}
+
+.sc-leggi__etichetta { padding-block: var(--spazio-8); }
+
+.sc-leggi__segno {
+  flex: none;
+  width: 18px;
+  text-align: center;
+}
+
+/* ---------- Pannello aperto (508:362, 508:388) ----------
+   Largo quanto la pagina, come nel disegno: esce dai margini laterali */
+.sc-approfondimento {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spazio-16);
+  margin-inline: calc(var(--spazio-20) * -1);
+  padding: calc(var(--spazio-24) - 1px) var(--spazio-20) calc(28px - 1px);
+  background: var(--superficie-base);
+  border-block: 1px solid var(--accento-lilla);
+}
+
+.sc-approfondimento[hidden] { display: none; }
+
+.sc-dettagli {
+  display: grid;
+  gap: var(--spazio-16);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sc-dettaglio {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  padding: calc(14px - 1px) calc(var(--spazio-16) - 1px);
+  background: var(--superficie-bianco);
+  border: 1px solid var(--accento-lilla);
+  border-radius: var(--raggio-18);
+}
+
+.sc-approfondimento__fonte {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* «Chiudi approfondimento ×» (508:373): alto 48 px, tutto largo */
+.sc-chiudi {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 18px;
+  background: var(--superficie-lilla-chiaro);
+  border: 0;
+  border-radius: var(--raggio-24);
+  color: var(--testo-accento);
+  white-space: pre-wrap;
+  cursor: pointer;
+}
+
+/* ---------- Tablet (anche 1024–1279 px) ---------- */
+@media (min-width: 600px) {
+  .sc-riga--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sc-riga--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+  /* 03: i tre passaggi affiancati (643:258) */
+  [data-sezione="03"] .sc-passi { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+  /* tablet: valore e nome uno accanto all'altro (509:351) */
+  .sc-confronto__riga { grid-template-columns: auto minmax(0, 1fr); }
+
+  .sc-approfondimento {
+    margin-inline: calc(var(--spazio-24) * -1);
+    padding-inline: var(--spazio-24);
+  }
+
+  .sc-dettagli { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

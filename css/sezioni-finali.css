@@ -2,7 +2,8 @@
    Sezioni 08 (142:2), 09 (148:2) e footer informativo 10 (148:45).
    Desktop: elementi sul piano come nel disegno (x in px su 1440 che scalano
    con la pagina, y in px), come la sezione 02.
-   Sotto i 1280 px per ora tutto in colonna: tappa 4.
+   Tablet e smartphone (509:526, 509:541, 509:556; 330:2, 332:2, 332:37):
+   tutto in colonna, classi «fc-» (js/sezioni-finali.js), regole in fondo al file.
    ========================================================================== */
 
 :where(.sezione-finale) :where(ul, ol) {
@@ -11,23 +12,15 @@
   list-style: none;
 }
 
+/* tablet e smartphone: blocchi in colonna a 16 px (footer 14), 64 px tra le sezioni */
 .sf__palco {
   position: relative;
   max-width: var(--larghezza-desktop);
   margin-inline: auto;
-  padding: var(--spazio-48) var(--spazio-20);
-  display: grid;
-  gap: var(--spazio-32);
-}
-
-/* filetto in alto (64 → 1376 px nel disegno) */
-.sf__palco::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: var(--spazio-20);
-  right: var(--spazio-20);
-  border-top: var(--filetto);
+  padding: var(--spazio-64) var(--spazio-20) var(--spazio-24);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spazio-16);
 }
 
 .sf__eyebrow { color: var(--testo-accento); }
@@ -114,24 +107,167 @@
 .s10__copyright { color: var(--testo-secondario); }
 .s10__firma { color: var(--testo-accento); }
 
+/* ---------- Tablet e smartphone ---------- */
+/* 09: nessuno spazio sotto (finisce con la frase finale); footer: 14 px tra i blocchi,
+   in fondo 20 + 14 px e il margine del disegno fino al bordo della pagina */
+[data-sezione="09"] .sf__palco { padding-bottom: 0; }
+
+[data-sezione="10"] .sf__palco {
+  gap: 14px;
+  padding-bottom: calc(20px + 14px + 44px);      /* 332:62 e fine del frame 250:2 */
+}
+
+.fc-eyebrow { color: var(--testo-accento); }
+.fc-titolo,
+.fc-forte { color: var(--testo-primario); }
+.fc-testo { color: var(--testo-secondario); }
+
+/* 08: «Ground Truths · …» (509:530) */
+.fc-contesto {
+  padding: calc(var(--spazio-8) - 1px) calc(var(--spazio-12) - 1px);
+  background: var(--superficie-lilla);
+  border: 1px solid var(--accento-lilla);
+  border-radius: 17px;
+  color: var(--testo-accento);
+}
+
+.fc-articoli,
+.fc-tappe,
+.fc-colonne {
+  display: grid;
+  gap: var(--spazio-16);
+}
+
+.fc-articolo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  padding: calc(var(--spazio-16) - 1px) calc(18px - 1px);
+  border: 1px solid var(--accento-lilla);
+  border-radius: var(--raggio-22);
+}
+
+.fc-articolo__testa {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spazio-8);
+  min-height: 22px;
+}
+
+.fc-articolo__numero { color: var(--testo-accento); }
+.fc-articolo__etichetta { color: var(--testo-secondario); }
+.fc-articolo__sintesi { color: var(--testo-primario); }
+
+/* filetto tra sintesi e articolo (429:82) */
+.fc-articolo__fonte {
+  padding-top: 10px;
+  border-top: 1px solid var(--linea-divisore);
+  color: var(--testo-secondario);
+}
+
+/* riquadri «Il filo comune» (509:537) e «Il percorso» (509:551) */
+.fc-riquadro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spazio-8);
+  padding: calc(var(--spazio-12) - 1px) calc(14px - 1px);
+  background: var(--superficie-lilla-chiaro-52);
+  border: 1px solid var(--accento-lilla);
+  border-radius: var(--raggio-18);
+}
+
+.fc-percorso { background: var(--superficie-lilla-chiaro-55); }
+.fc-percorso__tappe { color: var(--testo-primario); white-space: pre-wrap; }
+
+/* 09: tappe (509:546) */
+.fc-tappa {
+  min-width: 0;
+  padding: calc(var(--spazio-16) - 1px) calc(14px - 1px) calc(10px - 1px) calc(var(--spazio-16) - 1px);
+  border: 1px solid var(--accento-lilla);
+  border-radius: 20px;
+}
+
+.fc-tappa__testa {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 26px;
+  margin: 0 0 6px;
+}
+
+.fc-tappa__numero { flex: none; width: 34px; color: var(--testo-accento); }
+.fc-tappa__titolo { color: var(--testo-primario); }
+
+/* frase finale (509:554) */
+.fc-chiusura {
+  padding: calc(var(--spazio-16) - 1px);
+  border: 1px solid var(--accento-lilla);
+  border-radius: 20px;
+  color: var(--testo-primario);
+}
+
+/* 10: colonne (509:561) e social (509:564) */
+.fc-colonna {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.fc-colonne { gap: 14px; }
+
+.fc-social {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spazio-4) var(--spazio-20);
+  min-height: 28px;
+  color: var(--testo-primario);
+}
+
+.fc-filetto {
+  width: 100%;
+  margin: 0;
+  border: 0;
+  border-top: var(--filetto);
+}
+
+.fc-piede {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spazio-8);
+}
+
+/* ---------- Tablet (anche 1024–1279 px) ---------- */
 @media (min-width: 600px) {
   .sf__palco { padding-inline: var(--spazio-24); }
-  .sf__palco::before { left: var(--spazio-24); right: var(--spazio-24); }
-  .s08__articoli { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .s09__tappe { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  [data-sezione="10"] .sf__palco {
+    padding-top: 80px;                              /* 10084 → 10164 nel disegno */
+    padding-bottom: calc(20px + 14px + 56px);       /* 509:574 e fine del frame 509:258 */
+  }
+  .fc-articoli { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .fc-tappe,
+  .fc-colonne { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--spazio-16); }
 }
 
 /* ---------- Desktop ---------- */
 @media (min-width: 1280px) {
-  .sf__palco {
+  .sf__palco,
+  [data-sezione="10"] .sf__palco {
     display: block;
     height: var(--sf-altezza);
     padding: 0;
   }
 
+  /* filetto in alto (64 → 1376 px nel disegno) */
   .sf__palco::before {
+    content: "";
+    position: absolute;
+    top: 0;
     left: calc(64 / 1440 * 100%);
     right: calc(64 / 1440 * 100%);
+    border-top: var(--filetto);
   }
 
   /* elementi sul piano: x e larghezza in px su 1440 (scalano), y in px */

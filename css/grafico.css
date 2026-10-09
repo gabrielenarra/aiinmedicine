@@ -188,18 +188,25 @@
 }
 
 @media (min-width: 1280px) {
-  .grafico-colonne__area { margin-bottom: var(--spazio-24); }
+  /* colonna delle tacche: 81 px come nel disegno; se la card è stretta (1280–1360 px)
+     si riduce fino a 42, così le cinque colonne restano larghe almeno 83 px */
+  .grafico-colonne__area {
+    --sinistra: max(42px, min(81px, 100% - 464px));
+    margin-bottom: var(--spazio-24);
+  }
   .grafico-colonne__tacche { right: 14px; }
-  .grafico-colonne__tacca { grid-template-columns: 74px 1fr; }
+  /* qui il 100% è la larghezza delle tacche, cioè dell'area meno 14 px */
+  .grafico-colonne__tacca { grid-template-columns: calc(max(42px, min(81px, 100% + 14px - 464px)) - 7px) 1fr; }
 
+  /* colonne da 90 px come a 1440; tra 1280 e 1400 px la card si stringe e le
+     colonne con lei (prima l'ultima usciva dalla card) */
   .grafico-colonne__elenco {
-    inset: 0 auto 0 81px;
-    grid-auto-columns: 90px;
+    inset: 0 14px 0 var(--sinistra);
+    grid-auto-columns: minmax(0, 90px);
   }
 
+  /* barra da 42 px al centro della colonna (nel disegno: a 24 px su 90) */
   .grafico-colonne__barra {
-    left: 24px;
-    transform: none;
     width: 42px;
   }
 
@@ -264,3 +271,121 @@
   border-radius: 7px;
   background: var(--colore-segmento);
 }
+
+/* ---------- Barre in riga (tablet e smartphone: 04 509:371…, 06 509:459…) ----------
+   Nome · barra · valore. La barra è lunga al massimo 142 px (04: 60% → 142 px)
+   o 140 px (06: da 0,80 a 1,00) come nel disegno; sotto i 360 px si accorcia. */
+.grafico-righe {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spazio-12);
+  margin: 0;
+  min-width: 0;
+}
+
+.grafico-righe__etichetta { color: var(--testo-accento); }
+
+.grafico-righe__elenco {
+  display: grid;
+  gap: var(--spazio-12);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.grafico-righe__voce {
+  display: grid;
+  grid-template-columns: minmax(0, 104px) minmax(0, 142px) 48px;
+  align-items: center;
+  gap: var(--spazio-8);
+  min-height: 30px;
+}
+
+.grafico-righe__nome { color: var(--testo-secondario); }
+.grafico-righe__valore { color: var(--testo-primario); }
+
+.grafico-righe__pista { display: block; }
+
+.grafico-righe__barra {
+  display: block;
+  width: calc(var(--quota) * 100%);
+  min-width: 2px;               /* un valore piccolo resta visibile */
+  height: 11px;
+  border-radius: 6px;
+  background: var(--accento-lilla);
+}
+
+/* 04: SpCas9 in grigio (509:372) */
+[data-grafico^="crispr_"] [data-barra="spcas9"] .grafico-righe__barra { background: var(--grafico-barra-grigia); }
+
+/* 06: barre con bordo (alte 13 px in tutto), righe da 26 px, nomi più larghi (509:459) */
+[data-grafico="diagnostics_auroc"] { gap: 13px; }
+[data-grafico="diagnostics_auroc"] .grafico-righe__elenco { gap: 13px; }
+
+[data-grafico="diagnostics_auroc"] .grafico-righe__voce {
+  grid-template-columns: minmax(0, 112px) minmax(0, 142px) 42px;
+  min-height: 26px;
+}
+
+[data-grafico="diagnostics_auroc"] .grafico-righe__barra {
+  height: 13px;
+  min-width: 13px;
+  border: 1px solid var(--accento-lilla);
+}
+
+/* scala: 0,80 · 0,90 · 1,00 sopra le barre, distribuita su tutta la larghezza come
+   nel disegno (509:455; docs/PUNTI-APERTI.md B25) */
+.grafico-righe__tacche {
+  display: flex;
+  justify-content: space-between;
+  min-height: 24px;
+  align-items: center;
+  color: var(--testo-secondario);
+}
+
+/* ---------- Barra composta, tablet e smartphone (509:494) ---------- */
+.grafico-composto--compatto {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spazio-12);
+  max-width: none;
+}
+
+.grafico-composto--compatto [data-segmento="likely_benign"] { --colore-segmento: var(--superficie-lilla-chiaro); --colore-etichetta: var(--testo-primario); }
+.grafico-composto--compatto [data-segmento="uncertain"] { --colore-segmento: var(--grafico-incerto); --colore-etichetta: var(--testo-primario); }
+.grafico-composto--compatto [data-segmento="likely_pathogenic"] { --colore-segmento: var(--grafico-patogenico); --colore-etichetta: var(--superficie-bianco); }
+
+.grafico-composto--compatto .grafico-composto__asse { min-height: 18px; }
+
+.grafico-composto--compatto .grafico-composto__barra {
+  height: 40px;
+  margin: 0;
+  border-radius: var(--raggio-12);
+}
+
+.grafico-composto--compatto .grafico-composto__segmento {
+  display: grid;
+  place-items: center;
+  min-width: 0;
+}
+
+.grafico-composto--compatto .grafico-composto__etichetta {
+  color: var(--colore-etichetta);
+  white-space: nowrap;
+}
+
+.grafico-composto--compatto .grafico-composto__legenda {
+  gap: var(--spazio-12);
+  max-width: none;
+  margin: 0;
+}
+
+.grafico-composto--compatto .grafico-composto__voce {
+  grid-template-columns: 42px minmax(0, 158px) auto;
+  gap: var(--spazio-8);
+  min-height: 34px;
+}
+
+.grafico-composto--compatto .grafico-composto__soglie { white-space: nowrap; }
+
+.grafico-composto--compatto .grafico-composto__quota { color: var(--testo-primario); }

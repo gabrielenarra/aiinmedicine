@@ -1,8 +1,8 @@
 /* ==========================================================================
-   Hero (disegno 3:7: 15:9 eyebrow, 15:10 titolo, 15:11 testo, 15:12 invito,
-   415:76 citazione) con le sfere ferme di design/sfere.css.
-   Misure desktop 1440; tra 1280 e 1440 le posizioni orizzontali scalano.
-   Tablet e smartphone: tappa 4 (per ora testi in colonna, senza sfere).
+   Hero con le sfere ferme di design/sfere.css.
+   Smartphone (250:2, 250:10–16) · tablet (509:258, 509:278–284) ·
+   desktop 1440 (3:7: 15:9–15:12, 415:76). Tra un formato e l'altro le
+   posizioni orizzontali delle sfere e della citazione scalano con la pagina.
    ========================================================================== */
 
 /* l'alone delle sfere a destra non deve creare scorrimento orizzontale
@@ -11,16 +11,21 @@
   overflow-x: clip;
 }
 
+/* ---------- Smartphone ---------- */
 .hero__palco {
   position: relative;
   max-width: var(--larghezza-desktop);
+  min-height: var(--hero-altezza-smartphone);
   margin-inline: auto;
-  padding: var(--spazio-48) var(--spazio-20);
+  padding: var(--hero-alto-smartphone) var(--spazio-20) var(--spazio-32);
   isolation: isolate;               /* le sfere restano dietro ai testi della sezione */
 }
 
 .hero__sfere {
-  display: none;                    /* tablet e smartphone: tappa 4 */
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
 }
 
 .hero__testo,
@@ -34,31 +39,32 @@
 }
 
 .hero__titolo {
-  margin-top: var(--hero-spazio-titolo);
+  margin-top: 22px;
   color: var(--testo-primario);
 }
 
 .hero__sottotitolo {
-  margin-top: var(--spazio-20);
-  max-width: var(--hero-larghezza-testo);
+  margin-top: var(--hero-spazio-testo-smartphone);
+  max-width: 350px;
   color: var(--testo-navigazione);
 }
 
-/* «Scorri per iniziare»: link alla prima sezione, area di tocco ≥ 44 px */
+/* «Scorri per iniziare»: link alla prima sezione, area di tocco ≥ 44 px
+   (il testo è alto 32 px: la zona cliccabile ne aggiunge 6 sopra e 6 sotto) */
 .hero__invito {
   display: inline-flex;
   flex-direction: column;
   justify-content: center;
   min-height: var(--area-tocco-min);
-  margin-top: var(--spazio-32);
+  margin-top: calc(35px - 6px);
   color: var(--testo-attenuato);    /* nel disegno: testo principale al 61% */
   text-decoration: none;
 }
 
 .hero__citazione {
-  margin: var(--spazio-48) 0 0;
-  max-width: var(--hero-larghezza-citazione);
-  padding: var(--spazio-8);
+  max-width: 228px;
+  margin: 27px 0 0;
+  padding-left: 13px;
 }
 
 .hero__citazione blockquote {
@@ -66,35 +72,77 @@
   color: var(--testo-primario);
 }
 
+/* virgolette decorative in alto a sinistra della citazione (250:14) */
+.hero__virgolette {
+  position: absolute;
+  top: -9px;
+  left: 0;
+  color: var(--testo-accento);
+  opacity: 0.75;                    /* come nel disegno: è decorazione, non testo */
+}
+
 .hero__autore {
-  margin-top: var(--spazio-12);
+  margin-top: var(--spazio-4);
   color: var(--testo-attenuato);    /* nel disegno: testo principale al 62% */
 }
 
-.hero__virgolette {
-  color: var(--testo-accento);
-}
-
+/* ---------- Tablet (anche 1024–1279 px) ---------- */
 @media (min-width: 600px) {
-  .hero__palco { padding-inline: var(--spazio-24); }
+  .hero__palco {
+    min-height: var(--hero-altezza-tablet);
+    padding: var(--spazio-48) var(--spazio-24) var(--spazio-32);
+  }
+
+  .hero__sottotitolo {
+    margin-top: var(--spazio-32);
+    max-width: 440px;
+  }
+
+  .hero__titolo {
+    max-width: 456px;
+  }
+
+  .hero__invito {
+    margin-top: calc(40px - 6px);
+  }
+
+  /* citazione nella colonna destra: 519 px su 768, 92 px dall'alto dell'hero;
+     larga 225 px, ma mai oltre il margine destro di 24 px (tablet stretti, 600 px) */
+  .hero__citazione {
+    position: absolute;
+    left: calc(519 / 768 * 100%);
+    top: 92px;
+    width: min(225px, calc(100% * (1 - 519 / 768) - var(--spazio-24)));
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .hero__virgolette {
+    top: -16px;
+    left: -15px;
+  }
+
+  .hero__autore {
+    margin-top: var(--spazio-12);
+  }
 }
 
+/* ---------- Desktop ---------- */
 @media (min-width: 1280px) {
   .hero__palco {
     min-height: var(--hero-altezza);
     padding: var(--hero-alto) var(--margine-alto-desktop) 0;
   }
 
-  .hero__sfere {
-    display: block;
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
+  .hero__titolo {
+    margin-top: var(--hero-spazio-titolo);
+    max-width: var(--hero-larghezza-titolo);
   }
 
-  .hero__titolo {
-    max-width: var(--hero-larghezza-titolo);
+  .hero__sottotitolo {
+    margin-top: var(--spazio-20);
+    max-width: var(--hero-larghezza-testo);
   }
 
   /* invito a 62 px dal testo; la zona cliccabile alta 44 px ne toglie 6 sopra */
@@ -104,10 +152,9 @@
 
   /* citazione nella colonna destra: 920 px da sinistra, 66 px dall'alto dell'hero */
   .hero__citazione {
-    position: absolute;
     left: calc(920 / 1440 * 100%);
     top: var(--hero-alto-citazione);
     width: var(--hero-larghezza-citazione);
-    margin: 0;
+    padding: var(--spazio-8);
   }
 }

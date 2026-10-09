@@ -82,7 +82,9 @@
       "Instagram"
     ],
     "copyright": "© 2026 AI in Medicine",
-    "chiudi_testo": "ESC  ·  CHIUDI"
+    "chiudi_testo": "ESC  ·  CHIUDI",
+    "etichetta_apri": "Apri menu",
+    "etichetta_chiudi": "Chiudi menu"
   },
   "hero": {
     "figma": [
@@ -176,7 +178,10 @@
           "testo": "Dataset più vasti e strumenti predittivi accelerano l’identificazione di pattern prima difficili da osservare.",
           "categoria": "RICERCA TRASLAZIONALE"
         }
-      ]
+      ],
+      "compatto": {
+        "riquadro": null
+      }
     },
     "03": {
       "id": "vaccini-mrna",
@@ -355,6 +360,9 @@
         },
         "leggi_di_piu": {
           "etichetta": "SCOPRI COME FUNZIONA VAXLAB"
+        },
+        "pannello": {
+          "badge": "DA ABSTRACT"
         }
       }
     },
@@ -573,7 +581,8 @@
         },
         "leggi_di_piu": {
           "etichetta": "SCOPRI COME È STATO TESTATO"
-        }
+        },
+        "pannello": null
       }
     },
     "05": {
@@ -715,6 +724,11 @@
       },
       "compatto": {
         "domanda": null,
+        "titolo": [
+          "Leggere il paesaggio",
+          "immunitario",
+          "del tumore"
+        ],
         "coorte": {
           "eyebrow": "LA RICERCA IN NUMERI",
           "voci": [
@@ -759,7 +773,8 @@
         },
         "leggi_di_piu": {
           "etichetta": "SCOPRI I {metrica:immunotherapy_immune_subtypes} PROFILI IMMUNITARI"
-        }
+        },
+        "pannello": null
       }
     },
     "06": {
@@ -944,7 +959,8 @@
         },
         "leggi_di_piu": {
           "etichetta": "SCOPRI COME È COSTRUITO CHEXPERT"
-        }
+        },
+        "pannello": null
       }
     },
     "07": {
@@ -1086,7 +1102,8 @@
         "domanda": null,
         "leggi_di_piu": {
           "etichetta": "SCOPRI COME FUNZIONANO ALPHAFOLD E ALPHAMISSENSE"
-        }
+        },
+        "pannello": null
       }
     },
     "08": {
@@ -1238,8 +1255,10 @@
       ],
       "chiusura": "Una medicina più precisa può essere anche una medicina più umana.",
       "compatto": {
-        "percorso_etichetta": "IL PERCORSO"
-      }
+        "percorso_etichetta": "IL PERCORSO",
+        "separatore_percorso": "  →  "
+      },
+      "separatore_percorso": "   →   "
     }
   },
   "footer": {
