@@ -14,7 +14,7 @@
    testo → card 42 + 2·8, tra le card 22 + 2·8 */
 .s02__palco {
   position: relative;
-  max-width: var(--larghezza-desktop);
+  max-width: var(--larghezza-contenuto);
   margin-inline: auto;
   padding: 0 var(--spazio-20);      /* i 64 px verso la 03 sono in alto nella 03 */
 }

@@ -72,7 +72,7 @@ body {
 /* ---------- Contenitore: margini laterali e larghezza massima ---------- */
 .contenitore {
   width: 100%;
-  max-width: var(--larghezza-desktop);
+  max-width: var(--larghezza-contenuto);
   margin-inline: auto;
   padding-inline: var(--spazio-20);
 }

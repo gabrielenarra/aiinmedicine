@@ -19,7 +19,7 @@
    pulsante menu a destra. Desktop (da 1280 px): voci e social, sotto. */
 .intestazione__interno {
   position: relative;
-  max-width: var(--larghezza-desktop);
+  max-width: var(--larghezza-contenuto);
   height: var(--spazio-64);
   margin-inline: auto;
   padding: 0 var(--spazio-20);
@@ -136,7 +136,7 @@
 }
 
 .intestazione-sticky__interno {
-  max-width: var(--larghezza-desktop);
+  max-width: var(--larghezza-contenuto);
   margin-inline: auto;
   min-height: var(--spazio-64);
   padding: var(--spazio-12) var(--spazio-20);

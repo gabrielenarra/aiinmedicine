@@ -33,7 +33,7 @@
    sezione e l'altra, 24 px sotto la barra «Leggi di più» (8 di spazio + 16) */
 .sd__interno {
   position: relative;
-  max-width: var(--larghezza-desktop);
+  max-width: var(--larghezza-contenuto);
   margin-inline: auto;
   padding: var(--spazio-64) var(--spazio-20) var(--spazio-24);
   display: flex;

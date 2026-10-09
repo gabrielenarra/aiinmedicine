@@ -14,7 +14,7 @@
 /* ---------- Smartphone ---------- */
 .hero__palco {
   position: relative;
-  max-width: var(--larghezza-desktop);
+  max-width: var(--larghezza-contenuto);
   min-height: var(--hero-altezza-smartphone);
   margin-inline: auto;
   padding: var(--hero-alto-smartphone) var(--spazio-20) var(--spazio-32);

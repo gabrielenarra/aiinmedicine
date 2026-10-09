@@ -6,6 +6,11 @@
    ========================================================================== */
 
 :root {
+  /* Larghezza massima del contenuto: su tablet (fino a 1279 px) la colonna resta
+     larga come il frame Tablet 768 e si centra (decisione del 9 ottobre 2026,
+     docs/PUNTI-APERTI.md B28); da 1280 px quella del desktop (1440) */
+  --larghezza-contenuto: var(--larghezza-tablet);
+
   /* Margini laterali misurati nel disegno desktop 1440 (CLAUDE.md dice 64 px:
      il disegno usa 46 per header e hero, 72 per i testi delle sezioni 02, 08–10,
      56 per le sezioni 03–07; vale il disegno, vedi docs/PUNTI-APERTI.md B17) */
@@ -69,4 +74,8 @@
   --sfumatura-kpi-06: linear-gradient(90deg, rgba(246, 244, 255, 0.98), rgba(227, 219, 255, 0.98)); /* 424:91 */
   /* AUROC (charts.js: «490 px per 1,0 a partire da 0,80»): l'asse 0,80–1,00 è alto 98 px */
   --altezza-grafico-auroc: 98px;
+}
+
+@media (min-width: 1280px) {
+  :root { --larghezza-contenuto: var(--larghezza-desktop); }
 }
