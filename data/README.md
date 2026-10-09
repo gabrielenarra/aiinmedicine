@@ -36,6 +36,7 @@ node strumenti/dati.mjs controlla
 | `audit_numeri.csv` | Lo stesso controllo, in forma di tabella (apribile in Excel): valore nel disegno, nodo Figma, confronto con la fonte, esito, nota | Documentazione |
 | `charts.js` | Specifica dei grafici da disegnare con i dati: tipo, barre o segmenti, scala, controllo sul disegno, testo alternativo | Specifica |
 | `manifest.js` | Indice del pacchetto dati | — |
+| `ancore.js`, `linee.js` | Copie di `design/linee/ancore.json` e dei tracciati di `design/linee/linea-*.svg`, per la linea narrativa (tappa 6). Non si modificano a mano: si rigenerano con `node strumenti/linee.mjs` | `design/linee/` |
 
 ## Regole
 
@@ -45,7 +46,7 @@ node strumenti/dati.mjs controlla
 4. **Sezione 03: nessun grafico.** In `mrna.js` il blocco `expression_chart` esiste ancora ma **non va disegnato**: nel disegno (opzione B) restano soltanto i tre numeri con didascalia e badge «Da abstract». In `charts.js` quel grafico è marcato `RIMOSSO_OPZIONE_B`. Se in futuro il grafico tornerà, i dati sono già qui.
 5. **Cosa NON vogliono dire i numeri** (dal `manifest.js`): l'89% di AlphaMissense non è accuratezza clinica; i sottotipi immunitari TCGA non sono probabilità di risposta; i valori AUROC di CheXpert sono per patologia, non esiste un'unica AUC di CheXpert. Le didascalie del sito devono rispettarlo.
 6. Il `manifest.js` nomina «React» nelle regole: è un residuo della bozza dati, **non** ha effetto. Il sito è HTML, CSS e JavaScript semplici; la regola vale con lo stesso senso («nessun valore scritto nel codice»).
-7. Se un numero cambia, si cambia **solo** qui (e nel disegno Figma, per tenerli allineati); poi si lancia `npm run verifica-dati` (lo script si crea alla tappa 2 di `docs/TAPPE.md`).
+7. Se un numero cambia, si cambia **solo** qui (e nel disegno Figma, per tenerli allineati); poi si lancia `npm run verifica-dati`.
 
 ## Dove sono i testi del resto del sito
 

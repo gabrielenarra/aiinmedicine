@@ -58,9 +58,11 @@ test('la linea si disegna con lo scroll e le sfere compaiono una sola volta', as
   const nascoste = await page.locator('.narrazione .sfera--da-rivelare:not(.e-visibile)').count();
   expect(nascoste).toBeGreaterThan(0);
   await page.evaluate(() => document.getElementById('diagnostica').scrollIntoView({ behavior: 'instant' }));
-  await expect.poll(offset, { timeout: 3000 }).toBeLessThan(inizio);
+  // la linea arriva con l'inerzia: si aspetta il risultato (con la macchina carica serve tempo)
+  await expect.poll(offset, { timeout: 15000 }).toBeLessThan(inizio);
+  await expect.poll(() => page.locator('.narrazione .sfera.e-visibile').count(), { timeout: 15000 }).toBeGreaterThan(0);
+  await expect.poll(offset, { timeout: 15000 }).toBeLessThan(inizio / 2);
   const visibili = await page.locator('.narrazione .sfera.e-visibile').count();
-  expect(visibili).toBeGreaterThan(0);
   // tornando su le sfere già viste restano visibili
   await page.evaluate(() => scrollTo({ top: 0, behavior: 'instant' }));
   await page.waitForTimeout(300);

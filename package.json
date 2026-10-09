@@ -10,6 +10,7 @@
     "controlla-dati": "node strumenti/dati.mjs controlla"
   },
   "devDependencies": {
+    "@axe-core/playwright": "4.13.0",
     "@fontsource/cormorant-garamond": "5.3.0",
     "@fontsource/inter": "5.3.0",
     "@playwright/test": "1.64.0",

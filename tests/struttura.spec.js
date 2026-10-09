@@ -120,3 +120,34 @@ function cartella(nome) {
   if (!fs.existsSync(dir)) return [];
   return fs.readdirSync(dir).filter((f) => /\.(css|js)$/.test(f)).map((f) => `${nome}/${f}`);
 }
+
+// Una visita completa (scroll fino in fondo, pannelli, menu, link interni) nei tre modi
+// di apertura: nessun errore o avviso, nessuna richiesta fallita o verso altri siti.
+for (const modo of MODI) {
+  for (const larghezza of [390, 1440]) {
+    test(`Visita completa, ${modo.descrizione}, ${larghezza} px`, async ({ page }) => {
+      await page.setViewportSize({ width: larghezza, height: 900 });
+      const registro = await apri(page, modo.url);
+      const fine = await page.evaluate(() => document.documentElement.scrollHeight);
+      for (let y = 0; y <= fine; y += 600) {
+        await page.evaluate((v) => scrollTo(0, v), y);
+        await page.waitForTimeout(30);
+      }
+      await page.evaluate(() => document.querySelectorAll('[data-leggi-di-piu]').forEach((b) => b.click()));
+      await page.waitForTimeout(500);
+      if (larghezza < 1280) {
+        await page.evaluate(() => scrollTo(0, 0));
+        await page.locator('.intestazione [data-apri-menu]').click();
+        await page.locator('#menu .voce-menu').nth(2).click();
+      } else {
+        await page.locator('.voce-intestazione').nth(1).click();
+      }
+      await page.waitForTimeout(800);
+      expect(registro.errori, 'errori in console').toEqual([]);
+      expect(registro.fallite, 'richieste fallite').toEqual([]);
+      const origine = modo.nome === 'file' ? pathToFileURL(RADICE).href : `${SERVER}/`;
+      expect(registro.richieste.filter((u) => !u.startsWith(origine) && !u.startsWith('data:'))).toEqual([]);
+      expect(await page.context().cookies()).toEqual([]);
+    });
+  }
+}

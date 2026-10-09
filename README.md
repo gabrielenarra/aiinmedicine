@@ -1,77 +1,105 @@
-# AI · Data · Design · Human — pacchetto per costruire il sito con Claude Code
+# AI · Data · Design · Human
 
-Questo è tutto ciò che serve a Claude Code per trasformare il disegno Figma in un sito vero. **Non è il sito**: è il materiale di partenza (regole, token, dati, linee, istruzioni a tappe).
+Sito a pagina singola, con scorrimento narrativo, sull'intelligenza artificiale in medicina. Progetto di Digital Design, Università di Genova. Costruito dal disegno Figma `AtwFNzYiwSlUkSIfsBPDWk` in sette tappe (`docs/TAPPE.md`), ottobre 2026.
 
-Disegno: Figma `AtwFNzYiwSlUkSIfsBPDWk` («AI · Data · Design · Human»), aggiornato all'8 ottobre 2026.
-Formati disegnati: desktop 1440 px, tablet 768 px, smartphone 390 px.
+**Il sito non è pubblicato online.** Funziona aprendolo dal computer e, quando si deciderà, copiando la cartella su un hosting qualsiasi.
 
-## Per cominciare (5 passi)
+---
 
-1. **Fai una copia del file Figma** (menu del file → Duplica): Claude Code lo leggerà soltanto, ma è una buona abitudine.
-2. Metti questa cartella dove vuoi e aprila in Claude Code. (La cartella `.claude` è nascosta: su Mac si vede con Cmd+Maiusc+punto, su Windows da «Visualizza → Elementi nascosti». Deve restare dove sta.)
-3. Collega Figma a Claude Code e prova che funzioni (istruzioni in `docs/PROMPT-01-avvio.md`).
-4. Esegui `git init` nella cartella.
-5. Incolla il prompt di `docs/PROMPT-01-avvio.md` in **modalità piano**. Poi segui `docs/TAPPE.md`, una tappa alla volta. Per non dover approvare ogni azione: `docs/PERMESSI.md`.
+## 1. Come si apre
 
-## Che cosa c'è dentro
+### Con un doppio clic (il modo più semplice)
+
+Fai doppio clic su **`index.html`**. Si apre nel browser e funziona tutto: non serve installare niente né essere collegati a internet. È il modo pensato per mandarlo ai professori.
+
+**Per mandarlo a qualcuno** basta una cartella (anche compressa in .zip) con questi elementi:
 
 ```
-ai-medicine-sito/
-├── README.md                    questo file
-├── CLAUDE.md                    le regole fisse che Claude Code legge ogni volta
-├── .claude/settings.json        permessi: cosa può fare senza chiedere e cosa mai
-├── package.json                 strumenti di sviluppo (font, server locale)
-├── assets/fonts/                Inter e Cormorant Garamond (woff2) con le licenze
-├── index.html                   la pagina (si apre con un doppio clic)
-├── css/font.css  css/base.css   font e stili di base
-├── js/dati.js                   legge i dati di data/ e li passa al sito
-├── js/ui.js  js/grafico.js      strumenti comuni e grafici (guidati da data/charts.js)
-├── js/intestazione.js  js/hero.js  js/sezione-02.js
-├── js/sezioni-dati.js           sezioni 03–07 con «Leggi di più»
-├── js/sezioni-finali.js         sezioni 08, 09 e footer
-├── tests/                       prove automatiche (npm test, npm run verifica-dati)
-├── strumenti/dati.mjs           converte i dati tra .js e .json e li controlla
-├── data/                        numeri, fonti, grafici (la fonte di tutto ciò che è scientifico)
-│   ├── README.md                come si usano (e perché sono .js)
-│   ├── contenuti.js             tutti i testi del sito, copiati dal disegno
-│   ├── site_metrics.js  mrna.js  crispr.js  immunotherapy.js
-│   ├── diagnostics.js   discoveries.js  sources.js  manifest.js
-│   ├── audit_status.js  audit_numeri.csv   esiti dei controlli sulle fonti (8 ott 2026)
-│   └── charts.js                           specifiche dei grafici
-├── design/                      riferimento visivo, già estratto da Figma
-│   ├── tokens.css               34 colori, spaziature, raggi, font (variabili)
-│   ├── typography.css           24 stili di testo
-│   ├── movimento.css            durate, curva, anello di focus, movimento ridotto
-│   ├── sfere.css                ricetta CSS delle sfere
-│   ├── mappa-figma.md           pagine, ID dei nodi, componenti, regole del Leggimi
-│   ├── stati-e-interazioni.md   copia fedele della pagina 06 (fogli A–E)
-│   └── linee/
-│       ├── linea-desktop.svg  linea-tablet.svg  linea-smartphone.svg
-│       ├── ancore.json          posizioni di sezioni, sfere e maschere nei tre formati
-│       └── LEGGIMI-linee.md     come usarle e animarle
-└── docs/
-    ├── PROMPT-01-avvio.md       il primo messaggio (modalità piano)
-    ├── TAPPE.md                 le sette tappe, con i prompt pronti
-    ├── PUNTI-APERTI.md          cosa è ancora da decidere o verificare (e dove si cambia)
-    └── PERMESSI.md              come lavorare senza approvazioni continue
+index.html   css/   js/   data/   assets/   design/
 ```
 
-## Decisioni già prese
+Non servono `node_modules/`, `tests/`, `strumenti/`, `docs/` né i file `package*.json`. Da `design/` il sito usa solo `tokens.css`, `movimento.css`, `typography.css` e `sfere.css`, ma conviene mandare la cartella intera.
 
-- **Sito statico:** HTML, CSS e JavaScript semplici, nessun framework, nessuna fase di compilazione. Si apre con un **doppio clic su `index.html`** (senza installare nulla), con un server qualsiasi, e si pubblica copiando i file.
-- **Dati in `.js` invece di `.json`** (9 ott 2026), solo per permettere il doppio clic: stessi valori, controllati. Per la versione finale si potrà tornare ai `.json` con `node strumenti/dati.mjs verso-json` (vedi `data/README.md`).
-- **Niente pubblicazione per ora:** il sito funziona in locale e si potrà copiare su qualsiasi hosting, anche in una sottocartella (solo percorsi relativi).
-- **Font ospitati nel sito** (`assets/fonts/`), nessun cookie, nessuno strumento di analisi, nessun contenuto caricato da servizi esterni.
-- **Contenuti e numeri fuori dal codice:** stanno in `data/`, così i punti ancora aperti si correggono in seguito cambiando un solo file.
-- **Sezione 03 senza grafico** (opzione B): tre numeri con badge «Da abstract».
-- **Footer, social, logo, favicon, immagine di anteprima:** non esistono ancora, per ora restano come nel disegno (testo non cliccabile, niente brand).
-- **Linea narrativa animata e sfere:** per ultime (tappa 6). I grafici sono già completi e fermi dalla tappa 3.
+### Con un piccolo server sul tuo computer (per chi sviluppa)
 
-## Limiti da conoscere
+Serve Node.js. Dalla cartella del progetto, la prima volta `npm install`, poi:
 
-- **Le tre linee SVG sono ricalcolate** sul tracciato originale (scarto massimo sotto 0,5 px) e **non contengono le due ombre interne** del tratto; a 5,9 px di spessore l'effetto è appena percettibile. Se serve l'identico, si esporta da Figma (nodi in `design/linee/LEGGIMI-linee.md`).
-- **Le linee sono legate alle altezze del disegno:** nel sito reale le sezioni avranno altezze diverse, quindi la linea va riallineata (spiegato nella guida; è parte della tappa 6).
-- **Il disegno ha una rotazione residua di 0,0357°** nella home desktop e nella «Card sezione 02»: va ignorata.
-- **Alcune card dello smartphone** (sezioni 07, 08, footer) hanno 6–20 px di margine inferiore interno più stretto del resto: nel sito si usa la spaziatura standard.
-- **Il registro dati dice «VERIFICATO» per alcuni numeri che i controlli hanno messo «DA_VERIFICARE»:** vale `data/audit_status.js` (vedi `docs/PUNTI-APERTI.md`).
-- Tutto ciò che non si può provare in Figma (lettori di schermo, prestazioni su telefoni veri) va provato sul sito reale: elenco in `design/stati-e-interazioni.md`, foglio D.
+```
+npm run avvia
+```
+
+Il sito si apre su `http://127.0.0.1:8080`, visibile solo dal tuo computer.
+
+---
+
+## 2. Come si modifica un testo
+
+Tutti i testi del sito (titoli, frasi, voci del menu, didascalie, pannelli «Leggi di più», footer) stanno in **`data/contenuti.js`**. Ogni testo ha accanto il nodo Figma da cui viene (`"figma"`).
+
+1. Apri `data/contenuti.js` con un editor di testo (per esempio Visual Studio Code o Blocco note).
+2. Cerca la frase e cambiala **tra le virgolette**. Non toccare le virgolette, le virgole, le parentesi né la prima e l'ultima riga del file.
+3. Alcune cose da sapere:
+   - `"righe": [ … ]` = la frase va a capo in quei punti (solo desktop).
+   - `"compatto": { … }` = testo diverso su tablet e smartphone; se manca, vale quello desktop.
+   - `{metrica:…}` e `{dato:…}` dentro una frase **non sono testo**: il sito ci mette un numero preso dai dati (vedi il punto 3).
+4. Controlla che il file sia ancora valido: `node strumenti/dati.mjs controlla` (oppure apri `index.html`: se la pagina resta vuota, c'è un errore di battitura nel file).
+
+## 3. Come si modifica un numero
+
+I numeri scientifici **non sono mai scritti nel codice né nei testi**: stanno in `data/` (spiegazione completa in `data/README.md`).
+
+- **Numeri delle sezioni 03–07** (KPI, valori dei grafici): `data/site_metrics.js` (campo `display` per il testo mostrato, `value` per i calcoli) e i file delle sezioni `mrna.js`, `crispr.js`, `immunotherapy.js`, `diagnostics.js`, `discoveries.js`.
+- **Grafici** (scale, barre, testo alternativo): `data/charts.js`.
+- **Fonti e DOI**: `data/sources.js`.
+- **Stato dei controlli** (verificato o da verificare): `data/audit_status.js`, che ha la precedenza.
+
+Dopo una modifica:
+
+```
+node strumenti/dati.mjs controlla
+npm run verifica-dati
+```
+
+Il secondo comando apre il sito a 1440, 1100 e 390 px e confronta **ogni numero mostrato** con i dati. Deve finire con «Tutti i numeri mostrati coincidono con data/». Ricordati di cambiare lo stesso numero anche nel disegno Figma.
+
+Per i **punti ancora aperti** (numeri da ricontrollare, decisioni da prendere) c'è `docs/PUNTI-APERTI.md`, con un esempio di come chiedere a Claude Code di chiuderne uno.
+
+## 4. Come si pubblica (quando lo si deciderà)
+
+Il sito è fatto di file statici con **soli percorsi relativi**: funziona a qualsiasi indirizzo, anche dentro una sottocartella (per esempio `https://esempio.it/progetti/ai-medicine/`). Per pubblicarlo:
+
+1. Scegli un hosting di file statici (dell'università, oppure servizi come Netlify, GitHub Pages, Cloudflare Pages: **da decidere insieme**, punto aperto B3).
+2. Carica la stessa cartella del punto 1 (`index.html`, `css/`, `js/`, `data/`, `assets/`, `design/`) così com'è. Non c'è nessuna fase di compilazione.
+3. Apri l'indirizzo e controlla: la pagina, i font, i pannelli, il menu su telefono.
+
+Cose da decidere prima (sono in `docs/PUNTI-APERTI.md`): dominio, logo, favicon, immagine di anteprima per i social, link del footer e dei social. Il sito **non usa cookie, statistiche né servizi esterni**: se un giorno se ne aggiungessero, servirebbe un'informativa sulla privacy.
+
+*Facoltativo, per la versione finale servita solo da un hosting:* si può tornare ai file `.json` con `node strumenti/dati.mjs verso-json` (spiegato in `CLAUDE.md`).
+
+---
+
+## 5. Come è fatto
+
+| Cartella | Cosa contiene |
+|---|---|
+| `index.html` | La pagina: carica stili, dati e script (tutti con percorsi relativi). |
+| `css/` | Stili: `font.css`, `base.css`, uno per parte della pagina (`hero.css`, `sezione-02.css`, `sezioni-dati.css`, `sezioni-compatte.css` per tablet e smartphone, `sezioni-finali.css`, `grafico.css`, `menu.css`, `linea.css`), `interazioni.css` (movimento e stati), `valori-disegno.css` (misure prese dal disegno). |
+| `js/` | Costruiscono la pagina dai dati: `dati.js` (l'unico che legge `data/`), `ui.js` (strumenti comuni), uno per parte della pagina, `grafico.js` (grafici guidati da `data/charts.js`), `navigazione.js` (menu, header sticky, link), `ingresso.js` (comparsa dei blocchi), `linea.js` (linea narrativa e sfere). |
+| `data/` | Testi, numeri, fonti, grafici; `ancore.js` e `linee.js` sono copie di `design/linee/` (si rigenerano con `node strumenti/linee.mjs`). |
+| `design/` | Riferimento estratto da Figma: colori, testi, movimento, sfere, linee, stati. Non si modifica. |
+| `assets/fonts/` | Inter e Cormorant Garamond (licenza SIL OFL, file di licenza inclusi). |
+| `tests/` | Prove automatiche: `npm test` (struttura, interazioni, linea, accessibilità con axe-core) e `npm run verifica-dati`. |
+| `strumenti/` | Script per chi sviluppa: `dati.mjs` (controlla e converte i dati), `linee.mjs` (copia linee e ancore). |
+| `docs/` | `TAPPE.md` (come è stato costruito), `PUNTI-APERTI.md` (cosa resta da decidere), `CONTROLLI-MANUALI.md` (cosa provare a mano). |
+
+**Formati:** smartphone fino a 599 px, tablet da 600 a 1279 px (contenuto largo al massimo 768 px e centrato), desktop da 1280 px (contenuto largo al massimo 1440 px).
+
+**Regole fisse** per chi ci lavora (anche con Claude Code): `CLAUDE.md`.
+
+## 6. Controlli fatti (tappa 7, 9 ottobre 2026)
+
+- **Numeri:** ogni numero mostrato coincide con `data/` (desktop, tablet, smartphone).
+- **Tre modi di apertura** (doppio clic, server, sottocartella) × 11 larghezze (320–1920 px): nessun errore o avviso in console, nessuna richiesta fallita o verso altri siti, nessun cookie o dato salvato, nessuno scorrimento orizzontale, font del sito caricati. Anche durante una visita completa (scroll, pannelli, menu, link).
+- **Accessibilità automatica** (axe-core, WCAG 2.1 A e AA) a 390, 768 e 1440 px, con pannelli e menu aperti: nessun problema rilevato. Un solo titolo principale, titoli senza salti, lingua italiana con le parti in inglese marcate, testo alternativo per ogni grafico, ordine di tabulazione e anello di focus come da specifica.
+- **Peso:** circa 490 KB in 47 file (139 KB di font, nessuna immagine). **Caricamento** con CPU rallentata 4 volte: contenuto principale in circa 0,8 s (smartphone) e 1,3 s (desktop).
+- **Da provare a mano:** `docs/CONTROLLI-MANUALI.md`.
