@@ -1,0 +1,134 @@
+/* ==========================================================================
+   Base del sito: reset, sfondo, contenitore e margini per formato.
+   Si carica dopo design/tokens.css, design/movimento.css, css/font.css e
+   design/typography.css. Colori e spaziature solo dalle variabili dei token.
+
+   Formati (CLAUDE.md):
+     smartphone  fino a 599 px    margini 20 px
+     tablet      600–1023 px      margini 24 px
+     desktop     da 1024 px       margini 64 px, contenuto largo al massimo 1440 px
+   ========================================================================== */
+
+/* ---------- Reset essenziale ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body,
+h1, h2, h3, h4,
+p, figure, blockquote,
+ul, ol, dl, dd {
+  margin: 0;
+}
+
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+  padding: 0;
+}
+
+img,
+svg,
+picture {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+/* I titoli lunghi vanno a capo invece di uscire dallo schermo (smartphone da 320 px) */
+h1, h2, h3 {
+  overflow-wrap: break-word;
+}
+
+/* ---------- Pagina ---------- */
+body {
+  min-height: 100vh;
+  background: var(--superficie-base);
+  color: var(--testo-primario);
+  font-family: var(--font-sans);
+}
+
+@media (min-width: 1024px) {
+  /* Desktop: sfumatura orizzontale su tutta la finestra (design/mappa-figma.md, «Sfondi e superfici») */
+  body {
+    background: var(--sfondo-pagina-desktop);
+  }
+}
+
+/* ---------- Contenitore: margini laterali e larghezza massima ---------- */
+.contenitore {
+  width: 100%;
+  max-width: var(--larghezza-desktop);
+  margin-inline: auto;
+  padding-inline: var(--spazio-20);
+}
+
+@media (min-width: 600px) {
+  .contenitore {
+    padding-inline: var(--spazio-24);
+  }
+}
+
+@media (min-width: 1024px) {
+  .contenitore {
+    padding-inline: var(--spazio-64);
+  }
+}
+
+/* ---------- Scheletro provvisorio (tappa 1) ----------
+   Spaziature solo per rendere leggibile lo scheletro: le misure vere
+   delle sezioni arrivano dal disegno alle tappe 3 e 4. */
+.intestazione,
+.sezione,
+.pie {
+  padding-block: var(--spazio-48);
+}
+
+.intestazione {
+  border-bottom: 1px solid var(--linea-intestazione);
+}
+
+.pie {
+  border-top: 1px solid var(--linea-divisore);
+}
+
+.pie .t-corpo-piccolo-14 {
+  margin-top: var(--spazio-8);
+  color: var(--testo-attenuato);
+}
+
+/* ---------- «Vai al contenuto»: primo elemento della tabulazione ----------
+   Fuori dallo schermo finché non riceve il focus da tastiera. */
+.vai-al-contenuto {
+  position: absolute;
+  top: var(--spazio-8);
+  left: var(--spazio-8);
+  z-index: 100;
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--area-tocco-min);
+  padding: var(--spazio-12) var(--spazio-16);
+  border-radius: var(--raggio-pillola);
+  background: var(--superficie-bianco);
+  color: var(--testo-accento);
+  text-decoration: none;
+  transform: translateY(-200%);
+}
+
+.vai-al-contenuto:focus {
+  transform: none;
+}
