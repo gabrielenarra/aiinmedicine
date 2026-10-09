@@ -6,7 +6,7 @@ Prima si fa il **prompt di avvio** (`docs/PROMPT-01-avvio.md`, modalità piano).
 
 **Consiglio:** all'inizio di ogni tappa, se la conversazione è lunga, scrivi `/clear` e poi incolla il prompt della tappa. Claude Code rilegge da solo `CLAUDE.md` e sa dove siamo grazie ai commit.
 
-**Come guardare il sito:** a fine tappa chiedi *«avvia il server locale e dimmi l'indirizzo»* (di solito `http://localhost:8080`) e aprilo nel browser. Per vedere il telefono: Ispeziona → icona dello smartphone (larghezza 390).
+**Come guardare il sito:** doppio clic su `index.html` nella cartella del progetto. In alternativa chiedi *«avvia il server locale e dimmi l'indirizzo»* (di solito `http://localhost:8080`) e aprilo nel browser. Per vedere il telefono: Ispeziona → icona dello smartphone (larghezza 390).
 
 | Tappa | Cosa | Perché in questo ordine |
 |---|---|---|
@@ -33,13 +33,15 @@ font ospitati nel sito (assets/fonts, da @fontsource, @font-face in
 css/font.css con font-display: swap: niente Google Fonts), un CSS di base
 (reset, sfondo --superficie-base, larghezza massima 1440 centrata, margini
 64/24/20 px con i breakpoint di CLAUDE.md). Solo percorsi relativi.
-Aggiungi package.json con gli script "avvia" (server statico) e "test"
+JavaScript con script normali (niente moduli, niente fetch): il sito deve
+aprirsi anche con un doppio clic su index.html.
+Aggiungi a package.json gli script "avvia" (server statico) e "test"
 (Playwright: per ora controlla solo che nessuna richiesta vada verso altri
 domini e che non ci siano cookie). Installa Playwright con Chromium.
 Non mettere ancora i contenuti: solo i titoli di sezione provvisori.
 Verifica con uno screenshot a 390, 768 e 1440 px che la pagina si apra senza
-errori in console, anche servita da una sottocartella. Poi git init (se non
-c'è già), commit "Tappa 1: struttura".
+errori in console in tre modi: da file://, da server, da una sottocartella.
+Commit "Tappa 1: struttura".
 ```
 
 Controllo per te: la pagina si apre, sfondo chiaro, font corretti (titoli serif, testi sans), nessuno scorrimento orizzontale.
@@ -48,22 +50,24 @@ Controllo per te: la pagina si apre, sfondo chiaro, font corretti (titoli serif,
 
 ```text
 Tappa 2. Leggi dal disegno Figma (sola lettura) i testi di ogni sezione e
-scrivili in data/contenuti.json, per sezione e per formato solo se il testo
+scrivili in data/contenuti.js, per sezione e per formato solo se il testo
 cambia davvero tra desktop, tablet e smartphone (altrimenti un testo solo).
 Includi: voci del menu, testi dell'hero, titoli, introduzioni, citazioni con
 fonte, didascalie, etichette e badge, testi dei pannelli "Leggi di più",
 footer (come testo non cliccabile). I numeri e le fonti NON vanno copiati lì:
-si leggono da data/site_metrics.json e data/sources.json.
-Scrivi il piccolo modulo JavaScript che carica i file di data/ e li rende
-disponibili al resto del sito, e lo script "npm run verifica-dati": apre la
-pagina con Playwright, legge tutti i numeri mostrati e li confronta con il
-campo "display" di data/; segnala differenze. Deve girare anche se le sezioni
-non sono ancora complete (controlla quelle presenti).
+si leggono da data/site_metrics.js e data/sources.js.
+data/contenuti.js ha la stessa forma degli altri file di data/ (vedi
+data/README.md). Scrivi js/dati.js, l'unico file che legge window.DATI e
+rende i dati disponibili al resto del sito in window.SITO.dati, e lo script
+"npm run verifica-dati": apre la pagina con Playwright (da file://), legge
+tutti i numeri mostrati e li confronta con il campo "display" di data/;
+segnala differenze. Deve girare anche se le sezioni non sono ancora
+complete (controlla quelle presenti).
 Non cambiare nessun testo del disegno: se trovi un refuso o un dubbio,
 elencalo a fine tappa. Commit "Tappa 2: contenuti e dati".
 ```
 
-Controllo per te: apri `data/contenuti.json` e confronta due o tre testi con Figma; lo script `npm run verifica-dati` termina senza differenze.
+Controllo per te: apri `data/contenuti.js` e confronta due o tre testi con Figma; lo script `npm run verifica-dati` termina senza differenze.
 
 ## Tappa 3 — Desktop: tutte le sezioni
 
@@ -73,7 +77,7 @@ Si fa **in tre blocchi**, un prompt per blocco (e un commit per blocco).
 Tappa 3a (desktop 1440 px). Costruisci header (stato iniziale e sticky),
 hero e sezione 02 come nel disegno: frame Home — Desktop (3:7) e componenti
 della pagina 02. Usa i componenti riutilizzabili elencati in
-design/mappa-figma.md. Testi da data/contenuti.json. Sfere dell'hero con
+design/mappa-figma.md. Testi da data/contenuti.js. Sfere dell'hero con
 design/sfere.css (ferme). Nessuna linea narrativa per ora.
 Confronta con get_screenshot del frame e dimmi le differenze visibili.
 Commit "Tappa 3a: hero e sezione 02".
@@ -84,7 +88,7 @@ Tappa 3b (desktop). Sezioni 03, 04 e 05: contenuto chiuso e pannello di
 approfondimento aperto (frame "Section 03/04/05 / Open State"), con il
 componente "Leggi di più" (per ora basta aprire/chiudere con aria-expanded,
 senza animazione). Grafici come componente unico guidato dai dati
-(data/charts.json): barre orizzontali, barra con pista, KPI. Sezione 03: tre
+(data/charts.js): barre orizzontali, barra con pista, KPI. Sezione 03: tre
 numeri con badge "Da abstract", NESSUN grafico. Numeri da data/.
 Confronta con Figma, lancia npm run verifica-dati. Commit "Tappa 3b: sezioni 03–05".
 ```
@@ -176,7 +180,8 @@ Tappa 7. Controlli finali, senza cambiare il design:
    schermo, zoom 200%/400%, colori forzati).
 4. Console senza errori né avvisi; nessuna richiesta di rete fallita;
    nessuna richiesta verso altri domini, nessun cookie, nessun percorso
-   che inizia con "/" (prova il sito servito da una sottocartella).
+   che inizia con "/". Prova in tre modi: doppio clic (file://), server,
+   sottocartella.
 5. Peso della pagina e tempo di caricamento (CPU rallentata).
 6. Aggiorna docs/PUNTI-APERTI.md con ogni dubbio emerso.
 7. Scrivi README.md del sito: come si avvia, come si modifica un testo o un
@@ -184,7 +189,7 @@ Tappa 7. Controlli finali, senza cambiare il design:
 Non fare push e non pubblicare. Commit "Tappa 7: controlli finali".
 ```
 
-Dopo questa tappa il sito è pronto per essere mostrato ai professori (anche solo da `localhost`, o come file/cartella da inviare). La pubblicazione online con un dominio è un passo a parte, da decidere insieme.
+Dopo questa tappa il sito è pronto per essere mostrato ai professori (come cartella da inviare: si apre con un doppio clic su `index.html`, senza installare nulla; servono solo `index.html`, `css/`, `js/`, `data/`, `assets/` e `design/`). La pubblicazione online con un dominio è un passo a parte, da decidere insieme.
 
 ---
 
@@ -194,5 +199,5 @@ Per cambiare un punto aperto o un testo a sito finito, vedi in fondo a `docs/PUN
 
 ```text
 Nel sito, nella sezione 04, la didascalia sotto il 95% deve dire "...". Cambia
-il testo in data/contenuti.json, controlla a 390 e 1440 px e fai il commit.
+il testo in data/contenuti.js, controlla a 390 e 1440 px e fai il commit.
 ```

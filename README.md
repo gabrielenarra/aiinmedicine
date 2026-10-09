@@ -20,12 +20,16 @@ ai-medicine-sito/
 ├── README.md                    questo file
 ├── CLAUDE.md                    le regole fisse che Claude Code legge ogni volta
 ├── .claude/settings.json        permessi: cosa può fare senza chiedere e cosa mai
+├── package.json                 strumenti di sviluppo (font, server locale)
+├── assets/fonts/                Inter e Cormorant Garamond (woff2) con le licenze
+├── css/font.css                 collega i font al sito
+├── strumenti/dati.mjs           converte i dati tra .js e .json e li controlla
 ├── data/                        numeri, fonti, grafici (la fonte di tutto ciò che è scientifico)
-│   ├── README.md                come si usano
-│   ├── site_metrics.json  mrna.json  crispr.json  immunotherapy.json
-│   ├── diagnostics.json   discoveries.json  sources.json  manifest.json
-│   ├── audit_status.json  audit_numeri.csv      esiti dei controlli sulle fonti (8 ott 2026)
-│   └── charts.json                              specifiche dei grafici
+│   ├── README.md                come si usano (e perché sono .js)
+│   ├── site_metrics.js  mrna.js  crispr.js  immunotherapy.js
+│   ├── diagnostics.js   discoveries.js  sources.js  manifest.js
+│   ├── audit_status.js  audit_numeri.csv   esiti dei controlli sulle fonti (8 ott 2026)
+│   └── charts.js                           specifiche dei grafici
 ├── design/                      riferimento visivo, già estratto da Figma
 │   ├── tokens.css               34 colori, spaziature, raggi, font (variabili)
 │   ├── typography.css           24 stili di testo
@@ -46,7 +50,8 @@ ai-medicine-sito/
 
 ## Decisioni già prese
 
-- **Sito statico:** HTML, CSS e JavaScript semplici, nessun framework, nessuna fase di compilazione. Si può aprire con un server qualsiasi e pubblicare copiando i file.
+- **Sito statico:** HTML, CSS e JavaScript semplici, nessun framework, nessuna fase di compilazione. Si apre con un **doppio clic su `index.html`** (senza installare nulla), con un server qualsiasi, e si pubblica copiando i file.
+- **Dati in `.js` invece di `.json`** (9 ott 2026), solo per permettere il doppio clic: stessi valori, controllati. Per la versione finale si potrà tornare ai `.json` con `node strumenti/dati.mjs verso-json` (vedi `data/README.md`).
 - **Niente pubblicazione per ora:** il sito funziona in locale e si potrà copiare su qualsiasi hosting, anche in una sottocartella (solo percorsi relativi).
 - **Font ospitati nel sito** (`assets/fonts/`), nessun cookie, nessuno strumento di analisi, nessun contenuto caricato da servizi esterni.
 - **Contenuti e numeri fuori dal codice:** stanno in `data/`, così i punti ancora aperti si correggono in seguito cambiando un solo file.
@@ -60,5 +65,5 @@ ai-medicine-sito/
 - **Le linee sono legate alle altezze del disegno:** nel sito reale le sezioni avranno altezze diverse, quindi la linea va riallineata (spiegato nella guida; è parte della tappa 6).
 - **Il disegno ha una rotazione residua di 0,0357°** nella home desktop e nella «Card sezione 02»: va ignorata.
 - **Alcune card dello smartphone** (sezioni 07, 08, footer) hanno 6–20 px di margine inferiore interno più stretto del resto: nel sito si usa la spaziatura standard.
-- **Il registro dati dice «VERIFICATO» per alcuni numeri che i controlli hanno messo «DA_VERIFICARE»:** vale `data/audit_status.json` (vedi `docs/PUNTI-APERTI.md`).
+- **Il registro dati dice «VERIFICATO» per alcuni numeri che i controlli hanno messo «DA_VERIFICARE»:** vale `data/audit_status.js` (vedi `docs/PUNTI-APERTI.md`).
 - Tutto ciò che non si può provare in Figma (lettori di schermo, prestazioni su telefoni veri) va provato sul sito reale: elenco in `design/stati-e-interazioni.md`, foglio D.

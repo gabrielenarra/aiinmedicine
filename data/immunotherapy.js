@@ -1,3 +1,4 @@
+(window.DATI = window.DATI || {})["immunotherapy"] =
 {
   "section_id": "05",
   "section": "immunoterapia",
@@ -60,3 +61,4 @@
   ],
   "scope_note": "Categorie biologiche qualitative; non frequenze, non accuratezza di un modello e non risposta clinica a immunoterapia."
 }
+;

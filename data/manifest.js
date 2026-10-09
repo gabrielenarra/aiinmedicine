@@ -1,3 +1,4 @@
+(window.DATI = window.DATI || {})["manifest"] =
 {
   "project": "AI in Medicine",
   "purpose": "Development-ready data package matching the current Figma scientific values",
@@ -27,3 +28,4 @@
     "sources.json"
   ]
 }
+;

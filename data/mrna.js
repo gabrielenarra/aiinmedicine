@@ -1,3 +1,4 @@
+(window.DATI = window.DATI || {})["mrna"] =
 {
   "section_id": "03",
   "section": "vaccini_mrna",
@@ -69,3 +70,4 @@
     ]
   }
 }
+;

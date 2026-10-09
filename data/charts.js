@@ -1,3 +1,4 @@
+(window.DATI = window.DATI || {})["charts"] =
 {
  "_nota": "Specifiche per rifare i grafici da dati. I valori numerici vengono dai JSON del registro; qui si aggiungono scale, controllo sul disegno e alternative testuali.",
  "charts": [
@@ -190,3 +191,4 @@
   }
  ]
 }
+;

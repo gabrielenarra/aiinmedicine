@@ -1,3 +1,4 @@
+(window.DATI = window.DATI || {})["site_metrics"] =
 [
   {
     "order": 1,
@@ -285,3 +286,4 @@
     "status": "VERIFICATO"
   }
 ]
+;

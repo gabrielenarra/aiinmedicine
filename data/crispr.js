@@ -1,3 +1,4 @@
+(window.DATI = window.DATI || {})["crispr"] =
 {
   "section_id": "04",
   "section": "crispr",
@@ -28,3 +29,4 @@
     "calculation_note": "Arrotondato dal confronto 0,32% vs 6,1%; legato ai siti off-target noti del benchmark."
   }
 }
+;

@@ -1,3 +1,4 @@
+(window.DATI = window.DATI || {})["audit_status"] =
 {
  "_nota": "Aggiunge solo esito dei controlli. I valori restano quelli del registro.",
  "data_controllo": "2026-10-08",
@@ -120,3 +121,4 @@
   }
  }
 }
+;

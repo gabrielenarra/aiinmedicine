@@ -19,14 +19,19 @@ Se il disegno e un documento qui non coincidono, **vale il disegno**: segnalalo 
 
 ## Tecnica (decisa, non cambiarla senza chiedere)
 
-- **HTML, CSS e JavaScript semplici.** Nessun framework (niente React/Vue), nessuno strumento di build. Il sito si apre con un server statico qualsiasi (`npx http-server` o `python3 -m http.server`) e si pubblica copiando i file.
-- JavaScript in moduli ES (`<script type="module">`), senza librerie esterne salvo accordo.
+- **HTML, CSS e JavaScript semplici.** Nessun framework (niente React/Vue), nessuno strumento di build. Si pubblica copiando i file.
+- **Il sito deve aprirsi con un doppio clic su `index.html`** (indirizzo `file://`, senza server), oltre che da un server statico (`npm run avvia`) e da qualsiasi hosting. Chi lo riceve (i professori) non deve installare nulla. Il browser, da `file://`, blocca `fetch`, i moduli ES e i riferimenti a file esterni dentro gli SVG; quindi:
+  - **JavaScript con script normali** (`<script src="js/…" defer>`), **non** `type="module"`, niente `import`/`export`. Per non sporcare lo spazio globale ogni file è chiuso in una funzione (`(() => { … })()`) e il sito espone un solo oggetto, `window.SITO`. Nessuna libreria esterna salvo accordo.
+  - **Mai `fetch` né `XMLHttpRequest`.** Tutto ciò che la pagina legge sta in file caricati con un tag: `<script>` per i dati, `<link>` per il CSS, `<img>` o SVG scritto dentro l'HTML per le immagini. Niente `<use href="file.svg#…">` verso file esterni.
+  - **Dati in `data/*.js`**, vedi «Contenuto e dati».
+- **Versione finale (dopo l'approvazione dei professori):** si potrà tornare a `data/*.json` letti con `fetch` e ai moduli ES, se il sito sarà servito solo da un hosting. Per questo il cambio deve restare piccolo: solo `js/dati.js` sa da dove arrivano i dati e li consegna al resto del sito in `window.SITO.dati`; nessun altro file legge `window.DATI`. I dati si riconvertono con `node strumenti/dati.mjs verso-json`. Non farlo senza richiesta dell'utente.
 - Una sola pagina `index.html`; il layout cambia con i breakpoint sotto.
 - **Font ospitati nel sito fin dall'inizio, mai da Google Fonts.** Cormorant Garamond (400, 600, 400 corsivo) e Inter (400, 500, 600), solo `woff2`, in `assets/fonts/`. Si prendono con npm dai pacchetti `@fontsource/cormorant-garamond` e `@fontsource/inter` (licenza SIL Open Font License) e si **copiano** in `assets/fonts/` insieme ai file di licenza: il sito non deve dipendere da `node_modules/`. Le regole `@font-face` stanno in `css/font.css`, con `font-display: swap` e i nomi di famiglia di `design/tokens.css` (`"Cormorant Garamond"`, `"Inter"`). Il link a Google Fonts nel commento di `design/typography.css` e la dicitura in `design/tokens.css` sono superati (non modificare `design/`).
-- **Solo percorsi relativi**, perché il sito deve funzionare a qualsiasi indirizzo, anche in una sottocartella. Mai un percorso che inizia con `/` né un indirizzo completo del sito. In HTML: `css/…`, `js/…`; nel CSS gli `url()` sono relativi al file CSS (da `css/font.css`: `../assets/fonts/…`); in JavaScript i file si caricano con `new URL('../data/x.json', import.meta.url)`; i link interni sono solo `#sezione`. Niente `<base href>`.
+- **Solo percorsi relativi**, perché il sito deve funzionare a qualsiasi indirizzo, anche in una sottocartella. Mai un percorso che inizia con `/` né un indirizzo completo del sito. In HTML: `css/…`, `js/…`, `data/…`; nel CSS gli `url()` sono relativi al file CSS (da `css/font.css`: `../assets/fonts/…`); i link interni sono solo `#sezione`. Niente `<base href>`. Le prove vanno fatte in tre modi: da `file://`, da un server alla radice e da un server con il sito in una sottocartella.
 - **Nessun servizio esterno.** Nessun cookie, nessun `localStorage`/`sessionStorage` salvo accordo, nessuno strumento di analisi o statistiche, nessun contenuto caricato da altri siti (font, script, fogli di stile, immagini, video, iframe, mappe, CDN, incorporamenti social). Tutto ciò che la pagina carica sta nella cartella del sito. Sono ammessi solo i **link cliccabili** alle fonti (DOI e `data/sources.json`), con `rel="noopener noreferrer"`: non caricano nulla finché l'utente non ci clicca. Le prove con Playwright devono controllare che non parta nessuna richiesta verso altri domini.
 - Unità: px come nel disegno; ok convertire in rem se la resa non cambia. Colori **solo** dalle variabili di `design/tokens.css`; testo **solo** con le classi di `design/typography.css`. Niente valori fissi nuovi. Lo sfondo della pagina desktop è una sfumatura (`--sfondo-pagina-desktop`), tablet e smartphone tinta unita: vedi `design/mappa-figma.md`, «Sfondi e superfici».
-- Cartelle previste (da confermare alla tappa 1): `index.html`, `css/`, `js/`, `data/`, `design/`, `assets/` (con `assets/fonts/`), `tests/`.
+- Cartelle previste (da confermare alla tappa 1): `index.html`, `css/`, `js/`, `data/`, `design/`, `assets/` (con `assets/fonts/`), `tests/`, `strumenti/` (script per chi sviluppa, non usati dal sito).
+- **Cosa serve per vedere il sito:** `index.html`, `css/`, `js/`, `data/`, `assets/` e i fogli di `design/` collegati da `index.html`. Non servono `node_modules/`, `tests/`, `strumenti/`, `docs/`.
 
 ## Breakpoint e adattamento
 
@@ -38,10 +43,17 @@ Se il disegno e un documento qui non coincidono, **vale il disegno**: segnalalo 
 ## Contenuto e dati — regole che non si toccano
 
 - **Non cambiare mai il contenuto scientifico** (numeri, unità, fonti, didascalie, attribuzioni). Si copia dal disegno e da `data/`.
-- **Nessun numero scritto nel codice.** Numeri, etichette dei numeri, fonti e specifiche dei grafici si leggono da `data/*.json` (`display` per il testo, `value` per i calcoli). I testi del resto del sito vanno in `data/contenuti.json` (da creare alla tappa 2 leggendo il disegno). Motivo: i punti scientifici ancora aperti devono poter essere corretti in seguito modificando un solo file.
+- **Nessun numero scritto nel codice.** Numeri, etichette dei numeri, fonti e specifiche dei grafici si leggono da `data/*.js` (`display` per il testo, `value` per i calcoli). I testi del resto del sito vanno in `data/contenuti.js` (da creare alla tappa 2 leggendo il disegno). Motivo: i punti scientifici ancora aperti devono poter essere corretti in seguito modificando un solo file.
+- **Forma dei file `data/*.js`** (convertiti il 9 ottobre 2026 dai `.json` originali, valori identici; gli originali sono nel primo commit). Ogni file è **JSON puro** racchiuso tra una riga d'apertura e una di chiusura, e nient'altro:
+  ```
+  (window.DATI = window.DATI || {})["mrna"] =
+  { …JSON identico all'originale… }
+  ;
+  ```
+  Nessun commento, calcolo o codice tra le due righe: così `node strumenti/dati.mjs verso-json` li riporta in `.json` senza perdite. Dopo ogni modifica a mano lancia `node strumenti/dati.mjs controlla`. Un file nuovo (es. `contenuti.js`) segue la stessa forma, e si aggiunge con un `<script src="data/…" defer>` in `index.html` prima di `js/dati.js`. Dove i documenti di `design/` e `docs/` nominano `data/x.json`, oggi è `data/x.js` (stesso contenuto). Dentro `manifest.js` l'elenco nomina ancora i `.json`: è il contenuto originale, non va cambiato.
 - **Punti ancora aperti** (`docs/PUNTI-APERTI.md`): restano come nel disegno, ben marcati nei dati (es. `stato: "DA_VERIFICARE"`), mai presentati come verificati e mai «sistemati» di tua iniziativa. Se trovi un altro dubbio, aggiungilo a quel file e dillo all'utente.
-- **Sezione 03: nessun grafico.** Tre numeri con didascalia e badge «Da abstract». Il blocco `expression_chart` di `data/mrna.json` non va disegnato. Il componente grafico però deve restare generico (guidato dai dati), perché serve alle sezioni 04, 06 e 07.
-- **Footer, social, link:** non esistono ancora. Si mostrano come testo non cliccabile, come nel disegno (niente `href="#"` finti, niente link inventati). DOI e link alle fonti sì: sono in `data/sources.json`.
+- **Sezione 03: nessun grafico.** Tre numeri con didascalia e badge «Da abstract». Il blocco `expression_chart` di `data/mrna.js` non va disegnato. Il componente grafico però deve restare generico (guidato dai dati), perché serve alle sezioni 04, 06 e 07.
+- **Footer, social, link:** non esistono ancora. Si mostrano come testo non cliccabile, come nel disegno (niente `href="#"` finti, niente link inventati). DOI e link alle fonti sì: sono in `data/sources.js`.
 - **Logo, favicon, immagine di anteprima social, dominio, analytics:** non esistono e per ora non si fanno. Non inventarli e non aggiungere segnaposto grafici. Il titolo della scheda è il nome del progetto.
 - **Mai interpretare i numeri oltre la fonte** (regole in `data/README.md`, punto 5).
 
@@ -54,12 +66,12 @@ Specifica completa in `design/stati-e-interazioni.md` (copia fedele della pagina
 - Aree di tocco ≥ 44 × 44 px. Contrasto AA (le variabili del disegno lo rispettano: non cambiarle).
 - Semantica: `lang="it"`, un solo `h1`, `h2` per le sezioni, `h3` per le card; `<nav aria-label="Principale">`; «Leggi di più» = `<button>` con `aria-expanded` e `aria-controls`; menu = `role="dialog" aria-modal="true"`; sfere e linea `aria-hidden="true"`, `pointer-events: none`; link «Vai al contenuto».
 - `prefers-reduced-motion: reduce`: foglio E di `design/stati-e-interazioni.md`. Va provato, non solo scritto.
-- Ogni grafico ha un testo alternativo (campo `alt` di `data/charts.json`) e i numeri leggibili come testo, non solo disegnati.
+- Ogni grafico ha un testo alternativo (campo `alt` di `data/charts.js`) e i numeri leggibili come testo, non solo disegnati.
 - Card della sezione 02: **non cliccabili**.
 
 ## Linea narrativa e sfere
 
-Si fanno **per ultime** (tappa 6). Prima il sito con la linea ferma e completa. Leggi `design/linee/LEGGIMI-linee.md` prima di toccarla: la linea è legata alle altezze del disegno e va riallineata alle sezioni vere; sfere in `design/sfere.css` (geometria esatta di ogni sfera in `design/linee/ancore.json`). I due «Reference Marker» del desktop non si realizzano senza chiedere (`docs/PUNTI-APERTI.md` B13). Non cambiare lo stile della linea.
+Si fanno **per ultime** (tappa 6). Prima il sito con la linea ferma e completa. Leggi `design/linee/LEGGIMI-linee.md` prima di toccarla: la linea è legata alle altezze del disegno e va riallineata alle sezioni vere; sfere in `design/sfere.css` (geometria esatta di ogni sfera in `design/linee/ancore.json`). Siccome il sito si apre anche da `file://`, né `ancore.json` né gli SVG della linea si possono leggere con `fetch`: alla tappa 6 proponi all'utente come portarli nel sito (es. una copia in `data/ancore.js` nella stessa forma degli altri dati, SVG scritto dentro `index.html`) e aspetta l'ok. I due «Reference Marker» del desktop non si realizzano senza chiedere (`docs/PUNTI-APERTI.md` B13). Non cambiare lo stile della linea.
 
 ## Come lavorare
 
@@ -68,5 +80,5 @@ Si fanno **per ultime** (tappa 6). Prima il sito con la linea ferma e completa. 
 - Prima di una tappa grande, in modalità piano: proponi, aspetta conferma. Se hai dubbi sul disegno chiedi con una domanda sola, concreta.
 - **Verifica prima di dire «fatto»:** apri la pagina con Playwright (Chromium), fai gli screenshot alle larghezze sopra, guardali, e controlla la console del browser (nessun errore). Per i dati: lo script `npm run verifica-dati` (da creare alla tappa 2) confronta i valori mostrati con `data/`.
 - Non installare pacchetti inutili. Dipendenze di sviluppo ammesse: `playwright`, un server statico, `@fontsource/cormorant-garamond` e `@fontsource/inter` (solo per copiare i font in `assets/fonts/`). Niente `curl`/`wget` (la rete passa da `npm`).
-- Non toccare: `design/` (riferimento) e `data/*.json` salvo richiesta esplicita dell'utente.
+- Non toccare: `design/` (riferimento) e i dati in `data/` salvo richiesta esplicita dell'utente.
 - Se una richiesta dell'utente contraddice questo file, segnalalo prima di eseguirla.

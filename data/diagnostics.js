@@ -1,3 +1,4 @@
+(window.DATI = window.DATI || {})["diagnostics"] =
 {
   "section_id": "06",
   "section": "diagnostica",
@@ -79,3 +80,4 @@
     ]
   }
 }
+;

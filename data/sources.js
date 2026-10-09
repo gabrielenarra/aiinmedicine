@@ -1,3 +1,4 @@
+(window.DATI = window.DATI || {})["sources"] =
 {
   "SRC_VAXLAB_2026": {
     "section": "Vaccini mRNA",
@@ -77,3 +78,4 @@
     "note": "Documenta composizione, split e ruolo dei radiologi."
   }
 }
+;
