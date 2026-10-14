@@ -59,6 +59,13 @@ Se il disegno e un documento qui non coincidono, **vale il disegno**: segnalalo 
 - **Logo, favicon, immagine di anteprima social, dominio, analytics:** non esistono e per ora non si fanno. Non inventarli e non aggiungere segnaposto grafici. Il titolo della scheda è il nome del progetto.
 - **Mai interpretare i numeri oltre la fonte** (regole in `data/README.md`, punto 5).
 
+## Figure degli approfondimenti (dal 14 ottobre 2026)
+
+- Ogni pannello «Approfondimento» 03–07 ha un blocco figura (`js/figure.js`, `css/figure.css`; Figma «Blocco figura» 708:681). Testi, crediti, licenze e dimensioni native in `data/immagini.js`; «Ingrandisci» in `js/ingrandimento.js` (`<dialog>`, zoom mai oltre il 100%).
+- **Originali in `assets/immagini/originali/`, mai modificati** (impronta sha256 nei dati). Versioni ridotte solo per 03, 05, 06 in `assets/immagini/derivate/`, create con `node strumenti/derivate.mjs`. **Mai versioni ridotte, ritagli o scritte sopra la 04** (licenza NoDerivatives). Mai immagini generate con IA né scaricate dalla rete: i file li fornisce l'utente.
+- Dopo ogni modifica alle figure: `npm run verifica-immagini` (file, dimensioni, completezza dei crediti, testo mostrato = dati).
+- 07: per ora segnaposto «Rendering 3D in preparazione» (dati in `assets/dati-3d/`); il visualizzatore è la tappa successiva, da concordare.
+
 ## Interazioni, movimento, accessibilità
 
 Specifica completa in `design/stati-e-interazioni.md` (copia fedele della pagina 06 di Figma). In sintesi:

@@ -41,6 +41,17 @@ test('390 px: menu aperto senza problemi di accessibilità', async ({ page }) =>
   expect(descrivi(risultato.violations)).toEqual([]);
 });
 
+for (const larghezza of [390, 1440]) {
+  test(`${larghezza} px: finestra «Ingrandisci» aperta senza problemi di accessibilità`, async ({ page }) => {
+    await apri(page, larghezza);
+    await page.locator('#leggi-crispr').click();
+    await page.locator('[data-figura="04"] [data-ingrandisci]').click();
+    await page.waitForTimeout(400);
+    const risultato = await new AxeBuilder({ page }).withTags(REGOLE).include('dialog.ingrandimento').analyze();
+    expect(descrivi(risultato.violations)).toEqual([]);
+  });
+}
+
 test('struttura: lingua, un solo h1, titoli senza salti, sezioni con nome', async ({ page }) => {
   await apri(page, 1440);
   expect(await page.getAttribute('html', 'lang')).toBe('it');

@@ -62,7 +62,7 @@
       "Simple Codon Optimizer",
       "CUSTOM"
     ],
-    "predictive_metrics_count": 10,
+    "predictive_metrics_count": 12,
     "metric_examples": [
       "stabilità RNA",
       "espressione",

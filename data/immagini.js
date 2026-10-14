@@ -1,0 +1,221 @@
+(window.DATI = window.DATI || {})["immagini"] =
+{
+  "nota": "Figure dei pannelli «Approfondimento» 03–07 (decise il 14 ottobre 2026). Testi copiati dal prompt dell'utente e dal componente Figma «Blocco figura» (708:681). credito_it è un elenco di paragrafi; ogni paragrafo alterna testo semplice e pezzi {testo, url} (link) o {testo, lingua} (titolo in un'altra lingua). Le dimensioni native si controllano con npm run verifica-immagini.",
+  "interfaccia": {
+    "ingrandisci": "INGRANDISCI",
+    "chiudi": "CHIUDI ×",
+    "zoom_meno": "−",
+    "zoom_piu": "+",
+    "adatta": "ADATTA",
+    "etichetta_zoom_meno": "Riduci",
+    "etichetta_zoom_piu": "Ingrandisci di più",
+    "etichetta_adatta": "Adatta alla finestra",
+    "etichetta_livello": "Livello di zoom",
+    "nota_nativa": "Dimensione nativa {l}×{a} px: lo zoom si ferma al 100%. Trascina per spostare.",
+    "nota_nativa_compatta": "Nativa {l}×{a} px: zoom max 100%. Trascina per spostare.",
+    "immagine_in_arrivo": "Immagine in arrivo",
+    "legenda_3d": "SCORE ALPHAMISSENSE",
+    "segnaposto_3d": "Rendering 3D in preparazione: {proteina}"
+  },
+  "immagini": [
+    {
+      "id": "fig-03-vaxlab",
+      "sezione": "03",
+      "file": "assets/immagini/originali/03-vaxlab-fig1.png",
+      "larghezza_px": 1975,
+      "altezza_px": 2030,
+      "sha256": "3cfc4035608e7d7975ee99df31b9b77a8d273bea4d4df72b5a8269c6d2e9e5e0",
+      "derivate": [
+        { "file": "assets/immagini/derivate/03-vaxlab-fig1-1000.png", "larghezza_px": 1000, "altezza_px": 1028 }
+      ],
+      "titolo": "Fig. 1 · Flusso di lavoro VaxLab",
+      "badge": "FIGURA ORIGINALE",
+      "autori": "Kim J., Han Y., Kwon C. Y., Chang H.",
+      "titolo_opera": "VaxLab: integrated platform for rapid multistrategy mRNA vaccine design",
+      "lingua_titolo_opera": "en",
+      "pubblicazione": "Experimental & Molecular Medicine 58(4), 1149–1157",
+      "anno": 2026,
+      "copyright": "© The Author(s) 2026",
+      "licenza": "CC BY 4.0",
+      "licenza_url": "https://creativecommons.org/licenses/by/4.0/",
+      "credito_it": [
+        [
+          "Figura originale (Fig. 1): Kim J., Han Y., Kwon C. Y., Chang H., «",
+          { "testo": "VaxLab: integrated platform for rapid multistrategy mRNA vaccine design", "lingua": "en" },
+          "», Experimental & Molecular Medicine 58(4), 1149–1157 (2026). © The Author(s) 2026. Licenza ",
+          { "testo": "CC BY 4.0", "url": "https://creativecommons.org/licenses/by/4.0/" },
+          ". Contenuto non modificato. Fonte: ",
+          { "testo": "DOI 10.1038/s12276-026-01637-y", "url": "https://doi.org/10.1038/s12276-026-01637-y" },
+          " · ",
+          { "testo": "Fig. 1 dell’articolo", "url": "https://www.nature.com/articles/s12276-026-01637-y/figures/1" }
+        ]
+      ],
+      "fonte_url": "https://www.nature.com/articles/s12276-026-01637-y/figures/1",
+      "doi": "10.1038/s12276-026-01637-y",
+      "modifiche": "Nessuna: figura intera, non modificata (versioni ridotte solo per il caricamento, senza ritagli).",
+      "didascalia_it": "Schema del flusso di lavoro di VaxLab (Fig. 1 dell’articolo): ingresso delle sequenze (5′UTR, regione codificante, 3′UTR), ottimizzazione con sei strumenti, valutazione con metriche di struttura, sequenza e frequenza dei codoni, uscita con sequenza ottimizzata, report ed editor interattivo. Descrive il processo di progettazione, non l’efficacia di un vaccino.",
+      "alt_it": "Diagramma a quattro livelli (ingresso, ottimizzazione, valutazione, uscita) del flusso di lavoro di VaxLab, con le regioni 5′UTR, codificante e 3′UTR.",
+      "stato": "DEFINITIVA"
+    },
+    {
+      "id": "fig-04-opencrispr",
+      "sezione": "04",
+      "file": "assets/immagini/originali/04-opencrispr-edfig10.jpg",
+      "larghezza_px": 2157,
+      "altezza_px": 981,
+      "sha256": "00ae452a89260864db33c919d1f0b2ea4acf586f76a4f048e05d7aae88e8c45e",
+      "derivate": [],
+      "titolo": "Extended Data Fig. 10 · OpenCRISPR-1",
+      "badge": "FIGURA ORIGINALE · NON MODIFICATA",
+      "autori": "Ruffolo J. A. et al.",
+      "titolo_opera": "Design of highly functional genome editors by modelling CRISPR–Cas sequences",
+      "lingua_titolo_opera": "en",
+      "pubblicazione": "Nature 645, 518–525",
+      "anno": 2025,
+      "copyright": "© The Author(s) 2025",
+      "licenza": "CC BY-NC-ND 4.0",
+      "licenza_url": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+      "credito_it": [
+        [
+          "Figura originale, non modificata (Extended Data Fig. 10): Ruffolo J. A. et al., «",
+          { "testo": "Design of highly functional genome editors by modelling CRISPR–Cas sequences", "lingua": "en" },
+          "», Nature 645, 518–525 (2025). © The Author(s) 2025. Licenza ",
+          { "testo": "CC BY-NC-ND 4.0", "url": "https://creativecommons.org/licenses/by-nc-nd/4.0/" },
+          ": solo uso non commerciale, senza modifiche. Fonte: ",
+          { "testo": "DOI 10.1038/s41586-025-09298-z", "url": "https://doi.org/10.1038/s41586-025-09298-z" },
+          " · ",
+          { "testo": "Extended Data Fig. 10", "url": "https://www.nature.com/articles/s41586-025-09298-z/figures/14" }
+        ]
+      ],
+      "fonte_url": "https://www.nature.com/articles/s41586-025-09298-z/figures/14",
+      "doi": "10.1038/s41586-025-09298-z",
+      "modifiche": "Nessuna: file originale servito così com'è, senza versioni ridotte (licenza NoDerivatives).",
+      "didascalia_it": "Modello strutturale predetto del complesso OpenCRISPR-1–sgRNA–DNA nello stato catalitico (pannello a) e analisi delle mutazioni rispetto a SpCas9 (pannelli b–d). La struttura è una previsione computazionale AlphaFold2, non una struttura sperimentale.",
+      "alt_it": "Figura a quattro pannelli: a, modello a nastri del complesso con proteina, RNA guida e DNA; b, grafici a barre sulla distribuzione delle mutazioni; c e d, dettagli di due inserzioni.",
+      "stato": "DEFINITIVA"
+    },
+    {
+      "id": "fig-05-immunoterapia",
+      "sezione": "05",
+      "file": "assets/immagini/originali/05-nci-serda-cancer-immunotherapy.jpg",
+      "larghezza_px": 2048,
+      "altezza_px": 1704,
+      "sha256": "7d4b10435b2118c7bc24adedaa18d92d8c241ef0f3bad14fa903510755f6c1a6",
+      "derivate": [
+        { "file": "assets/immagini/derivate/05-nci-serda-cancer-immunotherapy-1000.jpg", "larghezza_px": 1000, "altezza_px": 832 }
+      ],
+      "titolo": "Cancer Immunotherapy · micrografia elettronica",
+      "badge": "IMMAGINE DI CONTESTO",
+      "autori": "Rita Elena Serda (Duncan Comprehensive Cancer Center at Baylor College of Medicine)",
+      "titolo_opera": "Cancer Immunotherapy",
+      "lingua_titolo_opera": "en",
+      "pubblicazione": "Progetto NCI Cancer Close Up 2016; pubblicata da NIH Image Gallery su Flickr il 23 maggio 2016",
+      "anno": 2016,
+      "copyright": "Rita Elena Serda, National Cancer Institute, National Institutes of Health",
+      "licenza": "CC BY-NC 2.0",
+      "licenza_url": "https://creativecommons.org/licenses/by-nc/2.0/",
+      "credito_it": [
+        [
+          "«",
+          { "testo": "Cancer Immunotherapy", "lingua": "en" },
+          "», Rita Elena Serda, Duncan Comprehensive Cancer Center at Baylor College of Medicine, National Cancer Institute, National Institutes of Health (progetto NCI Cancer Close Up 2016). Pubblicata da NIH Image Gallery su Flickr il 23 maggio 2016. Licenza ",
+          { "testo": "CC BY-NC 2.0", "url": "https://creativecommons.org/licenses/by-nc/2.0/" },
+          ": attribuzione, solo uso non commerciale. Fonte: ",
+          { "testo": "pagina Flickr dell’immagine", "url": "https://www.flickr.com/photos/nihgov/27125551111/" }
+        ]
+      ],
+      "fonte_url": "https://www.flickr.com/photos/nihgov/27125551111/",
+      "doi": null,
+      "modifiche": "Nessuna: immagine intera, senza ritagli (versioni ridotte solo per il caricamento).",
+      "didascalia_it": "Micrografia elettronica a scansione con colori aggiunti: una cellula tumorale del cavo orale (bianca) attaccata da due cellule T citotossiche (rosse). Introduce il contesto cellulare dell’immunoterapia; non rappresenta i profili immunitari C1–C6.",
+      "alt_it": "Micrografia elettronica a scansione: una grande cellula tumorale bianca dalla superficie rugosa e, sulla destra, due piccole cellule T rosse a contatto con essa, su sfondo nero.",
+      "stato": "DEFINITIVA"
+    },
+    {
+      "id": "fig-06-radiografia",
+      "sezione": "06",
+      "file": "assets/immagini/originali/06-radiografia-due-proiezioni.webp",
+      "larghezza_px": 1959,
+      "altezza_px": 1024,
+      "sha256": "4bc0a25f2f5f5657f9807041878b21320dbb83e5e45822e37dc04a5f1d3bcd97",
+      "derivate": [
+        { "file": "assets/immagini/derivate/06-radiografia-due-proiezioni-1000.webp", "larghezza_px": 1000, "altezza_px": 523 }
+      ],
+      "titolo": "Fig. 1 · Radiografia toracica in due proiezioni",
+      "badge": "IMMAGINE CLINICA RAPPRESENTATIVA",
+      "autori": "Kupelian C., Bowen D., Huang M., Lee B., Lenzen C., Rungvivatjarus T.",
+      "titolo_opera": "A presentation of systemic lupus erythematosus manifesting as abdominal pain: a case report",
+      "lingua_titolo_opera": "en",
+      "pubblicazione": "Journal of Medical Case Reports 19, 377",
+      "anno": 2025,
+      "copyright": "© The Author(s) 2025",
+      "licenza": "CC BY 4.0",
+      "licenza_url": "https://creativecommons.org/licenses/by/4.0/",
+      "credito_it": [
+        [
+          "Fig. 1 di Kupelian C., Bowen D., Huang M., Lee B., Lenzen C., Rungvivatjarus T., «",
+          { "testo": "A presentation of systemic lupus erythematosus manifesting as abdominal pain: a case report", "lingua": "en" },
+          "», Journal of Medical Case Reports 19, 377 (2025). © The Author(s) 2025. Licenza ",
+          { "testo": "CC BY 4.0", "url": "https://creativecommons.org/licenses/by/4.0/" },
+          ". Contenuto non modificato. Fonte: ",
+          { "testo": "DOI 10.1186/s13256-025-05451-4", "url": "https://doi.org/10.1186/s13256-025-05451-4" },
+          " · copia su ",
+          { "testo": "Wikimedia Commons", "url": "https://commons.wikimedia.org/wiki/File:Two-view_chest_radiograph_depicting_bilateral_pleural_effusions.webp" }
+        ],
+        [
+          "Figura 4 originale (non riprodotta qui, © 2019 AAAI): ",
+          { "testo": "Irvin J. et al., «CheXpert: A Large Chest Radiograph Dataset with Uncertainty Labels and Expert Comparison», AAAI 2019", "url": "https://doi.org/10.1609/aaai.v33i01.3301590", "lingua": "en" }
+        ]
+      ],
+      "fonte_url": "https://commons.wikimedia.org/wiki/File:Two-view_chest_radiograph_depicting_bilateral_pleural_effusions.webp",
+      "doi": "10.1186/s13256-025-05451-4",
+      "modifiche": "Nessuna: immagine intera, senza ritagli (versioni ridotte solo per il caricamento).",
+      "didascalia_it": "Radiografia toracica in due proiezioni (frontale a sinistra, laterale a destra) con versamento pleurico bilaterale, tratta da un caso clinico pubblicato. Immagine rappresentativa: non appartiene al dataset CheXpert e non mostra mappe del modello.",
+      "alt_it": "Due radiografie del torace affiancate, proiezione frontale a sinistra e laterale a destra, con versamento pleurico bilaterale secondo la fonte.",
+      "stato": "DEFINITIVA"
+    },
+    {
+      "id": "fig-07-alphafold-alphamissense",
+      "sezione": "07",
+      "file": null,
+      "larghezza_px": null,
+      "altezza_px": null,
+      "sha256": null,
+      "derivate": [],
+      "titolo": "AlphaFold DB e AlphaMissense · HBB e CFTR",
+      "badge": "RENDERING 3D IN PREPARAZIONE",
+      "proteine": ["HBB", "CFTR"],
+      "autori": "Varadi M. et al. (AlphaFold DB); Cheng J. et al. (AlphaMissense)",
+      "titolo_opera": "AlphaFold Protein Structure Database (HBB, P68871; CFTR, P13569) e punteggi AlphaMissense",
+      "lingua_titolo_opera": "en",
+      "pubblicazione": "Nucleic Acids Research 52(D1), D368–D375 (2024); Science 381(6664), eadg7492 (2023)",
+      "anno": 2024,
+      "copyright": "EMBL-EBI / Google DeepMind (dati); l’articolo di AlphaMissense (Science) non ha licenza aperta: si cita, non si riproduce",
+      "licenza": "CC BY 4.0 (dati)",
+      "licenza_url": "https://creativecommons.org/licenses/by/4.0/",
+      "credito_it": [
+        [
+          "Dati, licenza ",
+          { "testo": "CC BY 4.0", "url": "https://creativecommons.org/licenses/by/4.0/" },
+          ": strutture dell’AlphaFold Protein Structure Database, EMBL-EBI / Google DeepMind (Varadi M. et al., «",
+          { "testo": "AlphaFold Protein Structure Database in 2024: providing structure coverage for over 214 million protein sequences", "lingua": "en" },
+          "», Nucleic Acids Research 52(D1), D368–D375, 2024); punteggi AlphaMissense (Cheng J. et al., «",
+          { "testo": "Accurate proteome-wide missense variant effect prediction with AlphaMissense", "lingua": "en" },
+          "», Science 381(6664), eadg7492, 2023). Elaborazione e rendering: questo progetto. ",
+          { "testo": "AlphaFold DB (HBB)", "url": "https://alphafold.ebi.ac.uk/entry/P68871" },
+          " · ",
+          { "testo": "AlphaFold DB (CFTR)", "url": "https://alphafold.ebi.ac.uk/entry/P13569" },
+          " · ",
+          { "testo": "AlphaMissense", "url": "https://doi.org/10.1126/science.adg7492" }
+        ]
+      ],
+      "fonte_url": "https://alphafold.ebi.ac.uk/entry/P68871",
+      "doi": "10.1126/science.adg7492",
+      "modifiche": "Elaborazione di questo progetto: media per residuo dei punteggi am_pathogenicity, classi con le soglie ufficiali (0–0,34; 0,34–0,564; 0,564–1).",
+      "didascalia_it": "Strutture di emoglobina beta (HBB) e CFTR predette da AlphaFold DB e colorate con la media per residuo dei punteggi AlphaMissense (probabilmente benigna, incerta, probabilmente patogena). Sono previsioni computazionali, non diagnosi.",
+      "alt_it": null,
+      "stato": "SEGNAPOSTO"
+    }
+  ]
+}
+;

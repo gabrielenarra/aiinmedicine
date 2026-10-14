@@ -1,0 +1,170 @@
+/* ==========================================================================
+   «Ingrandisci»: finestra con la figura (js/ingrandimento.js)
+   Desktop 711:501: sfondo scuro, finestra larga al massimo 1200 px, raggio 24,
+   padding 24. Smartphone 711:521: finestra a tutto schermo, raggio 8, padding 16.
+   Dissolvenza di 250 ms, in uscita al 70% (con movimento ridotto 150 ms, foglio E).
+   ========================================================================== */
+
+html.ingrandimento-aperto { overflow: hidden; }
+
+.ingrandimento {
+  --gutter-ingrandimento: var(--spazio-24);
+  box-sizing: border-box;
+  width: min(var(--larghezza-ingrandimento), calc(100% - 2 * var(--gutter-ingrandimento)));
+  max-width: none;
+  max-height: calc(100dvh - 2 * var(--gutter-ingrandimento));
+  margin: auto;
+  padding: calc(var(--spazio-24) - 1px);
+  background: var(--superficie-base);
+  border: 1px solid var(--accento-lilla);
+  border-radius: var(--raggio-24);
+  color: var(--testo-primario);
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity calc(var(--durata-standard) * var(--uscita)) var(--curva);
+}
+.ingrandimento[open] {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spazio-16);
+}
+.ingrandimento[data-visibile="true"] {
+  opacity: 1;
+  transition-duration: var(--durata-standard);
+}
+
+.ingrandimento::backdrop {
+  background: var(--testo-primario);
+  opacity: 0;
+  transition: opacity calc(var(--durata-standard) * var(--uscita)) var(--curva);
+}
+.ingrandimento[data-visibile="true"]::backdrop {
+  opacity: 1;
+  transition-duration: var(--durata-standard);
+}
+
+/* ---------- Intestazione: titolo breve e «CHIUDI ×» ---------- */
+.ingrandimento__testa {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spazio-16);
+}
+.ingrandimento__titolo { margin: 0; min-width: 0; color: var(--testo-primario); }
+
+/* ---------- Pulsanti: pillola come nel disegno, area di tocco ≥ 44 px ---------- */
+.ingrandimento__pulsante {
+  --alto-pillola: calc(16px + 2 * var(--spazio-8));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  min-width: var(--area-tocco-min);
+  min-height: var(--area-tocco-min);
+  margin-block: calc((var(--alto-pillola) - var(--area-tocco-min)) / 2);
+  padding: 0;
+  background: none;
+  border: 0;
+  color: var(--testo-accento);
+  cursor: pointer;
+}
+.ingrandimento__pillola {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--alto-pillola);
+  min-height: var(--alto-pillola);
+  padding: 0 calc(var(--spazio-12) - 1px);
+  background: var(--superficie-bianco);
+  border: 1px solid var(--linea-accento-75);
+  border-radius: var(--raggio-14);
+  transition: background-color var(--durata-rapida) var(--curva), border-color var(--durata-rapida) var(--curva);
+}
+.ingrandimento__chiudi .ingrandimento__pillola {
+  background: var(--superficie-lilla-chiaro-90);
+  border-color: var(--accento-lilla);
+}
+@media (hover: hover) {
+  .ingrandimento__pulsante:not([aria-disabled="true"]):hover .ingrandimento__pillola {
+    background: var(--superficie-lilla-chiaro);
+    border-color: var(--accento-lilla);
+  }
+}
+.ingrandimento__pulsante:active:not([aria-disabled="true"]) { color: var(--testo-accento-premuto); }
+.ingrandimento__pulsante[aria-disabled="true"] { color: var(--testo-attenuato); cursor: default; }
+
+/* ---------- Barra dello zoom ---------- */
+.ingrandimento__barra {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spazio-8);
+}
+.ingrandimento__livello {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(16px + 2 * var(--spazio-8));
+  margin: 0;
+  padding: 0 calc(var(--spazio-12) - 1px);
+  background: var(--superficie-lilla-chiaro-90);
+  border: 1px solid var(--accento-lilla);
+  border-radius: var(--raggio-14);
+  color: var(--testo-accento);
+}
+.ingrandimento__nota {
+  flex: 1 1 240px;
+  margin: 0;
+  color: var(--testo-attenuato);
+  text-align: right;
+}
+
+/* ---------- Area dell'immagine: scorre quando la figura è più grande ---------- */
+.ingrandimento__area {
+  display: flex;
+  flex: 1 1 auto;
+  min-height: 160px;
+  padding: calc(var(--spazio-16) - 1px);
+  background: var(--superficie-bianco);
+  border: 1px solid var(--linea-divisore);
+  border-radius: var(--raggio-18);
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+.ingrandimento__img {
+  display: block;
+  flex: none;
+  margin: auto;          /* centrata quando è più piccola, nessun taglio quando è più grande */
+  max-width: none;
+  user-select: none;
+}
+.ingrandimento__area[data-ingrandita="true"] { cursor: grab; }
+.ingrandimento__area[data-trascina] { cursor: grabbing; }
+
+/* ---------- Didascalia e credito ---------- */
+.ingrandimento__didascalia {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spazio-12);
+  flex: none;
+  max-height: 30dvh;
+  overflow-y: auto;
+}
+.ingrandimento__didascalia p { margin: 0; }
+.ingrandimento__testo { color: var(--testo-secondario); }
+.ingrandimento__didascalia .figura__credito + .figura__credito { margin-top: calc(var(--spazio-12) * -1); }
+
+/* ---------- Smartphone: a tutto schermo (711:521) ---------- */
+@media (max-width: 599px) {
+  .ingrandimento {
+    --gutter-ingrandimento: 0px;
+    width: 100%;
+    height: 100dvh;
+    max-height: 100dvh;
+    padding: calc(var(--spazio-16) - 1px);
+    gap: var(--spazio-12);
+    border-radius: var(--raggio-8);
+  }
+  .ingrandimento::backdrop { background: var(--superficie-base); }
+  .ingrandimento__nota { flex-basis: 100%; text-align: left; }
+}

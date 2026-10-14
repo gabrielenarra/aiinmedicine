@@ -24,7 +24,7 @@
   },
   "mrna_predictive_metrics": {
    "esito": "OK_FONTE_LETTA",
-   "nota": "Nodo 55:72 assente: nello stato aperto 182:2 (I432:191;432:157)."
+   "nota": "Nodo 55:72 assente: nello stato aperto 182:2 (I432:191;432:157). Dal 14 ottobre 2026 il valore è 12: la Fig. 1 dell’articolo elenca 12 voci in tre famiglie (decisione dell’utente del 14 ottobre); l’abstract dice invece «ten predictive metrics» (da dire ai professori, docs/PUNTI-APERTI.md A4)."
   },
   "crispr_off_target_reduction": {
    "esito": "OK_FONTE_LETTA",

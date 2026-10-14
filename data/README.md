@@ -36,6 +36,7 @@ node strumenti/dati.mjs controlla
 | `audit_numeri.csv` | Lo stesso controllo, in forma di tabella (apribile in Excel): valore nel disegno, nodo Figma, confronto con la fonte, esito, nota | Documentazione |
 | `charts.js` | Specifica dei grafici da disegnare con i dati: tipo, barre o segmenti, scala, controllo sul disegno, testo alternativo | Specifica |
 | `manifest.js` | Indice del pacchetto dati | — |
+| `immagini.js` | Le figure dei pannelli «Approfondimento» 03–07 (14 ottobre 2026): file, dimensioni native, impronta sha256 dell'originale, versioni ridotte, titolo breve, badge, didascalia, alt, credito completo con i link, licenza, modifiche; più i testi dei controlli (`interfaccia`). Il credito è un elenco di paragrafi: testo semplice alternato a link `{testo, url}` e titoli in inglese `{testo, lingua}`. Dopo una modifica: `npm run verifica-immagini` | Testi decisi con l'utente |
 | `ancore.js`, `linee.js` | Copie di `design/linee/ancore.json` e dei tracciati di `design/linee/linea-*.svg`, per la linea narrativa (tappa 6). Non si modificano a mano: si rigenerano con `node strumenti/linee.mjs` | `design/linee/` |
 
 ## Regole

@@ -76,6 +76,17 @@ Possibilmente un telefono di fascia media (non il più recente).
 
 Se la linea scatta su telefono: **non togliere nulla da solo**. Dillo (punto aperto B32): le soluzioni previste sono, nell'ordine, togliere le ombre della linea solo su smartphone, ridurre la sfocatura, spezzare il tracciato.
 
+## 6b. Figure e «Ingrandisci»
+
+| Prova | Cosa deve succedere | Esito |
+|---|---|---|
+| Apri un approfondimento, Tab fino a «Ingrandisci», Invio | Si apre la finestra con la figura intera; il focus è su «CHIUDI ×»; Tab resta dentro la finestra | |
+| «+» più volte | Si ferma a 100% (dimensione nativa), la figura resta nitida; si sposta trascinando | |
+| Esc, poi «CHIUDI ×», poi clic fuori | La finestra si chiude ogni volta e il focus torna su «Ingrandisci» | |
+| Zoom del browser al 200% con la finestra aperta | Pulsanti, didascalia e credito leggibili, niente testo tagliato | |
+| Telefono: tocco su «Ingrandisci», spostamento col dito, pinch-zoom | La finestra è a tutto schermo; la figura si sposta; il pinch-zoom del telefono funziona | |
+| Lettore di schermo sulla figura | Legge l'alt, la didascalia e il credito; i titoli in inglese con pronuncia inglese | |
+
 ## 7. Browser
 
 | Browser | Esito |

@@ -1,0 +1,216 @@
+/* ==========================================================================
+   Blocco figura dei pannelli «Approfondimento» 03–07
+   Componente Figma «Blocco figura» (708:681, 12 varianti Figura × Formato) e
+   «Blocco figura 3D (segnaposto)» (705:117). Costruito da js/figure.js.
+   Desktop: nel pannello dopo «Perché è utile / Perché è importante», prima delle
+   mini-card (182:2). Tablet e smartphone: dopo l'introduzione (508:362, 297:4).
+   Solo token di design/tokens.css; misure del disegno in css/valori-disegno.css.
+   ========================================================================== */
+
+.figura {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spazio-12);
+  min-width: 0;
+  margin: 0;
+}
+
+/* posizione nel pannello desktop: 20 px sotto «Perché è utile», 24 px sopra le mini-card */
+.approfondimento .figura { margin-top: var(--spazio-20); }
+.approfondimento .figura + .approfondimento__schede { margin-top: var(--spazio-24); }
+
+/* ---------- Cornice: barra in alto, immagine sotto ---------- */
+.figura__cornice {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spazio-12);
+  min-width: 0;
+  padding: calc(var(--spazio-16) - 1px);
+  background: var(--superficie-bianco);
+  border: 1px solid var(--accento-lilla);
+  border-radius: var(--raggio-18);
+}
+
+/* Badge a sinistra, «Ingrandisci» a destra; se non c'è spazio vanno a capo.
+   Il badge sta nella barra, mai sopra i pixel dell'immagine. */
+.figura__barra {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spazio-8);
+}
+
+.figura__badge {
+  margin: 0;
+  padding: calc(var(--spazio-8) - 1px) calc(var(--spazio-12) - 1px);
+  background: var(--superficie-lilla-chiaro-90);
+  border: 1px solid var(--accento-lilla);
+  border-radius: var(--raggio-14);
+  color: var(--testo-accento);
+}
+
+/* «Ingrandisci»: pillola come nel disegno (alta come il badge); l'area di tocco
+   arriva a 44 px con un margine negativo, così la barra resta alta come in Figma */
+.figura__ingrandisci {
+  --alto-pillola: calc(16px + 2 * var(--spazio-8));
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spazio-8);
+  min-height: var(--area-tocco-min);
+  margin-block: calc((var(--alto-pillola) - var(--area-tocco-min)) / 2);
+  padding: 0 var(--spazio-12);
+  background: none;
+  border: 0;
+  color: var(--testo-accento);
+  cursor: pointer;
+  position: relative;
+  isolation: isolate;
+  transition: color var(--durata-rapida) var(--curva);
+}
+/* il bordo visibile della pillola (alto 32 px, centrato nell'area di tocco) */
+.figura__ingrandisci::before {
+  content: '';
+  position: absolute;
+  inset: calc((var(--area-tocco-min) - var(--alto-pillola)) / 2) 0;
+  background: var(--superficie-bianco);
+  border: 1px solid var(--linea-accento-75);
+  border-radius: var(--raggio-14);
+  transition: border-color var(--durata-rapida) var(--curva), background-color var(--durata-rapida) var(--curva);
+  z-index: -1;
+}
+.figura__ingrandisci > .figura__icona { flex: none; }
+@media (hover: hover) {
+  .figura__ingrandisci:hover::before { background: var(--superficie-lilla-chiaro); border-color: var(--accento-lilla); }
+}
+.figura__ingrandisci:active { color: var(--testo-accento-premuto); }
+.figura__ingrandisci:active::before { border-color: var(--testo-accento-premuto); }
+
+.figura__icona {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+}
+
+/* ---------- Immagine: proporzioni native, mai più larga della sua dimensione ---------- */
+.figura__immagine {
+  display: flex;
+  justify-content: center;
+  min-width: 0;
+}
+
+.figura__img {
+  display: block;
+  width: 100%;
+  /* larghezza del disegno per formato (03 e 05), poi mai oltre quella nativa */
+  max-width: min(var(--larghezza-figura, 100%), var(--larghezza-nativa, 100%));
+  height: auto;
+}
+
+[data-formato="desktop"] [data-figura="03"] { --larghezza-figura: var(--figura-03-desktop); }
+[data-formato="tablet"] [data-figura="03"] { --larghezza-figura: var(--figura-03-tablet); }
+[data-formato="desktop"] [data-figura="05"] { --larghezza-figura: var(--figura-05-desktop); }
+[data-formato="tablet"] [data-figura="05"] { --larghezza-figura: var(--figura-05-tablet); }
+
+/* File mancante: riquadro vuoto, mai una figura finta */
+.figura__in-arrivo {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  min-height: 200px;
+  background: var(--superficie-lilla-chiaro-55);
+  border: 1px dashed var(--linea-accento-75);
+  border-radius: var(--raggio-14);
+  color: var(--testo-secondario);
+}
+
+/* ---------- Didascalia e credito (sotto la cornice) ---------- */
+.figura__didascalia {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spazio-12);
+}
+.figura__didascalia p { margin: 0; }
+.figura__testo { color: var(--testo-secondario); }
+.figura__credito { color: var(--testo-attenuato); overflow-wrap: anywhere; }
+.figura__credito + .figura__credito { margin-top: calc(var(--spazio-12) * -1); }
+.figura__credito a {
+  color: var(--testo-accento);
+  text-decoration: underline;
+  text-underline-position: from-font;
+}
+.figura__credito a:active { color: var(--testo-accento-premuto); }
+
+/* ---------- 07: segnaposto 3D (705:117) ---------- */
+.figura__area-3d {
+  display: flex;
+  gap: var(--spazio-16);
+  align-items: flex-start;
+}
+
+.figura__segnaposto-3d {
+  display: grid;
+  place-items: center;
+  flex: 0 1 var(--segnaposto-3d-larghezza);
+  min-width: 0;
+  height: var(--segnaposto-3d-altezza);
+  padding: var(--spazio-16);
+  background: var(--superficie-lilla-chiaro-55);
+  border: 1px dashed var(--linea-accento-75);
+  border-radius: var(--raggio-14);
+  color: var(--testo-secondario);
+  text-align: center;
+}
+
+.figura__legenda {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spazio-12);
+  flex: 0 0 var(--legenda-3d-larghezza);
+  min-width: 0;
+}
+.figura__legenda-titolo { margin: 0; color: var(--testo-accento); }
+.figura__legenda-voci {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spazio-12);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.figura__legenda-voce {
+  display: flex;
+  align-items: center;
+  gap: var(--spazio-8);
+  color: var(--testo-secondario);
+}
+.figura__pallino {
+  flex: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--colore-segmento);
+  border: 1px solid var(--linea-accento-75);
+}
+
+[data-formato="desktop"] .figura--3d {
+  --segnaposto-3d-larghezza: var(--segnaposto-3d-desktop);
+  --segnaposto-3d-altezza: var(--segnaposto-3d-alto-desktop);
+  --legenda-3d-larghezza: var(--legenda-3d-desktop);
+}
+[data-formato="tablet"] .figura--3d {
+  --segnaposto-3d-larghezza: var(--segnaposto-3d-tablet);
+  --segnaposto-3d-altezza: var(--segnaposto-3d-alto-tablet);
+  --legenda-3d-larghezza: var(--legenda-3d-tablet);
+}
+
+/* ---------- Smartphone (708:531 …): padding 12, segnaposto in colonna ---------- */
+@media (max-width: 599px) {
+  .figura__cornice { padding: calc(var(--spazio-12) - 1px); }
+  .figura__area-3d { flex-direction: column; align-items: stretch; }
+  .figura__segnaposto-3d { flex: none; width: 100%; height: var(--segnaposto-3d-alto-smartphone); }
+  .figura__legenda { flex: none; }
+}

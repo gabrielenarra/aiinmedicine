@@ -8,7 +8,7 @@
 (() => {
   const grezzi = window.DATI || {};
   const necessari = ['contenuti', 'site_metrics', 'sources', 'audit_status', 'charts',
-    'mrna', 'crispr', 'immunotherapy', 'diagnostics', 'discoveries', 'ancore', 'linee'];
+    'mrna', 'crispr', 'immunotherapy', 'diagnostics', 'discoveries', 'ancore', 'linee', 'immagini'];
   const mancanti = necessari.filter((nome) => !(nome in grezzi));
   if (mancanti.length) {
     console.error(`Dati mancanti: ${mancanti.join(', ')}. Controlla gli <script src="data/…"> in index.html.`);
@@ -71,6 +71,8 @@
     ancore: grezzi.ancore || {},
     linee: grezzi.linee || {},
     grafici: grezzi.charts || {},
+    // figure dei pannelli «Approfondimento» (testi, crediti, licenze, dimensioni native)
+    immagini: grezzi.immagini || { interfaccia: {}, immagini: [] },
     sezioni: {
       '03': grezzi.mrna,
       '04': grezzi.crispr,

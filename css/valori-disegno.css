@@ -74,6 +74,24 @@
   --sfumatura-kpi-06: linear-gradient(90deg, rgba(246, 244, 255, 0.98), rgba(227, 219, 255, 0.98)); /* 424:91 */
   /* AUROC (charts.js: «490 px per 1,0 a partire da 0,80»): l'asse 0,80–1,00 è alto 98 px */
   --altezza-grafico-auroc: 98px;
+
+  /* Blocco figura (708:681): larghezza dell'immagine nella cornice, dove non la
+     occupa tutta (03 e 05; su smartphone sempre tutta). Mai oltre la dimensione
+     nativa (css/figure.css) */
+  --figura-03-desktop: 600px;          /* 708:513 */
+  --figura-03-tablet: 520px;           /* 708:516 */
+  --figura-05-desktop: 580px;          /* 708:591 */
+  --figura-05-tablet: 500px;           /* 708:606 */
+  /* Segnaposto 3D della 07 (705:117): riquadri tratteggiati e legenda */
+  --segnaposto-3d-desktop: 315px;      /* 705:53 */
+  --segnaposto-3d-alto-desktop: 300px;
+  --legenda-3d-desktop: 190px;         /* 705:57 */
+  --segnaposto-3d-tablet: 243px;       /* 705:76 */
+  --segnaposto-3d-alto-tablet: 260px;
+  --legenda-3d-tablet: 170px;          /* 705:80 */
+  --segnaposto-3d-alto-smartphone: 200px; /* 705:99 */
+  /* Finestra «Ingrandisci» desktop (711:502) */
+  --larghezza-ingrandimento: 1200px;
 }
 
 @media (min-width: 1280px) {

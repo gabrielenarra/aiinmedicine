@@ -237,7 +237,7 @@
       segno('leggi-di-piu__segno', aperto));
   }
 
-  function approfondimento(s) {
+  function approfondimento(s, n) {
     const a = formato(s.approfondimento);
     const nomiProfili = (sezioni['05'] && sezioni['05'].immune_subtypes) || [];
     const numera = (i, testo) => (a.numera_schede ? `${String(i + 1).padStart(2, '0')} · ${testo}` : testo);
@@ -254,6 +254,8 @@
       el('div', { class: 'approfondimento__contesto' },
         el('p', { class: 't-eyebrow-maiuscolo-12' }, a.contesto.etichetta),
         el('p', { class: 't-corpo-piccolo-14' }, a.contesto.testo)),
+      // figura (js/figure.js): dopo «Perché è utile», prima delle mini-card (182:2)
+      window.SITO.figure.blocco(n),
       a.schede ? el('ul', { class: 'approfondimento__schede', role: 'list' }, a.schede.map((sc, i) =>
         el('li', { class: 'scheda-dettaglio' },
           el('p', { class: 'scheda-dettaglio__etichetta t-eyebrow-maiuscolo-12' }, righe(etichettaScheda(sc.etichetta, i))),
@@ -521,6 +523,8 @@
       el('p', { class: `sc-eyebrow ${classeEtichetta}` }, a.eyebrow),
       el('h3', { class: 'sc-titolo t-titolo-mobile' }, a.titolo),
       el('p', { class: 'sc-nota t-etichetta-media-14' }, a.introduzione),
+      // figura (js/figure.js): dopo l'introduzione, prima della prima card (297:4, 508:362)
+      window.SITO.figure.blocco(n),
       el('ul', { class: 'sc-dettagli', role: 'list' },
         schede.map((sc, i) => scheda(numera(i, unaRiga(sc.etichetta)), sc.testo)),
         (a.profili || []).map((p) => {
@@ -563,7 +567,7 @@
           intestazionePalco(n, s),
           bloccoSezione(n, s),
           barraLeggiDiPiu(s)),
-        apribile(s.id, approfondimento(s))));
+        apribile(s.id, approfondimento(s, n))));
   }
 
   function disegna() {
