@@ -92,6 +92,11 @@
   --segnaposto-3d-alto-smartphone: 200px; /* 705:99 */
   /* Finestra «Ingrandisci» desktop (711:502) */
   --larghezza-ingrandimento: 1200px;
+  /* Visualizzatore 3D della 07 (712:501): schede da 320, area 3D alta 240, campo 96 */
+  --v3d-scheda: 320px;                 /* 712:504 */
+  --v3d-area-alta: 240px;              /* 712:506 */
+  --v3d-campo: 96px;                   /* 712:519 */
+  --v3d-tabella-alta: 320px;           /* tabella testuale: scorre dentro questa altezza */
 }
 
 @media (min-width: 1280px) {

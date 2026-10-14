@@ -3,6 +3,8 @@
 const { test, expect } = require('@playwright/test');
 const path = require('node:path');
 const { pathToFileURL } = require('node:url');
+// avvisi della scheda grafica simulata del Chromium di prova (WebGL del 3D, sezione 07): non vengono dal sito
+const GPU_SIMULATA = /GL Driver Message/;
 
 const PAGINA = pathToFileURL(path.resolve(__dirname, '..', 'index.html')).href;
 const SEZIONI = ['vaccini-mrna', 'crispr', 'immunoterapia', 'diagnostica', 'scoperte'];
@@ -10,7 +12,7 @@ const SEZIONI = ['vaccini-mrna', 'crispr', 'immunoterapia', 'diagnostica', 'scop
 async function apri(page, larghezza, url = PAGINA) {
   const errori = [];
   const esterne = [];
-  page.on('console', (m) => { if (m.type() === 'error' || m.type() === 'warning') errori.push(m.text()); });
+  page.on('console', (m) => { if ((m.type() === 'error' || m.type() === 'warning') && !GPU_SIMULATA.test(m.text())) errori.push(m.text()); });
   page.on('pageerror', (e) => errori.push(e.message));
   page.on('request', (r) => { if (!/^(file|data|blob):/.test(r.url()) && !r.url().startsWith('http://127.0.0.1:8081/')) esterne.push(r.url()); });
   await page.emulateMedia({ reducedMotion: 'reduce' });
@@ -44,7 +46,8 @@ for (const larghezza of [320, 360, 390, 768, 1024, 1280, 1440, 1920]) {
       const figure = [...document.querySelectorAll('figure.figura')];
       for (const f of figure) {
         const c = f.getBoundingClientRect();
-        for (const n of f.querySelectorAll('*')) {
+        // la tabella della 07 scorre dentro il suo riquadro (.v3d__scorri): lì lo scorrimento è voluto
+        for (const n of [...f.querySelectorAll('*')].filter((x) => !x.closest('.v3d__scorri table'))) {
           const r = n.getBoundingClientRect();
           if (r.width && (r.right > c.right + 1 || r.left < c.left - 1)) fuori.push(`${f.dataset.figura} → ${n.className || n.tagName}`);
           const s = getComputedStyle(n);
@@ -54,13 +57,13 @@ for (const larghezza of [320, 360, 390, 768, 1024, 1280, 1440, 1920]) {
       return {
         sezioni: figure.map((f) => f.dataset.figura),
         // larghezza mostrata ≤ larghezza nativa (in px CSS) e proporzioni rispettate
-        immagini: [...document.querySelectorAll('figure.figura img')].map((i) => {
+        immagini: [...document.querySelectorAll('figure.figura img.figura__img')].map((i) => {
           const r = i.getBoundingClientRect();
           return { larga: r.width, alta: r.height, nativa: Number(i.getAttribute('width')), altaNativa: Number(i.getAttribute('height')) };
         }),
         // il badge sta nella barra, sopra l'immagine e non sopra i suoi pixel
-        badgeSopra: figure.filter((f) => f.querySelector('img')).every((f) =>
-          f.querySelector('.figura__badge').getBoundingClientRect().bottom <= f.querySelector('img').getBoundingClientRect().top),
+        badgeSopra: figure.filter((f) => f.querySelector('img.figura__img')).every((f) =>
+          f.querySelector('.figura__badge').getBoundingClientRect().bottom <= f.querySelector('img.figura__img').getBoundingClientRect().top),
         scorrimento: document.documentElement.scrollWidth,
         fuori,
       };
@@ -108,13 +111,14 @@ test('04: nessuna scritta sopra l\'immagine e nessuna versione ridotta', async (
   expect(info.altri).toBe(1);
 });
 
-test('07: segnaposto con due riquadri e legenda, nessuna immagine, niente «Ingrandisci»', async ({ page }) => {
+test('07: visualizzatore attivo, niente segnaposto né badge, niente «Ingrandisci» (prove in visualizzatore-3d.spec.js)', async ({ page }) => {
   await apri(page, 1440);
   await apriPannelli(page);
   const f = page.locator('[data-figura="07"]');
-  await expect(f.locator('.figura__segnaposto-3d')).toHaveCount(2);
+  await expect(f.locator('.v3d__scheda')).toHaveCount(2);
   await expect(f.locator('.figura__legenda-voce')).toHaveCount(3);
-  await expect(f.locator('img')).toHaveCount(0);
+  await expect(f.locator('.figura__segnaposto-3d')).toHaveCount(0);
+  await expect(f.locator('.figura__badge')).toHaveCount(0);
   await expect(f.locator('[data-ingrandisci]')).toHaveCount(0);
 });
 

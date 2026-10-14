@@ -1,0 +1,186 @@
+/* ==========================================================================
+   Sezione 07: visualizzatore 3D (js/visualizzatore-3d.js), Figma 712:501
+   Desktop: due schede da 320 px e la legenda affiancate. Tablet: due schede
+   affiancate, legenda sotto. Smartphone: tutto in colonna.
+   Solo token; misure del disegno in css/valori-disegno.css.
+   ========================================================================== */
+
+.v3d {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, var(--v3d-scheda))) minmax(max-content, 1fr);
+  gap: var(--spazio-16);
+  align-items: start;
+}
+
+.v3d__scheda {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spazio-8);
+  min-width: 0;
+  padding: calc(var(--spazio-12) - 1px);
+  background: var(--superficie-bianco);
+  border: 1px solid var(--accento-lilla);
+  border-radius: var(--raggio-18);
+}
+.v3d__scheda p { margin: 0; }
+.v3d__testa { color: var(--testo-primario); }
+
+/* Area del modello: il canvas di 3Dmol la riempie */
+.v3d__area {
+  position: relative;
+  height: var(--v3d-area-alta);
+  background: var(--superficie-lilla-chiaro-55);
+  border: 1px solid var(--linea-divisore);
+  border-radius: var(--raggio-14);
+  overflow: hidden;
+  touch-action: none;   /* trascinare ruota il modello */
+}
+.v3d__area canvas { position: absolute; inset: 0; width: 100% !important; height: 100% !important; }
+
+/* Immagine di riserva: visibile finché il 3D non è pronto, senza WebGL e in stampa */
+.v3d__riserva {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.v3d__area[data-pronto] .v3d__riserva { visibility: hidden; }
+.v3d__scheda[data-riserva] .v3d__area { touch-action: auto; }
+.v3d__scheda[data-riserva] .v3d__riserva { visibility: visible; }
+
+.v3d__istruzioni { color: var(--testo-attenuato); }
+
+/* ---------- Pulsanti: pillola come nel disegno, area di tocco ≥ 44 px ---------- */
+.v3d__controlli {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--spazio-8);
+}
+.v3d__pulsante {
+  --alto-pillola: calc(16px + 2 * var(--spazio-8));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--area-tocco-min);
+  min-height: var(--area-tocco-min);
+  padding: 0;
+  background: none;
+  border: 0;
+  color: var(--testo-accento);
+  cursor: pointer;
+}
+.v3d__pillola {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--alto-pillola);
+  min-height: var(--alto-pillola);
+  padding: 0 calc(var(--spazio-12) - 1px);
+  background: var(--superficie-bianco);
+  border: 1px solid var(--linea-accento-75);
+  border-radius: var(--raggio-14);
+  transition: background-color var(--durata-rapida) var(--curva), border-color var(--durata-rapida) var(--curva);
+}
+.v3d__pulsante--vai .v3d__pillola,
+.v3d__pulsante[aria-pressed="true"] .v3d__pillola {
+  background: var(--superficie-lilla-chiaro-90);
+  border-color: var(--accento-lilla);
+}
+@media (hover: hover) {
+  .v3d__pulsante:hover .v3d__pillola { background: var(--superficie-lilla-chiaro); border-color: var(--accento-lilla); }
+}
+.v3d__pulsante:active { color: var(--testo-accento-premuto); }
+
+/* ---------- «Vai al residuo» ---------- */
+.v3d__vai {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 var(--spazio-8);
+}
+.v3d__etichetta { color: var(--testo-secondario); }
+.v3d__campo {
+  width: var(--v3d-campo);
+  min-height: var(--area-tocco-min);
+  padding: 0 calc(var(--spazio-12) - 1px);
+  background: var(--superficie-bianco);
+  border: 1px solid var(--accento-lilla);
+  border-radius: var(--raggio-12);
+  color: var(--testo-primario);
+}
+.v3d__campo::placeholder { color: var(--testo-attenuato); opacity: 1; }
+.v3d__campo[aria-invalid="true"] { border-color: var(--testo-accento-premuto); }
+.v3d__errore { color: var(--testo-accento-premuto); }
+.v3d__errore:empty { display: none; }
+
+/* ---------- Riquadro «Residuo scelto» (aria-live) ---------- */
+.figura--3d-attiva > .v3d__risultato {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spazio-4);
+  padding: calc(var(--spazio-12) - 1px) calc(var(--spazio-16) - 1px);
+  background: var(--superficie-lilla-chiaro-90);
+  border: 1px solid var(--accento-lilla);
+  border-radius: var(--raggio-14);
+}
+.v3d__risultato p { margin: 0; }
+.v3d__risultato-titolo { color: var(--testo-accento); }
+.v3d__risultato-testo { color: var(--testo-secondario); }
+
+/* ---------- Tabelle testuali comprimibili ---------- */
+.v3d__tabelle {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spazio-8);
+}
+.v3d__tabella {
+  border: 1px solid var(--linea-divisore);
+  border-radius: var(--raggio-12);
+  background: var(--superficie-bianco);
+}
+.v3d__sommario {
+  display: flex;
+  align-items: center;
+  min-height: var(--area-tocco-min);
+  padding: 0 var(--spazio-16);
+  color: var(--testo-accento);
+  cursor: pointer;
+}
+.v3d__scorri {
+  max-height: var(--v3d-tabella-alta);
+  overflow: auto;
+  border-top: 1px solid var(--linea-divisore);
+}
+.v3d__tabella table { width: 100%; border-collapse: collapse; }
+.v3d__tabella th {
+  position: sticky;
+  top: 0;
+  background: var(--superficie-lilla-chiaro);
+  color: var(--testo-primario);
+  text-align: left;
+  font-weight: inherit;
+}
+.v3d__tabella th,
+.v3d__tabella td { padding: var(--spazio-8) var(--spazio-16); }
+.v3d__tabella td { color: var(--testo-secondario); border-top: 1px solid var(--linea-divisore); }
+
+.figura--3d-attiva { gap: var(--spazio-16); }
+
+/* ---------- Tablet: schede affiancate, legenda sotto ---------- */
+[data-formato="tablet"] .v3d { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+[data-formato="tablet"] .v3d .figura__legenda { grid-column: 1 / -1; }
+
+/* ---------- Smartphone: in colonna ---------- */
+@media (max-width: 599px) {
+  .v3d { grid-template-columns: minmax(0, 1fr); }
+  .v3d__tabella th,
+  .v3d__tabella td { padding-inline: var(--spazio-8); }
+}
+
+/* ---------- Stampa: immagine fissa al posto del 3D ---------- */
+@media print {
+  .v3d__area canvas { display: none !important; }
+  .v3d__area .v3d__riserva { visibility: visible !important; }
+  [data-v3d-solo-3d], .v3d__vai { display: none !important; }
+}

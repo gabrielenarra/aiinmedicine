@@ -86,6 +86,11 @@ Se la linea scatta su telefono: **non togliere nulla da solo**. Dillo (punto ape
 | Zoom del browser al 200% con la finestra aperta | Pulsanti, didascalia e credito leggibili, niente testo tagliato | |
 | Telefono: tocco su «Ingrandisci», spostamento col dito, pinch-zoom | La finestra è a tutto schermo; la figura si sposta; il pinch-zoom del telefono funziona | |
 | Lettore di schermo sulla figura | Legge l'alt, la didascalia e il credito; i titoli in inglese con pronuncia inglese | |
+| 07 su un telefono vero: apri l'approfondimento | Prima l'immagine fissa, poi (entro pochi secondi) i due modelli 3D; la rotazione lenta si ferma al primo tocco | |
+| 07: ruota e avvicina con le dita, «−», «+», «REIMPOSTA» | Movimenti fluidi, senza scatti; «REIMPOSTA» rimette la vista iniziale | |
+| 07: tocca un punto del nastro, poi «Vai al residuo» con 7 (HBB) | Il riquadro «Residuo scelto» si aggiorna e il lettore di schermo lo legge; la sfera viola segna il residuo | |
+| 07: tabella dei residui | Si apre e si chiude; si scorre dentro il suo riquadro | |
+| 07: stampa della pagina (anteprima di stampa) | Al posto del 3D le immagini fisse | |
 
 ## 7. Browser
 

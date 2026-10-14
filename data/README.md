@@ -37,6 +37,7 @@ node strumenti/dati.mjs controlla
 | `charts.js` | Specifica dei grafici da disegnare con i dati: tipo, barre o segmenti, scala, controllo sul disegno, testo alternativo | Specifica |
 | `manifest.js` | Indice del pacchetto dati | — |
 | `immagini.js` | Le figure dei pannelli «Approfondimento» 03–07 (14 ottobre 2026): file, dimensioni native, impronta sha256 dell'originale, versioni ridotte, titolo breve, badge, didascalia, alt, credito completo con i link, licenza, modifiche; più i testi dei controlli (`interfaccia`). Il credito è un elenco di paragrafi: testo semplice alternato a link `{testo, url}` e titoli in inglese `{testo, lingua}`. Dopo una modifica: `npm run verifica-immagini` | Testi decisi con l'utente |
+| `alphamissense_residui.js`, `struttura_hbb.js`, `struttura_cftr.js` | Sezione 07, visualizzatore 3D: per ogni residuo di HBB e CFTR amminoacido, media dei punteggi AlphaMissense e classe (con riepilogo e soglie); strutture AlphaFold ridotte alla catena principale. **Non si modificano a mano:** si rigenerano con `node strumenti/prepara_alphamissense.mjs` dai file di `assets/dati-3d/`. Le due strutture si caricano solo quando si apre il pannello 07 | `assets/dati-3d/` |
 | `ancore.js`, `linee.js` | Copie di `design/linee/ancore.json` e dei tracciati di `design/linee/linea-*.svg`, per la linea narrativa (tappa 6). Non si modificano a mano: si rigenerano con `node strumenti/linee.mjs` | `design/linee/` |
 
 ## Regole

@@ -8,7 +8,7 @@
 (() => {
   const grezzi = window.DATI || {};
   const necessari = ['contenuti', 'site_metrics', 'sources', 'audit_status', 'charts',
-    'mrna', 'crispr', 'immunotherapy', 'diagnostics', 'discoveries', 'ancore', 'linee', 'immagini'];
+    'mrna', 'crispr', 'immunotherapy', 'diagnostics', 'discoveries', 'ancore', 'linee', 'immagini', 'alphamissense_residui'];
   const mancanti = necessari.filter((nome) => !(nome in grezzi));
   if (mancanti.length) {
     console.error(`Dati mancanti: ${mancanti.join(', ')}. Controlla gli <script src="data/…"> in index.html.`);
@@ -73,6 +73,10 @@
     grafici: grezzi.charts || {},
     // figure dei pannelli «Approfondimento» (testi, crediti, licenze, dimensioni native)
     immagini: grezzi.immagini || { interfaccia: {}, immagini: [] },
+    // 07: media per residuo dei punteggi AlphaMissense (strumenti/prepara_alphamissense.mjs)
+    alphamissense: grezzi.alphamissense_residui || { proteine: [] },
+    // strutture 3D: arrivano dopo, quando si apre il pannello 07 (js/visualizzatore-3d.js)
+    struttura: (nome) => grezzi[nome] || (window.DATI && window.DATI[nome]) || null,
     sezioni: {
       '03': grezzi.mrna,
       '04': grezzi.crispr,

@@ -16,12 +16,17 @@ const path = require('node:path');
 const crypto = require('node:crypto');
 const vm = require('node:vm');
 const { pathToFileURL } = require('node:url');
+// avvisi della scheda grafica simulata del Chromium di prova (WebGL del 3D, sezione 07): non vengono dal sito
+const GPU_SIMULATA = /GL Driver Message/;
 
 const RADICE = path.resolve(__dirname, '..');
 const contesto = { window: {} };
 vm.createContext(contesto);
 vm.runInContext(fs.readFileSync(path.join(RADICE, 'data', 'immagini.js'), 'utf8'), contesto);
+vm.runInContext(fs.readFileSync(path.join(RADICE, 'data', 'alphamissense_residui.js'), 'utf8'), contesto);
 const { immagini } = contesto.window.DATI.immagini;
+// {modello} nei crediti: versione dei modelli AlphaFold (come in js/figure.js)
+const MODELLO = [...new Set(contesto.window.DATI.alphamissense_residui.proteine.map((p) => p.modello))].join(', ');
 const problemi = [];
 
 // ---------- Dimensioni native dall'intestazione del file ----------
@@ -56,14 +61,25 @@ function dimensioni(file) {
 }
 
 // Testo visibile del credito, come lo scrive js/figure.js
-const testoCredito = (paragrafo) => paragrafo.map((p) => (typeof p === 'string' ? p : p.testo)).join('');
+const testoCredito = (paragrafo) => paragrafo.map((p) => (typeof p === 'string' ? p.replace('{modello}', MODELLO) : p.testo)).join('');
 const linkCredito = (credito) => credito.flat().filter((p) => typeof p === 'object' && p.url).map((p) => ({ testo: p.testo, url: p.url }));
 
 console.log('Figura | file | dimensioni attese | dimensioni del file | esito');
 for (const f of immagini) {
   // ---------- 3. Voce completa ----------
-  for (const campo of ['licenza', 'licenza_url', 'credito_it', 'fonte_url', 'modifiche', 'didascalia_it', 'badge', 'titolo']) {
+  // 07 attiva: niente badge (il visualizzatore ha tolto «Rendering 3D in preparazione»)
+  const campi = ['licenza', 'licenza_url', 'credito_it', 'fonte_url', 'modifiche', 'didascalia_it', 'titolo'].concat(f.stato === 'ATTIVA' ? [] : ['badge']);
+  for (const campo of campi) {
     if (!f[campo] || (Array.isArray(f[campo]) && !f[campo].length)) problemi.push(`${f.id}: manca «${campo}»`);
+  }
+  if (f.stato === 'ATTIVA' && !/\{modello\}/.test(JSON.stringify(f.credito_it))) problemi.push(`${f.id}: il credito non riporta la versione del modello`);
+  // immagini fisse di riserva del 3D (render nostri)
+  for (const r of f.riserva || []) {
+    const p = path.join(RADICE, r.file);
+    if (!fs.existsSync(p)) { problemi.push(`${f.id}: immagine di riserva mancante ${r.file}`); continue; }
+    const d = dimensioni(p);
+    if (!d || d.l !== r.larghezza_px || d.a !== r.altezza_px) problemi.push(`${f.id}: ${r.file} è ${d ? `${d.l}×${d.a}` : '?'}, attesa ${r.larghezza_px}×${r.altezza_px}`);
+    console.log(`${f.sezione} | riserva ${path.basename(r.file)} | ${r.larghezza_px}×${r.altezza_px} | ${d ? `${d.l}×${d.a}` : '?'} | ${d && d.l === r.larghezza_px ? 'ok' : '✗'}`);
   }
   if (f.file && !f.alt_it) problemi.push(`${f.id}: manca «alt_it»`);
   if (f.credito_it && !testoCredito(f.credito_it.flat()).includes(f.licenza.replace(' (dati)', ''))) problemi.push(`${f.id}: il credito non nomina la licenza`);
@@ -99,7 +115,7 @@ for (const f of immagini) {
 async function nelSito(browser, larghezza) {
   const pagina = await browser.newPage({ viewport: { width: larghezza, height: 900 } });
   const errori = [];
-  pagina.on('console', (m) => { if (m.type() === 'error' || m.type() === 'warning') errori.push(m.text()); });
+  pagina.on('console', (m) => { if ((m.type() === 'error' || m.type() === 'warning') && !GPU_SIMULATA.test(m.text())) errori.push(m.text()); });
   pagina.on('pageerror', (e) => errori.push(e.message));
   await pagina.emulateMedia({ reducedMotion: 'reduce' });
   await pagina.goto(pathToFileURL(path.join(RADICE, 'index.html')).href);
@@ -128,7 +144,7 @@ async function nelSito(browser, larghezza) {
   for (const f of immagini) {
     const m = mostrate.figure.find((x) => x.sezione === f.sezione);
     if (!m) { problemi.push(`${larghezza} px: figura ${f.sezione} non mostrata`); continue; }
-    if (m.badge !== f.badge) problemi.push(`${larghezza} px, ${f.sezione}: badge «${m.badge}» ≠ «${f.badge}»`);
+    if ((m.badge ?? null) !== (f.badge ?? null)) problemi.push(`${larghezza} px, ${f.sezione}: badge «${m.badge}» ≠ «${f.badge}»`);
     if (m.didascalia !== f.didascalia_it) problemi.push(`${larghezza} px, ${f.sezione}: la didascalia mostrata è diversa da data/immagini.js`);
     const attesi = f.credito_it.map(testoCredito);
     if (JSON.stringify(m.crediti) !== JSON.stringify(attesi)) problemi.push(`${larghezza} px, ${f.sezione}: il credito mostrato è diverso da data/immagini.js`);

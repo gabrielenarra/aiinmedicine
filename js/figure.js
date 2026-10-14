@@ -37,10 +37,14 @@
     return svg;
   }
 
+  // Valori nei crediti: {modello} = versione dei modelli AlphaFold, letta dal nome dei file (07)
+  const am = window.SITO.dati.alphamissense;
+  const valoriCredito = { modello: [...new Set(am.proteine.map((p) => p.modello))].join(', ') };
+
   // Un paragrafo di credito: testo, link {testo, url}, titoli {testo, lingua}
   function paragrafoCredito(pezzi) {
     return el('p', { class: 'figura__credito t-dati-medio-12' }, pezzi.map((p) => {
-      if (typeof p === 'string') return p;
+      if (typeof p === 'string') return compila(p, valoriCredito);
       if (p.url) return el('a', { href: p.url, rel: 'noopener noreferrer', target: '_blank', lang: p.lingua || null }, p.testo);
       return el('span', { lang: p.lingua || null }, p.testo);
     }));
@@ -107,29 +111,36 @@
 
   // 07, finché il visualizzatore non c'è: due riquadri tratteggiati e la legenda.
   // Colori della legenda = quelli dei segmenti del grafico della sezione (css/grafico.css)
-  function bloccoSegnaposto(f) {
+  function legenda() {
     const classi = (window.SITO.dati.sezioni['07'] || {}).classification || [];
+    return el('div', { class: 'figura__legenda' },
+      el('p', { class: 'figura__legenda-titolo t-eyebrow-maiuscolo-12' }, interfaccia.legenda_3d),
+      el('ul', { class: 'figura__legenda-voci', role: 'list' }, classi.map((c) =>
+        el('li', { class: 'figura__legenda-voce t-dati-medio-12' },
+          el('span', { class: 'figura__pallino', 'data-segmento': c.class, 'aria-hidden': 'true' }),
+          c.label_it))));
+  }
+
+  function bloccoSegnaposto(f) {
     return el('figure', { class: 'figura figura--3d', 'data-figura': f.sezione, 'data-figura-id': f.id },
       el('div', { class: 'figura__cornice' },
-        el('div', { class: 'figura__barra' }, badge(f.badge)),
+        el('div', { class: 'figura__barra' }, badge(f.badge || f.badge_segnaposto)),
         el('div', { class: 'figura__area-3d' },
           (f.proteine || []).map((p) => el('div', { class: 'figura__segnaposto-3d t-corpo-piccolo-14' },
             compila(interfaccia.segnaposto_3d, { proteina: p }))),
-          el('div', { class: 'figura__legenda' },
-            el('p', { class: 'figura__legenda-titolo t-eyebrow-maiuscolo-12' }, interfaccia.legenda_3d),
-            el('ul', { class: 'figura__legenda-voci', role: 'list' }, classi.map((c) =>
-              el('li', { class: 'figura__legenda-voce t-dati-medio-12' },
-                el('span', { class: 'figura__pallino', 'data-segmento': c.class, 'aria-hidden': 'true' }),
-                c.label_it)))))),
+          legenda())),
       didascalia(f));
   }
 
-  // Il blocco della sezione n (03–07), o null se la sezione non ha figura
+  // Il blocco della sezione n (03–07), o null se la sezione non ha figura.
+  // 07 attiva: visualizzatore 3D (js/visualizzatore-3d.js); se manca, il segnaposto
   function blocco(n) {
     const f = perSezione(n);
     if (!f) return null;
-    return f.stato === 'SEGNAPOSTO' ? bloccoSegnaposto(f) : bloccoImmagine(f);
+    if (f.stato === 'ATTIVA' && window.SITO.visualizzatore3d) return window.SITO.visualizzatore3d.blocco(f);
+    if (f.stato === 'SEGNAPOSTO' || f.stato === 'ATTIVA') return bloccoSegnaposto(f);
+    return bloccoImmagine(f);
   }
 
-  window.SITO.figure = { blocco, perId: (id) => immagini.find((f) => f.id === id), paragrafoCredito, compila };
+  window.SITO.figure = { blocco, perId: (id) => immagini.find((f) => f.id === id), paragrafoCredito, didascalia, badge, legenda, compila };
 })();

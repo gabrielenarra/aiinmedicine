@@ -15,7 +15,48 @@
     "nota_nativa_compatta": "Nativa {l}×{a} px: zoom max 100%. Trascina per spostare.",
     "immagine_in_arrivo": "Immagine in arrivo",
     "legenda_3d": "SCORE ALPHAMISSENSE",
-    "segnaposto_3d": "Rendering 3D in preparazione: {proteina}"
+    "segnaposto_3d": "Rendering 3D in preparazione: {proteina}",
+    "v3d_titolo_scheda": "{gene} · UniProt {uniprot} · {n} residui",
+    "v3d_istruzioni": "Trascina per ruotare, rotella o due dita per avvicinare. Tocca un punto del nastro per leggere il residuo.",
+    "v3d_zoom_meno": "−",
+    "v3d_zoom_piu": "+",
+    "v3d_etichetta_zoom_meno": "Allontana il modello {gene}",
+    "v3d_etichetta_zoom_piu": "Avvicina il modello {gene}",
+    "v3d_reimposta": "REIMPOSTA",
+    "v3d_rotazione_on": "ROTAZIONE: ON",
+    "v3d_rotazione_off": "ROTAZIONE: OFF",
+    "v3d_vai_etichetta": "Vai al residuo",
+    "v3d_vai": "VAI",
+    "v3d_segnaposto_campo": "1–{n}",
+    "v3d_risultato_titolo": "RESIDUO SCELTO",
+    "v3d_risultato_vuoto": "Scegli un residuo con «Vai al residuo» oppure toccando il modello: qui compaiono posizione, amminoacido, punteggio medio e classe.",
+    "v3d_risultato": "{gene} · residuo {posizione}: {amminoacido} · punteggio medio {punteggio} · {classe}",
+    "v3d_fuori_intervallo": "Scrivi un numero intero da 1 a {n} per {gene}.",
+    "v3d_tabella_titolo": "Tabella dei residui di {gene} ({n} righe)",
+    "v3d_colonne": ["Posizione", "Amminoacido", "Punteggio medio", "Classe"],
+    "v3d_riserva_alt": "Modello 3D di {nome} ({gene}) predetto da AlphaFold DB, colorato per classe AlphaMissense (media per residuo). Immagine fissa al posto del modello interattivo.",
+    "amminoacidi": {
+      "A": ["alanina", "Ala"],
+      "R": ["arginina", "Arg"],
+      "N": ["asparagina", "Asn"],
+      "D": ["acido aspartico", "Asp"],
+      "C": ["cisteina", "Cys"],
+      "Q": ["glutammina", "Gln"],
+      "E": ["acido glutammico", "Glu"],
+      "G": ["glicina", "Gly"],
+      "H": ["istidina", "His"],
+      "I": ["isoleucina", "Ile"],
+      "L": ["leucina", "Leu"],
+      "K": ["lisina", "Lys"],
+      "M": ["metionina", "Met"],
+      "F": ["fenilalanina", "Phe"],
+      "P": ["prolina", "Pro"],
+      "S": ["serina", "Ser"],
+      "T": ["treonina", "Thr"],
+      "W": ["triptofano", "Trp"],
+      "Y": ["tirosina", "Tyr"],
+      "V": ["valina", "Val"]
+    }
   },
   "immagini": [
     {
@@ -183,7 +224,12 @@
       "sha256": null,
       "derivate": [],
       "titolo": "AlphaFold DB e AlphaMissense · HBB e CFTR",
-      "badge": "RENDERING 3D IN PREPARAZIONE",
+      "badge": null,
+      "badge_segnaposto": "RENDERING 3D IN PREPARAZIONE",
+      "riserva": [
+        { "proteina": "HBB", "file": "assets/immagini/derivate/07-hbb-3d.png", "larghezza_px": 592, "altezza_px": 480 },
+        { "proteina": "CFTR", "file": "assets/immagini/derivate/07-cftr-3d.png", "larghezza_px": 592, "altezza_px": 480 }
+      ],
       "proteine": ["HBB", "CFTR"],
       "autori": "Varadi M. et al. (AlphaFold DB); Cheng J. et al. (AlphaMissense)",
       "titolo_opera": "AlphaFold Protein Structure Database (HBB, P68871; CFTR, P13569) e punteggi AlphaMissense",
@@ -201,7 +247,7 @@
           { "testo": "AlphaFold Protein Structure Database in 2024: providing structure coverage for over 214 million protein sequences", "lingua": "en" },
           "», Nucleic Acids Research 52(D1), D368–D375, 2024); punteggi AlphaMissense (Cheng J. et al., «",
           { "testo": "Accurate proteome-wide missense variant effect prediction with AlphaMissense", "lingua": "en" },
-          "», Science 381(6664), eadg7492, 2023). Elaborazione e rendering: questo progetto. ",
+          "», Science 381(6664), eadg7492, 2023). Elaborazione e rendering: questo progetto (modelli AlphaFold {modello}). ",
           { "testo": "AlphaFold DB (HBB)", "url": "https://alphafold.ebi.ac.uk/entry/P68871" },
           " · ",
           { "testo": "AlphaFold DB (CFTR)", "url": "https://alphafold.ebi.ac.uk/entry/P13569" },
@@ -214,7 +260,7 @@
       "modifiche": "Elaborazione di questo progetto: media per residuo dei punteggi am_pathogenicity, classi con le soglie ufficiali (0–0,34; 0,34–0,564; 0,564–1).",
       "didascalia_it": "Strutture di emoglobina beta (HBB) e CFTR predette da AlphaFold DB e colorate con la media per residuo dei punteggi AlphaMissense (probabilmente benigna, incerta, probabilmente patogena). Sono previsioni computazionali, non diagnosi.",
       "alt_it": null,
-      "stato": "SEGNAPOSTO"
+      "stato": "ATTIVA"
     }
   ]
 }

@@ -7,6 +7,9 @@ module.exports = defineConfig({
   testDir: 'tests',
   outputDir: 'tests/risultati',
   reporter: [['list']],
+  // 60 s per prova: il Chromium di prova disegna il 3D della sezione 07 senza scheda
+  // grafica, e con molte prove in parallelo i pannelli aperti rallentano tutto
+  timeout: 60000,
   use: {
     ...devices['Desktop Chrome'],
     browserName: 'chromium',

@@ -21,6 +21,8 @@ const TIPI = {
   '.woff2': 'font/woff2',
   '.png': 'image/png',
   '.jpg': 'image/jpeg',
+  '.webp': 'image/webp',
+  '.pdb': 'text/plain; charset=utf-8',
   '.txt': 'text/plain; charset=utf-8',
 };
 
@@ -41,7 +43,10 @@ http
       'Content-Type': TIPI[path.extname(file)] || 'application/octet-stream',
       'Cache-Control': 'no-store',
     });
-    fs.createReadStream(file).pipe(risposta);
+    // se la lettura fallisce la risposta si chiude comunque (altrimenti la pagina resta in attesa)
+    fs.createReadStream(file)
+      .on('error', () => risposta.destroy())
+      .pipe(risposta);
   })
   .listen(PORTA, '127.0.0.1', () => {
     console.log(`Server di prova su http://127.0.0.1:${PORTA}/ e ${SOTTOCARTELLA}`);

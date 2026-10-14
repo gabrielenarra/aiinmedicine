@@ -6,6 +6,8 @@ const { test, expect } = require('@playwright/test');
 const fs = require('node:fs');
 const path = require('node:path');
 const { pathToFileURL } = require('node:url');
+// avvisi della scheda grafica simulata del Chromium di prova (WebGL del 3D, sezione 07): non vengono dal sito
+const GPU_SIMULATA = /GL Driver Message/;
 
 const RADICE = path.resolve(__dirname, '..');
 const SERVER = 'http://127.0.0.1:8081';
@@ -22,7 +24,7 @@ const LARGHEZZE = [320, 360, 390, 600, 768, 1023, 1024, 1279, 1280, 1440, 1920];
 async function apri(page, url) {
   const registro = { richieste: [], errori: [], fallite: [] };
   page.on('request', (r) => registro.richieste.push(r.url()));
-  page.on('console', (m) => { if (m.type() === 'error' || m.type() === 'warning') registro.errori.push(`${m.type()}: ${m.text()}`); });
+  page.on('console', (m) => { if ((m.type() === 'error' || m.type() === 'warning') && !GPU_SIMULATA.test(m.text())) registro.errori.push(`${m.type()}: ${m.text()}`); });
   page.on('pageerror', (e) => registro.errori.push(`errore: ${e.message}`));
   page.on('requestfailed', (r) => registro.fallite.push(`${r.url()} (${r.failure()?.errorText})`));
   page.on('response', (r) => { if (r.status() >= 400) registro.fallite.push(`${r.url()} (${r.status()})`); });

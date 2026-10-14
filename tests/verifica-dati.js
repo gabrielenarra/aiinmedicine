@@ -14,6 +14,8 @@ const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
 const { pathToFileURL } = require('node:url');
+// avvisi della scheda grafica simulata del Chromium di prova (WebGL del 3D, sezione 07): non vengono dal sito
+const GPU_SIMULATA = /GL Driver Message/;
 
 const RADICE = path.resolve(__dirname, '..');
 
@@ -38,7 +40,7 @@ function valoreDato(percorso) {
 async function controlla(browser, larghezza) {
   const pagina = await browser.newPage({ viewport: { width: larghezza, height: 900 } });
   const erroriConsole = [];
-  pagina.on('console', (m) => { if (m.type() === 'error' || m.type() === 'warning') erroriConsole.push(m.text()); });
+  pagina.on('console', (m) => { if ((m.type() === 'error' || m.type() === 'warning') && !GPU_SIMULATA.test(m.text())) erroriConsole.push(m.text()); });
   pagina.on('pageerror', (e) => erroriConsole.push(e.message));
   await pagina.goto(pathToFileURL(path.join(RADICE, 'index.html')).href);
 
