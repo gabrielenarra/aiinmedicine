@@ -595,9 +595,12 @@
   }
 
   /* etichetta a sinistra e testo a destra; la colonna dell'etichetta cambia nel disegno */
+  /* etichetta e prima riga del testo alla stessa altezza (182:2, 194:2, 206:2:
+     nel disegno il testo parte 2 px sopra l'etichetta, che è più piccola) */
   .approfondimento__sintesi {
     display: grid;
     grid-template-columns: var(--colonna-sintesi, 137px) minmax(0, 720px);
+    align-items: baseline;
   }
 
   [data-sezione="04"] .approfondimento__sintesi { --colonna-sintesi: 140px; }

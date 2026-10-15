@@ -94,6 +94,12 @@ body {
   display: block;
 }
 
+/* ---------- Ritocchi tipografici (js/ui.js, «tipografia») ----------
+   intervalli come «0–60%» non vanno mai a capo; le lettere greche restano
+   minuscole anche nelle etichette in maiuscolo («IFN-γ», come in Figma) */
+.intervallo { white-space: nowrap; }
+.greca { text-transform: none; }
+
 /* ---------- Testo solo per i lettori di schermo (es. testo alternativo dei grafici) ---------- */
 .solo-lettori {
   position: absolute;

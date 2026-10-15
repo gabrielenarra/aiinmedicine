@@ -28,19 +28,41 @@
   // Gli spazi doppi del disegno («02  /  DATI») restano: il browser li ridurrebbe a uno
   const spazi = (t) => t.replace(/ {2,}/g, (s) => ' '.repeat(s.length - 1) + ' ');
 
+  // Due ritocchi tipografici su tutti i testi (Figma 194:2, 345:27):
+  // - intervalli numerici con la lineetta («0–60%», «0,80–1,00», «C1–C6» no: solo cifre)
+  //   in un <span class="intervallo">, che non va mai a capo («0–/60%» era un errore);
+  // - lettere greche in un <span class="greca">, che resta minuscolo anche nelle
+  //   etichette in maiuscolo («IFN-γ», non «IFN-Γ»).
+  // Il testo (textContent) resta identico.
+  const TIPOGRAFIA = /(\d+(?:,\d+)?–\d+(?:,\d+)?\s?%?)|([Ͱ-Ͽ])/g;
+  function tipografia(testo) {
+    const parti = [];
+    let ultimo = 0;
+    for (const trovato of testo.matchAll(TIPOGRAFIA)) {
+      parti.push(testo.slice(ultimo, trovato.index));
+      const span = document.createElement('span');
+      span.className = trovato[1] ? 'intervallo' : 'greca';
+      span.textContent = trovato[0];
+      parti.push(span);
+      ultimo = trovato.index + trovato[0].length;
+    }
+    parti.push(testo.slice(ultimo));
+    return parti;
+  }
+
   // Segnaposto nei testi: {metrica:ID} e {dato:percorso}
   const SEGNAPOSTO = /\{(metrica|dato):([^}]+)\}/g;
   function conValori(testo) {
     const parti = [];
     let ultimo = 0;
     for (const trovato of testo.matchAll(SEGNAPOSTO)) {
-      parti.push(spazi(testo.slice(ultimo, trovato.index)));
+      parti.push(...tipografia(spazi(testo.slice(ultimo, trovato.index))));
       const [, tipo, chiave] = trovato;
       parti.push(tipo === 'metrica' ? numero(chiave, 'valore-nel-testo')
         : el('span', { class: 'valore-nel-testo', 'data-dato': chiave }, dato(chiave) ?? '?'));
       ultimo = trovato.index + trovato[0].length;
     }
-    parti.push(spazi(testo.slice(ultimo)));
+    parti.push(...tipografia(spazi(testo.slice(ultimo))));
     return parti;
   }
 

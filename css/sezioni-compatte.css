@@ -192,9 +192,9 @@
   display: flex;
   flex-direction: column;
   gap: var(--spazio-16);
-  padding: calc(var(--spazio-24) - 1px) var(--spazio-20) calc(28px - 1px);
+  padding: var(--spazio-24) var(--spazio-20) 28px;
   background: var(--superficie-base);
-  border-block: 1px solid var(--accento-lilla);
+  /* niente bordo: nel disegno aggiornato nessun pannello compatto lo ha (508:362, 297:4) */
 }
 
 .sc-approfondimento[hidden] { display: none; }
