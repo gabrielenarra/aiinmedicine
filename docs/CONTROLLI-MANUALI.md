@@ -92,6 +92,18 @@ Se la linea scatta su telefono: **non togliere nulla da solo**. Dillo (punto ape
 | 07: tabella dei residui | Si apre e si chiude; si scorre dentro il suo riquadro | |
 | 07: stampa della pagina (anteprima di stampa) | Al posto del 3D le immagini fisse | |
 
+## 6c. Sfere e grafici in movimento
+
+| Prova | Cosa deve succedere | Esito |
+|---|---|---|
+| Computer: muovi il mouse sull'hero | Le sfere si spostano di poco nel verso opposto, il riflesso va verso il cursore; niente scatti | |
+| Scorri e fermati | Le sfere galleggiano mentre scorri e si fermano da sole pochi secondi dopo; leggendo, niente si muove | |
+| Telefono: scorri | Le sfere si muovono un poco con lo scorrimento, mai sopra testi o pulsanti; nessuno scorrimento orizzontale | |
+| Grafici 04, 06, 07 quando entrano nello schermo | Barre una dopo l'altra, valori che compaiono già esatti (mai numeri che salgono) | |
+| Mouse, tap, Tab + frecce su un grafico | La barra scelta resta piena, le altre si schiariscono; i testi restano leggibili; Tab entra ed esce dal grafico in un solo passo | |
+| Lettore di schermo sulle barre | Legge «nome: valore» (es. «Pleural Effusion: 0,97») | |
+| Movimento ridotto attivo | Sfere ferme, grafici già completi | |
+
 ## 7. Browser
 
 | Browser | Esito |

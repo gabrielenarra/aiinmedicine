@@ -298,7 +298,7 @@
   grid-template-columns: minmax(0, 104px) minmax(0, 142px) 48px;
   align-items: center;
   gap: var(--spazio-8);
-  min-height: 30px;
+  min-height: 32px;             /* passo delle righe 44 px con lo spazio di 12 (foglio G, 753:131) */
 }
 
 .grafico-righe__nome { color: var(--testo-secondario); }
@@ -318,13 +318,13 @@
 /* 04: SpCas9 in grigio (509:372) */
 [data-grafico^="crispr_"] [data-barra="spcas9"] .grafico-righe__barra { background: var(--grafico-barra-grigia); }
 
-/* 06: barre con bordo (alte 13 px in tutto), righe da 26 px, nomi più larghi (509:459) */
+/* 06: barre con bordo (alte 13 px in tutto), righe da 31 px (passo 44 px, foglio G), nomi più larghi (509:459) */
 [data-grafico="diagnostics_auroc"] { gap: 13px; }
 [data-grafico="diagnostics_auroc"] .grafico-righe__elenco { gap: 13px; }
 
 [data-grafico="diagnostics_auroc"] .grafico-righe__voce {
   grid-template-columns: minmax(0, 112px) minmax(0, 142px) 42px;
-  min-height: 26px;
+  min-height: 31px;
 }
 
 [data-grafico="diagnostics_auroc"] .grafico-righe__barra {

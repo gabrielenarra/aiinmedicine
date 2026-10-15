@@ -16,6 +16,13 @@
   const { grafico } = window.SITO.dati;
   const { el } = window.SITO.ui;
 
+  // Nome accessibile di una barra (foglio G, 750:115): «pannello · nome: valore»,
+  // es. «Pleural Effusion: 0,97». Serve a chi la raggiunge con la tastiera
+  function etichettaVoce(pannello, nome, valore) {
+    const testo = (x) => (Array.isArray(x) ? x.join(' ') : x || '').replace(/\s+/g, ' ').trim();
+    return `${pannello ? `${testo(pannello)} · ` : ''}${testo(nome)}: ${valore}`;
+  }
+
   // Quota della barra sulla scala dell'asse (0 → 1)
   function quota(valore, asse) {
     const q = (valore - asse.min) / (asse.max - asse.min);
@@ -33,7 +40,10 @@
       opzioni.etichetta ? el('figcaption', { class: 'grafico-barre__etichetta t-etichetta-forte-14' }, opzioni.etichetta) : null,
       el('p', { id: idTesto, class: 'solo-lettori' }, spec.alt),
       el('ul', { class: 'grafico-barre__elenco', role: 'list' }, spec.barre.map((b, i) =>
-        el('li', { class: 'grafico-barre__voce', 'data-barra': b.id },
+        el('li', {
+          class: 'grafico-barre__voce', 'data-barra': b.id, style: `--i:${(opzioni.inizio || 0) + i}`,
+          'aria-label': etichettaVoce(opzioni.etichetta, (opzioni.nomi && opzioni.nomi[i]) || b.id, b.display),
+        },
           el('span', { class: 'grafico-barre__pista', 'aria-hidden': 'true' },
             el('span', { class: 'grafico-barre__barra', style: `--quota:${quota(b.valore, spec.asse)}` })),
           el('span', { class: 'grafico-barre__nome t-dati-medio-12' }, (opzioni.nomi && opzioni.nomi[i]) || b.id),
@@ -59,7 +69,10 @@
       opzioni.tacche ? el('div', { class: 'grafico-righe__tacche t-dati-medio-12', 'aria-hidden': 'true' },
         [asse.min, (asse.min + asse.max) / 2, asse.max].map((t) => el('span', {}, formatoTacche.format(t)))) : null,
       el('ul', { class: 'grafico-righe__elenco', role: 'list' }, spec.barre.map((b, i) =>
-        el('li', { class: 'grafico-righe__voce', 'data-barra': b.id },
+        el('li', {
+          class: 'grafico-righe__voce', 'data-barra': b.id, style: `--i:${(opzioni.inizio || 0) + i}`,
+          'aria-label': etichettaVoce(opzioni.etichetta, nome(b, i), b.display),
+        },
           el('span', { class: 'grafico-righe__nome t-dati-medio-12', lang: opzioni.nomi ? null : 'en' }, nome(b, i)),
           el('span', { class: 'grafico-righe__pista', 'aria-hidden': 'true' },
             el('span', { class: 'grafico-righe__barra', style: `--quota:${quota(b.valore, asse)}` })),
@@ -83,7 +96,7 @@
         el('div', { class: 'grafico-colonne__tacche', 'aria-hidden': 'true' }, tacche.map((t) =>
           el('span', { class: 'grafico-colonne__tacca t-dati-medio-12', style: `--quota:${quota(t, asse)}` }, formatoTacche.format(t)))),
         el('ul', { class: 'grafico-colonne__elenco', role: 'list' }, spec.barre.map((b, i) =>
-          el('li', { class: 'grafico-colonne__voce', 'data-barra': b.id },
+          el('li', { class: 'grafico-colonne__voce', 'data-barra': b.id, style: `--i:${i}`, 'aria-label': etichettaVoce(null, b.id, b.display) },
             el('span', { class: 'grafico-colonne__valore t-dati-forte-12', 'data-dato': `${percorso}.barre.${i}.display`, style: `--quota:${quota(b.valore, asse)}` }, b.display),
             el('span', { class: 'grafico-colonne__barra', 'aria-hidden': 'true', style: `--quota:${quota(b.valore, asse)}` }),
             el('span', { class: 'grafico-colonne__nome t-dati-medio-12', lang: 'en' }, b.id))))));
@@ -107,11 +120,16 @@
       // Desktop: nel disegno le percentuali sulla barra (122:10–12) sono coperte dalla barra
       // stessa e non si vedono, quindi la barra è senza etichette e le percentuali sono nella
       // legenda (docs/PUNTI-APERTI.md B22). Tablet e smartphone: percentuali sulla barra.
-      el('div', { class: 'grafico-composto__barra', 'aria-hidden': 'true' }, spec.segmenti.map((s, i) =>
-        el('span', { class: 'grafico-composto__segmento', 'data-segmento': s.id, style: `--quota:${s.valore / totale}` },
-          opzioni.compatto ? el('span', { class: 'grafico-composto__etichetta t-dati-forte-12', 'data-dato': `${percorso}.segmenti.${i}.display` }, s.display) : null))),
+      // i segmenti sono un elenco: si raggiungono con la tastiera (foglio G)
+      el('div', { class: 'grafico-composto__barra', role: 'list' }, spec.segmenti.map((s, i) =>
+        el('span', {
+          class: 'grafico-composto__segmento', role: 'listitem', 'data-segmento': s.id,
+          style: `--quota:${s.valore / totale};--i:${i}`,
+          'aria-label': etichettaVoce(null, (opzioni.nomi && opzioni.nomi[i]) || s.id, s.display),
+        },
+          opzioni.compatto ? el('span', { class: 'grafico-composto__etichetta t-dati-forte-12', 'aria-hidden': 'true', 'data-dato': `${percorso}.segmenti.${i}.display` }, s.display) : null))),
       el('ul', { class: 'grafico-composto__legenda', role: 'list' }, spec.segmenti.map((s, i) =>
-        el('li', { class: 'grafico-composto__voce', 'data-segmento': s.id },
+        el('li', { class: 'grafico-composto__voce', 'data-segmento': s.id, style: `--i:${i}` },
           opzioni.compatto ? null : el('span', { class: 'grafico-composto__punto', 'aria-hidden': 'true' }),
           el('span', { class: 'grafico-composto__quota t-dati-forte-12', 'data-dato': `${percorso}.segmenti.${i}.display` }, s.display),
           el('span', { class: 'grafico-composto__nome t-dati-medio-12' }, (opzioni.nomi && opzioni.nomi[i]) || s.id),

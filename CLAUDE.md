@@ -78,6 +78,14 @@ Specifica completa in `design/stati-e-interazioni.md` (copia fedele della pagina
 - Ogni grafico ha un testo alternativo (campo `alt` di `data/charts.js`) e i numeri leggibili come testo, non solo disegnati.
 - Card della sezione 02: **non cliccabili**.
 
+## Movimento di sfere e grafici (dal 15 ottobre 2026)
+
+- Specifica: Figma, pagina 06, **foglio «06 · G — Movimento di sfere e grafici» (740:115)**, con tre ritocchi decisi sul prototipo (`docs/PUNTI-APERTI.md` B42): galleggiamento «a respiro» (solo durante lo scorrimento e 3 s dopo: mai movimento automatico continuo, WCAG 2.2.2), riflesso al 4%, manina sulle barre.
+- `js/movimento-sfere.js`: parallasse al cursore, riflesso, respiro, spostamento con lo scorrimento su tablet e smartphone; muove le sfere solo con la proprietà CSS `translate` (il `transform` resta all'ingresso); il ciclo dei fotogrammi si ferma quando non c'è niente da muovere.
+- `js/grafici-interattivi.js`: evidenziazione con mouse, tocco e tastiera (una sola tappa di Tab per grafico, quattro frecce, Home e Fine). L'ingresso a cascata è in `js/ingresso.js` + `css/movimento-grafici-sfere.css` (ritardo `--i` × `--sfasamento-barre`).
+- **Mai numeri che contano fino al valore**: i valori compaiono già esatti, in dissolvenza. Nomi, legenda e assi sempre visibili. Si attenuano solo i riempimenti delle barre, mai i testi.
+- Token del foglio G in `css/movimento-grafici-sfere.css`. Con «movimento ridotto» tutto è fermo e completo. Prove: `tests/movimento.spec.js`.
+
 ## Linea narrativa e sfere
 
 Si fanno **per ultime** (tappa 6). Prima il sito con la linea ferma e completa. Leggi `design/linee/LEGGIMI-linee.md` prima di toccarla: la linea è legata alle altezze del disegno e va riallineata alle sezioni vere; sfere in `design/sfere.css` (geometria esatta di ogni sfera in `design/linee/ancore.json`). Siccome il sito si apre anche da `file://`, né `ancore.json` né gli SVG della linea si possono leggere con `fetch`. **Deciso alla tappa 6 (9 ottobre 2026):** copie in `data/ancore.js` (identica a `ancore.json`) e `data/linee.js` (solo i tracciati), rigenerate con `node strumenti/linee.mjs` se il disegno cambia; lo stile della linea lo ricostruisce `js/linea.js` uguale agli SVG. La fonte resta `design/linee/`. I due «Reference Marker» del desktop non si realizzano senza chiedere (`docs/PUNTI-APERTI.md` B13). Non cambiare lo stile della linea.

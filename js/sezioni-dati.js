@@ -105,9 +105,11 @@
       el('p', { class: 'grafico-precisione__sottotitolo t-corpo-piccolo-14' }, g.sottotitolo),
       g.legenda ? el('ul', { class: 'legenda', role: 'list', 'aria-hidden': 'true' }, g.legenda.map((voce, i) =>
         el('li', { class: `legenda__voce legenda__voce--${i}` }, el('span', { class: 'legenda__punto' }), el('span', { class: 't-dati-medio-12' }, voce)))) : null,
-      el('div', { class: 'grafico-precisione__pannelli' },
+      // i due pannelli sono un solo grafico per la tastiera e la cascata (foglio G):
+      // le barre del secondo continuano l'ordine del primo
+      el('div', { class: 'grafico-precisione__pannelli', 'data-gruppo-barre': '' },
         barreOrizzontali('crispr_on_target', { etichetta: g.pannelli[0], nomi }),
-        barreOrizzontali('crispr_off_target', { etichetta: g.pannelli[1], nomi })),
+        barreOrizzontali('crispr_off_target', { etichetta: g.pannelli[1], nomi, inizio: nomi.length })),
       g.nota ? el('p', { class: 'grafico-precisione__nota t-etichetta-media-14' }, g.nota) : null,
       g.sintesi ? kpi(g.sintesi, 'kpi--sintesi') : null);
   }
@@ -421,12 +423,12 @@
 
   // 04: «Dove modifica il DNA?» (509:367)
   function graficoPrecisioneC(g, nomi) {
-    return el('div', { class: 'sc-scheda sc-grafico' },
+    return el('div', { class: 'sc-scheda sc-grafico', 'data-gruppo-barre': '' },
       el('h3', { class: 'sc-titoletto t-titolo-sottotitolo' }, g.titolo),
       el('p', { class: 'sc-nota t-etichetta-media-14' }, g.sottotitolo),
       barreRighe('crispr_on_target', { etichetta: g.pannelli[0], nomi }),
       el('hr', { class: 'sc-divisore' }),
-      barreRighe('crispr_off_target', { etichetta: g.pannelli[1], nomi }),
+      barreRighe('crispr_off_target', { etichetta: g.pannelli[1], nomi, inizio: nomi.length }),
       g.sintesi ? el('p', { class: 'sc-sintesi' },
         el('span', { class: 'sc-sintesi__valore t-titolo-card' }, numero(g.sintesi.metrica)),
         el('span', { class: 'sc-nota t-etichetta-media-14' }, righe(g.sintesi.didascalia))) : null);
