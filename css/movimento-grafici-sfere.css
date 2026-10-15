@@ -7,6 +7,7 @@
 /* ---------- Token del foglio G (scheda «Token di movimento», 741:187) ---------- */
 :root {
   --durata-galleggiamento: 9000ms;
+  --respiro-dopo-scorrimento: 3000ms;   /* prova del 15 ott: galleggiamento solo durante e subito dopo lo scorrimento */
   --curva-onda: cubic-bezier(0.37, 0, 0.63, 1);   /* unica eccezione alla curva unica (foglio A) */
   --sfasamento-barre: 70ms;
   --parallasse-piccola: 4px;
@@ -15,7 +16,7 @@
   --galleggiamento-piccola: 4px;
   --galleggiamento-media: 5px;
   --galleggiamento-grande: 6px;
-  --riflesso-max: 6;                 /* % del diametro della Base */
+  --riflesso-max: 4;                 /* % del diametro della Base (foglio G: 6; prova del 15 ott: 4) */
   --scorrimento-piccola: 0.05;
   --scorrimento-media: 0.1;
   --scorrimento-grande: 0.15;
@@ -81,6 +82,11 @@
 [data-evidenzia] .grafico-composto__segmento:not([data-attiva]) {
   background: color-mix(in srgb, var(--colore-segmento) calc(var(--attenuazione) * 100%), transparent);
   --colore-etichetta: var(--testo-primario);   /* il bianco sul patogeno attenuato non si leggerebbe */
+}
+
+/* al passaggio del mouse le barre mostrano la manina: il grafico risponde (prova del 15 ott) */
+@media (hover: hover) and (pointer: fine) {
+  :is(.grafico-barre__voce, .grafico-righe__voce, .grafico-colonne__voce, .grafico-composto__segmento, .grafico-composto__voce) { cursor: pointer; }
 }
 
 /* area attiva: barra, nome e valore; al tocco alta almeno 44 px anche se la riga è più bassa */
