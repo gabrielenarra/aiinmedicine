@@ -1,0 +1,112 @@
+/* ==========================================================================
+   Movimento di sfere e grafici (Figma, pagina 06, foglio «06 · G», 740:115)
+   js/movimento-sfere.js e js/grafici-interattivi.js; ingresso dei grafici in
+   js/ingresso.js (data-cresce). Va caricato dopo css/interazioni.css.
+   ========================================================================== */
+
+/* ---------- Token del foglio G (scheda «Token di movimento», 741:187) ---------- */
+:root {
+  --durata-galleggiamento: 9000ms;
+  --curva-onda: cubic-bezier(0.37, 0, 0.63, 1);   /* unica eccezione alla curva unica (foglio A) */
+  --sfasamento-barre: 70ms;
+  --parallasse-piccola: 4px;
+  --parallasse-media: 8px;
+  --parallasse-grande: 12px;
+  --galleggiamento-piccola: 4px;
+  --galleggiamento-media: 5px;
+  --galleggiamento-grande: 6px;
+  --riflesso-max: 6;                 /* % del diametro della Base */
+  --scorrimento-piccola: 0.05;
+  --scorrimento-media: 0.1;
+  --scorrimento-grande: 0.15;
+  --scorrimento-max: 24px;
+  --attenuazione: 0.4;
+  /* classi delle sfere per diametro della Base (scheda «Sfere», 744:206) */
+  --sfera-soglia-media: 100px;
+  --sfera-soglia-grande: 180px;
+}
+
+/* il riflesso si sposta con «translate» (js/movimento-sfere.js) */
+.sfera, .sfera__luce { will-change: translate; }
+
+/* ---------- Grafici · ingresso (scheda «Grafici», 750:271–750:299) ----------
+   barre una dopo l'altra (--i = posizione), 400 ms ciascuna, scarto di 70 ms;
+   i valori compaiono già esatti, in dissolvenza, quando la loro barra è arrivata;
+   nomi, legenda, assi e griglia sempre visibili */
+.grafico-barre__barra,
+.grafico-righe__barra,
+.grafico-composto__segmento {
+  transform-origin: left center;
+}
+.grafico-barre__barra,
+.grafico-righe__barra,
+.grafico-colonne__barra {
+  transition:
+    transform var(--durata-lenta) var(--curva) calc(var(--i, 0) * var(--sfasamento-barre)),
+    opacity var(--durata-rapida) var(--curva);
+}
+.grafico-composto__segmento {
+  transition:
+    transform var(--durata-lenta) var(--curva) calc(var(--i, 0) * var(--sfasamento-barre)),
+    background-color var(--durata-rapida) var(--curva),
+    box-shadow var(--durata-rapida) var(--curva);
+}
+
+/* la barra composta resta ferma e ritaglia; crescono i segmenti, ciascuno dal suo lato sinistro */
+[data-cresce="attesa"] .grafico-composto__barra { transform: none; }
+[data-cresce="attesa"] .grafico-composto__segmento { transform: scaleX(0); }
+
+.grafico-barre__valore,
+.grafico-righe__valore,
+.grafico-colonne__valore,
+.grafico-composto__quota,
+.grafico-composto__etichetta {
+  transition: opacity var(--durata-rapida) var(--curva)
+    calc(var(--i, 0) * var(--sfasamento-barre) + var(--durata-lenta));
+}
+[data-cresce="attesa"] :is(.grafico-barre__valore, .grafico-righe__valore, .grafico-colonne__valore,
+  .grafico-composto__quota, .grafico-composto__etichetta) { opacity: 0; }
+
+/* ---------- Grafici · evidenziazione (750:303–750:335) ----------
+   la barra scelta resta piena, le altre al 40%: solo il riempimento, mai i testi */
+[data-evidenzia] :is(.grafico-barre__voce, .grafico-righe__voce, .grafico-colonne__voce):not([data-attiva])
+  :is(.grafico-barre__barra, .grafico-righe__barra, .grafico-colonne__barra) {
+  opacity: var(--attenuazione);
+}
+
+/* 07: il segmento acceso ha un contorno interno di 2 px; gli altri si schiariscono;
+   un filo attorno alla barra ne tiene leggibile la forma («benigna» è quasi bianca) */
+[data-evidenzia] .grafico-composto__barra { box-shadow: 0 0 0 1px var(--linea-divisore); }
+[data-evidenzia] .grafico-composto__segmento[data-attiva] { box-shadow: inset 0 0 0 2px var(--testo-accento-scuro); }
+[data-evidenzia] .grafico-composto__segmento:not([data-attiva]) {
+  background: color-mix(in srgb, var(--colore-segmento) calc(var(--attenuazione) * 100%), transparent);
+  --colore-etichetta: var(--testo-primario);   /* il bianco sul patogeno attenuato non si leggerebbe */
+}
+
+/* area attiva: barra, nome e valore; al tocco alta almeno 44 px anche se la riga è più bassa */
+.grafico-barre__voce,
+.grafico-righe__voce,
+.grafico-colonne__voce { position: relative; }
+.grafico-righe__voce::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc((100% - var(--area-tocco-min)) / 2);
+  bottom: calc((100% - var(--area-tocco-min)) / 2);
+}
+/* la barra composta ritaglia: l'anello di focus del segmento sta all'interno */
+.grafico-composto__segmento:focus-visible { outline-offset: calc(var(--anello-distanza) * -2); }
+.grafico-composto__segmento:focus { position: relative; z-index: 1; }
+
+/* ---------- Movimento ridotto (scheda «Movimento ridotto», 756:299) ----------
+   grafici già completi, nessuna dissolvenza; evidenziazione con cambio immediato */
+@media (prefers-reduced-motion: reduce) {
+  [data-cresce="attesa"] .grafico-composto__segmento { transform: none; }
+  [data-cresce="attesa"] :is(.grafico-barre__valore, .grafico-righe__valore, .grafico-colonne__valore,
+    .grafico-composto__quota, .grafico-composto__etichetta) { opacity: 1; }
+  .grafico-barre__barra, .grafico-righe__barra, .grafico-colonne__barra, .grafico-composto__segmento,
+  .grafico-barre__valore, .grafico-righe__valore, .grafico-colonne__valore,
+  .grafico-composto__quota, .grafico-composto__etichetta { transition: none; }
+  .sfera, .sfera__luce { translate: none !important; }
+}
