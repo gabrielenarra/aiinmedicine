@@ -68,6 +68,11 @@
 [data-cresce="attesa"] :is(.grafico-barre__valore, .grafico-righe__valore, .grafico-colonne__valore,
   .grafico-composto__quota, .grafico-composto__etichetta) { opacity: 0; }
 
+/* lo stato di attesa scatta subito: le transizioni (con i loro ritardi) valgono solo all'ingresso */
+[data-cresce="attesa"] :is(.grafico-barre__barra, .grafico-righe__barra, .grafico-colonne__barra,
+  .grafico-composto__segmento, .grafico-barre__valore, .grafico-righe__valore, .grafico-colonne__valore,
+  .grafico-composto__quota, .grafico-composto__etichetta) { transition: none; }
+
 /* ---------- Grafici · evidenziazione (750:303–750:335) ----------
    la barra scelta resta piena, le altre al 40%: solo il riempimento, mai i testi */
 [data-evidenzia] :is(.grafico-barre__voce, .grafico-righe__voce, .grafico-colonne__voce):not([data-attiva])

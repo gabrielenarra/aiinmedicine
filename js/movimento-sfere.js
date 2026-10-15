@@ -80,10 +80,10 @@
     if (ridotto.matches) { avviato = false; azzera(); return; }
     // morbidezza: raggiunge ~98% dell'obiettivo in --durata-lenta
     const k = 1 - Math.exp(-dt / (T.lenta / 4));
-    // respiro: sale mentre si scorre, poi si spegne con dolcezza (~1 s)
+    // respiro: sale mentre si scorre, poi si spegne con dolcezza (circa 2 s)
     const voluto = adesso - ultimoScorrimento < T.respiro ? 1 : 0;
-    respiro += (voluto - respiro) * (1 - Math.exp(-dt / (voluto ? T.lenta : T.lenta * 2.5)));
-    if (respiro < 0.002 && !voluto) respiro = 0;
+    respiro += (voluto - respiro) * (1 - Math.exp(-dt / T.lenta));
+    if (respiro < 0.01 && !voluto) respiro = 0;
     const alto = window.innerHeight;
     const conCursore = puntatore.matches;
     let inMovimento = respiro > 0 || voluto === 1;
