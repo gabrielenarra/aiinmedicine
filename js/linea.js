@@ -59,7 +59,7 @@
       <mask id="attenuazione" maskUnits="userSpaceOnUse"><rect x="0" y="0" width="0" height="0" fill="url(#grad-attenuazione)"/></mask>
     </defs>
     <g id="linea-gruppo">
-      <g class="narrazione__maschera"><g filter="url(#ombre-linea)">
+      <g class="narrazione__maschera"><g class="narrazione__ombre" filter="url(#ombre-linea)">
         <path id="linea" stroke="url(#gradiente-linea)" stroke-width="5.9" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4" fill="none"/>
       </g></g>
     </g>`;
@@ -74,6 +74,7 @@
   strato.append(cornice);
   const percorso = svg.querySelector('#linea');
   const filtro = svg.querySelector('#ombre-linea');
+  const gruppoOmbre = svg.querySelector('.narrazione__ombre');
   const maschera = svg.querySelector('#attenuazione');
   const gradMaschera = svg.querySelector('#grad-attenuazione');
   const gruppoMaschera = svg.querySelector('.narrazione__maschera');
@@ -208,6 +209,12 @@
     filtro.setAttribute('y', -30);
     filtro.setAttribute('width', col.larghezza + 60);
     filtro.setAttribute('height', altezza + 60);
+    // smartphone: niente ombre della linea (punto aperto B32, prima soluzione prevista).
+    // Il filtro sfoca un'area alta quanto tutta la pagina e la rifà a ogni passo
+    // dell'animazione: sui telefoni rende lento lo scorrimento. All'opacità della linea
+    // (58%) le ombre si vedono appena.
+    if (f === 'smartphone') gruppoOmbre.removeAttribute('filter');
+    else gruppoOmbre.setAttribute('filter', 'url(#ombre-linea)');
     const tracciato = trasforma(t.d, (x) => x * col.scala, fy);
     percorso.setAttribute('d', tracciato.d);
     svgTop = 0;

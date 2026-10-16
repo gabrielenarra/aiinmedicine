@@ -130,13 +130,39 @@
     return colori;
   }
 
+  // ---------- Prestazioni sugli schermi touch ----------
+  const TOUCH = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+  const RISOLUZIONE_MASSIMA = 2;
+  // 3Dmol legge window.devicePixelRatio a ogni ridimensionamento (renderer.setSize):
+  // durante quella chiamata gli si fa vedere un valore al massimo di 2.
+  function limitaRisoluzione(viewer) {
+    const renderer = viewer.renderer;
+    if (!renderer || typeof renderer.setSize !== 'function' || window.devicePixelRatio <= RISOLUZIONE_MASSIMA) return;
+    const originale = renderer.setSize;
+    renderer.setSize = function (...argomenti) {
+      const proprio = Object.getOwnPropertyDescriptor(window, 'devicePixelRatio');
+      try {
+        Object.defineProperty(window, 'devicePixelRatio', { value: RISOLUZIONE_MASSIMA, configurable: true, writable: true });
+        return originale.apply(this, argomenti);
+      } finally {
+        if (proprio) Object.defineProperty(window, 'devicePixelRatio', proprio);
+        else delete window.devicePixelRatio;
+      }
+    };
+    viewer.resize();
+  }
+
   // ---------- Avvio di un visualizzatore ----------
   function avvia(gene, area, blocco) {
     const p = proteina(gene);
     const struttura = dati.struttura(STRUTTURE[gene]);
     if (!window.$3Dmol || !struttura) throw new Error('Libreria o struttura non disponibili');
     const colori = coloriDaLegenda(blocco);
-    const viewer = window.$3Dmol.createViewer(area, { backgroundAlpha: 0, antialias: true });
+    // Schermi touch (telefoni, tablet): niente bordi ammorbiditi e risoluzione al massimo 2×.
+    // Con l'ammorbidimento la libreria disegna anche a piena risoluzione (3× su molti
+    // telefoni): un lavoro che rende lenta, a volte bloccata, la scheda grafica.
+    const viewer = window.$3Dmol.createViewer(area, { backgroundAlpha: 0, antialias: !TOUCH });
+    if (TOUCH) limitaRisoluzione(viewer);
     viewer.addModel(struttura.pdb, 'pdb');
     const classe = new Map(p.residui.map((r) => [r[0], r[3]]));
     viewer.setStyle({}, { cartoon: { colorfunc: (atomo) => colori[classe.get(atomo.resi)] } });
@@ -154,6 +180,13 @@
     }
     new ResizeObserver(() => { viewer.resize(); viewer.render(); }).observe(area);
     if (stato[gene].rotazione) giraPer(gene, true);
+    // fuori dallo schermo la rotazione si sospende (e riparte al ritorno): niente disegno inutile
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(([voce]) => {
+        if (!stato[gene].rotazione) return;
+        viewer.spin(voce.isIntersecting ? 'y' : false, VELOCITA);
+      }).observe(area);
+    }
     evidenzia(gene);
   }
 
