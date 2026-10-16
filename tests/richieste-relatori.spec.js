@@ -49,6 +49,30 @@ for (const larghezza of [390, 1440]) {
   });
 }
 
+// con «Vai alla sezione» le card sono più alte: non devono toccarsi né coprire il titolo
+// (tra 1280 e 1440 px le posizioni scalano con la pagina, le larghezze no)
+for (const larghezza of [1280, 1320, 1366, 1440, 1920]) {
+  test(`${larghezza} px: card, titolo e riquadro della 02 non si sovrappongono`, async ({ page }) => {
+    await apri(page, 'index.html', larghezza);
+    const incroci = await page.evaluate(() => {
+      const blocchi = [...document.querySelectorAll('.s02__titolo, .s02__introduzione, .s02__riquadro, .card-02')];
+      const r = blocchi.map((b) => {
+        if (b.matches('.card-02, .s02__riquadro')) return b.getBoundingClientRect();
+        const z = document.createRange(); z.selectNodeContents(b);
+        const q = [...z.getClientRects()];
+        return { left: Math.min(...q.map((x) => x.left)), right: Math.max(...q.map((x) => x.right)), top: Math.min(...q.map((x) => x.top)), bottom: Math.max(...q.map((x) => x.bottom)) };
+      });
+      const out = [];
+      for (let i = 0; i < r.length; i++) for (let j = i + 1; j < r.length; j++) {
+        const a = r[i], c = r[j];
+        if (Math.min(a.right, c.right) - Math.max(a.left, c.left) > 0 && Math.min(a.bottom, c.bottom) - Math.max(a.top, c.top) > 0) out.push(`${blocchi[i].className} × ${blocchi[j].className}`);
+      }
+      return out;
+    });
+    expect(incroci).toEqual([]);
+  });
+}
+
 test('1440 px: le card della 02 restano dentro la loro sezione', async ({ page }) => {
   await apri(page, 'index.html', 1440);
   const r = await page.evaluate(() => {

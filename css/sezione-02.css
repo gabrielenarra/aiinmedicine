@@ -204,8 +204,13 @@
 
   /* 415:2 mRNA · 415:8 CRISPR · 415:14 Immunoterapia · 415:20 Diagnostica · 415:26 Scoperte */
   .card-02:nth-child(1) { --x: 649;  --y: 50;  --w: 250; }
+  /* tra 1280 e 1320 px il titolo «I dati raccontano» (largo circa 512 px da x 72) arrivava sotto
+     la card 01: la card resta almeno 24 px a destra del titolo */
+  .card-02:nth-child(1) { left: max(calc(var(--x) / 1440 * 100%), calc(72 / 1440 * 100% + 536px)); }
   .card-02:nth-child(2) { --x: 1076; --y: 236; --w: 278; }
-  .card-02:nth-child(3) { --x: 783;  --y: 458; --w: 290; }
+  /* 458 nel disegno; 494 dal 16/10/2026: con «Vai alla sezione» la card 02 arriva a 478 e
+     tra 1280 e 1400 px le due card si sovrapponevano (restano 16 px sotto la 02) */
+  .card-02:nth-child(3) { --x: 783;  --y: 494; --w: 290; }
   .card-02:nth-child(4) { --x: 417;  --y: 426; --w: 265; }
   .card-02:nth-child(5) { --x: 72;   --y: 467; --w: 244; }
 }
