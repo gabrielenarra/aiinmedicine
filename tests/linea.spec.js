@@ -82,3 +82,26 @@ test('aprendo un pannello la linea si riallinea alla pagina più lunga', async (
   await expect.poll(() => page.evaluate(() => Number(document.querySelector('.narrazione__linea').getAttribute('height'))), { timeout: 3000 })
     .toBeGreaterThan(prima);
 });
+
+// La linea non deve allungare la pagina: richiudendo i pannelli la pagina torna a finire
+// col footer (prima restava uno spazio vuoto lungo quanto i pannelli aperti).
+for (const larghezza of [390, 1440]) {
+  test(`${larghezza} px: richiudendo i pannelli la pagina finisce col footer`, async ({ page }) => {
+    await apri(page, larghezza, true);
+    const misura = () => page.evaluate(() => ({
+      pagina: document.documentElement.scrollHeight,
+      fineFooter: Math.round(document.querySelector('footer').getBoundingClientRect().bottom + scrollY),
+      linea: Number(document.querySelector('.narrazione__linea').getAttribute('height')),
+    }));
+    const prima = await misura();
+    expect(prima.pagina - prima.fineFooter).toBeLessThanOrEqual(1);
+    const barra = page.locator('#leggi-crispr');
+    await barra.click();
+    await expect.poll(async () => (await misura()).linea, { timeout: 3000 }).toBeGreaterThan(prima.linea);
+    await barra.click();
+    await expect.poll(async () => (await misura()).linea, { timeout: 3000 }).toBe(prima.linea);
+    const dopo = await misura();
+    expect(dopo.pagina).toBe(prima.pagina);
+    expect(dopo.pagina - dopo.fineFooter).toBeLessThanOrEqual(1);
+  });
+}

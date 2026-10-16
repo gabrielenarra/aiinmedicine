@@ -91,11 +91,20 @@
   // ---------- 1. Riallineamento ----------
   const formato = () => perFormato({ desktop: 'desktop', tablet: 'tablet', smartphone: 'smartphone' });
 
+  // Altezza del contenuto della pagina, SENZA lo strato della linea: lo strato è alto
+  // quanto la pagina, e misurandolo insieme non potrebbe più accorciarsi (pannelli
+  // aperti e poi richiusi lasciavano uno spazio vuoto sotto il footer).
+  function altezzaContenuto() {
+    strato.style.display = 'none';
+    const altezza = document.documentElement.scrollHeight;
+    strato.style.display = '';
+    return altezza;
+  }
+
   // Ancore: [yDisegno, yReale]. Inizio pagina, inizio e fine di ogni sezione, fine pagina.
-  function ancoreVerticali(a) {
+  function ancoreVerticali(a, fine) {
     const alto = (n) => n.getBoundingClientRect().top + scrollY;
     const compatto = formato() !== 'desktop';
-    const fine = document.documentElement.scrollHeight;
     const punti = [[0, 0]];
     for (const s of a.sezioni) {
       const nodo = document.querySelector(`[data-sezione="${s.n}"]`);
@@ -185,10 +194,10 @@
     const a = ancore[f];
     const t = linee[f];
     if (!a || !t) return;
-    const punti = ancoreVerticali(a);
+    const altezza = altezzaContenuto();
+    const punti = ancoreVerticali(a, altezza);
     const fy = mappa(punti);
     const col = colonna(a.larghezza);
-    const altezza = document.documentElement.scrollHeight;
 
     strato.style.height = `${altezza}px`;
     svg.style.left = `${col.sinistra}px`;
