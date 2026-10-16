@@ -91,7 +91,8 @@
                 { "articolo_08": 3 },
                 { "articolo_08": 4 }
               ],
-              "nota_schede": "Titolo, data e autore verificati sul sito di Eric Topol (16 ottobre 2026)"
+              "nota_schede": "Titolo, data e autore verificati sul sito di Eric Topol (16 ottobre 2026)",
+              "link_schede": "Articolo"
             }
           ]
         }

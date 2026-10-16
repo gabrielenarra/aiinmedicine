@@ -160,6 +160,29 @@
 .fc-articolo__etichetta { color: var(--testo-secondario); }
 .fc-articolo__sintesi { color: var(--testo-primario); }
 
+/* 08: il titolo dell'articolo è un link esterno; il suo ::after copre tutta la card,
+   così si apre toccando qualsiasi punto (area ampia anche su telefono) */
+.articolo,
+.fc-articolo { position: relative; }
+.articolo-link { color: inherit; text-decoration: none; }
+.articolo-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+.articolo .articolo-link::after { border-radius: var(--raggio-24); }
+.fc-articolo .articolo-link::after { border-radius: var(--raggio-22); }
+@media (hover: hover) {
+  .articolo:hover .articolo-link,
+  .fc-articolo:hover .articolo-link { text-decoration: underline; text-underline-position: from-font; }
+}
+/* anello di focus intorno a tutta la card */
+.articolo-link:focus-visible { outline: none; }
+.articolo-link:focus-visible::after {
+  outline: var(--anello-focus);
+  outline-offset: var(--anello-distanza);
+}
+
 /* filetto tra sintesi e articolo (429:82) */
 .fc-articolo__fonte {
   padding-top: 10px;

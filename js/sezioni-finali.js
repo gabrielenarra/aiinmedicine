@@ -1,14 +1,25 @@
 // Sezioni 08 «Eric Topol» (142:2), 09 «Conclusione» (148:2) e footer informativo
 // (sezione 10, 148:45). Testi da data/contenuti.js.
 //
-// 08: i link agli articoli sono nel disegno ma da verificare (PUNTI-APERTI A11):
-//     per ora titolo e data sono testo, non link.
+// 08: il titolo di ogni articolo è un link al sito di Eric Topol (indirizzi verificati il
+//     16 ottobre 2026, PUNTI-APERTI A11): nuova scheda, «↗», tutta la card cliccabile.
 // 10: le voci del footer portano alle pagine informative (data/pagine.js, foglio «06 · H»);
 //     la voce della pagina in cui ci si trova ha aria-current="page". I social per ora
 //     non ci sono (liste vuote in contenuti.js, PUNTI-APERTI B2/B16): si rimettono con gli indirizzi.
 
 (() => {
   const { contenuti, pagine } = window.SITO.dati;
+
+  // Titolo dell'articolo della sezione 08: link esterno (nuova scheda) se c'è l'indirizzo.
+  // Il link si allarga a tutta la card (css/sezioni-finali.css, .articolo-link::after).
+  function titoloArticolo(a) {
+    if (!a.url) return el('span', { class: 'riga', lang: a.lingua }, a.titolo_articolo);
+    return el('span', { class: 'riga' },
+      el('a', { class: 'articolo-link', href: a.url, target: '_blank', rel: 'noopener noreferrer', lang: a.lingua },
+        // la freccia resta attaccata all'ultima parola (spazio non separabile)
+        a.titolo_articolo, el('span', { 'aria-hidden': 'true' }, ' ↗'),
+        el('span', { class: 'solo-lettori', lang: 'it' }, ` (${(pagine.interfaccia || {}).nuova_scheda})`)));
+  }
 
   // Voce del footer: link alla sua pagina (e parte); «corrente» se porta alla pagina aperta
   const paginaAperta = document.body.dataset.pagina;
@@ -44,7 +55,7 @@
             s.etichetta_articolo ? el('span', { class: 'articolo__etichetta t-eyebrow-maiuscolo-12' }, s.etichetta_articolo) : null),
           el('p', { class: 'articolo__sintesi t-titolo-sottotitolo', lang: a.lingua }, righe(a.sintesi)),
           el('p', { class: 'articolo__fonte t-etichetta-media-14' },
-            el('span', { class: 'riga', lang: a.lingua }, a.titolo_articolo),
+            titoloArticolo(a),
             el('span', { class: 'riga' }, a.autori_data))))),
       s.chiusura ? el('div', { class: 's08__chiusura' },
         el('p', { class: 't-eyebrow-maiuscolo-12' }, s.chiusura.etichetta),
@@ -120,7 +131,7 @@
             s.etichetta_articolo ? el('span', { class: 'fc-articolo__etichetta t-eyebrow-maiuscolo-12' }, s.etichetta_articolo) : null),
           el('p', { class: 'fc-articolo__sintesi t-citazione-corsivo-22', lang: a.lingua }, righe(a.sintesi)),
           el('p', { class: 'fc-articolo__fonte t-etichetta-media-14' },
-            el('span', { class: 'riga', lang: a.lingua }, a.titolo_articolo),
+            titoloArticolo(a),
             el('span', { class: 'riga' }, a.autori_data))))),
       s.chiusura ? el('div', { class: 'fc-riquadro' },
         el('p', { class: 'fc-eyebrow t-eyebrow-maiuscolo-12' }, s.chiusura.etichetta),

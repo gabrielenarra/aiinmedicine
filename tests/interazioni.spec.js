@@ -156,3 +156,35 @@ test('anello di focus da tastiera sul pulsante menu: attorno al cerchio, 2 px', 
   });
   expect(anello).toBe('solid 2px 2px');
 });
+
+// ---------- Sezione 08: articoli di Eric Topol cliccabili (A11, 16 ottobre 2026) ----------
+for (const larghezza of [390, 1440]) {
+  test(`${larghezza} px: le card della sezione 08 aprono l'articolo in una nuova scheda`, async ({ page, context }) => {
+    // nessuna richiesta vera verso il sito esterno durante la prova
+    await context.route('https://erictopol.substack.com/**', (r) => r.fulfill({ status: 200, contentType: 'text/html', body: 'ok' }));
+    await apri(page, larghezza);
+    const link = page.locator('[data-sezione="08"] .articolo-link');
+    await expect(link).toHaveCount(5);
+    for (let i = 0; i < 5; i++) {
+      const a = link.nth(i);
+      await expect(a).toHaveAttribute('href', /^https:\/\/erictopol\.substack\.com\/p\//);
+      await expect(a).toHaveAttribute('target', '_blank');
+      await expect(a).toHaveAttribute('rel', 'noopener noreferrer');
+      await expect(a.locator('.solo-lettori')).toHaveText(/nuova scheda/);
+    }
+    // un tocco sulla sintesi (non sul titolo) apre comunque l'articolo
+    const card = page.locator('[data-sezione="08"] li').first();
+    await card.scrollIntoViewIfNeeded();
+    const href = await link.first().getAttribute('href');
+    // (il link copre la card: si clicca per coordinate, come farebbe un dito)
+    const box = await card.locator('[class*="sintesi"]').boundingBox();
+    expect(await page.evaluate(([x, y]) => document.elementFromPoint(x, y).closest('a')?.className, [box.x + box.width / 2, box.y + box.height / 2]))
+      .toBe('articolo-link');
+    const [scheda] = await Promise.all([
+      context.waitForEvent('page'),
+      page.mouse.click(box.x + box.width / 2, box.y + box.height / 2),
+    ]);
+    await expect(scheda).toHaveURL(href);
+    await scheda.close();
+  });
+}

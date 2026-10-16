@@ -80,6 +80,7 @@
       return scheda({
         titolo: a.titolo_articolo, lingua: a.lingua || 'en',
         voci: [[ui.autori, autori], [ui.data, data], [ui.nota, gruppo.nota_schede]],
+        link: a.url && gruppo.link_schede ? { testo: gruppo.link_schede, url: a.url } : null,
       });
     }
     // credito di un'immagine, identico a quello sotto la figura
