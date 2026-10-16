@@ -127,7 +127,8 @@
 }
 
 .kpi__numero { color: var(--testo-accento); }
-/* numero e badge sulla stessa riga (03, KPI 03 «Da abstract») */
+/* numero e badge sulla stessa riga (03, KPI 03 «Da abstract»): il badge sborda sopra e sotto
+   la riga del numero, così valore e didascalia restano alla stessa altezza delle altre KPI */
 .kpi__testa {
   display: flex;
   flex-wrap: wrap;
@@ -135,6 +136,10 @@
   justify-content: space-between;
   gap: var(--spazio-8);
 }
+.kpi__testa > .sd__badge { margin-block: calc(var(--spazio-8) * -0.75); }
+
+/* 03: le tre KPI alte uguali (richiesta dell'utente, 16 ott 2026) */
+[data-sezione="03"] .sd__kpi { align-items: stretch; }
 .kpi__valore { margin-top: 11px; color: var(--testo-primario); }
 .kpi__didascalia { margin-top: var(--spazio-12); color: var(--testo-secondario); }
 .kpi__nota { margin-top: 9px; color: var(--testo-secondario); }
