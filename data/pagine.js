@@ -102,7 +102,6 @@
       "file": "glossario.html",
       "titolo": "Glossario",
       "introduzione": "Le parole tecniche usate nel sito, spiegate in poche righe.",
-      "avviso": "Bozza da rivedere con la docente",
       "parti": [
         {
           "id": "termini",
