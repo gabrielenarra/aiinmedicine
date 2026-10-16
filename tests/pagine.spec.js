@@ -12,8 +12,8 @@ const url = (file, modo = 'file') => (modo === 'file'
   : `http://127.0.0.1:8081/${modo === 'sottocartella' ? 'sottocartella/annidata/' : ''}${file}`);
 const contesto = { window: {} };
 vm.createContext(contesto);
-for (const f of ['pagine.js', 'sources.js', 'immagini.js', 'alphamissense_residui.js']) vm.runInContext(fs.readFileSync(path.join(RADICE, 'data', f), 'utf8'), contesto);
-const { pagine, sources, immagini } = contesto.window.DATI;
+for (const f of ['pagine.js', 'site_metrics.js', 'sources.js', 'immagini.js', 'alphamissense_residui.js']) vm.runInContext(fs.readFileSync(path.join(RADICE, 'data', f), 'utf8'), contesto);
+const { pagine, sources, immagini, site_metrics: metriche } = contesto.window.DATI;
 const PAGINE = Object.keys(pagine.pagine);
 const GPU_SIMULATA = /GL Driver Message/;
 
@@ -130,6 +130,11 @@ test('contenuti: glossario, articoli e crediti uguali ai dati; link esterni segn
     await expect(scheda).toHaveCount(1);
     await expect(scheda.locator(`a[href="https://doi.org/${f.doi}"]`)).toHaveCount(1);
   }
+  // numeri dei dataset presi da site_metrics, campi verificati (nessun [DA VERIFICARE])
+  const numeri = await page.$$eval('#dataset [data-metrica]', (n) => n.map((x) => [x.dataset.metrica, x.textContent]));
+  expect(numeri.length).toBe(5);
+  for (const [id, testo] of numeri) expect(testo).toBe(metriche.find((m) => m.metric_id === id).display);
+  await expect(page.locator('main .segnaposto')).toHaveCount(0);
   // link esterni: nuova scheda, «↗», testo per i lettori di schermo
   const esterni = await page.$$eval('main a[target="_blank"]', (a) => a.map((x) => ({ rel: x.rel, testo: x.textContent })));
   expect(esterni.length).toBeGreaterThan(10);

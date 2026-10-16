@@ -10,7 +10,7 @@
   // La home ha bisogno di tutti i dati; le pagine informative (<body data-pagina>) di pochi
   const paginaInformativa = !!document.body.dataset.pagina;
   const necessari = paginaInformativa
-    ? ['contenuti', 'sources', 'immagini', 'alphamissense_residui', 'pagine']
+    ? ['contenuti', 'site_metrics', 'sources', 'audit_status', 'immagini', 'alphamissense_residui', 'pagine']
     : ['contenuti', 'site_metrics', 'sources', 'audit_status', 'charts',
       'mrna', 'crispr', 'immunotherapy', 'diagnostics', 'discoveries', 'ancore', 'linee', 'immagini', 'alphamissense_residui', 'pagine'];
   const mancanti = necessari.filter((nome) => !(nome in grezzi));

@@ -41,10 +41,10 @@
           "gruppi": [
             {
               "schede": [
-                { "titolo": "TCGA – The Cancer Genome Atlas, via GDC", "voci": [["Editore", "[DA VERIFICARE]"], ["Contenuto", "[DA VERIFICARE]"], ["Dove compare", "Sezione 05"], ["Licenza o condizioni", "[DA VERIFICARE]"]], "link": { "testo": "Fonte originale", "fonte": "SRC_PANIMMUNE_2018", "campo": "url" } },
-                { "titolo": "CheXpert", "voci": [["Editore", "[DA VERIFICARE]"], ["Contenuto", "[DA VERIFICARE]"], ["Dove compare", "Sezione 06"], ["Licenza o condizioni", "[DA VERIFICARE]"]], "link": { "testo": "Fonte originale", "fonte": "SRC_CHEXPERT_2019", "campo": "alternate_url" } },
+                { "titolo": "TCGA – The Cancer Genome Atlas, via GDC", "voci": [["Editore", "National Cancer Institute (NCI), Genomic Data Commons"], ["Contenuto", "Profili immunogenomici di {metrica:immunotherapy_tumor_samples} tumori di {metrica:immunotherapy_cancer_types} tipi (PanCanAtlas)"], ["Dove compare", "Sezione 05"], ["Licenza o condizioni", "Dati «open access» scaricabili liberamente; i dati ad accesso controllato richiedono un’autorizzazione (dbGaP). Nessuna licenza specifica indicata"]], "link": { "testo": "Fonte originale", "fonte": "SRC_PANIMMUNE_2018", "campo": "url" } },
+                { "titolo": "CheXpert", "voci": [["Editore", "Stanford ML Group / Stanford AIMI (Stanford University)"], ["Contenuto", "{metrica:diagnostics_radiographs} radiografie del torace di {metrica:diagnostics_patients} pazienti dello Stanford Hospital (2002–2017), con {metrica:diagnostics_observations} osservazioni ricavate dai referti"], ["Dove compare", "Sezione 06"], ["Licenza o condizioni", "Accordo d’uso per la ricerca della Stanford University, da accettare prima del download"]], "link": { "testo": "Fonte originale", "fonte": "SRC_CHEXPERT_2019", "campo": "alternate_url" } },
                 { "titolo": "AlphaFold Protein Structure Database", "voci": [["Editore", "EMBL-EBI / Google DeepMind"], ["Contenuto", "Strutture di proteine predette"], ["Dove compare", "Sezione 07"], ["Licenza o condizioni", "CC BY 4.0"]], "link": { "testo": "Fonte originale", "fonte": "SRC_AFDB_2024", "campo": "alternate_url" } },
-                { "titolo": "Punteggi AlphaMissense", "voci": [["Editore", "[DA VERIFICARE]"], ["Contenuto", "Punteggi per le varianti missenso"], ["Dove compare", "Sezione 07"], ["Licenza o condizioni", "CC BY 4.0"]], "link": { "testo": "Fonte originale", "fonte": "SRC_ALPHAMISSENSE_2023", "campo": "url" } }
+                { "titolo": "Punteggi AlphaMissense", "voci": [["Editore", "Google DeepMind"], ["Contenuto", "Punteggi per le varianti missenso"], ["Dove compare", "Sezione 07"], ["Licenza o condizioni", "CC BY 4.0"]], "link": { "testo": "Fonte originale", "fonte": "SRC_ALPHAMISSENSE_2023", "campo": "url" } }
               ]
             }
           ]
@@ -56,10 +56,10 @@
           "gruppi": [
             {
               "schede": [
-                { "titolo": "VaxLab", "voci": [["Descrizione", "[DA VERIFICARE]"], ["Dove compare", "Sezione 03"], ["Licenza o condizioni", "[DA VERIFICARE]"]], "link": { "testo": "Articolo", "fonte": "SRC_VAXLAB_2026", "campo": "url" } },
-                { "titolo": "OpenCRISPR-1", "voci": [["Descrizione", "[DA VERIFICARE]"], ["Dove compare", "Sezione 04"], ["Licenza o condizioni", "[DA VERIFICARE]"]], "link": { "testo": "Sito dello strumento", "fonte": "SRC_OPENCRISPR_2025", "campo": "alternate_url" } },
-                { "titolo": "AlphaFold", "voci": [["Descrizione", "[DA VERIFICARE]"], ["Dove compare", "Sezione 07"], ["Licenza o condizioni", "[DA VERIFICARE]"]], "link": { "testo": "Sito dello strumento", "fonte": "SRC_AFDB_2024", "campo": "alternate_url" } },
-                { "titolo": "AlphaMissense", "voci": [["Descrizione", "[DA VERIFICARE]"], ["Dove compare", "Sezione 07"], ["Licenza o condizioni", "[DA VERIFICARE]"]], "link": { "testo": "Articolo", "fonte": "SRC_ALPHAMISSENSE_2023", "campo": "url" } },
+                { "titolo": "VaxLab", "voci": [["Descrizione", "Piattaforma web open source per progettare vaccini a mRNA: ottimizzazione dei codoni, regioni UTR, metriche predittive"], ["Dove compare", "Sezione 03"], ["Licenza o condizioni", "Licenza del software non indicata dagli autori: per riusarlo occorre chiedere a loro"]], "link": { "testo": "Articolo", "fonte": "SRC_VAXLAB_2026", "campo": "url" } },
+                { "titolo": "OpenCRISPR-1", "voci": [["Descrizione", "Editor genetico progettato con l’IA da Profluent: una proteina simile a Cas9 con il suo RNA guida"], ["Dove compare", "Sezione 04"], ["Licenza o condizioni", "Gratuito per ricerca e uso commerciale; per l’uso terapeutico commerciale serve un accordo di licenza con impegni etici"]], "link": { "testo": "Sito dello strumento", "fonte": "SRC_OPENCRISPR_2025", "campo": "alternate_url" } },
+                { "titolo": "AlphaFold", "voci": [["Descrizione", "Codice open source di AlphaFold 2 per prevedere la struttura 3D delle proteine"], ["Dove compare", "Sezione 07"], ["Licenza o condizioni", "Codice Apache 2.0; parametri del modello CC BY 4.0"]], "link": { "testo": "Sito dello strumento", "fonte": "SRC_AFDB_2024", "campo": "alternate_url" } },
+                { "titolo": "AlphaMissense", "voci": [["Descrizione", "Modello che prevede l’effetto delle varianti missenso sulle proteine"], ["Dove compare", "Sezione 07"], ["Licenza o condizioni", "Codice Apache 2.0 (senza i pesi del modello); previsioni CC BY 4.0"]], "link": { "testo": "Articolo", "fonte": "SRC_ALPHAMISSENSE_2023", "campo": "url" } },
                 { "titolo": "3Dmol.js", "voci": [["Descrizione", "Visualizzatore 3D"], ["Dove compare", "Sezione 07"], ["Licenza o condizioni", "BSD-3-Clause"]], "link": { "testo": "Sito dello strumento", "url": "https://3dmol.org/" } }
               ]
             }
@@ -75,9 +75,9 @@
               "schede": [
                 { "fonte": "SRC_VAXLAB_2026", "rivista": "Experimental & Molecular Medicine" },
                 { "fonte": "SRC_OPENCRISPR_2025", "rivista": "Nature" },
-                { "fonte": "SRC_PANIMMUNE_2018", "rivista": "[DA VERIFICARE]" },
+                { "fonte": "SRC_PANIMMUNE_2018", "rivista": "Immunity, vol. 48 (2018)" },
                 { "fonte": "SRC_CHEXPERT_2019", "rivista": "AAAI" },
-                { "fonte": "SRC_CHEXPERT_DATASHEET_2021", "rivista": "[DA VERIFICARE]" },
+                { "fonte": "SRC_CHEXPERT_DATASHEET_2021", "rivista": "Preprint su arXiv (non pubblicato su rivista)" },
                 { "fonte": "SRC_AFDB_2024", "rivista": "Nucleic Acids Research" },
                 { "fonte": "SRC_ALPHAMISSENSE_2023", "rivista": "Science" }
               ]
