@@ -28,6 +28,8 @@ test('numerazione: temi 01–05, Topol 06, conclusione 07; panoramica e footer s
     expect(testo.startsWith(inizio), `${chiave}: ${testo.slice(0, 40)}`).toBe(true);
   }
   await expect(page.locator('footer [class*="eyebrow"]').first()).toHaveText(/^INFORMAZIONI$/i);
+  // l'hero non ha numero (era «01 — INIZIO DEL CAMBIAMENTO»)
+  expect((await page.locator('[data-sezione="hero"]').innerText()).trim()).toMatch(/^INIZIO DEL CAMBIAMENTO/i);
 });
 
 for (const larghezza of [390, 1440]) {

@@ -115,7 +115,7 @@
       "15:12",
       "415:76"
     ],
-    "eyebrow": "01  —  INIZIO DEL CAMBIAMENTO",
+    "eyebrow": "INIZIO DEL CAMBIAMENTO",
     "titolo": [
       "Una nuova",
       "medicina",
