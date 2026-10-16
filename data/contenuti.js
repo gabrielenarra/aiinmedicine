@@ -1146,7 +1146,7 @@
           "titolo_articolo": "Agentic AI Comes to Medicine",
           "autori_data": "Eric Topol · 17 giugno 2026",
           "url": "https://erictopol.substack.com/p/agentic-ai-comes-to-medicine",
-          "stato": "DA_VERIFICARE",
+          "stato": "VERIFICATO",
           "punto_aperto": "A11"
         },
         {
@@ -1159,7 +1159,7 @@
           "titolo_articolo": "The Paradox of Medical AI Implementation",
           "autori_data": "Eric Topol · 3 maggio 2026",
           "url": "https://erictopol.substack.com/p/the-paradox-of-medical-ai-implementation",
-          "stato": "DA_VERIFICARE",
+          "stato": "VERIFICATO",
           "punto_aperto": "A11"
         },
         {
@@ -1172,7 +1172,7 @@
           "titolo_articolo": "Why All Mammograms Should Incorporate A.I.",
           "autori_data": "Eric Topol · 8 febbraio 2026",
           "url": "https://erictopol.substack.com/p/why-all-mammograms-should-incorporate",
-          "stato": "DA_VERIFICARE",
+          "stato": "VERIFICATO",
           "punto_aperto": "A11"
         },
         {
@@ -1185,7 +1185,7 @@
           "titolo_articolo": "Charlotte Blease: Is A.I. Going to Remedy Medicine’s Problems?",
           "autori_data": "Eric Topol e Charlotte Blease · 12 settembre 2025",
           "url": "https://erictopol.substack.com/p/is-ai-going-to-remedy-medicines-problems",
-          "stato": "DA_VERIFICARE",
+          "stato": "VERIFICATO",
           "punto_aperto": "A11"
         },
         {
@@ -1198,7 +1198,7 @@
           "titolo_articolo": "It's Time for Primary Prevention in Medicine",
           "autori_data": "Eric Topol · 17 settembre 2025",
           "url": "https://erictopol.substack.com/p/dawn-of-a-new-era-of-primary-prevention",
-          "stato": "DA_VERIFICARE",
+          "stato": "VERIFICATO",
           "punto_aperto": "A11"
         }
       ],
