@@ -2,7 +2,7 @@
 
 Sito a pagina singola, con scorrimento narrativo, sull'intelligenza artificiale in medicina. Progetto di Digital Design, Università di Genova. Costruito dal disegno Figma `AtwFNzYiwSlUkSIfsBPDWk` in sette tappe (`docs/TAPPE.md`), ottobre 2026.
 
-**Il sito non è pubblicato online.** Funziona aprendolo dal computer e, quando si deciderà, copiando la cartella su un hosting qualsiasi.
+**Il sito non è ancora online.** Funziona aprendolo dal computer; verrà pubblicato su Cloudflare Pages all'indirizzo aiinmedicine.it (punto 4).
 
 ---
 
@@ -64,15 +64,18 @@ Il secondo comando apre il sito a 1440, 1100 e 390 px e confronta **ogni numero 
 
 Per i **punti ancora aperti** (numeri da ricontrollare, decisioni da prendere) c'è `docs/PUNTI-APERTI.md`, con un esempio di come chiedere a Claude Code di chiuderne uno.
 
-## 4. Come si pubblica (quando lo si deciderà)
+## 4. Come si pubblica
 
-Il sito è fatto di file statici con **soli percorsi relativi**: funziona a qualsiasi indirizzo, anche dentro una sottocartella (per esempio `https://esempio.it/progetti/ai-medicine/`). Per pubblicarlo:
+Deciso il 16 ottobre 2026: **Cloudflare Pages** (gratuito), collegato a un **archivio GitHub privato**, con il dominio **aiinmedicine.it** (registrato su IONOS).
 
-1. Scegli un hosting di file statici (dell'università, oppure servizi come Netlify, GitHub Pages, Cloudflare Pages: **da decidere insieme**, punto aperto B3).
-2. Carica la stessa cartella del punto 1 (`index.html`, `css/`, `js/`, `data/`, `assets/`, `design/`) così com'è. Non c'è nessuna fase di compilazione.
-3. Apri l'indirizzo e controlla: la pagina, i font, i pannelli, il menu su telefono.
+- **Cosa va online:** solo i file del sito. `node strumenti/pubblica.mjs` li copia nella cartella `pubblica/` (pagine, `css/`, `js/`, `data/*.js`, font, immagini e i quattro fogli di `design/` usati). Restano fuori `docs/`, `tests/`, `strumenti/`, le note di lavoro.
+- **Impostazioni su Cloudflare Pages:** comando di build `node strumenti/pubblica.mjs`, cartella di output `pubblica`. Nessun framework.
+- **Aggiornare il sito:** ogni volta che le modifiche vengono inviate all'archivio GitHub, Cloudflare rifà la cartella e aggiorna il sito da solo in circa un minuto.
+- **Su Cloudflare restano spenti** Web Analytics e «Email Address Obfuscation»: aggiungerebbero script al sito, che non usa cookie, statistiche né servizi esterni.
+- **Prima di collegare il dominio:** controllare l'indirizzo di prova `….pages.dev`; aggiornare la data della privacy (`data/pagine.js`).
+- **Prova della cartella pubblicata:** `npx playwright test tests/pubblicazione.spec.js`.
 
-Cose da decidere prima (sono in `docs/PUNTI-APERTI.md`): dominio, logo, favicon, immagine di anteprima per i social, link del footer e dei social. Il sito **non usa cookie, statistiche né servizi esterni**: se un giorno se ne aggiungessero, servirebbe un'informativa sulla privacy.
+Resta da fare (`docs/PUNTI-APERTI.md`): logo, favicon, immagine di anteprima per i social, social.
 
 *Facoltativo, per la versione finale servita solo da un hosting:* si può tornare ai file `.json` con `node strumenti/dati.mjs verso-json` (spiegato in `CLAUDE.md`).
 
@@ -83,14 +86,14 @@ Cose da decidere prima (sono in `docs/PUNTI-APERTI.md`): dominio, logo, favicon,
 | Cartella | Cosa contiene |
 |---|---|
 | `index.html` | La pagina: carica stili, dati e script (tutti con percorsi relativi). |
-| `fonti-e-dati.html`, `glossario.html`, `il-progetto.html`, `crediti-e-licenze.html`, `privacy-e-note-legali.html`, `404.html` | Pagine informative raggiunte dal footer e pagina «non trovata»: testi in `data/pagine.js` (con segnaposto da riempire prima della pubblicazione). |
+| `fonti-e-dati.html`, `glossario.html`, `il-progetto.html`, `crediti-e-licenze.html`, `privacy-e-note-legali.html`, `404.html` | Pagine informative raggiunte dal footer e pagina «non trovata»: testi in `data/pagine.js`. |
 | `css/` | Stili: `font.css`, `base.css`, uno per parte della pagina (`hero.css`, `sezione-02.css`, `sezioni-dati.css`, `sezioni-compatte.css` per tablet e smartphone, `sezioni-finali.css`, `grafico.css`, `menu.css`, `linea.css`), `interazioni.css` (movimento e stati), `valori-disegno.css` (misure prese dal disegno). |
 | `js/` | Costruiscono la pagina dai dati: `dati.js` (l'unico che legge `data/`), `ui.js` (strumenti comuni), uno per parte della pagina, `grafico.js` (grafici guidati da `data/charts.js`), `navigazione.js` (menu, header sticky, link), `ingresso.js` (comparsa dei blocchi), `linea.js` (linea narrativa e sfere). |
 | `data/` | Testi, numeri, fonti, grafici; `ancore.js` e `linee.js` sono copie di `design/linee/` (si rigenerano con `node strumenti/linee.mjs`). |
 | `design/` | Riferimento estratto da Figma: colori, testi, movimento, sfere, linee, stati. Non si modifica. |
 | `assets/fonts/` | Inter e Cormorant Garamond (licenza SIL OFL, file di licenza inclusi). |
 | `tests/` | Prove automatiche: `npm test` (struttura, interazioni, linea, accessibilità con axe-core) e `npm run verifica-dati`. |
-| `strumenti/` | Script per chi sviluppa: `dati.mjs` (controlla e converte i dati), `linee.mjs` (copia linee e ancore). |
+| `strumenti/` | Script per chi sviluppa: `dati.mjs` (controlla e converte i dati), `linee.mjs` (copia linee e ancore), `pubblica.mjs` (prepara la cartella da mettere online). |
 | `docs/` | `TAPPE.md` (come è stato costruito), `PUNTI-APERTI.md` (cosa resta da decidere), `CONTROLLI-MANUALI.md` (cosa provare a mano). |
 
 **Formati:** smartphone fino a 599 px, tablet da 600 a 1279 px (contenuto largo al massimo 768 px e centrato), desktop da 1280 px (contenuto largo al massimo 1440 px).

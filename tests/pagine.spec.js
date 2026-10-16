@@ -148,9 +148,10 @@ test('contenuti: glossario, articoli e crediti uguali ai dati; link esterni segn
   const f03 = immagini.immagini.find((f) => f.id === 'fig-03-vaxlab');
   const testoCredito = f03.credito_it[0].map((x) => (typeof x === 'string' ? x : x.testo)).join('');
   await expect(page.locator('#crediti')).toContainText(testoCredito);
-  // segnaposto visibili e attenuati
+  // privacy completa (hosting: Cloudflare Pages), nessun segnaposto rimasto
   await apri(page, 'privacy-e-note-legali.html', 1440);
-  expect(await page.locator('.segnaposto').count()).toBeGreaterThan(0);
+  await expect(page.locator('main .segnaposto')).toHaveCount(0);
+  await expect(page.locator('#privacy')).toContainText('Cloudflare');
   // i dati forniti dall'utente sono al loro posto: email cliccabile (mailto)
   await expect(page.locator('#privacy a[href="mailto:gabrielenarra@gmail.com"]').first()).toBeVisible();
 });
