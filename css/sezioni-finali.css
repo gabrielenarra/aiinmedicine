@@ -354,6 +354,20 @@
   .s09__percorso { --x: 500; --y: 388; --w: 680; width: calc(680 / 1440 * 100%); text-align: center; }
   .s09__chiusura { --x: 500; --y: 470; --w: 670; width: calc(670 / 1440 * 100%); text-align: center; }
 
+  /* 16/10/2026: le tappe stavano a 20 px dal testo di sinistra (largo 350 px fissi) e sotto
+     i 1366 px lo coprivano. Ora partono sempre 40 px dopo la colonna di sinistra
+     (72 + 350 + 40 = 462 su 1440) e finiscono a 1265 come nel disegno, lontane dalla sfera
+     a destra; percorso e chiusura restano centrati sotto le tappe. */
+  .s09__tappe,
+  .s09__percorso,
+  .s09__chiusura {
+    left: calc(72 / 1440 * 100% + 390px);
+    right: calc(175 / 1440 * 100%);
+    width: auto;
+  }
+  /* la frase finale è più lunga delle tappe: un po' più larga (stesso centro, ±7 px) */
+  .s09__chiusura { left: calc(72 / 1440 * 100% + 360px); right: calc(120 / 1440 * 100%); }
+
   /* 10 (148:45): alto 660 */
   [data-sezione="10"] { --sf-altezza: 660px; }
   .s10__marchio { --x: 72; --y: 44; --w: 420; }

@@ -123,3 +123,21 @@ test('il progetto: due relatori', async ({ page }) => {
   await expect(voce).toContainText('Prof.ssa Annalisa Barla · Prof. Andrea Vian');
   await expect(page.locator('main')).not.toContainText('Docenti');
 });
+
+// Sezione «07 / Conclusione» (chiave 09) su desktop: le tappe non devono stare attaccate al
+// testo di sinistra (segnalato il 16/10/2026: 20 px a 1440, testi accavallati sotto i 1366)
+for (const larghezza of [1280, 1366, 1440, 1920]) {
+  test(`${larghezza} px: conclusione, almeno 40 px tra testo di sinistra e tappe`, async ({ page }) => {
+    await apri(page, 'index.html', larghezza);
+    const r = await page.evaluate(() => {
+      const testo = (n) => { const z = document.createRange(); z.selectNodeContents(n); return [...z.getClientRects()]; };
+      const s = document.querySelector('[data-sezione="09"]');
+      const sinistra = Math.max(...['.sf__titolo', '.sf__introduzione', '.sf__nota'].flatMap((q) => testo(s.querySelector(q)).map((x) => x.right)));
+      const tappe = Math.min(...[...s.querySelectorAll('.tappa')].flatMap((t) => testo(t).map((x) => x.left)));
+      const chiusura = testo(s.querySelector('.s09__chiusura')).length;
+      return { spazio: tappe - sinistra, righeChiusura: chiusura };
+    });
+    expect(r.spazio).toBeGreaterThanOrEqual(40);
+    expect(r.righeChiusura).toBe(1);
+  });
+}
