@@ -14,7 +14,10 @@
   // Una sfera di design/sfere.css. posizione = { x, y, d } già in unità CSS.
   function sfera(s, posizione, classe = '') {
     const luce = s.luce || { dx: 0, dy: 0, s: 0 };   // luce: null = sfera senza riflesso
-    const ombra = s.ombra || { dx: 0, dy: 0, w: 0, h: 0 };
+    // l'ombra è «a terra»: sempre sotto il centro. Due sfere del disegno desktop (ancore 9 e 13,
+    // vicino alle sezioni 06 e 08) la hanno sopra (dy negativo): nel sito sembrava un alone
+    // grigio. Dal 16/10/2026 si usa la posizione standard delle altre sfere (dx 0, dy 0,34).
+    const ombra = s.ombra && s.ombra.dy < 0 ? { ...s.ombra, dx: 0, dy: 0.34 } : (s.ombra || { dx: 0, dy: 0, w: 0, h: 0 });
     const variabili = [
       `--d:${posizione.d}`, `--x:${posizione.x}`, `--y:${posizione.y}`,
       `--rot:${s.rot || 0}deg`,

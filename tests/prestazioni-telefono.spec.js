@@ -28,7 +28,8 @@ test('telefono: il 3D della 07 si disegna al massimo a 2×, senza errori', async
   await barra.scrollIntoViewIfNeeded();
   await barra.click();
   const tela = page.locator('[data-pronto] canvas').first();
-  await expect(tela).toBeAttached({ timeout: 30000 });
+  // il 3D si carica al volo: sotto carico (prove in parallelo) può servire più tempo
+  await expect(tela).toBeAttached({ timeout: 50000 });
   const rapporto = await tela.evaluate((c) => c.width / c.clientWidth);
   expect(rapporto).toBeGreaterThan(1.9);
   expect(rapporto).toBeLessThan(2.1);
