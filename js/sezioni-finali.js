@@ -4,8 +4,8 @@
 // 08: i link agli articoli sono nel disegno ma da verificare (PUNTI-APERTI A11):
 //     per ora titolo e data sono testo, non link.
 // 10: le voci del footer portano alle pagine informative (data/pagine.js, foglio «06 · H»);
-//     la voce della pagina in cui ci si trova ha aria-current="page". I social restano
-//     testo non cliccabile: gli indirizzi non esistono ancora (PUNTI-APERTI B2/B16).
+//     la voce della pagina in cui ci si trova ha aria-current="page". I social per ora
+//     non ci sono (liste vuote in contenuti.js, PUNTI-APERTI B2/B16): si rimettono con gli indirizzi.
 
 (() => {
   const { contenuti, pagine } = window.SITO.dati;
@@ -82,7 +82,7 @@
       f.colonne.map((c, i) => el('div', { class: `s10__colonna s10__colonna--${i}` },
         el('p', { class: 's10__titolo-colonna t-etichetta-forte-14' }, c.titolo),
         el('ul', { class: 's10__voci', role: 'list' }, c.voci.map((v) => voceFooter(v, 't-corpo-piccolo-14'))))),
-      el('ul', { class: 's10__social', role: 'list' }, f.social.map((v) => el('li', { class: 't-etichetta-forte-14' }, v))),
+      f.social.length ? el('ul', { class: 's10__social', role: 'list' }, f.social.map((v) => el('li', { class: 't-etichetta-forte-14' }, v))) : null,
       el('p', { class: 's10__nota-fonti t-corpo-piccolo-14' }, f.nota_fonti),
       pagine.avvertenza_footer ? el('p', { class: 's10__avvertenza t-corpo-piccolo-14' }, pagine.avvertenza_footer) : null,
       el('p', { class: 's10__copyright t-corpo-piccolo-14' }, f.copyright),
@@ -158,7 +158,7 @@
       el('div', { class: 'fc-colonne' }, f.colonne.map((c) => el('div', { class: 'fc-colonna' },
         el('p', { class: 'fc-forte t-etichetta-forte-14' }, c.titolo),
         el('ul', { class: 'fc-testo', role: 'list' }, c.voci.map((v) => voceFooter(v, 't-etichetta-media-14')))))),
-      el('ul', { class: 'fc-social', role: 'list' }, f.social.map((v) => el('li', { class: 't-etichetta-media-14' }, v))),
+      f.social.length ? el('ul', { class: 'fc-social', role: 'list' }, f.social.map((v) => el('li', { class: 't-etichetta-media-14' }, v))) : null,
       el('hr', { class: 'fc-filetto' }),
       el('p', { class: 'fc-testo t-etichetta-media-14' }, f.nota_fonti),
       pagine.avvertenza_footer ? el('p', { class: 'fc-testo fc-avvertenza t-etichetta-media-14' }, pagine.avvertenza_footer) : null,

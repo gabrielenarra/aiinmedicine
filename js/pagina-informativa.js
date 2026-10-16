@@ -34,6 +34,7 @@
     return pezzi.map((x) => {
       if (typeof x === 'string') return conSegnaposto(x);
       if (x.url) return linkEsterno(x.testo, x.url);
+      if (x.email) return el('a', { class: 'link-nel-testo', href: `mailto:${x.email}` }, x.testo);
       if (x.pagina) return el('a', { class: 'link-nel-testo', href: x.pagina }, x.testo);
       return x.testo;
     });

@@ -31,11 +31,7 @@
       "09",
       "il-progetto.html#about"
     ],
-    "social": [
-      "in",
-      "X",
-      "○"
-    ]
+    "social": []
   },
   "intestazione_sticky": {
     "figma": "242:2",
@@ -89,12 +85,7 @@
       }
     ],
     "freccia": "→",
-    "social": [
-      "in",
-      "X",
-      "GitHub",
-      "Instagram"
-    ],
+    "social": [],
     "copyright": "© 2026 AI in Medicine",
     "chiudi_testo": "ESC  ·  CHIUDI",
     "etichetta_apri": "Apri menu",
@@ -1327,12 +1318,7 @@
         ]
       }
     ],
-    "social": [
-      "in",
-      "X",
-      "GitHub",
-      "Instagram"
-    ],
+    "social": [],
     "nota_fonti": "Fonti e riferimenti sono indicati nelle singole sezioni.",
     "copyright": "© 2026 AI in Medicine · Università di Genova",
     "marchio": "AI · DATA · DESIGN · HUMAN"

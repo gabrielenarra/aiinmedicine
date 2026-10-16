@@ -139,7 +139,7 @@
           "gruppi": [
             {
               "schede": [
-                { "titolo": "Scheda del progetto", "larga": true, "voci": [["Autore", "[DA FORNIRE]"], ["Corso di laurea", "[DA FORNIRE]"], ["Anno accademico", "[DA FORNIRE]"], ["Docenti e ruoli", "[DA FORNIRE: relatore/relatrice, correlatore/correlatrice]"], ["Contatto", "[DA FORNIRE]"]] }
+                { "titolo": "Scheda del progetto", "larga": true, "voci": [["Autore", "Gabriele Narra"], ["Corso di laurea", "Laurea Magistrale in Design Prodotto Evento / Digital Design"], ["Anno accademico", "2025/2026"], ["Docenti", "Prof. Annalisa Barla · Prof. Andrea Vian"], ["Contatto", [{ "testo": "gabrielenarra@gmail.com", "email": "gabrielenarra@gmail.com" }]]] }
               ]
             }
           ]
@@ -207,15 +207,15 @@
           "titolo": "Privacy",
           "avviso": "Bozza da far verificare prima della pubblicazione (per esempio dall’ufficio privacy dell’università).",
           "blocchi": [
-            { "titolo": "Titolare del trattamento", "testo": "[DA FORNIRE: titolare], contatto: [DA FORNIRE: email]." },
+            { "titolo": "Titolare del trattamento", "testo": ["Gabriele Narra, contatto: ", { "testo": "gabrielenarra@gmail.com", "email": "gabrielenarra@gmail.com" }, "."] },
             { "titolo": "Quali dati", "testo": "Il sito non usa cookie, non usa strumenti di statistica o profilazione e non ha moduli. Come ogni sito, il servizio che lo ospita ([DA FORNIRE: hosting]) registra automaticamente alcuni dati tecnici di navigazione: indirizzo IP, data e ora della visita, pagina richiesta, tipo di browser. Se scrivi all’indirizzo di contatto, vengono trattati i dati contenuti nel messaggio." },
             { "titolo": "Perché", "testo": "I dati tecnici servono solo a far funzionare il sito e a proteggerlo da abusi; i dati dei messaggi servono solo a rispondere." },
             { "titolo": "Base giuridica", "testo": "Legittimo interesse al funzionamento e alla sicurezza del sito e a rispondere alle richieste (art. 6, par. 1, lett. f, GDPR)." },
             { "titolo": "Per quanto tempo", "testo": "Dati tecnici: per il tempo previsto dal servizio di hosting, [DA FORNIRE: per esempio 30 giorni]. Messaggi: per il tempo necessario a rispondere." },
             { "titolo": "Chi li riceve", "testo": "Il servizio di hosting, che tratta i dati per conto del titolare. Nessun dato viene venduto o ceduto ad altri. Trasferimenti fuori dall’Unione europea: [DA VERIFICARE in base all’hosting]." },
-            { "titolo": "I tuoi diritti", "testo": ["Puoi chiedere l’accesso ai tuoi dati, la rettifica, la cancellazione, la limitazione o opporti al trattamento (artt. 15–21 GDPR) scrivendo a [DA FORNIRE: email]. Puoi anche presentare reclamo al ", { "testo": "Garante per la protezione dei dati personali", "url": "https://www.garanteprivacy.it" }, "."] },
+            { "titolo": "I tuoi diritti", "testo": ["Puoi chiedere l’accesso ai tuoi dati, la rettifica, la cancellazione, la limitazione o opporti al trattamento (artt. 15–21 GDPR) scrivendo a ", { "testo": "gabrielenarra@gmail.com", "email": "gabrielenarra@gmail.com" }, ". Puoi anche presentare reclamo al ", { "testo": "Garante per la protezione dei dati personali", "url": "https://www.garanteprivacy.it" }, "."] },
             { "titolo": "Collegamenti esterni", "testo": "I link ad articoli e fonti portano a siti di terzi, con le loro informative." },
-            { "titolo": "Ultimo aggiornamento", "testo": "[DA FORNIRE: data]" }
+            { "titolo": "Ultimo aggiornamento", "testo": "16 ottobre 2026" }
           ]
         },
         {

@@ -125,7 +125,8 @@
               // nel disegno l'ultima voce («About») ha il titolo più piccolo (30 px): docs/PUNTI-APERTI.md B30
               el('span', { class: `voce-menu__titolo ${i === m.voci.length - 1 ? 't-titolo-card-grande' : 't-titolo-mobile'}` }, v.titolo),
               el('span', { class: 'voce-menu__freccia t-etichetta-media-16', 'aria-hidden': 'true' }, m.freccia))))),
-          el('p', { class: 'menu__social t-etichetta-forte-14' }, m.social.join('    ')),
+          // social: per ora nessuno (dati vuoti), il paragrafo non compare
+          m.social && m.social.length ? el('p', { class: 'menu__social t-etichetta-forte-14' }, m.social.join('    ')) : null,
           el('p', { class: 'menu__ente t-etichetta-media-14' }, m.ente))));
   }
 

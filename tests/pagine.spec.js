@@ -145,7 +145,9 @@ test('contenuti: glossario, articoli e crediti uguali ai dati; link esterni segn
   await expect(page.locator('#crediti')).toContainText(testoCredito);
   // segnaposto visibili e attenuati
   await apri(page, 'privacy-e-note-legali.html', 1440);
-  expect(await page.locator('.segnaposto').count()).toBeGreaterThan(3);
+  expect(await page.locator('.segnaposto').count()).toBeGreaterThan(0);
+  // i dati forniti dall'utente sono al loro posto: email cliccabile (mailto)
+  await expect(page.locator('#privacy a[href="mailto:gabrielenarra@gmail.com"]').first()).toBeVisible();
 });
 
 test('404: pulsante e link tornano nel sito; sfere decorative ferme e nascoste', async ({ page }) => {
