@@ -12,6 +12,14 @@
 .sc-etichetta,
 .sc-fonti__etichetta,
 .sc-kpi__numero { color: var(--testo-accento); }
+/* numero e badge sulla stessa riga (03, KPI 03 «Da abstract») */
+.sc-kpi__testa {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spazio-8);
+}
 
 .sc-titolo,
 .sc-titoletto,

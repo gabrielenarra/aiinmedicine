@@ -13,20 +13,21 @@
   "kpis": [
     {
       "id": "workflow_time_per_variant",
-      "value": 5,
-      "operator": "<",
+      "value": 13,
+      "value_min": 5,
+      "operator": "range",
       "unit": "min",
-      "display": "<5 min",
-      "label": "workflow completo per variante",
+      "display": "da 5 a 13 min",
+      "label": "tempo di calcolo per proteine fino a 500 amminoacidi (risultati: HA entro 13 min; discussione: 5–13 min)",
       "status": "VERIFICATO"
     },
     {
       "id": "expression_most_vs_wt",
       "value": 2.9,
-      "operator": ">=",
+      "operator": "up_to",
       "unit": "fold_vs_wild_type",
-      "display": "≥2,9×",
-      "label": "espressione della maggior parte delle varianti vs wild-type",
+      "display": "fino a 2,9×",
+      "label": "espressione della variante migliore (L6) vs wild-type; 6 costrutti su 7 sopra il wild-type",
       "status": "VERIFICATO"
     },
     {
@@ -35,8 +36,8 @@
       "operator": "up_to",
       "unit": "fold",
       "display": "fino a 9,5×",
-      "label": "differenza massima osservata tra varianti ottimizzate",
-      "status": "VERIFICATO"
+      "label": "differenza nell’espressione tra le varianti ottimizzate (dall’abstract; non rispetto al wild-type)",
+      "status": "VERIFICATO_DA_ABSTRACT"
     }
   ],
   "expression_chart": {
@@ -46,8 +47,8 @@
     },
     "optimized_variants": {
       "value": 2.9,
-      "operator": ">=",
-      "display": "≥2,9×"
+      "operator": "up_to",
+      "display": "fino a 2,9×"
     },
     "max_observed_difference": {
       "value": 9.5,
@@ -62,7 +63,7 @@
       "Simple Codon Optimizer",
       "CUSTOM"
     ],
-    "predictive_metrics_count": 12,
+    "predictive_metrics_count": 10,
     "metric_examples": [
       "stabilità RNA",
       "espressione",

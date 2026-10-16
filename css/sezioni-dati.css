@@ -127,6 +127,14 @@
 }
 
 .kpi__numero { color: var(--testo-accento); }
+/* numero e badge sulla stessa riga (03, KPI 03 «Da abstract») */
+.kpi__testa {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spazio-8);
+}
 .kpi__valore { margin-top: 11px; color: var(--testo-primario); }
 .kpi__didascalia { margin-top: var(--spazio-12); color: var(--testo-secondario); }
 .kpi__nota { margin-top: 9px; color: var(--testo-secondario); }

@@ -12,31 +12,32 @@
     "data": "2026-10-08",
     "testo": "Togliere il grafico e lasciare i tre numeri con le didascalie."
    },
-   "valori_riportati_dall_abstract": [
+   "conferma": {
+    "data": "2026-10-16",
+    "testo": "Grafico ancora tolto dopo la lettura del testo completo (A3)."
+   },
+   "valori_mostrati": [
     {
      "id": "workflow_time",
-     "display": "<5 min",
-     "didascalia": "workflow completo per variante HA influenzale",
-     "nota": "Caso HA riportato nell'abstract"
+     "display": "da 5 a 13 min",
+     "didascalia": "workflow completo per variante (proteine fino a 500 amminoacidi)",
+     "nota": "Da risultati e discussione"
     },
     {
      "id": "optimized_most",
-     "display": "≥2,9×",
-     "didascalia": "espressione della maggior parte delle varianti vs sequenza di riferimento",
-     "nota": "Dato riportato nell'abstract"
+     "display": "fino a 2,9×",
+     "didascalia": "espressione della variante migliore (L6) vs wild-type",
+     "nota": "6 costrutti su 7 sopra il wild-type"
     },
     {
      "id": "max_difference",
      "display": "fino a 9,5×",
-     "didascalia": "differenza massima osservata tra varianti ottimizzate",
-     "nota": "Dato dell'abstract · non clinico"
+     "badge": "DA ABSTRACT",
+     "didascalia": "di differenza nell'espressione tra le varianti ottimizzate",
+     "nota": "Non rispetto al wild-type · non clinico"
     }
    ],
-   "da_ricontrollare_sul_testo_completo": [
-    "≥2,9× per la maggior parte delle varianti (nei Risultati l'estrazione attribuisce 2,9× alla sola variante L6)",
-    "riferimento di base del 9,5× (non indicato nell'abstract)"
-   ],
-   "alt": "Tre valori riportati nell'abstract dello studio VaxLab: workflow completo per una variante HA influenzale in meno di 5 minuti; espressione proteica di almeno 2,9 volte rispetto alla sequenza di riferimento per la maggior parte delle varianti; differenza massima osservata tra varianti ottimizzate fino a 9,5 volte. Dati di laboratorio su cellule, non clinici."
+   "alt": "Tre valori dello studio VaxLab: workflow completo per variante da 5 a 13 minuti per proteine fino a 500 amminoacidi (risultati e discussione); espressione proteica fino a 2,9 volte rispetto al wild-type per la variante migliore, L6, con 6 costrutti su 7 sopra il wild-type; secondo l'abstract, fino a 9,5 volte di differenza nell'espressione tra le varianti ottimizzate, non rispetto al wild-type. Dati di laboratorio su cellule, non clinici."
   },
   {
    "id": "crispr_on_target",

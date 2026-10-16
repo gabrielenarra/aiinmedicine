@@ -238,36 +238,36 @@
         "testo": "Sequenze HA influenzali. Il test misura l’espressione proteica, non l’efficacia vaccinale nei pazienti."
       },
       "pannello": {
-        "eyebrow": "IL CASO VAXLAB  /  OTTIMIZZAZIONE DELL’mRNA",
-        "badge": "DA ABSTRACT"
+        "eyebrow": "IL CASO VAXLAB  /  OTTIMIZZAZIONE DELL’mRNA"
       },
       "kpi": [
         {
           "numero": "01",
           "metrica": "mrna_workflow_time",
           "didascalia": [
-            "workflow completo",
-            "per variante HA influenzale"
+            "workflow completo per variante",
+            "(proteine fino a 500 amminoacidi)"
           ],
-          "nota": "Caso HA riportato nell’abstract"
+          "nota": "Da risultati e discussione"
         },
         {
           "numero": "02",
           "metrica": "mrna_expression_most",
           "didascalia": [
-            "espressione della maggior parte",
-            "delle varianti vs sequenza di riferimento"
+            "espressione della variante",
+            "migliore (L6) vs wild-type"
           ],
-          "nota": "Dato riportato nell’abstract"
+          "nota": "6 costrutti su 7 sopra il wild-type"
         },
         {
           "numero": "03",
           "metrica": "mrna_expression_max",
+          "badge": "DA ABSTRACT",
           "didascalia": [
-            "differenza massima osservata",
-            "tra varianti ottimizzate"
+            "di differenza nell’espressione",
+            "tra le varianti ottimizzate"
           ],
-          "nota": "Dato dell’abstract · non clinico"
+          "nota": "Non rispetto al wild-type · non clinico"
         }
       ],
       "spiegazione": {
@@ -342,7 +342,7 @@
         ],
         "sintesi": {
           "etichetta": "NOTE DI LETTURA",
-          "testo": "I valori di espressione sono quelli riportati nell’abstract dello studio. Senza i dati completi per variante non li rappresentiamo in un grafico."
+          "testo": "Il valore «{metrica:mrna_expression_most}» e i tempi vengono dai risultati e dalla discussione dell’articolo; «{metrica:mrna_expression_max}» è riportato solo nell’abstract, come differenza tra le varianti ottimizzate e non rispetto al wild-type. Per questo li mostriamo come numeri, non in un grafico."
         },
         "fonti": [
           {
@@ -388,9 +388,7 @@
         "leggi_di_piu": {
           "etichetta": "SCOPRI COME FUNZIONA VAXLAB"
         },
-        "pannello": {
-          "badge": "DA ABSTRACT"
-        }
+        "pannello": null
       }
     },
     "04": {

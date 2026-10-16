@@ -1,30 +1,31 @@
 (window.DATI = window.DATI || {})["audit_status"] =
 {
  "_nota": "Aggiunge solo esito dei controlli. I valori restano quelli del registro.",
- "data_controllo": "2026-10-08",
+ "data_controllo": "2026-10-16",
  "decisioni": {
-  "sezione_03_grafico": "Opzione B (8 ott 2026): grafico tolto, restano i tre numeri con didascalie e badge «Da abstract»."
+  "sezione_03_grafico": "Opzione B (8 ott 2026): grafico tolto, restano i tre numeri con didascalie. Confermato il 16 ott 2026 (A3) dopo la lettura del testo completo.",
+  "sezione_03_numeri": "16 ott 2026 (A1, A2, A4 e tempi), testo completo letto su Europe PMC PMC13144369: «da 5 a 13 min», «fino a 2,9×» (L6 vs wild-type, 6 costrutti su 7 sopra il wild-type), «fino a 9,5×» solo con badge «Da abstract» e mai come confronto con il wild-type, 4 algoritmi, 10 metriche predittive."
  },
  "metriche": {
   "mrna_workflow_time": {
    "esito": "OK_FONTE_LETTA",
-   "nota": ""
+   "nota": "Testo completo letto il 16/10/2026: l’abstract dice «under 5 min per variant», ma i risultati danno il workflow HA entro 13 min e la discussione 5–13 min per proteine fino a 500 amminoacidi. Mostrato «da 5 a 13 min» (decisione dell’utente del 16 ottobre)."
   },
   "mrna_expression_most": {
-   "esito": "DA_VERIFICARE",
-   "nota": "Abstract: almeno 2,9× per la maggior parte; risultati: 2,9× per la variante L6. Nel disegno: numero con badge «Da abstract», senza grafico."
+   "esito": "OK_FONTE_LETTA",
+   "nota": "Testo completo letto il 16/10/2026: 2,9× è la variante migliore (L6) rispetto al wild-type; 6 costrutti su 7 sopra il wild-type (tutti tranne V3). Mostrato «fino a 2,9×» con la nota «6 costrutti su 7 sopra il wild-type» (A1 chiuso). L’abstract («at least 2.9-fold» per la maggior parte) non coincide con i risultati."
   },
   "mrna_expression_max": {
-   "esito": "DA_VERIFICARE",
-   "nota": "Confronto di base non indicato dalla fonte. Nel disegno: solo numero, senza barra."
+   "esito": "OK_FONTE_LETTA_SOLO_ABSTRACT",
+   "nota": "Abstract: «up to 9.5-fold differences in protein expression»; il testo dell’articolo non dice tra quali sequenze. Mostrato «fino a 9,5×» con didascalia fedele all’abstract («di differenza nell’espressione tra le varianti ottimizzate») e badge «Da abstract»; mai come miglioramento rispetto al wild-type (A2 chiuso, 16/10/2026)."
   },
   "mrna_algorithms": {
    "esito": "OK_FONTE_LETTA",
-   "nota": "Nodo 55:70 assente: nello stato aperto 182:2 (I432:188;432:161)."
+   "nota": "Nodo 55:70 assente: nello stato aperto 182:2 (I432:188;432:161). Confermato sul testo completo il 16/10/2026: LinearDesign, CodonBERT, Simple Codon Optimizer, CUSTOM (A4 chiuso)."
   },
   "mrna_predictive_metrics": {
    "esito": "OK_FONTE_LETTA",
-   "nota": "Nodo 55:72 assente: nello stato aperto 182:2 (I432:191;432:157). Dal 14 ottobre 2026 il valore è 12: la Fig. 1 dell’articolo elenca 12 voci in tre famiglie (decisione dell’utente del 14 ottobre); l’abstract dice invece «ten predictive metrics» (da dire ai professori, docs/PUNTI-APERTI.md A4)."
+   "nota": "Nodo 55:72 assente: nello stato aperto 182:2 (I432:191;432:157). Dal 16 ottobre 2026 il valore è 10, come dicono abstract e testo dell’articolo («ten predictive metrics»); dal 14 al 16 ottobre il sito mostrava 12 (voci della Fig. 1). A4 chiuso."
   },
   "crispr_off_target_reduction": {
    "esito": "OK_FONTE_LETTA",

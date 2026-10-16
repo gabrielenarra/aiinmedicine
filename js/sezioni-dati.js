@@ -54,10 +54,11 @@
       s.pannello.badge ? el('p', { class: 'sd__badge t-eyebrow-maiuscolo-12' }, s.pannello.badge) : null);
   }
 
-  // KPI con numero d'ordine (sezione 03)
+  // KPI con numero d'ordine (sezione 03); badge facoltativo accanto al numero (03: «Da abstract» solo sul 9,5×)
   function kpi(voce, classe = '', stileValore = 't-titolo-mobile') {
+    const numeroKpi = voce.numero ? el('p', { class: 'kpi__numero t-etichetta-forte-14', 'aria-hidden': 'true' }, voce.numero) : null;
     return el('div', { class: `kpi ${classe}`.trim() },
-      voce.numero ? el('p', { class: 'kpi__numero t-etichetta-forte-14', 'aria-hidden': 'true' }, voce.numero) : null,
+      voce.badge ? el('div', { class: 'kpi__testa' }, numeroKpi, el('p', { class: 'sd__badge kpi__badge t-eyebrow-maiuscolo-12' }, voce.badge)) : numeroKpi,
       voce.eyebrow ? el('p', { class: 'kpi__eyebrow t-eyebrow-maiuscolo-12' }, voce.eyebrow) : null,
       el('p', { class: `kpi__valore ${stileValore}` }, numero(voce.metrica, 'kpi__cifra')),
       el('p', { class: 'kpi__didascalia t-corpo-piccolo-14' }, righe(voce.didascalia)),
@@ -353,8 +354,9 @@
 
   // KPI con numero d'ordine (03, «KPI 01» 509:308) o a tre testi (07, 509:491)
   function kpiC(voce) {
+    const numeroKpi = voce.numero ? el('p', { class: 'sc-kpi__numero t-etichetta-forte-14', 'aria-hidden': 'true' }, voce.numero) : null;
     return el('div', { class: 'sc-scheda sc-kpi' },
-      voce.numero ? el('p', { class: 'sc-kpi__numero t-etichetta-forte-14', 'aria-hidden': 'true' }, voce.numero) : null,
+      voce.badge ? el('div', { class: 'sc-kpi__testa' }, numeroKpi, el('p', { class: 'sc-badge t-eyebrow-maiuscolo-12' }, voce.badge)) : numeroKpi,
       el('p', { class: 'sc-kpi__valore t-titolo-card' }, numero(voce.metrica)),
       el('p', { class: 'sc-forte t-etichetta-forte-14' }, unaRiga(voce.didascalia)),
       voce.nota ? el('p', { class: 'sc-nota t-etichetta-media-14' }, voce.nota) : null);
