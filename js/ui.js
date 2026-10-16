@@ -28,22 +28,46 @@
   // Gli spazi doppi del disegno («02  /  DATI») restano: il browser li ridurrebbe a uno
   const spazi = (t) => t.replace(/ {2,}/g, (s) => ' '.repeat(s.length - 1) + ' ');
 
-  // Due ritocchi tipografici su tutti i testi (Figma 194:2, 345:27):
+  // Tre ritocchi tipografici su tutti i testi (Figma 194:2, 345:27):
   // - intervalli numerici con la lineetta («0–60%», «0,80–1,00», «C1–C6» no: solo cifre)
   //   in un <span class="intervallo">, che non va mai a capo («0–/60%» era un errore);
   // - lettere greche in un <span class="greca">, che resta minuscolo anche nelle
-  //   etichette in maiuscolo («IFN-γ», non «IFN-Γ»).
+  //   etichette in maiuscolo («IFN-γ», non «IFN-Γ»);
+  // - frecce «→» e «↗» disegnate (il font Inter del sito non le ha: ogni sistema le
+  //   disegnava a modo suo, docs/PUNTI-APERTI.md B23); il carattere resta per i lettori di schermo.
   // Il testo (textContent) resta identico.
-  const TIPOGRAFIA = /(\d+(?:,\d+)?–\d+(?:,\d+)?\s?%?)|([Ͱ-Ͽ])/g;
+  const TIPOGRAFIA = /(\d+(?:,\d+)?–\d+(?:,\d+)?\s?%?)|([Ͱ-Ͽ])|([→↗])/g;
+  const FRECCE = {
+    '→': '<path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"/>',
+    '↗': '<path d="M4.5 11.5l7-7M5.5 4.5h6v6"/>',
+  };
+  function freccia(carattere) {
+    const span = document.createElement('span');
+    span.className = 'freccia-testo';
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('viewBox', '0 0 16 16');
+    svg.setAttribute('aria-hidden', 'true');
+    svg.setAttribute('focusable', 'false');
+    svg.innerHTML = FRECCE[carattere];
+    const testo = document.createElement('span');
+    testo.className = 'freccia-testo__carattere';
+    testo.textContent = carattere;
+    span.append(svg, testo);
+    return span;
+  }
   function tipografia(testo) {
     const parti = [];
     let ultimo = 0;
     for (const trovato of testo.matchAll(TIPOGRAFIA)) {
       parti.push(testo.slice(ultimo, trovato.index));
-      const span = document.createElement('span');
-      span.className = trovato[1] ? 'intervallo' : 'greca';
-      span.textContent = trovato[0];
-      parti.push(span);
+      if (trovato[3]) {
+        parti.push(freccia(trovato[3]));
+      } else {
+        const span = document.createElement('span');
+        span.className = trovato[1] ? 'intervallo' : 'greca';
+        span.textContent = trovato[0];
+        parti.push(span);
+      }
       ultimo = trovato.index + trovato[0].length;
     }
     parti.push(testo.slice(ultimo));

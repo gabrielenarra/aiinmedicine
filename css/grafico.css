@@ -276,6 +276,7 @@
    Nome · barra · valore. La barra è lunga al massimo 142 px (04: 60% → 142 px)
    o 140 px (06: da 0,80 a 1,00) come nel disegno; sotto i 360 px si accorcia. */
 .grafico-righe {
+  --colonne-righe: minmax(0, 104px) minmax(0, 142px) 48px;   /* nome · barra · valore */
   display: flex;
   flex-direction: column;
   gap: var(--spazio-12);
@@ -295,7 +296,7 @@
 
 .grafico-righe__voce {
   display: grid;
-  grid-template-columns: minmax(0, 104px) minmax(0, 142px) 48px;
+  grid-template-columns: var(--colonne-righe);
   align-items: center;
   gap: var(--spazio-8);
   min-height: 32px;             /* passo delle righe 44 px con lo spazio di 12 (foglio G, 753:131) */
@@ -319,13 +320,13 @@
 [data-grafico^="crispr_"] [data-barra="spcas9"] .grafico-righe__barra { background: var(--grafico-barra-grigia); }
 
 /* 06: barre con bordo (alte 13 px in tutto), righe da 31 px (passo 44 px, foglio G), nomi più larghi (509:459) */
-[data-grafico="diagnostics_auroc"] { gap: 13px; }
+[data-grafico="diagnostics_auroc"] {
+  --colonne-righe: minmax(0, 112px) minmax(0, 142px) 42px;
+  gap: 13px;
+}
 [data-grafico="diagnostics_auroc"] .grafico-righe__elenco { gap: 13px; }
 
-[data-grafico="diagnostics_auroc"] .grafico-righe__voce {
-  grid-template-columns: minmax(0, 112px) minmax(0, 142px) 42px;
-  min-height: 31px;
-}
+[data-grafico="diagnostics_auroc"] .grafico-righe__voce { min-height: 31px; }
 
 [data-grafico="diagnostics_auroc"] .grafico-righe__barra {
   height: 13px;
@@ -333,14 +334,21 @@
   border: 1px solid var(--accento-lilla);
 }
 
-/* scala: 0,80 · 0,90 · 1,00 sopra le barre, distribuita su tutta la larghezza come
-   nel disegno (509:455; docs/PUNTI-APERTI.md B25) */
+/* scala: 0,80 · 0,90 · 1,00 sopra la sola colonna delle barre, allineata a inizio,
+   metà e fine della barra (decisione del 16 ott 2026, docs/PUNTI-APERTI.md B25;
+   nel disegno 509:455 era distribuita su tutta la card) */
 .grafico-righe__tacche {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: var(--colonne-righe);
+  gap: var(--spazio-8);
   min-height: 24px;
   align-items: center;
   color: var(--testo-secondario);
+}
+
+.grafico-righe__scala {
+  display: flex;
+  justify-content: space-between;
 }
 
 /* ---------- Barra composta, tablet e smartphone (509:494) ---------- */

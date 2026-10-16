@@ -146,9 +146,10 @@
 /* ---------- Tablet (anche 1024–1279 px) ---------- */
 /* due card per riga a 16 px, righe a 8 px; l'ultima card occupa tutta la riga (509:920–922) */
 @media (min-width: 600px) {
-  /* sotto le card il disegno tablet lascia quattro spaziatori avanzati (509:633–639):
-     4 · 22 + 4 · 8 = 120 px in più prima della 03 (docs/PUNTI-APERTI.md B26) */
-  .s02__palco { padding: 0 var(--spazio-24) calc(4 * 22px + 4 * var(--spazio-8)); }
+  /* il disegno tablet lascia sotto le card quattro spaziatori avanzati (509:633–639,
+     120 px in più): tolti il 16 ott 2026, lo spazio prima della 03 è 64 px come su
+     smartphone (docs/PUNTI-APERTI.md B26) */
+  .s02__palco { padding: 0 var(--spazio-24); }
 
   .s02__card {
     grid-template-columns: 1fr 1fr;

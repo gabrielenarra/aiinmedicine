@@ -99,9 +99,23 @@ body {
    minuscole anche nelle etichette in maiuscolo («IFN-γ», come in Figma) */
 .intervallo { white-space: nowrap; }
 .greca { text-transform: none; }
+/* frecce disegnate al posto di «→» e «↗» (js/ui.js): larghe quanto il carattere, colore del testo */
+.freccia-testo { display: inline-block; white-space: nowrap; }
+.freccia-testo svg {
+  width: 0.9em;
+  height: 0.9em;
+  vertical-align: -0.1em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
 
-/* ---------- Testo solo per i lettori di schermo (es. testo alternativo dei grafici) ---------- */
-.solo-lettori {
+/* ---------- Testo solo per i lettori di schermo (es. testo alternativo dei grafici) ----------
+   anche il carattere delle frecce disegnate («→», «↗»), che resta nel testo */
+.solo-lettori,
+.freccia-testo__carattere {
   position: absolute;
   width: 1px;
   height: 1px;

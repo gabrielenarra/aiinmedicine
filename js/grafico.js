@@ -66,8 +66,12 @@
     return el('figure', { class: 'grafico-righe', 'data-grafico': id, 'aria-describedby': idTesto },
       opzioni.etichetta ? el('figcaption', { class: 'grafico-righe__etichetta t-dati-forte-12' }, opzioni.etichetta) : null,
       el('p', { id: idTesto, class: 'solo-lettori' }, spec.alt),
+      // scala sopra la sola colonna delle barre (B25): stesse colonne delle righe, nome e valore vuoti
       opzioni.tacche ? el('div', { class: 'grafico-righe__tacche t-dati-medio-12', 'aria-hidden': 'true' },
-        [asse.min, (asse.min + asse.max) / 2, asse.max].map((t) => el('span', {}, formatoTacche.format(t)))) : null,
+        el('span', {}),
+        el('span', { class: 'grafico-righe__scala' },
+          [asse.min, (asse.min + asse.max) / 2, asse.max].map((t) => el('span', {}, formatoTacche.format(t)))),
+        el('span', {})) : null,
       el('ul', { class: 'grafico-righe__elenco', role: 'list' }, spec.barre.map((b, i) =>
         el('li', {
           class: 'grafico-righe__voce', 'data-barra': b.id, style: `--i:${(opzioni.inizio || 0) + i}`,

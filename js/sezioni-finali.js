@@ -16,8 +16,12 @@
     if (!a.url) return el('span', { class: 'riga', lang: a.lingua }, a.titolo_articolo);
     return el('span', { class: 'riga' },
       el('a', { class: 'articolo-link', href: a.url, target: '_blank', rel: 'noopener noreferrer', lang: a.lingua },
-        // la freccia resta attaccata all'ultima parola (spazio non separabile)
-        a.titolo_articolo, el('span', { 'aria-hidden': 'true' }, ' ↗'),
+        // la freccia resta attaccata all'ultima parola: ultima parola e freccia in un
+        // blocco che non va a capo (la freccia disegnata, js/ui.js, altrimenti si staccherebbe)
+        ...(() => {
+          const [, testa, ultima] = a.titolo_articolo.match(/^([\s\S]*?)(\S+)$/) || [, '', a.titolo_articolo];
+          return [testa, el('span', { class: 'intervallo' }, ultima, el('span', { 'aria-hidden': 'true' }, ' ↗'))];
+        })(),
         el('span', { class: 'solo-lettori', lang: 'it' }, ` (${(pagine.interfaccia || {}).nuova_scheda})`)));
   }
 
