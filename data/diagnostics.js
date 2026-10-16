@@ -43,7 +43,7 @@
       "split": "Test",
       "radiographs": 668,
       "patients": 500,
-      "annotation": "500 studi con consenso di 5 radiologi; confronto con altri 3.",
+      "annotation": "500 studi con voto a maggioranza di 5 radiologi; confronto con altri 3.",
       "source_id": "SRC_CHEXPERT_DATASHEET_2021"
     }
   ],

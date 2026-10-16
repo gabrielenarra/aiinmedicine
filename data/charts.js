@@ -112,7 +112,7 @@
     "max": 1.0,
     "unita": "AUROC",
     "troncato": true,
-    "nota": "Asse troncato: il caso vale 0,5. Valutare un asse da 0,5 o un grafico a punti."
+    "nota": "Asse troncato: il caso vale 0,5. Deciso il 16 ott 2026 (A7): l’asse resta da 0,80 a 1,00, come nel disegno; i valori sono scritti accanto a ogni barra."
    },
    "barre": [
     {

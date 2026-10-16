@@ -25,8 +25,8 @@
   "derived": {
     "off_target_reduction_pct": 95,
     "display": "95%",
-    "status": "VERIFICATO_ARROTONDATO",
-    "calculation_note": "Arrotondato dal confronto 0,32% vs 6,1%; legato ai siti off-target noti del benchmark."
+    "status": "VERIFICATO",
+    "calculation_note": "Valore scritto dagli autori (mediane 0,32% vs 6,1%, 15 siti off-target noti di SpCas9, cellule HEK293T); riletto il 16/10/2026."
   }
 }
 ;

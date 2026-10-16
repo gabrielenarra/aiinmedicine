@@ -89,7 +89,7 @@
     "label": "riduzione dell’editing nei siti off-target noti",
     "source_id": "SRC_OPENCRISPR_2025",
     "year": 2025,
-    "status": "VERIFICATO_ARROTONDATO"
+    "status": "VERIFICATO"
   },
   {
     "order": 7,
@@ -161,7 +161,7 @@
     "value": 10000,
     "operator": ">",
     "unit": "tumori TCGA",
-    "label": "tumori TCGA analizzati",
+    "label": "campioni tumorali analizzati",
     "source_id": "SRC_PANIMMUNE_2018",
     "year": 2018,
     "status": "VERIFICATO_ARROTONDATO"
@@ -236,7 +236,7 @@
     "value": 14,
     "operator": "=",
     "unit": "osservazioni cliniche etichettate",
-    "label": "positive · negative · incerte",
+    "label": "osservazioni cliniche",
     "source_id": "SRC_CHEXPERT_2019",
     "year": 2019,
     "status": "VERIFICATO"
@@ -251,7 +251,7 @@
     "value": 214000000,
     "operator": ">",
     "unit": "strutture proteiche predette",
-    "label": "AlphaFold DB",
+    "label": "forme proteiche previste",
     "source_id": "SRC_AFDB_2024",
     "year": 2024,
     "status": "VERIFICATO_ARROTONDATO"
@@ -266,7 +266,7 @@
     "value": 71000000,
     "operator": "~",
     "unit": "varianti missenso valutate",
-    "label": "proteoma umano",
+    "label": "varianti genetiche valutate",
     "source_id": "SRC_ALPHAMISSENSE_2023",
     "year": 2023,
     "status": "VERIFICATO_ARROTONDATO"
@@ -281,7 +281,7 @@
     "value": 89,
     "operator": "=",
     "unit": "%",
-    "label": "classificate benigno / patogeno",
+    "label": "assegnate alle due classi principali",
     "source_id": "SRC_ALPHAMISSENSE_2023",
     "year": 2023,
     "status": "VERIFICATO"

@@ -29,7 +29,7 @@
   },
   "crispr_off_target_reduction": {
    "esito": "OK_FONTE_LETTA",
-   "nota": "La fonte riporta il 95%."
+   "nota": "Riletto il 16/10/2026 sul testo completo (Europe PMC PMC12422970): «95% reduction in editing at known SpCas9 off-target sites (median indel rates of 0.32% versus 6.1%)», 15 siti off-target noti, cellule HEK293T. Il 95% è scritto dagli autori: nota del sito «Dato dell’articolo · benchmark in cellule» (A5 chiuso)."
   },
   "crispr_on_target_opencrispr": {
    "esito": "OK_FONTE_LETTA",
@@ -53,7 +53,7 @@
   },
   "immunotherapy_cancer_types": {
    "esito": "OK_FONTE_LETTA",
-   "nota": "Riletto il 16/10/2026 (stesso abstract): 33 tipi di tumore."
+   "nota": "Riletto il 16/10/2026 (stesso abstract): 33 tipi di tumore. Dal 16/10/2026 il sito dice «tipi di tumore» anche su desktop (A14 chiuso)."
   },
   "immunotherapy_immune_subtypes": {
    "esito": "OK_FONTE_LETTA",
@@ -61,7 +61,7 @@
   },
   "diagnostics_radiographs": {
    "esito": "OK_FONTE_LETTA",
-   "nota": ""
+   "nota": "Datasheet CheXpert (arXiv 2105.03020) letto il 16/10/2026: training 223.414 immagini / 64.540 pazienti, validation 234 / 200, test 668 / 500; validation annotata da 3 radiologi, test da 8 (verità = voto a maggioranza di 5, gli altri 3 per il confronto). Asse del grafico AUROC lasciato da 0,80 (decisione dell’utente, A7 chiuso)."
   },
   "diagnostics_patients": {
    "esito": "OK_FONTE_LETTA",
@@ -69,11 +69,11 @@
   },
   "diagnostics_observations": {
    "esito": "OK_FONTE_LETTA",
-   "nota": ""
+   "nota": "«14 observations»: dal 16/10/2026 la didascalia è «osservazioni cliniche» su tutti i formati (A13)."
   },
   "discovery_alphafold_structures": {
    "esito": "OK_FONTE_LETTA",
-   "nota": "Dato di settembre 2023, articolo del 2024."
+   "nota": "Riletto il 16/10/2026 (Europe PMC PMC10767828): «As of September 2023, it archives over 214 million predicted protein structures». Nota del sito «AlphaFold DB · dato di settembre 2023» (A9 chiuso)."
   },
   "discovery_alphamissense_variants": {
    "esito": "OK_FONTE_LETTA",

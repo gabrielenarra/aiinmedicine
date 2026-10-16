@@ -428,7 +428,7 @@
           "riduzione dell’editing",
           "ai siti off-target noti"
         ],
-        "nota": "Valore arrotondato · benchmark in cellule"
+        "nota": "Dato dell’articolo · benchmark in cellule"
       },
       "confronti": [
         {
@@ -652,7 +652,7 @@
           },
           {
             "metrica": "immunotherapy_cancer_types",
-            "didascalia": "tipi di cancro",
+            "didascalia": "tipi di tumore",
             "nota": "Lo stesso schema immunitario può comparire in tumori che nascono in organi diversi."
           }
         ],
@@ -845,7 +845,7 @@
         },
         {
           "metrica": "diagnostics_observations",
-          "didascalia": "segnali clinici da riconoscere",
+          "didascalia": "osservazioni cliniche",
           "nota": "per esempio edema o versamento pleurico"
         }
       ],
@@ -903,7 +903,7 @@
           {
             "etichetta": "TEST",
             "valore": "{dato:diagnostics.splits.2.radiographs} radiografie · {dato:diagnostics.splits.2.patients} pazienti",
-            "testo": "500 studi con consenso di 5 radiologi e confronto con altri 3. È la parte usata per la valutazione finale."
+            "testo": "500 studi con voto a maggioranza di 5 radiologi e confronto con altri 3. È la parte usata per la valutazione finale."
           },
           {
             "etichetta": "COME LEGGERE L’AUROC",
@@ -1026,8 +1026,8 @@
         {
           "metrica": "discovery_alphafold_structures",
           "didascalia": "forme proteiche previste",
-          "nota": "AlphaFold DB · dato riferito al 2024",
-          "stato": "DA_VERIFICARE",
+          "nota": "AlphaFold DB · dato di settembre 2023",
+          "stato": "VERIFICATO",
           "punto_aperto": "A9"
         },
         {
