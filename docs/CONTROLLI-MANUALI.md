@@ -104,6 +104,17 @@ Se la linea scatta su telefono: **non togliere nulla da solo**. Dillo (punto ape
 | Lettore di schermo sulle barre | Legge «nome: valore» (es. «Pleural Effusion: 0,97») | |
 | Movimento ridotto attivo | Sfere ferme, grafici già completi | |
 
+## 6d. Pagine informative e footer
+
+| Prova | Cosa deve succedere | Esito |
+|---|---|---|
+| Dal footer della home apri ogni voce (Dataset … Licenza) | Si apre la pagina giusta alla parte giusta; nel footer la voce è sottolineata e in grassetto | |
+| Tab dall'inizio di una pagina informativa | «Vai al contenuto», marchio, voci dell'header (o pulsante menu), «← Torna al sito», indice | |
+| Indice «In questa pagina» con Invio | La pagina scorre alla parte e il lettore di schermo legge il suo titolo | |
+| Link esterni (DOI, licenze) con il lettore di schermo | Si sente «si apre in una nuova scheda» | |
+| Testi [DA FORNIRE] | Sono grigi e ben visibili: vanno sostituiti prima della pubblicazione | |
+| Apri `404.html` | Messaggio, pulsante «Torna al sito», tre link; le sfere non coprono nulla | |
+
 ## 7. Browser
 
 | Browser | Esito |

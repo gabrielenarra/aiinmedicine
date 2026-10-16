@@ -29,7 +29,7 @@
       "03",
       "08",
       "09",
-      "10"
+      "il-progetto.html#about"
     ],
     "social": [
       "in",
@@ -105,7 +105,7 @@
       "03",
       "08",
       "09",
-      "10"
+      "il-progetto.html#about"
     ],
     "compatto": {
       "figma": [

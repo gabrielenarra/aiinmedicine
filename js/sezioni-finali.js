@@ -3,10 +3,22 @@
 //
 // 08: i link agli articoli sono nel disegno ma da verificare (PUNTI-APERTI A11):
 //     per ora titolo e data sono testo, non link.
-// 10: link del footer e social non esistono ancora: testo non cliccabile (CLAUDE.md).
+// 10: le voci del footer portano alle pagine informative (data/pagine.js, foglio «06 · H»);
+//     la voce della pagina in cui ci si trova ha aria-current="page". I social restano
+//     testo non cliccabile: gli indirizzi non esistono ancora (PUNTI-APERTI B2/B16).
 
 (() => {
-  const { contenuti } = window.SITO.dati;
+  const { contenuti, pagine } = window.SITO.dati;
+
+  // Voce del footer: link alla sua pagina (e parte); «corrente» se porta alla pagina aperta
+  const paginaAperta = document.body.dataset.pagina;
+  function voceFooter(v, classe) {
+    const href = (pagine.link_footer || {})[v];
+    if (!href) return el('li', { class: classe }, v);
+    const corrente = paginaAperta && href.split('#')[0] === `${paginaAperta}.html`;
+    return el('li', { class: classe },
+      el('a', { class: 'voce-footer', href, 'aria-current': corrente ? 'page' : null }, v));
+  }
   const { el, riempi, righe, formato, perFormato, compatto, alCambioFormato } = window.SITO.ui;
 
   function testa(s, idTitolo) {
@@ -69,9 +81,10 @@
         el('p', { class: 's10__descrizione t-corpo-piccolo-14' }, f.descrizione)),
       f.colonne.map((c, i) => el('div', { class: `s10__colonna s10__colonna--${i}` },
         el('p', { class: 's10__titolo-colonna t-etichetta-forte-14' }, c.titolo),
-        el('ul', { class: 's10__voci', role: 'list' }, c.voci.map((v) => el('li', { class: 't-corpo-piccolo-14' }, v))))),
+        el('ul', { class: 's10__voci', role: 'list' }, c.voci.map((v) => voceFooter(v, 't-corpo-piccolo-14'))))),
       el('ul', { class: 's10__social', role: 'list' }, f.social.map((v) => el('li', { class: 't-etichetta-forte-14' }, v))),
       el('p', { class: 's10__nota-fonti t-corpo-piccolo-14' }, f.nota_fonti),
+      pagine.avvertenza_footer ? el('p', { class: 's10__avvertenza t-corpo-piccolo-14' }, pagine.avvertenza_footer) : null,
       el('p', { class: 's10__copyright t-corpo-piccolo-14' }, f.copyright),
       el('p', { class: 's10__firma t-eyebrow-maiuscolo-12' }, f.marchio));
   }
@@ -144,10 +157,11 @@
       el('p', { class: 'fc-testo t-etichetta-media-14' }, f.descrizione),
       el('div', { class: 'fc-colonne' }, f.colonne.map((c) => el('div', { class: 'fc-colonna' },
         el('p', { class: 'fc-forte t-etichetta-forte-14' }, c.titolo),
-        el('ul', { class: 'fc-testo', role: 'list' }, c.voci.map((v) => el('li', { class: 't-etichetta-media-14' }, v)))))),
+        el('ul', { class: 'fc-testo', role: 'list' }, c.voci.map((v) => voceFooter(v, 't-etichetta-media-14')))))),
       el('ul', { class: 'fc-social', role: 'list' }, f.social.map((v) => el('li', { class: 't-etichetta-media-14' }, v))),
       el('hr', { class: 'fc-filetto' }),
       el('p', { class: 'fc-testo t-etichetta-media-14' }, f.nota_fonti),
+      pagine.avvertenza_footer ? el('p', { class: 'fc-testo fc-avvertenza t-etichetta-media-14' }, pagine.avvertenza_footer) : null,
       el('div', { class: 'fc-piede' },
         el('p', { class: 'fc-testo t-etichetta-media-14' }, f.copyright),
         el('p', { class: 'fc-eyebrow t-eyebrow-maiuscolo-12' }, f.marchio)));
@@ -155,14 +169,16 @@
 
   function disegna() {
     document.querySelectorAll('.sezione-finale').forEach((n) => n.classList.toggle('sezione-finale--compatta', compatto.matches));
+    // nelle pagine informative c'è solo il footer
+    const c = (n) => !!document.querySelector(`[data-sezione="${n}"]`);
     if (compatto.matches) {
-      sezione08Compatta();
-      sezione09Compatta();
+      if (c('08')) sezione08Compatta();
+      if (c('09')) sezione09Compatta();
       footerCompatto();
       return;
     }
-    sezione08();
-    sezione09();
+    if (c('08')) sezione08();
+    if (c('09')) sezione09();
     footer();
   }
 

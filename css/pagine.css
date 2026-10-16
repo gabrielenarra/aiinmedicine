@@ -1,0 +1,214 @@
+/* ==========================================================================
+   Pagine informative, pagina 404 e link del footer
+   Figma: pagina «10 - Pagine informative» (775:2): modello 777:65 / 777:166 /
+   777:266, pagine 777:366 … 778:1671, 404 789:446 / 789:528 / 789:609, stati dei
+   link del footer 779:413 / 779:466 / 779:518. Comportamento: foglio «06 · H» (780:299).
+   Costruite da js/pagina-informativa.js con i testi di data/pagine.js.
+   ========================================================================== */
+
+/* ---------- Footer: le voci sono link (stati del componente «Link di testo» 575:146) ---------- */
+.voce-footer {
+  color: inherit;
+  text-decoration: none;
+  text-underline-position: from-font;
+  border-radius: var(--raggio-8);
+  transition: color var(--durata-rapida) var(--curva);
+}
+@media (hover: hover) {
+  .voce-footer:hover { color: var(--testo-accento); text-decoration: underline; }
+}
+.voce-footer:active { color: var(--testo-accento-premuto); text-decoration: underline; }
+/* la pagina in cui ci si trova: sottolineatura continua, accento e peso forte (non solo colore) */
+.voce-footer[aria-current="page"] {
+  color: var(--testo-accento);
+  font-weight: 600;
+  text-decoration: underline;
+}
+/* tablet e smartphone: righe da 44 px, l'area di tocco (779:466, 779:518) */
+.fc-colonna .voce-footer {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--area-tocco-min);
+}
+.fc-colonna { gap: 0; }
+
+/* avvertenza medica nel footer: come la riga sulle fonti */
+.s10__avvertenza { color: var(--testo-secondario); }
+@media (min-width: 1280px) {
+  .s10__avvertenza {
+    position: absolute;
+    right: calc(70 / 1440 * 100%);
+    top: calc(var(--y) * 1px);
+    --y: 269;
+    max-width: 350px;
+    margin: 0;
+    text-align: right;
+  }
+}
+
+/* ---------- Pagina informativa ---------- */
+.pagina {
+  width: 100%;
+  max-width: var(--larghezza-contenuto);
+  margin-inline: auto;
+  padding-inline: var(--margine-pagina);
+  --margine-pagina: var(--spazio-20);
+}
+@media (min-width: 600px) { .pagina { --margine-pagina: var(--spazio-24); } }
+@media (min-width: 1280px) { .pagina { --margine-pagina: var(--margine-testi-02-desktop); } }
+
+/* intestazione: link di ritorno, eyebrow, h1, introduzione (777:74) */
+.pagina__testa {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spazio-16);
+  padding-top: var(--spazio-32);
+  padding-bottom: var(--spazio-16);
+}
+@media (min-width: 1280px) { .pagina__testa { padding-top: var(--spazio-48); padding-bottom: var(--spazio-40); } }
+.pagina__eyebrow { margin: 0; color: var(--testo-accento); }
+.pagina__titolo { margin: 0; color: var(--testo-primario); }
+.pagina__introduzione { margin: 0; max-width: var(--colonna-lettura); color: var(--testo-secondario); }
+.pagina__avviso {
+  margin: 0;
+  padding: var(--spazio-8) var(--spazio-12);
+  border-radius: var(--raggio-8);
+  background: var(--superficie-lilla-chiaro);
+  color: var(--testo-secondario);
+}
+
+/* link di testo (componente 575:146): area di tocco 44 px, sottolineati */
+.link-testo {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--area-tocco-min);
+  color: var(--testo-accento);
+  text-decoration: underline;
+  text-underline-position: from-font;
+  border-radius: var(--raggio-8);
+}
+@media (hover: hover) { .link-testo:hover { color: var(--testo-accento-premuto); } }
+.link-testo:active { color: var(--testo-accento-premuto); }
+.link-nel-testo { color: var(--testo-accento); text-decoration: underline; text-underline-position: from-font; }
+
+/* corpo: indice a sinistra (desktop, fisso durante lo scorrimento) e contenuto */
+.pagina__corpo { padding-bottom: var(--spazio-64); }
+@media (min-width: 1280px) {
+  .pagina__corpo {
+    display: grid;
+    grid-template-columns: var(--colonna-indice) minmax(0, 940px);
+    gap: 56px;
+    padding-top: var(--spazio-24);
+    padding-bottom: 80px;
+  }
+  .pagina__indice { position: sticky; top: calc(64px + var(--spazio-24)); align-self: start; }
+}
+.pagina__indice { margin-bottom: var(--spazio-32); }
+.pagina__indice-titolo { margin: 0; color: var(--testo-primario); }
+.pagina__indice ul { margin: 0; padding: 0; list-style: none; }
+
+.pagina__parti { display: flex; flex-direction: column; gap: var(--spazio-64); min-width: 0; }
+.parte { display: flex; flex-direction: column; gap: var(--spazio-24); min-width: 0; scroll-margin-top: 80px; }
+.parte__titolo { margin: 0; color: var(--testo-primario); }
+.parte__titolo:focus { outline: none; }
+.parte__titolo:focus-visible { outline: var(--anello-focus); outline-offset: var(--anello-distanza); }
+.parte__testo { margin: 0; max-width: var(--colonna-lettura); color: var(--testo-secondario); }
+.gruppo { display: flex; flex-direction: column; gap: var(--spazio-16); }
+.gruppo__titolo { margin: 0; color: var(--testo-accento); }
+
+/* schede (777:99): due per riga su desktop, una per riga su tablet e smartphone */
+.schede { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--spazio-16); margin: 0; padding: 0; list-style: none; }
+@media (min-width: 1280px) { .schede { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.scheda-pagina {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  min-width: 0;
+  padding: calc(var(--spazio-20) - 1px);
+  background: var(--superficie-bianco);
+  border: 1px solid var(--accento-lilla);
+  border-radius: var(--raggio-18);
+}
+.scheda-pagina--larga { grid-column: 1 / -1; }
+.scheda-pagina > * { margin: 0; max-width: 100%; }
+.scheda-pagina__etichetta, .scheda-pagina__voce-nome { color: var(--testo-accento); }
+.scheda-pagina__titolo { color: var(--testo-primario); overflow-wrap: anywhere; }
+.scheda-pagina__testo, .scheda-pagina__voce-valore { color: var(--testo-secondario); overflow-wrap: anywhere; }
+.scheda-pagina__voci { display: flex; flex-direction: column; gap: 10px; margin: 0; width: 100%; }
+.scheda-pagina__voce { display: flex; flex-direction: column; gap: 2px; }
+.scheda-pagina__voce dt, .scheda-pagina__voce dd { margin: 0; }
+.scheda-pagina .figura__credito { color: var(--testo-secondario); }
+
+/* blocchi di testo (privacy): titolo h3 e paragrafo, nella colonna di lettura */
+.blocchi { display: flex; flex-direction: column; gap: var(--spazio-20); max-width: var(--colonna-lettura); }
+.blocco { display: flex; flex-direction: column; gap: var(--spazio-4); }
+.blocco > * { margin: 0; }
+.blocco__titolo { color: var(--testo-primario); }
+.blocco__testo { color: var(--testo-secondario); }
+
+/* passi numerati del Processo (come i passi della sezione 03) */
+.passi-pagina { display: flex; flex-direction: column; gap: var(--spazio-16); margin: 0; padding: 0; list-style: none; max-width: var(--colonna-lettura); }
+.passo-pagina { display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: var(--spazio-12); align-items: start; }
+.passo-pagina__numero {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  margin: 2px;
+  border: 1px solid var(--accento-lilla);
+  border-radius: 50%;
+  color: var(--testo-accento);
+}
+.passo-pagina__testo > * { margin: 0; }
+.passo-pagina__titolo { color: var(--testo-primario); }
+.passo-pagina__descrizione { margin-top: var(--spazio-4) !important; color: var(--testo-secondario); }
+
+/* segnaposto da riempire prima della pubblicazione: testo attenuato */
+.segnaposto { color: var(--testo-attenuato); }
+
+/* ---------- Pagina 404 (789:446) ---------- */
+.pagina-404 {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spazio-16);
+  padding-block: 120px 160px;
+  text-align: center;
+  overflow-x: clip;
+}
+.pagina-404 > * { margin: 0; position: relative; z-index: 1; }
+.pagina-404__eyebrow { color: var(--testo-accento); }
+.pagina-404__titolo { color: var(--testo-primario); }
+.pagina-404__testo { max-width: 470px; color: var(--testo-secondario); }
+.pagina-404__pulsante {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--area-tocco-min);
+  margin-top: var(--spazio-24) !important;
+  padding: 0 var(--spazio-20);
+  border-radius: var(--raggio-12);
+  background: var(--testo-accento);
+  color: var(--superficie-bianco);
+  text-decoration: none;
+  transition: background-color var(--durata-rapida) var(--curva);
+}
+@media (hover: hover) { .pagina-404__pulsante:hover { background: var(--testo-accento-premuto); } }
+.pagina-404__pulsante:active { background: var(--testo-accento-premuto); }
+.pagina-404__link { margin-top: var(--spazio-24) !important; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0 var(--spazio-8); color: var(--testo-attenuato); }
+.pagina-404 > .sfera { position: absolute; z-index: 0; }
+@media (max-width: 599px) { .pagina-404 { padding-block: 64px 96px; } }
+
+/* sfere della 404 (789:446 · 789:609): ferme, decorative, mai sopra testi o pulsanti */
+.pagina-404__sfera--1 { --d: 92px; --x: 82%; --y: 150px; }
+.pagina-404__sfera--2 { --d: 92px; --x: 14%; --y: 400px; }
+@media (max-width: 599px) {
+  .pagina-404__sfera--1 { --d: 72px; --x: 96%; --y: 40px; }
+  .pagina-404__sfera--2 { --d: 72px; --x: 96%; --y: 400px; }
+}
+
+/* crediti delle immagini dentro una scheda (Crediti e licenze): paragrafi uno sotto l'altro, con un po' di spazio */
+.scheda-pagina__voce .figura__credito + .figura__credito { margin-top: var(--spazio-8); }

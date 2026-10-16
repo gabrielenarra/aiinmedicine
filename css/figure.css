@@ -136,7 +136,7 @@
 .figura__didascalia p { margin: 0; }
 .figura__testo { color: var(--testo-secondario); }
 .figura__credito { color: var(--testo-attenuato); overflow-wrap: anywhere; }
-.figura__credito + .figura__credito { margin-top: calc(var(--spazio-12) * -1); }
+.figura__didascalia .figura__credito + .figura__credito { margin-top: calc(var(--spazio-12) * -1); }
 .figura__credito a {
   color: var(--testo-accento);
   text-decoration: underline;

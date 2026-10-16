@@ -83,6 +83,7 @@ Cose da decidere prima (sono in `docs/PUNTI-APERTI.md`): dominio, logo, favicon,
 | Cartella | Cosa contiene |
 |---|---|
 | `index.html` | La pagina: carica stili, dati e script (tutti con percorsi relativi). |
+| `fonti-e-dati.html`, `glossario.html`, `il-progetto.html`, `crediti-e-licenze.html`, `privacy-e-note-legali.html`, `404.html` | Pagine informative raggiunte dal footer e pagina «non trovata»: testi in `data/pagine.js` (con segnaposto da riempire prima della pubblicazione). |
 | `css/` | Stili: `font.css`, `base.css`, uno per parte della pagina (`hero.css`, `sezione-02.css`, `sezioni-dati.css`, `sezioni-compatte.css` per tablet e smartphone, `sezioni-finali.css`, `grafico.css`, `menu.css`, `linea.css`), `interazioni.css` (movimento e stati), `valori-disegno.css` (misure prese dal disegno). |
 | `js/` | Costruiscono la pagina dai dati: `dati.js` (l'unico che legge `data/`), `ui.js` (strumenti comuni), uno per parte della pagina, `grafico.js` (grafici guidati da `data/charts.js`), `navigazione.js` (menu, header sticky, link), `ingresso.js` (comparsa dei blocchi), `linea.js` (linea narrativa e sfere). |
 | `data/` | Testi, numeri, fonti, grafici; `ancore.js` e `linee.js` sono copie di `design/linee/` (si rigenerano con `node strumenti/linee.mjs`). |

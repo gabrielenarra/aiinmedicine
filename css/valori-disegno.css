@@ -97,6 +97,9 @@
   --v3d-area-alta: 240px;              /* 712:506 */
   --v3d-campo: 96px;                   /* 712:519 */
   --v3d-tabella-alta: 320px;           /* tabella testuale: scorre dentro questa altezza */
+  /* Pagine informative (777:65): colonna di lettura (~70 caratteri) e indice a sinistra */
+  --colonna-lettura: 640px;            /* 777:90 */
+  --colonna-indice: 300px;             /* 777:81 */
 }
 
 @media (min-width: 1280px) {

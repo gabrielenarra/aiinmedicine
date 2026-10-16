@@ -32,7 +32,7 @@ Se il disegno e un documento qui non coincidono, **vale il disegno**: segnalalo 
 - Unità: px come nel disegno; ok convertire in rem se la resa non cambia. Colori **solo** dalle variabili di `design/tokens.css`; testo **solo** con le classi di `design/typography.css`. Niente valori fissi nuovi. Lo sfondo della pagina desktop è una sfumatura (`--sfondo-pagina-desktop`), tablet e smartphone tinta unita: vedi `design/mappa-figma.md`, «Sfondi e superfici».
 - Cartelle (confermate alla tappa 1): `index.html`, `css/` (`font.css`, `base.css`, poi i componenti), `js/`, `data/`, `design/`, `assets/` (con `assets/fonts/`), `tests/`, `strumenti/` (script per chi sviluppa, non usati dal sito). Ordine dei fogli in `index.html`: `design/tokens.css`, `design/movimento.css`, `css/font.css`, `design/typography.css`, `css/base.css`.
 - **Prove:** `npm test` (Playwright). `tests/server-prova.js` serve il sito alla radice e in `/sottocartella/annidata/`; ogni prova apre la pagina da `file://`, dalla radice e dalla sottocartella, a 320, 360, 390, 600, 768, 1023, 1024, 1279, 1280, 1440 e 1920 px, e controlla console, richieste esterne, cookie, font, scorrimento orizzontale. Screenshot in `tests/screenshots/` (non salvati in git). `npm run avvia` apre il sito su `http://127.0.0.1:8080` (solo da questo computer). Altre prove: `tests/interazioni.spec.js` (menu, header sticky, navigazione, movimento ridotto), `tests/linea.spec.js` (linea narrativa), `tests/accessibilita.spec.js` (axe-core, titoli, tabulazione). Le prove a mano sono in `docs/CONTROLLI-MANUALI.md`.
-- **Cosa serve per vedere il sito:** `index.html`, `css/`, `js/`, `data/`, `assets/` e i fogli di `design/` collegati da `index.html`. Non servono `node_modules/`, `tests/`, `strumenti/`, `docs/`.
+- **Cosa serve per vedere il sito:** `index.html` e le altre pagine `.html` della radice, `css/`, `js/`, `data/`, `assets/` e i fogli di `design/` collegati dalle pagine. Non servono `node_modules/`, `tests/`, `strumenti/`, `docs/`.
 
 ## Breakpoint e adattamento
 
@@ -77,6 +77,13 @@ Specifica completa in `design/stati-e-interazioni.md` (copia fedele della pagina
 - `prefers-reduced-motion: reduce`: foglio E di `design/stati-e-interazioni.md`. Va provato, non solo scritto.
 - Ogni grafico ha un testo alternativo (campo `alt` di `data/charts.js`) e i numeri leggibili come testo, non solo disegnati.
 - Card della sezione 02: **non cliccabili**.
+
+## Pagine informative e pagina 404 (dal 16 ottobre 2026)
+
+- Oltre a `index.html` ci sono `fonti-e-dati.html`, `glossario.html`, `il-progetto.html`, `crediti-e-licenze.html`, `privacy-e-note-legali.html` e `404.html` (Figma, pagina «10 - Pagine informative» 775:2; comportamento nel foglio «06 · H» 780:299). Stessa struttura: header, `<main id="contenuto">` vuoto, footer; `<body data-pagina="…">` dice quale pagina costruire.
+- Testi in `data/pagine.js` (anche la mappa voce del footer → pagina e l'avvertenza medica del footer); li costruisce `js/pagina-informativa.js`. Articoli da `data/sources.js`, prospettive dalla sezione 08, crediti delle immagini da `data/immagini.js` con la stessa funzione delle figure: non copiarli a mano.
+- Le voci del footer sono link (`js/sezioni-finali.js`); la voce della pagina aperta ha `aria-current="page"`. Nelle pagine informative l'header punta a `index.html#…` (`indirizzo()` in `js/intestazione.js`); «About» porta a `il-progetto.html#about`.
+- I segnaposto [DA FORNIRE] / [DA SCEGLIERE] / [DA VERIFICARE] restano visibili finché l'utente non dà i dati (`docs/PUNTI-APERTI.md` B43). La privacy è una bozza da far verificare. Prove: `tests/pagine.spec.js`.
 
 ## Movimento di sfere e grafici (dal 15 ottobre 2026)
 

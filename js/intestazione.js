@@ -11,6 +11,15 @@
   const { contenuti } = window.SITO.dati;
   const { el, riempi, formato, perFormato, compatto, smartphone, alCambioFormato } = window.SITO.ui;
 
+  // Nelle pagine informative le sezioni stanno nella home: i link vanno a index.html#…
+  const inHome = !window.SITO.dati.paginaInformativa;
+  // Indirizzo di una voce: una sezione della home («02»…«10») oppure una pagina
+  // informativa (destinazione con «.html», per esempio «il-progetto.html#about»)
+  function indirizzo(chiave) {
+    if (/\.html/.test(chiave)) return chiave;
+    return `${inHome ? '' : 'index.html'}#${idSezione(chiave)}`;
+  }
+
   // id della sezione nella pagina: «02»…«09» dalle sezioni, «10» è il footer
   function idSezione(chiave) {
     if (chiave === '10') return contenuti.footer && contenuti.footer.id;
@@ -31,7 +40,7 @@
   }
 
   // Marchio: link all'inizio della pagina (primo elemento dopo «Vai al contenuto», foglio D)
-  const marchio = (testo, classe) => el('a', { class: `marchio ${classe}`, href: '#inizio' }, testo);
+  const marchio = (testo, classe) => el('a', { class: `marchio ${classe}`, href: inHome ? '#inizio' : 'index.html' }, testo);
 
   function intestazione() {
     const t = contenuti.intestazione;
@@ -47,7 +56,7 @@
     // Desktop: le prime quattro voci al centro; «About» a destra con i social, più tenue
     // (opacità 70% nel disegno → colore attenuato)
     const voce = (v, i, classe) => el('li', {},
-      el('a', { class: `voce-intestazione ${classe} t-etichetta-media-14`, href: `#${idSezione(t.destinazioni[i])}` }, v));
+      el('a', { class: `voce-intestazione ${classe} t-etichetta-media-14`, href: indirizzo(t.destinazioni[i]) }, v));
     riempi(contenitore,
       marchio(t.marchio, 'intestazione__marchio t-eyebrow-maiuscolo-12'),
       el('nav', { class: 'intestazione__nav', 'aria-label': 'Principale' },
@@ -74,7 +83,7 @@
           el('ul', { role: 'list' }, s.voci.map((v, i) => el('li', {},
             el('a', {
               class: 'voce-sticky t-etichetta-media-14',
-              href: `#${idSezione(s.destinazioni[i][0])}`,
+              href: indirizzo(s.destinazioni[i][0]),
               'data-sezioni': s.destinazioni[i].join(' '),
             }, v)))),
           el('span', { class: 'intestazione-sticky__indicatore', 'aria-hidden': 'true' })),
@@ -111,7 +120,7 @@
           el('p', { class: 'menu__eyebrow t-eyebrow-maiuscolo-12' }, m.eyebrow),
           el('p', { class: `menu__titolo ${perFormato({ tablet: 't-titolo-sezione', smartphone: 't-titolo-mobile' })}` }, m.titolo),
           el('ol', { class: 'menu__voci', role: 'list' }, m.voci.map((v, i) => el('li', { class: 'menu__voce', style: `--i:${i}` },
-            el('a', { class: 'voce-menu', href: `#${idSezione(m.destinazioni[i])}` },
+            el('a', { class: 'voce-menu', href: indirizzo(m.destinazioni[i]) },
               el('span', { class: 'voce-menu__numero t-etichetta-forte-14', 'aria-hidden': 'true' }, v.numero),
               // nel disegno l'ultima voce («About») ha il titolo più piccolo (30 px): docs/PUNTI-APERTI.md B30
               el('span', { class: `voce-menu__titolo ${i === m.voci.length - 1 ? 't-titolo-card-grande' : 't-titolo-mobile'}` }, v.titolo),
@@ -123,7 +132,7 @@
   function disegna() {
     // titolo della scheda e link «Vai al contenuto»
     if (contenuti.pagina) {
-      document.title = contenuti.pagina.titolo_scheda;
+      if (inHome) document.title = contenuti.pagina.titolo_scheda;   // le altre pagine hanno il loro titolo
       document.querySelector('.vai-al-contenuto').textContent = contenuti.pagina.vai_al_contenuto;
     }
     intestazione();
@@ -133,5 +142,5 @@
 
   disegna();
   alCambioFormato(disegna);
-  window.SITO.intestazione = { idSezione };
+  window.SITO.intestazione = { idSezione, indirizzo };
 })();
