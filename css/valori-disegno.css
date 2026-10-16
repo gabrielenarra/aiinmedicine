@@ -52,10 +52,11 @@
   --hero-larghezza-citazione: 376px;
 
   /* Sezione 02 (384:25): alta 740 px; posizioni di card e riquadro in css/sezione-02.css */
-  --s02-altezza: 740px;
+  --s02-altezza: 760px;   /* 740 nel disegno; +20 dal 16/10/2026: con «Vai alla sezione» la card 05 arriva a 753 px */
 
   /* Card della sezione 02 (415:2 …) */
   --ombra-card-02: 0 12px 30px rgba(31, 26, 61, 0.08);
+  --ombra-card-02-hover: 0 12px 30px rgba(31, 26, 61, 0.16);   /* card della 02 al passaggio del mouse (809:3753) */
 
   /* Sezioni dati 03–07 (55:2, 63:2, 82:2 …) */
   --margine-sezioni-dati-desktop: 56px;           /* px-56 del frame di sezione */

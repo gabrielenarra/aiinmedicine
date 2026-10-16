@@ -100,6 +100,49 @@
 .card-02__testo { color: var(--testo-secondario); }
 .card-02__categoria { color: var(--testo-attenuato); }   /* nel disegno: principale al 60% */
 
+/* card cliccabile (16 ottobre 2026, Figma 809:3784 e foglio «06 · I» 813:299): il titolo è
+   il link alla sezione e il suo ::after copre tutta la card (area di tocco ampia) */
+.card-02 { position: relative; }
+/* le transizioni dell'ingresso (css/interazioni.css) più quelle di hover e premuto */
+.card-02:not([data-ingresso]) {
+  transition: box-shadow var(--durata-rapida) var(--curva), background-color var(--durata-rapida) var(--curva);
+}
+.card-02[data-ingresso="fatto"] {
+  transition:
+    opacity var(--durata-lenta) var(--curva) var(--ritardo, 0ms),
+    transform var(--durata-lenta) var(--curva) var(--ritardo, 0ms),
+    box-shadow var(--durata-rapida) var(--curva),
+    background-color var(--durata-rapida) var(--curva);
+}
+.card-02__link { color: inherit; text-decoration: none; }
+.card-02__link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--raggio-24);
+}
+/* invito «Vai alla sezione» con freccia verso il basso (809:78) */
+.card-02__invito {
+  display: flex;
+  align-items: center;
+  gap: var(--spazio-8);
+  padding-top: var(--spazio-12);
+  color: var(--testo-accento);
+}
+.card-02__freccia { width: 12px; height: 12px; flex: none; }
+/* hover (solo mouse): bordo a 2 px (il secondo px è un'ombra interna: niente salti) e ombra più marcata */
+@media (hover: hover) {
+  .card-02:hover { box-shadow: inset 0 0 0 1px var(--accento-lilla), var(--ombra-card-02-hover); }
+}
+/* focus: anello del foglio D intorno alla card */
+.card-02__link:focus-visible { outline: none; }
+.card-02__link:focus-visible::after {
+  outline: var(--anello-focus);
+  outline-offset: var(--anello-distanza);
+}
+/* premuto */
+.card-02:active { background-color: var(--superficie-lilla-chiaro-95); }
+
 /* ---------- Tablet (anche 1024–1279 px) ---------- */
 /* due card per riga a 16 px, righe a 8 px; l'ultima card occupa tutta la riga (509:920–922) */
 @media (min-width: 600px) {

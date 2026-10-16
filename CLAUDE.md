@@ -76,7 +76,9 @@ Specifica completa in `design/stati-e-interazioni.md` (copia fedele della pagina
 - Semantica: `lang="it"`, un solo `h1`, `h2` per le sezioni, `h3` per le card; `<nav aria-label="Principale">`; «Leggi di più» = `<button>` con `aria-expanded` e `aria-controls`; menu = `role="dialog" aria-modal="true"`; sfere e linea `aria-hidden="true"`, `pointer-events: none`; link «Vai al contenuto».
 - `prefers-reduced-motion: reduce`: foglio E di `design/stati-e-interazioni.md`. Va provato, non solo scritto.
 - Ogni grafico ha un testo alternativo (campo `alt` di `data/charts.js`) e i numeri leggibili come testo, non solo disegnati.
-- Card della sezione 02: **non cliccabili**.
+- **Card della sezione 02: cliccabili dal 16 ottobre 2026** (richiesta dei relatori; Figma stati 809:3784, foglio «06 · I» 813:299): ogni card porta alla sezione del suo tema (campo `sezione` della card in `contenuti.js`), il titolo è il link e copre tutta la card.
+- **Pulsante «Torna su»** (`js/torna-su.js`, `css/torna-su.css`; Figma 811:92): nella home e nelle 5 pagine informative, compare dopo l'hero, riporta in cima e porta il focus a «Vai al contenuto». Prove: `tests/richieste-relatori.spec.js`.
+- **Numerazione visibile (dal 16 ottobre 2026):** temi 01–05, Eric Topol 06, conclusione 07; hero, «Dati e cambiamento» e footer senza numero. Le chiavi interne (`data-sezione`, `sezioni["03"]`…, ancore della linea, nomi dei file e delle classi) restano quelle vecchie (02–10): non rinominarle.
 
 ## Pagine informative e pagina 404 (dal 16 ottobre 2026)
 

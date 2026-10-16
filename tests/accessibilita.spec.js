@@ -90,7 +90,10 @@ for (const larghezza of [390, 1440]) {
       await page.keyboard.press('Tab');
       sequenza.push(await page.evaluate(() => {
         const a = document.activeElement;
+        // l'anello può stare sull'elemento, sul cerchio del pulsante menu o, per i link che
+        // coprono tutta la card (card della 02 e della 08), sul loro ::after
         const anello = getComputedStyle(a).outlineStyle !== 'none'
+          || getComputedStyle(a, '::after').outlineStyle !== 'none'
           || (a.querySelector('.pulsante-menu__cerchio') && getComputedStyle(a.querySelector('.pulsante-menu__cerchio')).outlineStyle !== 'none');
         return { classe: a.className.split(' ')[0], anello };
       }));

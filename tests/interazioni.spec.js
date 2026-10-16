@@ -92,7 +92,7 @@ test('1440 px: l\'header sticky compare dopo l\'hero e segue la sezione letta', 
   const dati = page.locator('.voce-sticky', { hasText: 'DATI' });
   await expect(dati).toHaveAttribute('aria-current', 'location');
   await expect(page.locator('.voce-sticky[aria-current]')).toHaveCount(1);
-  await expect(page.locator('.intestazione-sticky__capitolo-numero')).toHaveText('06 / DIAGNOSTICA');
+  await expect(page.locator('.intestazione-sticky__capitolo-numero')).toHaveText('04 / DIAGNOSTICA');
   await expect(page.locator('.intestazione-sticky__capitolo-titolo')).toHaveText('Vedere prima, agire meglio');
 
   await page.evaluate(() => document.getElementById('eric-topol').scrollIntoView({ behavior: 'instant' }));
@@ -108,7 +108,7 @@ test('768 px: header sticky con pillola del capitolo e pulsante menu che apre il
   await page.evaluate(() => document.getElementById('crispr').scrollIntoView({ behavior: 'instant' }));
   const sticky = page.locator('.intestazione-sticky');
   await expect(sticky).toBeVisible();
-  await expect(page.locator('.intestazione-sticky__capitolo-numero')).toHaveText('04 / CRISPR-Cas9');
+  await expect(page.locator('.intestazione-sticky__capitolo-numero')).toHaveText('02 / CRISPR-Cas9');
   await sticky.locator('[data-apri-menu]').click();
   await expect(page.locator('#menu')).toBeVisible();
   await page.keyboard.press('Escape');

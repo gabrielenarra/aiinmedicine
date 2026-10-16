@@ -41,10 +41,10 @@
           "gruppi": [
             {
               "schede": [
-                { "titolo": "TCGA – The Cancer Genome Atlas, via GDC", "voci": [["Editore", "National Cancer Institute (NCI), Genomic Data Commons"], ["Contenuto", "Profili immunogenomici di {metrica:immunotherapy_tumor_samples} tumori di {metrica:immunotherapy_cancer_types} tipi (PanCanAtlas)"], ["Dove compare", "Sezione 05"], ["Licenza o condizioni", "Dati «open access» scaricabili liberamente; i dati ad accesso controllato richiedono un’autorizzazione (dbGaP). Nessuna licenza specifica indicata"]], "link": { "testo": "Fonte originale", "fonte": "SRC_PANIMMUNE_2018", "campo": "url" } },
-                { "titolo": "CheXpert", "voci": [["Editore", "Stanford ML Group / Stanford AIMI (Stanford University)"], ["Contenuto", "{metrica:diagnostics_radiographs} radiografie del torace di {metrica:diagnostics_patients} pazienti dello Stanford Hospital (2002–2017), con {metrica:diagnostics_observations} osservazioni ricavate dai referti"], ["Dove compare", "Sezione 06"], ["Licenza o condizioni", "Accordo d’uso per la ricerca della Stanford University, da accettare prima del download"]], "link": { "testo": "Fonte originale", "fonte": "SRC_CHEXPERT_2019", "campo": "alternate_url" } },
-                { "titolo": "AlphaFold Protein Structure Database", "voci": [["Editore", "EMBL-EBI / Google DeepMind"], ["Contenuto", "Strutture di proteine predette"], ["Dove compare", "Sezione 07"], ["Licenza o condizioni", "CC BY 4.0"]], "link": { "testo": "Fonte originale", "fonte": "SRC_AFDB_2024", "campo": "alternate_url" } },
-                { "titolo": "Punteggi AlphaMissense", "voci": [["Editore", "Google DeepMind"], ["Contenuto", "Punteggi per le varianti missenso"], ["Dove compare", "Sezione 07"], ["Licenza o condizioni", "CC BY 4.0"]], "link": { "testo": "Fonte originale", "fonte": "SRC_ALPHAMISSENSE_2023", "campo": "url" } }
+                { "titolo": "TCGA – The Cancer Genome Atlas, via GDC", "voci": [["Editore", "National Cancer Institute (NCI), Genomic Data Commons"], ["Contenuto", "Profili immunogenomici di {metrica:immunotherapy_tumor_samples} tumori di {metrica:immunotherapy_cancer_types} tipi (PanCanAtlas)"], ["Dove compare", "Sezione 03"], ["Licenza o condizioni", "Dati «open access» scaricabili liberamente; i dati ad accesso controllato richiedono un’autorizzazione (dbGaP). Nessuna licenza specifica indicata"]], "link": { "testo": "Fonte originale", "fonte": "SRC_PANIMMUNE_2018", "campo": "url" } },
+                { "titolo": "CheXpert", "voci": [["Editore", "Stanford ML Group / Stanford AIMI (Stanford University)"], ["Contenuto", "{metrica:diagnostics_radiographs} radiografie del torace di {metrica:diagnostics_patients} pazienti dello Stanford Hospital (2002–2017), con {metrica:diagnostics_observations} osservazioni ricavate dai referti"], ["Dove compare", "Sezione 04"], ["Licenza o condizioni", "Accordo d’uso per la ricerca della Stanford University, da accettare prima del download"]], "link": { "testo": "Fonte originale", "fonte": "SRC_CHEXPERT_2019", "campo": "alternate_url" } },
+                { "titolo": "AlphaFold Protein Structure Database", "voci": [["Editore", "EMBL-EBI / Google DeepMind"], ["Contenuto", "Strutture di proteine predette"], ["Dove compare", "Sezione 05"], ["Licenza o condizioni", "CC BY 4.0"]], "link": { "testo": "Fonte originale", "fonte": "SRC_AFDB_2024", "campo": "alternate_url" } },
+                { "titolo": "Punteggi AlphaMissense", "voci": [["Editore", "Google DeepMind"], ["Contenuto", "Punteggi per le varianti missenso"], ["Dove compare", "Sezione 05"], ["Licenza o condizioni", "CC BY 4.0"]], "link": { "testo": "Fonte originale", "fonte": "SRC_ALPHAMISSENSE_2023", "campo": "url" } }
               ]
             }
           ]
@@ -56,11 +56,11 @@
           "gruppi": [
             {
               "schede": [
-                { "titolo": "VaxLab", "voci": [["Descrizione", "Piattaforma web open source per progettare vaccini a mRNA: ottimizzazione dei codoni, regioni UTR, metriche predittive"], ["Dove compare", "Sezione 03"], ["Licenza o condizioni", "Licenza del software non indicata dagli autori: per riusarlo occorre chiedere a loro"]], "link": { "testo": "Articolo", "fonte": "SRC_VAXLAB_2026", "campo": "url" } },
-                { "titolo": "OpenCRISPR-1", "voci": [["Descrizione", "Editor genetico progettato con l’IA da Profluent: una proteina simile a Cas9 con il suo RNA guida"], ["Dove compare", "Sezione 04"], ["Licenza o condizioni", "Gratuito per ricerca e uso commerciale; per l’uso terapeutico commerciale serve un accordo di licenza con impegni etici"]], "link": { "testo": "Sito dello strumento", "fonte": "SRC_OPENCRISPR_2025", "campo": "alternate_url" } },
-                { "titolo": "AlphaFold", "voci": [["Descrizione", "Codice open source di AlphaFold 2 per prevedere la struttura 3D delle proteine"], ["Dove compare", "Sezione 07"], ["Licenza o condizioni", "Codice Apache 2.0; parametri del modello CC BY 4.0"]], "link": { "testo": "Sito dello strumento", "fonte": "SRC_AFDB_2024", "campo": "alternate_url" } },
-                { "titolo": "AlphaMissense", "voci": [["Descrizione", "Modello che prevede l’effetto delle varianti missenso sulle proteine"], ["Dove compare", "Sezione 07"], ["Licenza o condizioni", "Codice Apache 2.0 (senza i pesi del modello); previsioni CC BY 4.0"]], "link": { "testo": "Articolo", "fonte": "SRC_ALPHAMISSENSE_2023", "campo": "url" } },
-                { "titolo": "3Dmol.js", "voci": [["Descrizione", "Visualizzatore 3D"], ["Dove compare", "Sezione 07"], ["Licenza o condizioni", "BSD-3-Clause"]], "link": { "testo": "Sito dello strumento", "url": "https://3dmol.org/" } }
+                { "titolo": "VaxLab", "voci": [["Descrizione", "Piattaforma web open source per progettare vaccini a mRNA: ottimizzazione dei codoni, regioni UTR, metriche predittive"], ["Dove compare", "Sezione 01"], ["Licenza o condizioni", "Licenza del software non indicata dagli autori: per riusarlo occorre chiedere a loro"]], "link": { "testo": "Articolo", "fonte": "SRC_VAXLAB_2026", "campo": "url" } },
+                { "titolo": "OpenCRISPR-1", "voci": [["Descrizione", "Editor genetico progettato con l’IA da Profluent: una proteina simile a Cas9 con il suo RNA guida"], ["Dove compare", "Sezione 02"], ["Licenza o condizioni", "Gratuito per ricerca e uso commerciale; per l’uso terapeutico commerciale serve un accordo di licenza con impegni etici"]], "link": { "testo": "Sito dello strumento", "fonte": "SRC_OPENCRISPR_2025", "campo": "alternate_url" } },
+                { "titolo": "AlphaFold", "voci": [["Descrizione", "Codice open source di AlphaFold 2 per prevedere la struttura 3D delle proteine"], ["Dove compare", "Sezione 05"], ["Licenza o condizioni", "Codice Apache 2.0; parametri del modello CC BY 4.0"]], "link": { "testo": "Sito dello strumento", "fonte": "SRC_AFDB_2024", "campo": "alternate_url" } },
+                { "titolo": "AlphaMissense", "voci": [["Descrizione", "Modello che prevede l’effetto delle varianti missenso sulle proteine"], ["Dove compare", "Sezione 05"], ["Licenza o condizioni", "Codice Apache 2.0 (senza i pesi del modello); previsioni CC BY 4.0"]], "link": { "testo": "Articolo", "fonte": "SRC_ALPHAMISSENSE_2023", "campo": "url" } },
+                { "titolo": "3Dmol.js", "voci": [["Descrizione", "Visualizzatore 3D"], ["Dove compare", "Sezione 05"], ["Licenza o condizioni", "BSD-3-Clause"]], "link": { "testo": "Sito dello strumento", "url": "https://3dmol.org/" } }
               ]
             }
           ]
@@ -83,7 +83,7 @@
               ]
             },
             {
-              "titolo": "Prospettive (sezione 08)",
+              "titolo": "Prospettive (sezione 06)",
               "schede": [
                 { "articolo_08": 0 },
                 { "articolo_08": 1 },
@@ -110,18 +110,18 @@
           "gruppi": [
             {
               "schede": [
-                { "titolo": "AUROC", "testo": "Misura quanto bene un modello distingue due gruppi, da 0,5 (come tirare a caso) a 1 (distinzione perfetta). Non è una percentuale di diagnosi corrette.", "voci": [["Dove compare", "Sezione 06"]] },
-                { "titolo": "Cellula T citotossica", "testo": "Globulo bianco capace di riconoscere ed eliminare cellule infettate o tumorali.", "voci": [["Dove compare", "Sezione 05"]] },
-                { "titolo": "CRISPR-Cas9", "testo": "Sistema che taglia il DNA in un punto scelto, guidato da una breve molecola di RNA.", "voci": [["Dove compare", "Sezione 04"]] },
-                { "titolo": "Dataset", "testo": "Raccolta organizzata di dati usata per addestrare o mettere alla prova un modello.", "voci": [["Dove compare", "Sezioni 05 e 06"]] },
-                { "titolo": "Immunoterapia", "testo": "Terapie che aiutano il sistema immunitario a riconoscere e attaccare il tumore.", "voci": [["Dove compare", "Sezione 05"]] },
-                { "titolo": "mRNA", "testo": "Molecola che porta alla cellula le istruzioni per produrre una proteina.", "voci": [["Dove compare", "Sezione 03"]] },
-                { "titolo": "On-target e off-target", "testo": "Modifica del DNA nel punto voluto (on-target) o in punti non voluti (off-target).", "voci": [["Dove compare", "Sezione 04"]] },
-                { "titolo": "Ottimizzazione dei codoni", "testo": "Scelta, tra sequenze che producono la stessa proteina, di quelle che si prevede siano più stabili o producano più proteina.", "voci": [["Dove compare", "Sezione 03"]] },
-                { "titolo": "Punteggio AlphaMissense", "testo": "Stima da 0 a 1 di quanto è probabile che una variante missenso sia dannosa. È una previsione, non una diagnosi.", "voci": [["Dove compare", "Sezione 07"]] },
-                { "titolo": "Residuo", "testo": "Ciascuno degli amminoacidi che formano una proteina.", "voci": [["Dove compare", "Sezione 07"]] },
-                { "titolo": "Struttura predetta", "testo": "Forma tridimensionale di una proteina calcolata da un modello come AlphaFold, non osservata in laboratorio.", "voci": [["Dove compare", "Sezione 07"]] },
-                { "titolo": "Variante missenso", "testo": "Cambiamento nel DNA che sostituisce un amminoacido con un altro nella proteina.", "voci": [["Dove compare", "Sezione 07"]] }
+                { "titolo": "AUROC", "testo": "Misura quanto bene un modello distingue due gruppi, da 0,5 (come tirare a caso) a 1 (distinzione perfetta). Non è una percentuale di diagnosi corrette.", "voci": [["Dove compare", "Sezione 04"]] },
+                { "titolo": "Cellula T citotossica", "testo": "Globulo bianco capace di riconoscere ed eliminare cellule infettate o tumorali.", "voci": [["Dove compare", "Sezione 03"]] },
+                { "titolo": "CRISPR-Cas9", "testo": "Sistema che taglia il DNA in un punto scelto, guidato da una breve molecola di RNA.", "voci": [["Dove compare", "Sezione 02"]] },
+                { "titolo": "Dataset", "testo": "Raccolta organizzata di dati usata per addestrare o mettere alla prova un modello.", "voci": [["Dove compare", "Sezioni 03 e 04"]] },
+                { "titolo": "Immunoterapia", "testo": "Terapie che aiutano il sistema immunitario a riconoscere e attaccare il tumore.", "voci": [["Dove compare", "Sezione 03"]] },
+                { "titolo": "mRNA", "testo": "Molecola che porta alla cellula le istruzioni per produrre una proteina.", "voci": [["Dove compare", "Sezione 01"]] },
+                { "titolo": "On-target e off-target", "testo": "Modifica del DNA nel punto voluto (on-target) o in punti non voluti (off-target).", "voci": [["Dove compare", "Sezione 02"]] },
+                { "titolo": "Ottimizzazione dei codoni", "testo": "Scelta, tra sequenze che producono la stessa proteina, di quelle che si prevede siano più stabili o producano più proteina.", "voci": [["Dove compare", "Sezione 01"]] },
+                { "titolo": "Punteggio AlphaMissense", "testo": "Stima da 0 a 1 di quanto è probabile che una variante missenso sia dannosa. È una previsione, non una diagnosi.", "voci": [["Dove compare", "Sezione 05"]] },
+                { "titolo": "Residuo", "testo": "Ciascuno degli amminoacidi che formano una proteina.", "voci": [["Dove compare", "Sezione 05"]] },
+                { "titolo": "Struttura predetta", "testo": "Forma tridimensionale di una proteina calcolata da un modello come AlphaFold, non osservata in laboratorio.", "voci": [["Dove compare", "Sezione 05"]] },
+                { "titolo": "Variante missenso", "testo": "Cambiamento nel DNA che sostituisce un amminoacido con un altro nella proteina.", "voci": [["Dove compare", "Sezione 05"]] }
               ]
             }
           ]
@@ -140,7 +140,7 @@
           "gruppi": [
             {
               "schede": [
-                { "titolo": "Scheda del progetto", "larga": true, "voci": [["Autore", "Gabriele Narra"], ["Corso di laurea", "Laurea Magistrale in Design Prodotto Evento / Digital Design"], ["Anno accademico", "2025/2026"], ["Docenti", "Prof. Annalisa Barla · Prof. Andrea Vian"], ["Contatto", [{ "testo": "gabrielenarra@gmail.com", "email": "gabrielenarra@gmail.com" }]]] }
+                { "titolo": "Scheda del progetto", "larga": true, "voci": [["Autore", "Gabriele Narra"], ["Corso di laurea", "Laurea Magistrale in Design Prodotto Evento / Digital Design"], ["Anno accademico", "2025/2026"], ["Relatori", "Prof.ssa Annalisa Barla · Prof. Andrea Vian"], ["Contatto", [{ "testo": "gabrielenarra@gmail.com", "email": "gabrielenarra@gmail.com" }]]] }
               ]
             }
           ]
@@ -172,11 +172,11 @@
             {
               "titolo": "Immagini",
               "schede": [
-                { "titolo": "Sezione 03 · Schema del flusso di lavoro di VaxLab", "immagine": "fig-03-vaxlab", "larga": true },
-                { "titolo": "Sezione 04 · Modello strutturale di OpenCRISPR-1", "immagine": "fig-04-opencrispr", "larga": true },
-                { "titolo": "Sezione 05 · Cancer Immunotherapy", "lingua_titolo": "en", "immagine": "fig-05-immunoterapia", "larga": true },
-                { "titolo": "Sezione 06 · Radiografia toracica rappresentativa", "immagine": "fig-06-radiografia", "larga": true },
-                { "titolo": "Sezione 07 · Strutture 3D di HBB e CFTR", "immagine": "fig-07-alphafold-alphamissense", "larga": true }
+                { "titolo": "Sezione 01 · Schema del flusso di lavoro di VaxLab", "immagine": "fig-03-vaxlab", "larga": true },
+                { "titolo": "Sezione 02 · Modello strutturale di OpenCRISPR-1", "immagine": "fig-04-opencrispr", "larga": true },
+                { "titolo": "Sezione 03 · Cancer Immunotherapy", "lingua_titolo": "en", "immagine": "fig-05-immunoterapia", "larga": true },
+                { "titolo": "Sezione 04 · Radiografia toracica rappresentativa", "immagine": "fig-06-radiografia", "larga": true },
+                { "titolo": "Sezione 05 · Strutture 3D di HBB e CFTR", "immagine": "fig-07-alphafold-alphamissense", "larga": true }
               ]
             },
             {

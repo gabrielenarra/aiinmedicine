@@ -1,0 +1,73 @@
+/* Pulsante «Torna su» (16 ottobre 2026). Figma: set 811:92 (Normale 811:81, Hover 811:83,
+   Focus 811:85, Premuto 811:88, Nascosto 811:90); foglio «06 · I» 813:299.
+   Cerchio 48 × 48 px, fisso in basso a destra a 24 px dai bordi (smartphone 20 px). */
+
+.torna-su {
+  position: fixed;
+  right: var(--spazio-20);
+  bottom: var(--spazio-20);
+  z-index: 40;                       /* sopra il contenuto, sotto header sticky (50) e menu (100) */
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  color: var(--testo-accento);
+  background: var(--superficie-bianco);
+  border: 1px solid var(--accento-lilla);
+  border-radius: 50%;
+  box-shadow: var(--ombra-card-02);
+  cursor: pointer;
+  /* nascosto: non si vede, non si tocca, non entra nella tabulazione */
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity calc(var(--durata-standard) * var(--uscita)) var(--curva),
+    visibility 0s linear calc(var(--durata-standard) * var(--uscita)),
+    background-color var(--durata-rapida) var(--curva),
+    border-color var(--durata-rapida) var(--curva);
+}
+
+.torna-su[data-visibile] {
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity var(--durata-standard) var(--curva),
+    visibility 0s,
+    background-color var(--durata-rapida) var(--curva),
+    border-color var(--durata-rapida) var(--curva);
+}
+
+.torna-su svg { width: 20px; height: 20px; }
+
+@media (hover: hover) {
+  .torna-su:hover { background: var(--superficie-lilla); border-color: var(--testo-accento); }
+}
+
+.torna-su:focus-visible {
+  outline: var(--anello-focus);
+  outline-offset: var(--anello-distanza);
+}
+
+.torna-su:active {
+  background: var(--superficie-nebbia-88);
+  border-color: var(--testo-accento);
+  box-shadow: none;
+}
+
+/* con il menu aperto il pulsante non serve (il menu copre la pagina) */
+.menu-aperto .torna-su { visibility: hidden; opacity: 0; }
+
+@media (min-width: 600px) {
+  .torna-su { right: var(--spazio-24); bottom: var(--spazio-24); }
+}
+
+/* tablet e smartphone: in fondo alla pagina il pulsante coprirebbe la riga finale del footer
+   («AI · DATA · DESIGN · HUMAN», segnalato in Figma): spazio libero sotto il footer */
+@media (max-width: 1279px) {
+  footer.sezione-finale[data-sezione="10"] { padding-bottom: calc(48px + var(--spazio-24)); }
+}
+
+@media print {
+  .torna-su { display: none; }
+}

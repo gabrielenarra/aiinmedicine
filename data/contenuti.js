@@ -12,7 +12,8 @@
   ],
   "pagina": {
     "titolo_scheda": "AI · Data · Design · Human",
-    "vai_al_contenuto": "Vai al contenuto"
+    "vai_al_contenuto": "Vai al contenuto",
+    "torna_su": "Torna su"
   },
   "intestazione": {
     "figma": "415:80",
@@ -50,7 +51,7 @@
       ["10"]
     ],
     "capitolo_esempio": {
-      "eyebrow": "06 / DIAGNOSTICA",
+      "eyebrow": "04 / DIAGNOSTICA",
       "titolo": "Vedere prima, agire meglio"
     }
   },
@@ -154,12 +155,13 @@
     "02": {
       "id": "dati-e-cambiamento",
       "figma": "384:25",
-      "eyebrow": "02  /  DATI E CAMBIAMENTO",
+      "eyebrow": "DATI E CAMBIAMENTO",
       "titolo": [
         "I dati raccontano",
         "il cambiamento"
       ],
       "introduzione": "Cinque svolte che hanno trasformato il modo in cui osserviamo, interpretiamo e curiamo la salute.",
+      "invito_card": "Vai alla sezione",
       "riquadro": {
         "eyebrow": "DATA THREAD",
         "testo": [
@@ -170,30 +172,35 @@
       "card": [
         {
           "numero": "01",
+          "sezione": "03",
           "titolo": "Vaccini mRNA",
           "testo": "Una piattaforma molecolare capace di trasformare rapidamente una sequenza genetica in una risposta immunitaria progettata.",
           "categoria": "PIATTAFORME VACCINALI"
         },
         {
           "numero": "02",
+          "sezione": "04",
           "titolo": "CRISPR-Cas9",
           "testo": "L’editing genetico rende modificabili con precisione segmenti di DNA, aprendo nuove strade per ricerca e terapie.",
           "categoria": "GENE EDITING"
         },
         {
           "numero": "03",
+          "sezione": "05",
           "titolo": "Immunoterapia",
           "testo": "Il sistema immunitario diventa parte attiva della cura: riconoscere, colpire e ricordare le cellule bersaglio.",
           "categoria": "ONCOLOGIA"
         },
         {
           "numero": "04",
+          "sezione": "06",
           "titolo": "Diagnostica",
           "testo": "Imaging, biomarcatori e modelli computazionali convergono verso diagnosi più precoci e stratificate.",
           "categoria": "EARLY DETECTION"
         },
         {
           "numero": "05",
+          "sezione": "07",
           "titolo": "Scoperte Scientifiche",
           "testo": "Dataset più vasti e strumenti predittivi accelerano l’identificazione di pattern prima difficili da osservare.",
           "categoria": "RICERCA TRASLAZIONALE"
@@ -206,7 +213,7 @@
     "03": {
       "id": "vaccini-mrna",
       "figma": "55:2",
-      "eyebrow": "03  /  VACCINI mRNA",
+      "eyebrow": "01  /  VACCINI mRNA",
       "titolo": [
         "Progettare vaccini",
         "più efficaci",
@@ -349,7 +356,7 @@
             "508:362",
             "297:4"
           ],
-          "eyebrow": "03 / VACCINI mRNA · APPROFONDIMENTO",
+          "eyebrow": "01 / VACCINI mRNA · APPROFONDIMENTO",
           "chiudi": "CHIUDI APPROFONDIMENTO   ×",
           "numera_schede": true
         }
@@ -389,7 +396,7 @@
     "04": {
       "id": "crispr",
       "figma": "63:2",
-      "eyebrow": "04  /  CRISPR-Cas9",
+      "eyebrow": "02  /  CRISPR-Cas9",
       "titolo": [
         "Editing genetico",
         "più preciso",
@@ -526,7 +533,7 @@
             "508:375",
             "345:2"
           ],
-          "eyebrow": "04 / CRISPR-Cas9 · APPROFONDIMENTO",
+          "eyebrow": "02 / CRISPR-Cas9 · APPROFONDIMENTO",
           "chiudi": "CHIUDI APPROFONDIMENTO   ×",
           "numera_schede": true
         }
@@ -608,7 +615,7 @@
     "05": {
       "id": "immunoterapia",
       "figma": "82:2",
-      "eyebrow": "05  /  IMMUNOTERAPIA",
+      "eyebrow": "03  /  IMMUNOTERAPIA",
       "titolo": [
         "Leggere il",
         "paesaggio",
@@ -737,7 +744,7 @@
             "508:388",
             "345:27"
           ],
-          "eyebrow": "05 / IMMUNOTERAPIA · APPROFONDIMENTO",
+          "eyebrow": "03 / IMMUNOTERAPIA · APPROFONDIMENTO",
           "chiudi": "CHIUDI APPROFONDIMENTO   ×",
           "numera_schede": true
         }
@@ -800,7 +807,7 @@
     "06": {
       "id": "diagnostica",
       "figma": "97:2",
-      "eyebrow": "06  /  DIAGNOSTICA",
+      "eyebrow": "04  /  DIAGNOSTICA",
       "titolo": [
         "Vedere prima,",
         "agire meglio"
@@ -922,7 +929,7 @@
             "508:403",
             "345:58"
           ],
-          "eyebrow": "06 / DIAGNOSTICA · APPROFONDIMENTO",
+          "eyebrow": "04 / DIAGNOSTICA · APPROFONDIMENTO",
           "chiudi": "CHIUDI APPROFONDIMENTO   ×",
           "numera_schede": true
         }
@@ -986,7 +993,7 @@
     "07": {
       "id": "scoperte",
       "figma": "120:2",
-      "eyebrow": "07  /  SCOPERTE SCIENTIFICHE",
+      "eyebrow": "05  /  SCOPERTE SCIENTIFICHE",
       "titolo": [
         "Capire la biologia,",
         "scoprire il futuro"
@@ -1113,7 +1120,7 @@
             "508:416",
             "345:83"
           ],
-          "eyebrow": "07 / SCOPERTE SCIENTIFICHE · APPROFONDIMENTO",
+          "eyebrow": "05 / SCOPERTE SCIENTIFICHE · APPROFONDIMENTO",
           "chiudi": "CHIUDI APPROFONDIMENTO   ×",
           "numera_schede": true
         }
@@ -1129,7 +1136,7 @@
     "08": {
       "id": "eric-topol",
       "figma": "142:2",
-      "eyebrow": "08  /  LE PROSPETTIVE DI ERIC TOPOL",
+      "eyebrow": "06  /  LE PROSPETTIVE DI ERIC TOPOL",
       "titolo": [
         "Cinque lezioni per non perdere",
         "l’opportunità dell’AI"
@@ -1214,7 +1221,7 @@
     "09": {
       "id": "conclusione",
       "figma": "148:2",
-      "eyebrow": "09  /  CONCLUSIONE",
+      "eyebrow": "07  /  CONCLUSIONE",
       "titolo": [
         "Il futuro della medicina",
         "inizia ora."
@@ -1284,7 +1291,7 @@
   "footer": {
     "id": "informazioni",
     "figma": "148:45",
-    "eyebrow": "10  /  INFORMAZIONI",
+    "eyebrow": "INFORMAZIONI",
     "titolo": "AI · Data · Design · Human",
     "progetto": [
       "Un progetto di Digital Design",

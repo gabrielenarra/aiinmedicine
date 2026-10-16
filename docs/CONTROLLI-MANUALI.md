@@ -115,6 +115,16 @@ Se la linea scatta su telefono: **non togliere nulla da solo**. Dillo (punto ape
 | Testi [DA FORNIRE] | Sono grigi e ben visibili: vanno sostituiti prima della pubblicazione | |
 | Apri `404.html` | Messaggio, pulsante «Torna al sito», tre link; le sfere non coprono nulla | |
 
+## 6e. Card della sezione 02 e «Torna su» (16 ottobre 2026)
+
+| Prova | Cosa deve succedere | Esito |
+|---|---|---|
+| Tocco o clic su una card di «Dati e cambiamento» | La pagina scorre alla sezione del tema; il lettore di schermo legge il titolo della sezione | |
+| Tab fino a una card, Invio | Anello viola intorno a tutta la card; Invio porta alla sezione | |
+| Scorri oltre l'inizio | In basso a destra compare il pulsante rotondo con la freccia; non copre testi né pulsanti | |
+| Tocco su «Torna su» | La pagina torna in cima; con la tastiera il focus è su «Vai al contenuto» | |
+| Telefono: menu aperto | Il pulsante «Torna su» non si vede | |
+
 ## 7. Browser
 
 | Browser | Esito |
