@@ -112,8 +112,8 @@
   }
 
   .intestazione__interno::after {
-    left: var(--margine-alto-desktop);
-    right: var(--margine-alto-desktop);
+    left: var(--margine-filetto-desktop);
+    right: var(--margine-filetto-desktop);
   }
 
   .intestazione__nav ul {

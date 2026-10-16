@@ -11,10 +11,12 @@
      docs/PUNTI-APERTI.md B28); da 1280 px quella del desktop (1440) */
   --larghezza-contenuto: var(--larghezza-tablet);
 
-  /* Margini laterali misurati nel disegno desktop 1440 (CLAUDE.md dice 64 px:
-     il disegno usa 46 per header e hero, 72 per i testi delle sezioni 02, 08–10,
-     56 per le sezioni 03–07; vale il disegno, vedi docs/PUNTI-APERTI.md B17) */
-  --margine-alto-desktop: 46px;        /* 415:80, 15:9 */
+  /* Margini laterali del desktop. Il disegno usava 46 px per header e hero, 72 per i testi
+     delle sezioni 02, 08–10 e 56 per le sezioni 03–07 (docs/PUNTI-APERTI.md B17).
+     Decisione dell'utente del 16 ottobre 2026: tutti i testi partono dalla stessa linea a
+     72 px; i filetti restano a 64 px, come sopra le sezioni 02 e 08–10. */
+  --margine-alto-desktop: min(calc(72 / 1440 * 100%), 72px);   /* era 46 (415:80, 15:9); 72 a 1440, scala come le sezioni 02 e 08–10 */
+  --margine-filetto-desktop: min(calc(64 / 1440 * 100%), 64px);
   --margine-testi-02-desktop: 72px;    /* 19:3 */
 
   /* Filetti: 1 px nel colore del testo principale (letto dai pixel del disegno) */
@@ -27,8 +29,8 @@
   --rientro-extra-intestazione: 19px;
 
   /* Header sticky (242:2): marchio a 40 px, 52 px a destra, pillola del capitolo */
-  --margine-sticky-sinistra: 40px;
-  --margine-sticky-destra: 52px;
+  --margine-sticky-sinistra: min(calc(72 / 1440 * 100%), 72px);   /* era 40 (242:2): allineato ai testi, 16/10/2026 */
+  --margine-sticky-destra: min(calc(72 / 1440 * 100%), 72px);     /* era 52 */
   --larghezza-capitolo-sticky: 350px;
   --raggio-capitolo-sticky: 17px;
   --distanza-capitolo-sticky: 55px;
@@ -59,7 +61,7 @@
   --ombra-card-02-hover: 0 12px 30px rgba(31, 26, 61, 0.16);   /* card della 02 al passaggio del mouse (809:3753) */
 
   /* Sezioni dati 03–07 (55:2, 63:2, 82:2 …) */
-  --margine-sezioni-dati-desktop: 56px;           /* px-56 del frame di sezione */
+  --margine-sezioni-dati-desktop: min(calc(72 / 1440 * 100%), 72px);   /* era 56 (px-56 del frame di sezione): 16/10/2026 */
   --larghezza-colonna-testo: 316px;
   --larghezza-palco: 940px;
   --ombra-palco: 0 16px 34px rgba(26, 20, 51, 0.05);          /* 55:11 */

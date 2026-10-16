@@ -143,3 +143,20 @@ for (const larghezza of [1280, 1366, 1440, 1920]) {
     expect(r.righeChiusura).toBe(1);
   });
 }
+
+// Margine sinistro unico sul computer (decisione del 16/10/2026): marchio, hero e tutte le
+// sezioni partono dalla stessa linea (72 px a 1440, in proporzione sotto, 72 px nella
+// colonna centrata sopra i 1440)
+for (const larghezza of [1280, 1440, 1920]) {
+  test(`${larghezza} px: marchio, hero e sezioni allineati a sinistra`, async ({ page }) => {
+    await apri(page, 'index.html', larghezza);
+    const bordi = await page.evaluate(() => {
+      const sx = (n) => { const r = document.createRange(); r.selectNodeContents(n); return Math.round(Math.min(...[...r.getClientRects()].map((x) => x.left))); };
+      const out = { marchio: sx(document.querySelector('.intestazione .marchio')) };
+      for (const s of document.querySelectorAll('[data-sezione]')) out[s.dataset.sezione] = sx(s.querySelector('[class*="eyebrow"]'));
+      return out;
+    });
+    const atteso = Math.round(Math.max(0, (larghezza - 1440) / 2) + Math.min(72 / 1440 * Math.min(larghezza, 1440), 72));
+    for (const [nome, x] of Object.entries(bordi)) expect(Math.abs(x - atteso), `${nome}: ${x} invece di ${atteso}`).toBeLessThanOrEqual(1);
+  });
+}

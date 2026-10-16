@@ -532,8 +532,8 @@
     content: "";
     position: absolute;
     top: 0;
-    left: var(--margine-sezioni-dati-desktop);
-    right: var(--margine-sezioni-dati-desktop);
+    left: var(--margine-filetto-desktop);
+    right: var(--margine-filetto-desktop);
     border-top: var(--filetto);
   }
 

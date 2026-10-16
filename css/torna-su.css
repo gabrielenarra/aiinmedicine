@@ -61,6 +61,11 @@
 @media (min-width: 600px) {
   .torna-su { right: var(--spazio-24); bottom: var(--spazio-24); }
 }
+/* desktop: i riquadri delle sezioni arrivano a 64 px dal bordo (a 1280 px): a 16 px il
+   pulsante non ne copre il bordo (16/10/2026) */
+@media (min-width: 1280px) {
+  .torna-su { right: var(--spazio-16); }
+}
 
 /* tablet e smartphone: in fondo alla pagina il pulsante coprirebbe la riga finale del footer
    («AI · DATA · DESIGN · HUMAN», segnalato in Figma): spazio libero sotto il footer */
