@@ -85,7 +85,7 @@ Specifica completa in `design/stati-e-interazioni.md` (copia fedele della pagina
 - Oltre a `index.html` ci sono `fonti-e-dati.html`, `glossario.html`, `il-progetto.html`, `crediti-e-licenze.html`, `privacy-e-note-legali.html` e `404.html` (Figma, pagina «10 - Pagine informative» 775:2; comportamento nel foglio «06 · H» 780:299). Stessa struttura: header, `<main id="contenuto">` vuoto, footer; `<body data-pagina="…">` dice quale pagina costruire.
 - Testi in `data/pagine.js` (anche la mappa voce del footer → pagina e l'avvertenza medica del footer); li costruisce `js/pagina-informativa.js`. Articoli da `data/sources.js`, prospettive dalla sezione 08, crediti delle immagini da `data/immagini.js` con la stessa funzione delle figure: non copiarli a mano.
 - Le voci del footer sono link (`js/sezioni-finali.js`); la voce della pagina aperta ha `aria-current="page"`. Nelle pagine informative l'header punta a `index.html#…` (`indirizzo()` in `js/intestazione.js`); «About» porta a `il-progetto.html#about`.
-- I segnaposto [DA FORNIRE] / [DA SCEGLIERE] / [DA VERIFICARE] restano visibili finché l'utente non dà i dati (`docs/PUNTI-APERTI.md` B43). La privacy è una bozza da far verificare. Prove: `tests/pagine.spec.js`.
+- I segnaposto [DA FORNIRE] / [DA SCEGLIERE] / [DA VERIFICARE] restano visibili finché l'utente non dà i dati (`docs/PUNTI-APERTI.md` B43). La privacy è confermata dall'utente (17 ottobre 2026, senza avviso «Bozza»); contatto `contatti@aiinmedicine.it` (inoltro email di Cloudflare). Prove: `tests/pagine.spec.js`.
 
 ## Movimento di sfere e grafici (dal 15 ottobre 2026)
 
