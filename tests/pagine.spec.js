@@ -153,7 +153,7 @@ test('contenuti: glossario, articoli e crediti uguali ai dati; link esterni segn
   await expect(page.locator('main .segnaposto')).toHaveCount(0);
   await expect(page.locator('#privacy')).toContainText('Cloudflare');
   // i dati forniti dall'utente sono al loro posto: email cliccabile (mailto)
-  await expect(page.locator('#privacy a[href="mailto:gabrielenarra@gmail.com"]').first()).toBeVisible();
+  await expect(page.locator('#privacy a[href="mailto:contatti@aiinmedicine.it"]').first()).toBeVisible();
 });
 
 test('404: pulsante e link tornano nel sito; sfere decorative ferme e nascoste', async ({ page }) => {
