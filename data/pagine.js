@@ -208,11 +208,11 @@
           "avviso": "Bozza da far verificare prima della pubblicazione (per esempio dall’ufficio privacy dell’università).",
           "blocchi": [
             { "titolo": "Titolare del trattamento", "testo": ["Gabriele Narra, contatto: ", { "testo": "gabrielenarra@gmail.com", "email": "gabrielenarra@gmail.com" }, "."] },
-            { "titolo": "Quali dati", "testo": "Il sito non usa cookie, non usa strumenti di statistica o profilazione e non ha moduli. Come ogni sito, il servizio che lo ospita (Cloudflare Pages, di Cloudflare, Inc.) registra automaticamente alcuni dati tecnici di navigazione: indirizzo IP, data e ora della visita, pagina richiesta, tipo di browser. Se scrivi all’indirizzo di contatto, vengono trattati i dati contenuti nel messaggio." },
+            { "titolo": "Quali dati", "testo": "Il sito non usa cookie, non usa strumenti di statistica o profilazione e non ha moduli: per questo non mostra alcun avviso sui cookie. Come ogni sito, il servizio che lo ospita (Cloudflare Pages, di Cloudflare, Inc.) registra automaticamente alcuni dati tecnici di navigazione: indirizzo IP, data e ora della visita, pagina richiesta, tipo di browser. Se scrivi all’indirizzo di contatto, vengono trattati i dati contenuti nel messaggio." },
             { "titolo": "Perché", "testo": "I dati tecnici servono solo a far funzionare il sito e a proteggerlo da abusi; i dati dei messaggi servono solo a rispondere." },
             { "titolo": "Base giuridica", "testo": "Legittimo interesse al funzionamento e alla sicurezza del sito e a rispondere alle richieste (art. 6, par. 1, lett. f, GDPR)." },
             { "titolo": "Per quanto tempo", "testo": ["Dati tecnici: per il tempo stabilito da Cloudflare per la sicurezza e il funzionamento del servizio, come descritto nella sua ", { "testo": "informativa sulla privacy", "url": "https://www.cloudflare.com/privacypolicy/" }, ". Messaggi: per il tempo necessario a rispondere."] },
-            { "titolo": "Chi li riceve", "testo": "Cloudflare, Inc., che ospita il sito e tratta i dati per conto del titolare. Nessun dato viene venduto o ceduto ad altri. Trasferimenti fuori dall’Unione europea: Cloudflare ha sede negli Stati Uniti e aderisce all’EU-U.S. Data Privacy Framework; in mancanza, si applicano le clausole contrattuali standard della Commissione europea." },
+            { "titolo": "Chi li riceve", "testo": ["Cloudflare, Inc., che ospita il sito e tratta i dati per conto del titolare. Nessun dato viene venduto o ceduto ad altri. Trasferimenti fuori dall’Unione europea: Cloudflare ha sede negli Stati Uniti e aderisce all’EU-U.S. Data Privacy Framework; in mancanza, si applicano le clausole contrattuali standard della Commissione europea. I messaggi email sono gestiti tramite Gmail (Google), che li tratta secondo la sua ", { "testo": "informativa sulla privacy", "url": "https://policies.google.com/privacy" }, "." ] },
             { "titolo": "I tuoi diritti", "testo": ["Puoi chiedere l’accesso ai tuoi dati, la rettifica, la cancellazione, la limitazione o opporti al trattamento (artt. 15–21 GDPR) scrivendo a ", { "testo": "gabrielenarra@gmail.com", "email": "gabrielenarra@gmail.com" }, ". Puoi anche presentare reclamo al ", { "testo": "Garante per la protezione dei dati personali", "url": "https://www.garanteprivacy.it" }, "."] },
             { "titolo": "Collegamenti esterni", "testo": "I link ad articoli e fonti portano a siti di terzi, con le loro informative." },
             { "titolo": "Ultimo aggiornamento", "testo": "16 ottobre 2026" }
@@ -222,7 +222,8 @@
           "id": "note-legali",
           "titolo": "Note legali",
           "paragrafi": [
-            "Contenuti divulgativi a scopo didattico: non sono consigli medici e non sostituiscono il parere di un professionista. Le previsioni dei modelli citati non sono diagnosi. Per qualsiasi dubbio sulla tua salute rivolgiti al tuo medico."
+            "Contenuti divulgativi a scopo didattico: non sono consigli medici e non sostituiscono il parere di un professionista. Le previsioni dei modelli citati non sono diagnosi. Per qualsiasi dubbio sulla tua salute rivolgiti al tuo medico.",
+            "Sito non commerciale realizzato per un corso dell’Università di Genova; non è una testata giornalistica."
           ],
           "blocchi": [
             { "titolo": "Collegamenti esterni", "testo": "Il sito rimanda a fonti esterne (dataset, articoli, strumenti). Questi collegamenti si aprono in una nuova scheda e sono segnalati dal simbolo ↗." },
