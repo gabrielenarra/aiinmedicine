@@ -4,6 +4,22 @@ Le prove automatiche (`npm test`, `npm run verifica-dati`) coprono numeri, strut
 
 Riferimento: `design/stati-e-interazioni.md`, foglio D («Da provare sul sito reale») ed E.
 
+## Esiti del 17 ottobre 2026 (sito di prova aiinmedicine.pages.dev)
+
+Prove fatte dall'utente, tutte **riuscite**, nessun problema segnalato:
+
+| Blocco | Dispositivo | Esito |
+|---|---|---|
+| 1 · Solo tastiera (Vai al contenuto, anello di focus, card della 02, «Leggi di più», «Mostra meno», menu con Esc) | Computer Windows, Chrome/Edge | ok |
+| 3 · Zoom 200% e 400% | Computer Windows | ok |
+| 4 · Temi a contrasto di Windows | Computer Windows | ok |
+| 5 · Movimento ridotto di sistema (anche cambiandolo a pagina aperta) | Computer Windows | ok |
+| 6 · Telefono: scorrimento, rotazione, tocchi, menu, «Torna su», 3D (anche «Vai al residuo» 7), «Ingrandisci» | Samsung S21, Chrome | ok |
+| 2 · Lettore di schermo TalkBack (titolo, «Leggi di più» compresso/espanso, numeri, grafico, menu, sfere non lette) | Samsung S21, Chrome | ok |
+
+Non ancora provati: NVDA (Windows), VoiceOver (Mac e iPhone), Safari (Mac e iPhone), Firefox, solo testo grande (impostazione dei caratteri), anteprima di stampa del 3D, tablet vero. Non sono bloccanti per la pubblicazione; si possono fare se capita un dispositivo.
+
+
 ## 1. Solo tastiera (computer)
 
 Apri `index.html` e **non usare il mouse**.
@@ -30,7 +46,7 @@ Apri `index.html` e **non usare il mouse**.
 
 In tutti i lettori controlla anche:
 - **Grafici:** si sente la descrizione («Efficienza di editing nel punto scelto…») e i valori sono leggibili come testo.
-- **Numeri:** «≥2,9×», «~71M», «<5 min» vengono letti in modo comprensibile. Se un lettore li legge male, annotalo (punto aperto da aprire).
+- **Numeri:** «fino a 2,9×», «~71M», «da 5 a 13 min» vengono letti in modo comprensibile. Se un lettore li legge male, annotalo (punto aperto da aprire).
 - **Citazioni in inglese** (hero, sezione 08): pronunciate in inglese.
 - **Link alle fonti (DOI):** il nome del link dice che cosa apre.
 
