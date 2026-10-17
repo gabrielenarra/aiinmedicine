@@ -16,9 +16,22 @@ const TIPI = {
   '.woff2': 'font/woff2', '.png': 'image/png', '.jpg': 'image/jpeg', '.webp': 'image/webp', '.txt': 'text/plain; charset=utf-8',
 };
 
+// intestazioni di _headers (solo la regola «/*»), applicate come fa Cloudflare Pages
+function leggiIntestazioni() {
+  const righe = fs.readFileSync(path.join(USCITA, '_headers'), 'utf8').split(/\r?\n/);
+  const intestazioni = {};
+  for (const riga of righe.slice(1)) {
+    const m = riga.match(/^\s+([^:]+):\s*(.+)$/);
+    if (m) intestazioni[m[1]] = m[2];
+  }
+  return intestazioni;
+}
+
 let server;
+let INTESTAZIONI = {};
 test.beforeAll(async () => {
   execFileSync(process.execPath, [path.join(RADICE, 'strumenti', 'pubblica.mjs')]);
+  INTESTAZIONI = leggiIntestazioni();
   server = http.createServer((richiesta, risposta) => {
     let percorso = decodeURIComponent(new URL(richiesta.url, BASE).pathname);
     if (percorso.endsWith('/')) percorso += 'index.html';
@@ -28,7 +41,7 @@ test.beforeAll(async () => {
       file = path.join(USCITA, '404.html');
       stato = 404;
     }
-    risposta.writeHead(stato, { 'Content-Type': TIPI[path.extname(file)] || 'application/octet-stream', 'Cache-Control': 'no-store' });
+    risposta.writeHead(stato, { ...INTESTAZIONI, 'Content-Type': TIPI[path.extname(file)] || 'application/octet-stream', 'Cache-Control': 'no-store' });
     fs.createReadStream(file).on('error', () => risposta.destroy()).pipe(risposta);
   });
   await new Promise((ok) => server.listen(PORTA, '127.0.0.1', ok));
@@ -83,3 +96,33 @@ for (const indirizzo of ['/pagina-che-non-esiste', '/a/b/c/profondo.html']) {
     expect(await voce.evaluate((a) => a.href)).toBe(`${BASE}/glossario.html`);
   });
 }
+
+// Content-Security-Policy (_headers): il sito pubblicato funziona con la regola attiva.
+// Una violazione della regola compare in console come errore e fa fallire apri().
+test('con la Content-Security-Policy: grafici e visualizzatore 3D funzionano, licenza di 3Dmol.js raggiungibile', async ({ page }) => {
+  test.slow();
+  await page.setViewportSize({ width: 1440, height: 900 });
+  const errori = [];
+  page.on('console', (m) => { if (m.type() === 'error' && !GPU_SIMULATA.test(m.text())) errori.push(m.text()); });
+  page.on('pageerror', (e) => errori.push(e.message));
+  const risposta = await page.goto(`${BASE}/`);
+  expect(risposta.headers()['content-security-policy']).toContain("script-src 'self'");
+  // le barre dei grafici prendono la lunghezza dalla variabile scritta sull'elemento (--quota)
+  const barra = page.locator('[data-grafico="crispr_on_target"] .grafico-barre__barra').first();
+  await barra.scrollIntoViewIfNeeded();
+  expect(await barra.evaluate((e) => getComputedStyle(e).getPropertyValue('--quota').trim())).not.toBe('');
+  // visualizzatore 3D (libreria caricata al volo)
+  await page.locator('#leggi-scoperte').click();
+  const area = page.locator('[data-area="HBB"]');
+  await area.evaluate((e) => e.scrollIntoView({ block: 'center', behavior: 'instant' }));
+  await expect(page.locator('[data-area="HBB"][data-pronto], [data-proteina="HBB"][data-riserva]')).toBeAttached({ timeout: 30000 });
+  await expect(area).toHaveAttribute('data-pronto', '');
+  expect(errori).toEqual([]);
+  // il link «Testo completo della licenza» della pagina dei crediti porta al file pubblicato
+  await page.goto(`${BASE}/crediti-e-licenze.html`);
+  const link = page.locator('a', { hasText: 'Testo completo della licenza' });
+  await expect(link).toHaveAttribute('href', 'js/vendor/3dmol/LICENSE.txt');
+  const licenza = await page.request.get(`${BASE}/js/vendor/3dmol/LICENSE.txt`);
+  expect(licenza.status()).toBe(200);
+  expect(await licenza.text()).toContain('University of Pittsburgh');
+});

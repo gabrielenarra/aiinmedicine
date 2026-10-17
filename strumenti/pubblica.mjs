@@ -11,7 +11,11 @@
 // - 404.html riceve <base href="/">: l'hosting la mostra a qualsiasi indirizzo sbagliato,
 //   anche lontano dalla home (es. /a/b/c), e i percorsi relativi devono partire dalla radice
 //   del dominio (punto aperto B44). Vale perché il sito sta alla radice di aiinmedicine.it.
-// - _headers: intestazioni di sicurezza lette da Cloudflare Pages.
+// - _headers: intestazioni di sicurezza lette da Cloudflare Pages. La Content-Security-Policy
+//   permette solo file del sito; unica eccezione 'unsafe-inline' negli stili, perché i grafici
+//   scrivono sugli elementi le proprie variabili (style="--quota: …", js/grafico.js). Gli script
+//   restano solo 'self' (niente inline, niente eval). HSTS si aggiunge solo dopo il collegamento
+//   del dominio e la verifica dell'HTTPS (docs/PUNTI-APERTI.md B3).
 
 import { cpSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
@@ -50,6 +54,7 @@ writeFileSync(file404, con404);
 // intestazioni di sicurezza (Cloudflare Pages)
 writeFileSync(join(USCITA, '_headers'), [
   '/*',
+  "  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'",
   '  X-Content-Type-Options: nosniff',
   '  X-Frame-Options: DENY',
   '  Referrer-Policy: strict-origin-when-cross-origin',

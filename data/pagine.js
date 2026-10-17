@@ -25,7 +25,7 @@
     "Processo": "il-progetto.html#processo",
     "Crediti": "crediti-e-licenze.html#crediti",
     "Privacy": "privacy-e-note-legali.html#privacy",
-    "Terms": "privacy-e-note-legali.html#note-legali",
+    "Note legali": "privacy-e-note-legali.html#note-legali",
     "Licenza": "crediti-e-licenze.html#licenza"
   },
   "pagine": {
@@ -135,7 +135,7 @@
         {
           "id": "about",
           "titolo": "About",
-          "testo": "AI · Data · Design · Human è un progetto di Digital Design dell’Università di Genova.",
+          "testo": "AI · Data · Design · Human è un progetto universitario individuale di Gabriele Narra, realizzato nella Laurea Magistrale in Design Prodotto Evento / Digital Design dell’Università di Genova.",
           "gruppi": [
             {
               "schede": [
@@ -155,7 +155,7 @@
             { "titolo": "Verifiche", "testo": "Prove automatiche, accessibilità WCAG 2.1 AA, movimento ridotto." },
             { "titolo": "Revisione con i docenti" }
           ],
-          "chiusura": "Il sito non usa cookie né strumenti di statistica."
+          "chiusura": "Il sito non usa cookie di profilazione o di statistica né strumenti di tracciamento."
         }
       ]
     },
@@ -182,7 +182,7 @@
               "titolo": "Caratteri, strumenti e dati",
               "schede": [
                 { "etichetta": "Caratteri", "titolo": "Inter e Cormorant Garamond", "testo": "SIL Open Font License 1.1" },
-                { "etichetta": "Strumento", "titolo": "3Dmol.js", "testo": "BSD-3-Clause" },
+                { "etichetta": "Strumento", "titolo": "3Dmol.js", "testo": ["Copyright © 2014 University of Pittsburgh and contributors · licenza BSD-3-Clause. ", { "testo": "Testo completo della licenza", "pagina": "js/vendor/3dmol/LICENSE.txt" }] },
                 { "etichetta": "Fonti", "titolo": "AlphaFold DB e AlphaMissense", "testo": "CC BY 4.0" }
               ]
             }
@@ -207,11 +207,11 @@
           "titolo": "Privacy",
           "blocchi": [
             { "titolo": "Titolare del trattamento", "testo": ["Gabriele Narra, contatto: ", { "testo": "contatti@aiinmedicine.it", "email": "contatti@aiinmedicine.it" }, "."] },
-            { "titolo": "Quali dati", "testo": "Il sito non usa cookie, non usa strumenti di statistica o profilazione e non ha moduli: per questo non mostra alcun avviso sui cookie. Come ogni sito, il servizio che lo ospita (Cloudflare Pages, di Cloudflare, Inc.) registra automaticamente alcuni dati tecnici di navigazione: indirizzo IP, data e ora della visita, pagina richiesta, tipo di browser. Se scrivi all’indirizzo di contatto, vengono trattati i dati contenuti nel messaggio." },
+            { "titolo": "Quali dati", "testo": "Il sito non usa cookie di profilazione, pubblicitari o di statistica né strumenti di tracciamento: per questo non mostra avvisi sui cookie. Non ha moduli che inviano dati: il campo «Vai al residuo» del visualizzatore 3D funziona solo nel tuo browser e non trasmette nulla. Come ogni sito, il servizio che lo ospita (Cloudflare Pages, di Cloudflare, Inc.) registra automaticamente alcuni dati tecnici di navigazione: indirizzo IP, data e ora della visita, pagina richiesta, tipo di browser; può inoltre applicare misure tecniche strettamente necessarie alla sicurezza del servizio. Se scrivi all’indirizzo di contatto, vengono trattati il tuo indirizzo email e i dati che scegli di inserire nel messaggio." },
             { "titolo": "Perché", "testo": "I dati tecnici servono solo a far funzionare il sito e a proteggerlo da abusi; i dati dei messaggi servono solo a rispondere." },
-            { "titolo": "Base giuridica", "testo": "Legittimo interesse al funzionamento e alla sicurezza del sito e a rispondere alle richieste (art. 6, par. 1, lett. f, GDPR)." },
+            { "titolo": "Base giuridica", "testo": "Legittimo interesse al funzionamento e alla sicurezza del sito e a rispondere alle richieste (art. 6, par. 1, lett. f, GDPR). Scrivere un’email è facoltativo: se non lo fai, semplicemente non ricevi una risposta." },
             { "titolo": "Per quanto tempo", "testo": ["Dati tecnici: per il tempo stabilito da Cloudflare per la sicurezza e il funzionamento del servizio, come descritto nella sua ", { "testo": "informativa sulla privacy", "url": "https://www.cloudflare.com/privacypolicy/" }, ". Messaggi: conservati nella casella email finché servono per la corrispondenza sul progetto; puoi chiederne la cancellazione in qualsiasi momento."] },
-            { "titolo": "Chi li riceve", "testo": ["Cloudflare, Inc., che ospita il sito e tratta i dati per conto del titolare. Nessun dato viene venduto o ceduto ad altri. Trasferimenti fuori dall’Unione europea: Cloudflare e Google hanno sede negli Stati Uniti e aderiscono all’EU-U.S. Data Privacy Framework; in mancanza, si applicano le clausole contrattuali standard della Commissione europea. I messaggi scritti all’indirizzo di contatto passano dal servizio di inoltro email di Cloudflare, che li consegna senza conservarli, e arrivano in una casella Gmail (Google), che li tratta secondo la sua ", { "testo": "informativa sulla privacy", "url": "https://policies.google.com/privacy" }, "." ] },
+            { "titolo": "Chi li riceve", "testo": ["Cloudflare, Inc., che ospita il sito, inoltra la posta dell’indirizzo di contatto e tratta i dati per conto del titolare. Nessun dato viene venduto o ceduto ad altri. Trasferimenti fuori dall’Unione europea: Cloudflare e Google hanno sede negli Stati Uniti e aderiscono all’EU-U.S. Data Privacy Framework; in mancanza, si applicano le clausole contrattuali standard della Commissione europea. I messaggi scritti all’indirizzo di contatto passano dal servizio di inoltro email di Cloudflare, che li consegna senza conservarli, e arrivano in una casella Gmail (Google), che li tratta secondo la sua ", { "testo": "informativa sulla privacy", "url": "https://policies.google.com/privacy" }, "." ] },
             { "titolo": "I tuoi diritti", "testo": ["Puoi chiedere l’accesso ai tuoi dati, la rettifica, la cancellazione, la limitazione o opporti al trattamento (artt. 15–21 GDPR) scrivendo a ", { "testo": "contatti@aiinmedicine.it", "email": "contatti@aiinmedicine.it" }, ". Puoi anche presentare reclamo al ", { "testo": "Garante per la protezione dei dati personali", "url": "https://www.garanteprivacy.it" }, "."] },
             { "titolo": "Collegamenti esterni", "testo": "I link ad articoli e fonti portano a siti di terzi, con le loro informative." },
             { "titolo": "Ultimo aggiornamento", "testo": "17 ottobre 2026" }
@@ -222,11 +222,13 @@
           "titolo": "Note legali",
           "paragrafi": [
             "Contenuti divulgativi a scopo didattico: non sono consigli medici e non sostituiscono il parere di un professionista. Le previsioni dei modelli citati non sono diagnosi. Per qualsiasi dubbio sulla tua salute rivolgiti al tuo medico.",
-            "Sito non commerciale realizzato per un corso dell’Università di Genova; non è una testata giornalistica."
+            "I risultati, le metriche e gli esempi dei sistemi di intelligenza artificiale sono presentati nel loro contesto scientifico e sperimentale: non sono diagnosi individuali, garanzie di efficacia clinica o previsioni certe sullo stato di salute di una persona.",
+            "AI in Medicine è un progetto universitario individuale e indipendente di Gabriele Narra, realizzato nella Laurea Magistrale in Design Prodotto Evento / Digital Design dell’Università di Genova. Non è una pubblicazione ufficiale, una comunicazione istituzionale o un servizio dell’Università di Genova. È un sito non commerciale e non è una testata giornalistica.",
+            "I contenuti sono elaborati a partire dalle fonti scientifiche indicate nel sito e verificati con attenzione, ma le conoscenze scientifiche evolvono e i contenuti possono essere aggiornati o corretti. In caso di dubbio o discrepanza fanno fede le pubblicazioni originali citate."
           ],
           "blocchi": [
-            { "titolo": "Collegamenti esterni", "testo": "Il sito rimanda a fonti esterne (dataset, articoli, strumenti). Questi collegamenti si aprono in una nuova scheda e sono segnalati dal simbolo ↗." },
-            { "titolo": "Diritti e licenze", "testo": ["Testi, grafici e immagini hanno licenze diverse, indicate nella pagina «Crediti e licenze». ", { "testo": "Vai a Crediti e licenze", "pagina": "crediti-e-licenze.html" }] }
+            { "titolo": "Collegamenti esterni", "testo": "Il sito rimanda a fonti esterne (dataset, articoli, strumenti). Questi collegamenti si aprono in una nuova scheda e sono segnalati dal simbolo ↗. Il titolare non controlla questi siti e non risponde della loro disponibilità, dei loro contenuti o delle loro pratiche sulla privacy." },
+            { "titolo": "Diritti e licenze", "testo": ["Testi, grafici e immagini hanno licenze diverse, indicate nella pagina «Crediti e licenze»: immagini, figure, software e altri materiali di terze parti restano soggetti alle rispettive licenze. ", { "testo": "Vai a Crediti e licenze", "pagina": "crediti-e-licenze.html" }] }
           ]
         }
       ]

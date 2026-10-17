@@ -62,7 +62,7 @@
     "eyebrow": "NAVIGAZIONE",
     "titolo": "AI in Medicine",
     "sottotitolo": "AI · Data · Design · Human",
-    "ente": "Università di Genova",
+    "ente": "Progetto universitario di Gabriele Narra",
     "voci": [
       {
         "numero": "01",
@@ -87,7 +87,7 @@
     ],
     "freccia": "→",
     "social": [],
-    "copyright": "© 2026 AI in Medicine",
+    "copyright": "© 2026 Gabriele Narra · AI in Medicine",
     "chiudi_testo": "ESC  ·  CHIUDI",
     "etichetta_apri": "Apri menu",
     "etichetta_chiudi": "Chiudi menu",
@@ -1292,8 +1292,8 @@
     "eyebrow": "INFORMAZIONI",
     "titolo": "AI · Data · Design · Human",
     "progetto": [
-      "Un progetto di Digital Design",
-      "Università di Genova"
+      "Progetto universitario di Gabriele Narra",
+      "Laurea Magistrale · Università di Genova"
     ],
     "descrizione": "Ricerca, dati verificabili e progettazione editoriale per raccontare l’impatto dell’AI in medicina.",
     "colonne": [
@@ -1318,14 +1318,14 @@
         "titolo": "Legale",
         "voci": [
           "Privacy",
-          "Terms",
+          "Note legali",
           "Licenza"
         ]
       }
     ],
     "social": [],
     "nota_fonti": "Fonti e riferimenti sono indicati nelle singole sezioni.",
-    "copyright": "© 2026 AI in Medicine · Università di Genova",
+    "copyright": "© 2026 Gabriele Narra · AI in Medicine",
     "marchio": "AI · DATA · DESIGN · HUMAN"
   }
 }
