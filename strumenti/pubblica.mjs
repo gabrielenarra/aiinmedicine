@@ -14,8 +14,9 @@
 // - _headers: intestazioni di sicurezza lette da Cloudflare Pages. La Content-Security-Policy
 //   permette solo file del sito; unica eccezione 'unsafe-inline' negli stili, perché i grafici
 //   scrivono sugli elementi le proprie variabili (style="--quota: …", js/grafico.js). Gli script
-//   restano solo 'self' (niente inline, niente eval). HSTS si aggiunge solo dopo il collegamento
-//   del dominio e la verifica dell'HTTPS (docs/PUNTI-APERTI.md B3).
+//   restano solo 'self' (niente inline, niente eval). HSTS dal 17 ottobre 2026, dopo il
+//   collegamento di aiinmedicine.it e www e la verifica dell'HTTPS (docs/PUNTI-APERTI.md B3);
+//   un anno, sottodomini compresi, senza «preload».
 
 import { cpSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
@@ -55,6 +56,7 @@ writeFileSync(file404, con404);
 writeFileSync(join(USCITA, '_headers'), [
   '/*',
   "  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'",
+  '  Strict-Transport-Security: max-age=31536000; includeSubDomains',
   '  X-Content-Type-Options: nosniff',
   '  X-Frame-Options: DENY',
   '  Referrer-Policy: strict-origin-when-cross-origin',
