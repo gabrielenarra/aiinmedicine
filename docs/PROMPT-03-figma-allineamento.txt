@@ -1,0 +1,87 @@
+Nel file Figma AtwFNzYiwSlUkSIfsBPDWk («AI · Data · Design · Human») allinea il disegno al sito pubblicato (https://aiinmedicine.pages.dev, stato del 16 ottobre 2026). Il sito è la versione giusta: i dati scientifici sono stati ricontrollati sugli articoli originali.
+
+Regole
+- Ignora la pagina «07 · Archivio».
+- Cambia solo quello che è elencato. Usa stili di testo, variabili di colore e componenti già presenti; non creare stili nuovi.
+- Lavora una parte alla volta (A, B, C, D). Prima di cambiare, per ogni parte elencami i nodi che toccherai; poi applica.
+- Dove un testo compare anche nei frame tablet (768) e smartphone (390) o negli stati aperti, cambialo ovunque.
+- Alla fine mandami gli screenshot dei frame toccati e l'elenco dei nodi cambiati.
+
+Frame di riferimento (le sezioni si chiamano con la numerazione nuova; tra parentesi gli ID)
+- Home: desktop 3:7 · tablet 509:258 · smartphone 250:2
+- 01 Vaccini mRNA (VaxLab): home desktop 55:2, tablet 509:298, smartphone 302:2; stati aperti 182:2 · 508:362 · 297:4
+- 02 CRISPR: stati aperti 194:2 · 508:375 · 345:2
+- 03 Immunoterapia: home desktop 82:2, tablet 509:394, smartphone 316:2; stati aperti 200:2 · 508:388 · 345:27
+- 04 Diagnostica (CheXpert): stati aperti 206:2 · 508:403 · 345:58
+- 05 Scoperte (AlphaFold, AlphaMissense): stati aperti 216:17 · 508:416 · 345:83
+
+————————————————————————
+A · DATI SCIENTIFICI (testi)
+————————————————————————
+
+A1. 01 VaxLab, le tre card dei numeri (desktop 55:17, 55:22, 55:27 e corrispondenti tablet/smartphone)
+- Card 01: valore «<5 min» → «da 5 a 13 min». Didascalia → «workflow completo per variante» / «(proteine fino a 500 amminoacidi)». Nota → «Da risultati e discussione».
+- Card 02: valore «≥2,9×» → «fino a 2,9×». Didascalia → «espressione della variante» / «migliore (L6) vs wild-type». Nota → «6 costrutti su 7 sopra il wild-type».
+- Card 03: valore «fino a 9,5×» resta. Didascalia → «di differenza nell’espressione» / «tra le varianti ottimizzate». Nota → «Non rispetto al wild-type · non clinico».
+- Badge «DA ABSTRACT»: toglilo dall’intestazione del riquadro (accanto a «IL CASO VAXLAB / OTTIMIZZAZIONE DELL’mRNA»; su tablet e smartphone il badge 509:306 e il suo equivalente). Mettilo dentro la card 03, sulla stessa riga del numero «03», allineato a destra, stesso stile del badge di prima. Il badge non deve spostare in basso valore e didascalia: valore e testi delle tre card partono alla stessa altezza.
+- Le tre card sono alte uguali (quanto la più alta) su desktop e tablet.
+- Regola: il 9,5× non va mai presentato come miglioramento rispetto al wild-type.
+
+A2. 01 VaxLab, stati aperti (182:2, 508:362, 297:4)
+- «12 METRICHE PREDITTIVE» → «10 METRICHE PREDITTIVE» (anche «03 · …» nelle versioni numerate). «4 ALGORITMI» resta.
+- «Note di lettura», testo → «Il valore «fino a 2,9×» e i tempi vengono dai risultati e dalla discussione dell’articolo; «fino a 9,5×» è riportato solo nell’abstract, come differenza tra le varianti ottimizzate e non rispetto al wild-type. Per questo li mostriamo come numeri, non in un grafico.»
+
+A3. 02 CRISPR, card del «95%» (home desktop 63:15 e tablet/smartphone)
+- Nota «Valore arrotondato · benchmark in cellule» → «Dato dell’articolo · benchmark in cellule».
+
+A4. 03 Immunoterapia, sotto il «33» (desktop 88:13)
+- «tipi di cancro» → «tipi di tumore» (tablet e smartphone dicono già così).
+
+A5. 04 Diagnostica
+- Sotto il «14» (desktop 97:24): «segnali clinici da riconoscere» → «osservazioni cliniche» (come tablet e smartphone).
+- Stati aperti, scheda «TEST»: «500 studi con consenso di 5 radiologi e confronto con altri 3.» → «500 studi con voto a maggioranza di 5 radiologi e confronto con altri 3.»
+- Il grafico AUROC resta con l’asse da 0,80 a 1,00 (decisione presa): non cambiarlo.
+
+A6. 05 Scoperte, card del «>214M» (home, nodo I426:108;426:93 e corrispondenti)
+- «AlphaFold DB · dato riferito al 2024» → «AlphaFold DB · dato di settembre 2023».
+
+A7. Controllo finale della parte A: cerca in tutto il file (tranne «07 · Archivio») «<5 min», «≥2,9×», «12 METRICHE», «maggior parte delle varianti», «differenza massima osservata», «Caso HA riportato nell’abstract», «riferito al 2024», «tipi di cancro», «segnali clinici», «consenso di 5», «Valore arrotondato». Elencami le occorrenze rimaste (anche nei documenti: Leggimi, fogli 06, pagina 08) prima di cambiarle.
+
+————————————————————————
+B · IMPAGINAZIONE
+————————————————————————
+
+B1. Scala del grafico AUROC su tablet e smartphone (509:455 e l’equivalente smartphone): le etichette 0,80 · 0,90 · 1,00 vanno sopra la sola colonna delle barre, allineate a inizio, metà e fine della barra (oggi sono distribuite su tutta la larghezza della card). Nome e valore a destra restano senza etichette di scala sopra.
+
+B2. Panoramica (card dei temi) su tablet: togli i quattro spaziatori avanzati sotto le card (509:633–639). Lo spazio tra l’ultima card e la sezione 01 diventa uguale a quello dello smartphone (circa 120 px in meno).
+
+B3. Barra «Leggi di più» negli stati aperti di 03, 04 e 05: la barra tiene lo stesso testo della barra chiusa (via «aperto ·» all’inizio della descrizione; nella 03 l’etichetta torna quella della home al posto di «I 6 PROFILI IMMUNITARI»). Lo stato aperto si vede solo dal segno «−».
+
+B4. Margini del desktop (1440): tutti i testi partono dalla stessa linea a 72 px dal bordo: marchio dell’header, header sticky, hero, sezioni 01–05 (oggi 46 px per header e hero, 56 px per le sezioni dei temi). I filetti restano a 64 px.
+
+B5. Legenda del grafico CRISPR (415:68, 415:72): il pallino di SpCas9 diventa grigio come le sue barre (variabile del grigio delle barre), non lilla.
+
+B6. Posizioni cambiate per le richieste dei relatori (desktop):
+- Panoramica: sezione alta 760 px invece di 740; card 03 a y 494 invece di 458.
+- 07 Conclusione: le tappe partono 40 px dopo la colonna di sinistra e finiscono a x 1265; la frase finale è un po’ più larga.
+
+B7. Frecce «→» e «↗»: nel sito sono disegnate (non più caratteri di testo). Se in Figma sono testo, lasciale: segnalami solo se la loro dimensione è molto diversa tra menu, percorso della 07 e card della 06.
+
+————————————————————————
+C · SOCIAL
+————————————————————————
+
+C1. I profili social non esistono ancora e nel sito sono tolti. In Figma nascondi (non cancellare) le voci social in header («in · X · ○»), menu e footer («in · X · GitHub · Instagram»), così si possono rimettere quando ci saranno i profili.
+
+————————————————————————
+D · DOCUMENTI DEL FILE
+————————————————————————
+
+D1. Foglio G «Movimento di sfere e grafici» (740:115): aggiungi le tre scelte del sito:
+(1) galleggiamento «a respiro»: le sfere galleggiano solo mentre si scorre e per 3 s dopo, poi si fermano (WCAG 2.2.2: niente movimento automatico oltre 5 s senza pausa);
+(2) riflesso al 4% del diametro invece del 6%;
+(3) manina (cursore pointer) al passaggio del mouse sulle barre dei grafici.
+
+D2. Residui delle richieste dei relatori: aggiorna i vecchi numeri delle sezioni nei documenti (Leggimi, fogli F, pagina 08) alla numerazione nuova (temi 01–05, Eric Topol 06, conclusione 07; panoramica e footer senza numero); togli o aggiorna la riga 582:332 «card non cliccabili» (ora sono cliccabili); togli dal glossario (pagina «10 - Pagine informative») l’avviso «Bozza da rivedere con la docente».
+
+Fine: screenshot dei frame 55:2, 509:298, 302:2, 182:2, 508:403, 509:258 (zona panoramica e grafico 04), 3:7 (header, hero, 07) e del foglio G, più l’elenco dei nodi cambiati.
