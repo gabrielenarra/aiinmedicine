@@ -24,12 +24,18 @@ test('telefono: il 3D della 07 si disegna al massimo a 2×, senza errori', async
   const errori = [];
   page.on('pageerror', (e) => errori.push(e.message));
   await page.goto(PAGINA);
-  const barra = page.locator('#leggi-alphamissense, [id^="leggi-"]').last();
+  const barra = page.locator('#leggi-scoperte');
   await barra.scrollIntoViewIfNeeded();
   await barra.click();
-  const tela = page.locator('[data-pronto] canvas').first();
-  // il 3D si carica al volo: sotto carico (prove in parallelo) può servire più tempo
-  await expect(tela).toBeAttached({ timeout: 50000 });
+  // il 3D parte solo quando il suo riquadro è sullo schermo: appena aperto il pannello,
+  // a 390 × 844 ne sporge appena il bordo (e a volte resta sotto), quindi lo si porta al centro
+  const area = page.locator('[data-area="HBB"]');
+  await area.evaluate((e) => e.scrollIntoView({ block: 'center', behavior: 'instant' }));
+  // pronto o immagine di riserva: se la libreria non parte la prova fallisce subito, con il motivo
+  await expect(page.locator('[data-area="HBB"][data-pronto], [data-proteina="HBB"][data-riserva]')).toBeAttached({ timeout: 30000 });
+  await expect(area, 'il 3D non è partito: è comparsa l\'immagine di riserva').toHaveAttribute('data-pronto', '');
+  const tela = area.locator('canvas').first();
+  await expect(tela).toBeAttached();
   const rapporto = await tela.evaluate((c) => c.width / c.clientWidth);
   expect(rapporto).toBeGreaterThan(1.9);
   expect(rapporto).toBeLessThan(2.1);
