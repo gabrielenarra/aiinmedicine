@@ -1,0 +1,99 @@
+Nel file Figma AtwFNzYiwSlUkSIfsBPDWk («AI · Data · Design · Human») allinea il disegno alle ultime modifiche del sito pubblicato (https://aiinmedicine.pages.dev, stato del 17 ottobre 2026): attribuzione del progetto, footer, menu, pagine informative (privacy, note legali, crediti) e didascalia del 3D. Il sito è la versione giusta.
+
+Regole
+- Ignora la pagina «07 · Archivio».
+- Cambia solo i testi elencati. Stili di testo, colori, componenti e posizioni restano quelli che ci sono. Non creare stili nuovi.
+- Se un testo si allunga, lascia che il contenitore cresca (auto layout); non ridurre il testo e non cambiare la dimensione dei caratteri.
+- Se un testo compare in più frame (desktop 1440, tablet 768, smartphone 390, stati aperti, istanze di componenti, fogli di specifica), cambialo ovunque. Se è un componente, cambia il componente principale.
+- Lavora una parte alla volta (A, B, C, D, E). Prima di ogni parte elencami i nodi che toccherai, poi applica.
+- Alla fine: screenshot dei frame toccati ed elenco dei nodi cambiati.
+
+————————————————————————
+A · FOOTER (home e pagine informative)
+————————————————————————
+Footer della home: desktop 148:45, tablet 509:556, smartphone 332:37. Footer delle pagine informative: desktop 777:117 e i corrispondenti tablet/smartphone nella pagina «10 - Pagine informative» (775:2). Anche il footer della pagina 404.
+
+A1. Le due righe sotto il titolo «AI · Data · Design · Human»:
+«Un progetto di Digital Design» / «Università di Genova»
+→ «Progetto universitario di Gabriele Narra» / «Laurea Magistrale · Università di Genova»
+
+A2. Copyright in fondo:
+«© 2026 AI in Medicine · Università di Genova» → «© 2026 Gabriele Narra · AI in Medicine»
+
+A3. Colonna «Legale»: la voce «Terms» diventa «Note legali» (stessa posizione, stesso stile; porta alla parte «Note legali» della pagina Privacy e note legali).
+
+————————————————————————
+B · MENU A TUTTA PAGINA
+————————————————————————
+Menu aperto: desktop 403:2, tablet 508:340, smartphone 403:44.
+
+B1. La riga in basso «Università di Genova» → «Progetto universitario di Gabriele Narra».
+B2. Il copyright del menu, dove c'è: «© 2026 AI in Medicine» → «© 2026 Gabriele Narra · AI in Medicine».
+
+————————————————————————
+C · PAGINE INFORMATIVE (pagina «10 - Pagine informative», 775:2)
+————————————————————————
+
+C1. «Il progetto»
+- Frase di presentazione: «AI · Data · Design · Human è un progetto di Digital Design dell’Università di Genova.» → «AI · Data · Design · Human è un progetto universitario individuale di Gabriele Narra, realizzato nella Laurea Magistrale in Design Prodotto Evento / Digital Design dell’Università di Genova.»
+- Frase finale del processo: «Il sito non usa cookie né strumenti di statistica.» → «Il sito non usa cookie di profilazione o di statistica né strumenti di tracciamento.»
+- Scheda del progetto, voce «Contatto»: l’indirizzo è «contatti@aiinmedicine.it».
+
+C2. «Privacy e note legali» — parte PRIVACY
+- Togli l’avviso «Bozza da far verificare prima della pubblicazione…», se c’è.
+- Sostituisci il testo di ogni blocco con questo (titoli dei blocchi uguali; le parole sottolineate sono link come oggi):
+
+Titolare del trattamento
+Gabriele Narra, contatto: contatti@aiinmedicine.it.
+
+Quali dati
+Il sito non usa cookie di profilazione, pubblicitari o di statistica né strumenti di tracciamento: per questo non mostra avvisi sui cookie. Non ha moduli che inviano dati: il campo «Vai al residuo» del visualizzatore 3D funziona solo nel tuo browser e non trasmette nulla. Come ogni sito, il servizio che lo ospita (Cloudflare Pages, di Cloudflare, Inc.) registra automaticamente alcuni dati tecnici di navigazione: indirizzo IP, data e ora della visita, pagina richiesta, tipo di browser; può inoltre applicare misure tecniche strettamente necessarie alla sicurezza del servizio. Se scrivi all’indirizzo di contatto, vengono trattati il tuo indirizzo email e i dati che scegli di inserire nel messaggio.
+
+Perché
+I dati tecnici servono solo a far funzionare il sito e a proteggerlo da abusi; i dati dei messaggi servono solo a rispondere.
+
+Base giuridica
+Legittimo interesse al funzionamento e alla sicurezza del sito e a rispondere alle richieste (art. 6, par. 1, lett. f, GDPR). Scrivere un’email è facoltativo: se non lo fai, semplicemente non ricevi una risposta.
+
+Per quanto tempo
+Dati tecnici: per il tempo stabilito da Cloudflare per la sicurezza e il funzionamento del servizio, come descritto nella sua [informativa sulla privacy]. Messaggi: conservati nella casella email finché servono per la corrispondenza sul progetto; puoi chiederne la cancellazione in qualsiasi momento.
+
+Chi li riceve
+Cloudflare, Inc., che ospita il sito, inoltra la posta dell’indirizzo di contatto e tratta i dati per conto del titolare. Nessun dato viene venduto o ceduto ad altri. Trasferimenti fuori dall’Unione europea: Cloudflare e Google hanno sede negli Stati Uniti e aderiscono all’EU-U.S. Data Privacy Framework; in mancanza, si applicano le clausole contrattuali standard della Commissione europea. I messaggi scritti all’indirizzo di contatto passano dal servizio di inoltro email di Cloudflare, che li consegna senza conservarli, e arrivano in una casella Gmail (Google), che li tratta secondo la sua [informativa sulla privacy].
+
+I tuoi diritti
+Puoi chiedere l’accesso ai tuoi dati, la rettifica, la cancellazione, la limitazione o opporti al trattamento (artt. 15–21 GDPR) scrivendo a contatti@aiinmedicine.it. Puoi anche presentare reclamo al [Garante per la protezione dei dati personali].
+
+Collegamenti esterni
+I link ad articoli e fonti portano a siti di terzi, con le loro informative.
+
+Ultimo aggiornamento
+17 ottobre 2026
+
+C3. «Privacy e note legali» — parte NOTE LEGALI
+Paragrafi introduttivi (quattro, in quest’ordine; il primo c’è già):
+1. «Contenuti divulgativi a scopo didattico: non sono consigli medici e non sostituiscono il parere di un professionista. Le previsioni dei modelli citati non sono diagnosi. Per qualsiasi dubbio sulla tua salute rivolgiti al tuo medico.»
+2. «I risultati, le metriche e gli esempi dei sistemi di intelligenza artificiale sono presentati nel loro contesto scientifico e sperimentale: non sono diagnosi individuali, garanzie di efficacia clinica o previsioni certe sullo stato di salute di una persona.»
+3. «AI in Medicine è un progetto universitario individuale e indipendente di Gabriele Narra, realizzato nella Laurea Magistrale in Design Prodotto Evento / Digital Design dell’Università di Genova. Non è una pubblicazione ufficiale, una comunicazione istituzionale o un servizio dell’Università di Genova. È un sito non commerciale e non è una testata giornalistica.»
+4. «I contenuti sono elaborati a partire dalle fonti scientifiche indicate nel sito e verificati con attenzione, ma le conoscenze scientifiche evolvono e i contenuti possono essere aggiornati o corretti. In caso di dubbio o discrepanza fanno fede le pubblicazioni originali citate.»
+Blocchi:
+- Collegamenti esterni: «Il sito rimanda a fonti esterne (dataset, articoli, strumenti). Questi collegamenti si aprono in una nuova scheda e sono segnalati dal simbolo ↗. Il titolare non controlla questi siti e non risponde della loro disponibilità, dei loro contenuti o delle loro pratiche sulla privacy.»
+- Diritti e licenze: «Testi, grafici e immagini hanno licenze diverse, indicate nella pagina «Crediti e licenze»: immagini, figure, software e altri materiali di terze parti restano soggetti alle rispettive licenze.» + link «Vai a Crediti e licenze» (come oggi).
+
+C4. «Crediti e licenze», gruppo «Caratteri, strumenti e dati», scheda «3Dmol.js» (etichetta «STRUMENTO»):
+testo «BSD-3-Clause» → «Copyright © 2014 University of Pittsburgh and contributors · licenza BSD-3-Clause.» seguito dal link «Testo completo della licenza» (stesso stile degli altri link nel testo delle pagine).
+
+————————————————————————
+D · DIDASCALIA DEL VISUALIZZATORE 3D (solo se non l’hai già fatto)
+————————————————————————
+Sezione 05 Scoperte, stati aperti (desktop 216:17, tablet 508:416, smartphone 345:83), didascalia del blocco figura 3D (componente 712:501), e la stessa didascalia in «Crediti e licenze» se c’è.
+Prima di «Sono previsioni computazionali, non diagnosi.» deve esserci: «La numerazione dei residui parte dalla metionina iniziale, come in UniProt e AlphaFold: la mutazione dell’anemia falciforme, nota come Glu6Val, qui è il residuo 7 di HBB.»
+
+————————————————————————
+E · CONTROLLO FINALE
+————————————————————————
+Cerca in tutto il file (tranne «07 · Archivio») e dimmi cosa resta, prima di cambiarlo:
+«Un progetto di Digital Design», «© 2026 AI in Medicine · Università di Genova», «Terms», «Il sito non usa cookie né», «gabrielenarra@gmail.com», «Bozza da far verificare», «progetto di Digital Design dell’Università di Genova».
+Nei documenti (Leggimi, fogli 06, pagina 08) segnala le occorrenze ma non cambiarle senza chiedermelo.
+
+Fine: screenshot di footer desktop/tablet/smartphone (home e pagine informative), menu aperto (tre formati), pagine «Il progetto», «Privacy e note legali», «Crediti e licenze» (zona 3Dmol.js), più l’elenco dei nodi cambiati.
