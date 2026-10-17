@@ -258,7 +258,7 @@
       "fonte_url": "https://alphafold.ebi.ac.uk/entry/P68871",
       "doi": "10.1126/science.adg7492",
       "modifiche": "Elaborazione di questo progetto: media per residuo dei punteggi am_pathogenicity, classi con le soglie ufficiali (0–0,34; 0,34–0,564; 0,564–1).",
-      "didascalia_it": "Strutture di emoglobina beta (HBB) e CFTR predette da AlphaFold DB e colorate con la media per residuo dei punteggi AlphaMissense (probabilmente benigna, incerta, probabilmente patogena). Sono previsioni computazionali, non diagnosi.",
+      "didascalia_it": "Strutture di emoglobina beta (HBB) e CFTR predette da AlphaFold DB e colorate con la media per residuo dei punteggi AlphaMissense (probabilmente benigna, incerta, probabilmente patogena). La numerazione dei residui parte dalla metionina iniziale, come in UniProt e AlphaFold: la mutazione dell’anemia falciforme, nota come Glu6Val, qui è il residuo 7 di HBB. Sono previsioni computazionali, non diagnosi.",
       "alt_it": null,
       "stato": "ATTIVA"
     }
